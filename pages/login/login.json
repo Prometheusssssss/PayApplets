@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "lm-picker-time":"../../assets/my-components/picker-time/index",
+    "lm-framework":"../../assets/my-components/framework/index"
+  }
+}

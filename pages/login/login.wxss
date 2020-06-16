@@ -1,0 +1,57 @@
+/* pages/login/login.wxss */
+
+.slot-content{
+    margin: 0 14rpx;
+  }
+  .slot-content {
+    height: 100vh;
+  }
+  .slot-content > view {
+    margin-top: 20rpx;
+    background: white;
+  }
+  .content{ 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    margin-top: 200rpx; 
+   } 
+   .iptbox{ 
+    width: 80rpx; 
+    height: 80rpx; 
+    border-bottom:1rpx solid #ddd; 
+    /* border-radius: 20rpx;  */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+   } 
+   .ipt{ 
+    width: 0; 
+    height: 0; 
+   } 
+   .btn-area{ 
+    width: 80%; 
+    background-color: orange; 
+    color:white; 
+   }
+
+  image{
+    height: 96rpx;
+    width: 96rpx;
+  }
+  .ui_uploader_item{
+    position: relative;
+    height: 200rpx;
+    width: 200rpx;
+  }
+  .ui_uploader_item .special-image{
+    /* position: relative; */
+    width: 100%;
+    height: 100%;
+  }
+  .ui_uploader_item .ui_uploader_item_icon{
+    position: absolute;
+    right: 0;
+    top: 0;
+  }

@@ -1,0 +1,66 @@
+page {
+  --page-bg: #eeeeee;
+  --box-shadow-gray: rgba(174, 173, 173, 0.5);
+
+  --text-gray: #999999;
+  --text-black: #333333;
+  --text-red: #e51c23;
+  --text-orange: #f1980b;
+  --text-orange-light: #fe6d1d;
+  
+  --text-green: #8ac449;
+
+  --line-gray: #d8d8d8;
+  --content-gray: #f8f8f8;
+  --line-gray-light: #ebebeb;
+
+  --bg-gray-a: #a6a6a6;
+  --icon-gray: #999999;
+  --icon-black: #333333;
+  --icon-red: #e51c23;
+  --icon-orange: #f1980b;
+  --icon-orange-light:#f7ead6;
+  --icon-yellow: #fed525;
+  --icon-green: #8ac449;
+
+  --main-box-shadow: rgb(145, 209, 252);
+  --main-lga:  #26A0F1;
+  --main-lgb: #2583F5;
+  --main-lgba: #26A0F1;
+  --main-lgbb: #2583F5;
+  --main-style: #2583F5;
+
+  /* focus-color FEA126
+     focus-color 1ab1a1
+  */
+}
+
+page {
+  background: var(--page-bg);
+}
+
+text {
+  color: var(--text-black);
+  font-size: 24rpx;
+  letter-spacing: 0.88rpx;
+}
+
+.icon-red {
+  color: var(--icon-red);
+}
+
+.icon-orange {
+  color: var(--icon-orange);
+}
+
+.icon-yellow {
+  color: var(--icon-yellow);
+}
+
+.icon-gray {
+  color: var(--icon-gray)!important;
+}
+
+.icon-main-color ,.text-main-style{
+  color: var(--main-style);
+}

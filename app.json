@@ -1,0 +1,35 @@
+{
+  "pages":[
+    "pages/login/login",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "color": "#999999",
+    "selectedColor": "#57afe6",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "assets/img/tabs-focus/order-focus.png",
+        "iconPath": "assets/img/tabs-unfocus/order.png",
+        "pagePath": "pages/login/login",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "assets/img/tabs-focus/cart-focus.png",
+        "iconPath": "assets/img/tabs-unfocus/cart.png",
+        "pagePath": "pages/index/index",
+        "text": "记录"
+      }
+    ]
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "线上交易",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

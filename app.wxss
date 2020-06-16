@@ -1,0 +1,25 @@
+@import "config.wxss";
+@import "/assets/private-icon/font.wxss";
+
+.icon{
+  font-size: 60rpx;
+  padding: 8rpx 0;
+}
+/**app.wxss**/
+.search-top {
+  width: 100%;
+}
+
+button::after {
+  border: none;
+}
+
+page,
+lm-framework,
+lm-slider-bar {
+  height: 100%;
+}
+
+page{
+  background-color: #eeeeee;
+}

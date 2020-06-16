@@ -1,0 +1,21 @@
+<!-- 日期 -->
+<block wx:if="{{type=='date'}}">
+  <view class = "picker-time">
+    <i>起</i>
+    <view class="start-date">
+        <picker mode="date" value="{{startDate}}" start="1999-01-01" end="2999-12-12" bindchange="changeDateStart">
+        {{startDate}}
+            <!-- <i class="iconfont icon-riqi"/> -->
+        </picker>
+    </view>
+
+    <i>至</i>
+    <view class="end-date">
+        <picker mode="date" value="{{endDate}}" start="1999-01-01" end="2999-12-12" bindchange="changeDateEnd">
+        {{endDate}}
+        <!-- <text class="iconfont icon-riqi" /> -->
+        </picker>
+    </view>
+    <i class="search" catchtap="searchdate">查询</i>
+  </view>
+</block> 

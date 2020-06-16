@@ -1,0 +1,42 @@
+/* assets/my-componet/search/index.wxss */
+
+.picker-time{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 18rpx;
+  background-color: white;
+  width: calc(100% - 36rpx);
+}
+.picker-time>i{
+  color: #3B3B3B;
+  font-size: 28rpx;
+}
+.picker-time .search{
+  width: 100rpx;
+  text-align: right;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.picker-time .start-date,.picker-time .end-date{
+  display: flex;
+  border: 1px solid #D9D9D9;
+  border-radius: 6rpx;
+  padding: 6rpx 0;
+  width: 230rpx;
+  text-align: center;
+  justify-content: space-around;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.picker-time picker{
+  color: #8C8C8C;
+  font-size: 26rpx;
+}
+
+.picker-time picker text{
+  margin-left: 10rpx;
+}

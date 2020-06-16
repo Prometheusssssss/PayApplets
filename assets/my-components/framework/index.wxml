@@ -1,0 +1,31 @@
+<!--assets/my-component.wxml-->
+<!-- 客户和销售统计页面做成组件 -->
+<view class="framework">
+  <!-- 日期控件和查询 -->
+  <view class="top">
+    <slot name="top">
+    </slot>
+  </view>
+  <view class="middle">
+    <scroll-view class="content" enable-flex="true" scroll-y enable-back-to-top='true'
+      style="{{sliderBar=='true'?'width:73%;':'width:100%;'}};background:{{contentBg}};right:0"
+      scroll-top='{{topNum}}' bindscroll="scrollViewEventHander">
+      <view class="center-content" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove'
+        bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'>
+        <refresh-view wx:if="{{allowedRefresh == 1}}" id='refreshView' bind:onRefresh="onPullDownRefresh"
+          bind:onPullState="_pullState" />
+        <slot name="content">
+        </slot>
+      </view>
+      <view class="load">
+        <view class="load-message" hidden="{{allowedLoad!=1 && loadStatus == 0}}">
+          <view class="refresh-loading"></view>
+          <text>下拉加载</text>
+        </view>
+        <view class="load-message" hidden="{{allowedLoad!=2}}">
+          <text>--已经拉到底啦--</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
