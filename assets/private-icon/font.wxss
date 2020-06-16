@@ -10,7 +10,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-voice-status:before {
+
+
+/* .icon-voice-status:before {
   content: "\e6fa";
 }
 
@@ -245,4 +247,4 @@
 
 .icon-group-status:before {
   content: "\e6b9";
-}
+} */
