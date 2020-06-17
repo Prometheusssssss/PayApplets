@@ -1,39 +1,77 @@
 //app.js
+global.base64 = require('/pages/public-js/base64Encode.js')
+global.common = require('/pages/public-js/common.js')
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
+    
   },
   globalData: {
-    userInfo: null
-  }
+    logsStorageList: [],
+    developStorageList: [],
+
+    bgAudioManagerInterval: null,
+    addressPushInterval: null,
+
+    hostUrl: '',
+    systemInfo: {},
+    platform: {},
+    toastDuration: 1500,
+    pageSize: 10,
+    pageLargeSize: 30,
+    userInfo: null,
+    sliderBar: [],
+
+    manageUrl: 'https://app1.keyun.link:543', //体验
+    // manageUrl: 'https://app.keyun.link', //体验
+  },
+  setHostUrl: function (hostUrl) {
+    this.globalData.hostUrl = this.globalData.manageUrl + '/' + hostUrl;
+  },
+  setUser: function (user) {
+    var that = this;
+    that.showPhoneLog(user);
+    this.globalData.userInfo = user;
+  },
+
+  getUser: function () {
+    var user = this.globalData.userInfo;
+    return user;
+  },
+
+  getToastDuration: function () {
+    const toastDuration = this.globalData.toastDuration;
+    return toastDuration;
+  },
+
+  getPageSize: function () {
+    const pageSize = this.globalData.pageSize;
+    return pageSize;
+  },
+  getPageLargeSize: function () {
+    const pageLargeSize = this.globalData.pageLargeSize;
+    return pageLargeSize;
+  },
+  // clearLogsStorageList: function () {
+  //   this.globalData.logsStorageList = [];
+  // },
+
+  // setLogsStorageList: function (item) {
+  //   this.globalData.logsStorageList.unshift(item)
+  // },
+
+  // getLogsStorageList: function () {
+  //   return this.globalData.logsStorageList;
+  // },
+
+  // clearDevelopLogsStorageList: function () {
+  //   this.globalData.developStorageList = [];
+  // },
+
+  // setDevelopLogsStorageList: function (item) {
+  //   this.globalData.developStorageList.unshift(item)
+  // },
+
+  // getDevelopLogsStorageList: function () {
+  //   return this.globalData.developStorageList;
+  // },
 })

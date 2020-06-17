@@ -1,0 +1,30 @@
+<lm-framework sliderBar="false" contentBg="white" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"
+  lockScroll="{{showProductItemDetail}}">
+    <view slot="top" class="search-top">
+        <view >
+             <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" initValue="{{searchText}}" type="text" iconName="" rightIconName="plus-circle" catchRightEvent="addGuest" />
+            <view class="picker-content">
+            <view class="picker-title">结算方式：</view>
+            <picker class="picker-text" bindchange="bindSettlementWayPickerChange" value="{{settlementWayIndex}}"
+            range="{{settlementWay}}" range-key="NAME">
+            <view class="picker">
+                {{settlementWay[settlementWayIndex].NAME}}
+                <i class="icon icon-right iconc-main-style"></i>
+            </view>
+            </picker>
+        </view>
+       
+      </view>
+    </view>
+    <view slot="content" class="slot-content">
+        <!-- <view >
+            测试content
+        </view> -->
+       
+    </view>
+   
+
+</lm-framework>
+
+

@@ -1,6 +1,8 @@
 {
   "pages":[
+    "pages/order/order",
     "pages/login/login",
+    "pages/test/test",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -11,16 +13,34 @@
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "assets/img/tabs-focus/order-focus.png",
-        "iconPath": "assets/img/tabs-unfocus/order.png",
-        "pagePath": "pages/login/login",
+        "selectedIconPath": "assets/img/tabs-focus/home-focus.png",
+        "iconPath": "assets/img/tabs-unfocus/home.png",
+        "pagePath": "pages/test/test",
         "text": "首页"
       },
       {
-        "selectedIconPath": "assets/img/tabs-focus/cart-focus.png",
-        "iconPath": "assets/img/tabs-unfocus/cart.png",
+        "selectedIconPath": "assets/img/tabs-focus/trade-focus.png",
+        "iconPath": "assets/img/tabs-unfocus/trade.png",
+        "pagePath": "pages/order/order",
+        "text": "交易"
+      },
+      {
+        "selectedIconPath": "assets/img/tabs-focus/add-focus.png",
+        "iconPath": "assets/img/tabs-unfocus/add.png",
+        "pagePath": "pages/test/test",
+        "text": "发布"
+      },
+      {
+        "selectedIconPath": "assets/img/tabs-focus/msg-focus.png",
+        "iconPath": "assets/img/tabs-unfocus/msg.png",
+        "pagePath": "pages/test/test",
+        "text": "消息"
+      },
+      {
+        "selectedIconPath": "assets/img/tabs-focus/user-focus.png",
+        "iconPath": "assets/img/tabs-unfocus/user.png",
         "pagePath": "pages/index/index",
-        "text": "记录"
+        "text": "我的"
       }
     ]
   },

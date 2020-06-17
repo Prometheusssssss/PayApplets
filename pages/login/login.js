@@ -1,199 +1,128 @@
 // pages/login/login.js
+const { common,base64 } = global;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    startDate:'',
-    endDate:'',
-    defaultPageSize:10,
-    showProductItemDetail: false,
-    Length:6,    //输入框个数 
-    isFocus:true,  //聚焦 
-    Value:"",    //输入的内容 
-    ispassword:false, //是否密文显示 true为密文， false为明文。 
-    id:'',                        //上传时后端返回的图片ID,拼接后存入
-    joinString:'',                    
-    uploaderList: [],              //保存上传图片url的数组
-    uploaderNum: 0,             //已经上传的图片数目
-    showUpload: true,           //控制上传框的显隐
+   
+    canIUse: wx.canIUse('button.open-type.getPhoneNumber'),
+    isHide:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+        var that = this;
+        //查看是否授权
+        
+       that.isCodeHasUser();
+    
+  },
+  isCodeHasUser: async function () {
     var that = this;
-    var date = new Date()
-    var year = date.getFullYear()
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    if(month.toString().length<2){
-      month = '0' + month
-    }
-    if(day.toString().length<2){
-      day = '0' + day
-    }
-    var newDate = year+'-'+month+'-'+day;
-    that.setData({
-      startDate: newDate,
-      endDate: newDate
+    var code = await new Promise(r => {
+      wx.login({
+        timeout: 2000,
+        success(newRes) {
+          if (newRes.code) {
+            r(newRes.code)
+          } else {
+            r('')
+          }
+        }, fail() { r('') },
+      })
     })
-  },
+    console.log('jscode')
+    console.log(code)
+    // if (code != '') {
+    //   var auth = base64.encode(code);
+    //   // 把jscode传给后台查给有没有openid对应的手机号 可以把token缓存起来
+    //   var userInfo= await app.ManageExecuteApi(`/api/security/validusername/kyljscode`, auth, {}, "GET").then((companyList) => {
+    //   if(userInfo != 'erro'){//存入user  跳转页面
+    //     that.setData({
+    //       isHide : true
+    //     })
+    //   }else{
+    //     //重新授权登录
+    //     that.setData({
+    //       isHide : false
+    //     })
+    //   }
+      
 
-  focus(e){ 
-    var that = this; 
-    console.log(e.detail.value); 
-    var inputValue = e.detail.value; 
-    that.setData({ 
-     Value:inputValue, 
-    }) 
-   }, 
-   tap(){ 
-    var that = this; 
-    // debugger;
-    that.setData({ 
-     isFocus:true, 
-    }) 
-   }, 
-   formSubmit(e){ 
-    console.log(e.detail.value.password); 
-   }, 
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var that = this;
-    that.sjFramework = that.selectComponent("#lm-framework");
-    that.sjFramework.dealPageNoSize('enter')
-  },
-
-
-  callBackPageSetData: function (e) {
-    var that = this;
-    that.setData(e.detail.returnSetObj)
-  },
-  //订单页面方法开始
-  loadMainList: function (e) {
-    var { pageNo, pageSize, type } = e.detail;
-    var that = this;
-    that.sjFramework.dealWithList(type, [], pageSize);
-    // var p = {
-    //   id: that.data.customerList[that.data.customerIndex].KID,
-    //   salesman_id: app.getUser().id,
-    //   cid: app.getUser().cid,
-    //   page_size: pageSize,
-    //   page_no: pageNo,
+    //   })
+    // } else {
+    //   setTimeout(() => {
+    //     wx.login({
+    //       timeout: 2000,
+    //       success(newRes) {
+    //         if (newRes.code) {
+    //           r(newRes.code)
+    //         } else {
+    //           r('')
+    //         }
+    //       }, fail() { r('') },
+    //     })
+    //   }, 400)
     // }
-
-    // app.ExecuteProcess('sel_sales_order_kyl', p).then((list) => {
-    //   var dataList = common.arrayProcessing.convertStatusCss(list, 'sales-order');
-    //   that.sjFramework.dealWithList(type, dataList, pageSize);
-    // })
   },
-
-
-  startDatePickerBindchange:function(e){
-    var that = this;
+    //第一次授权
+  getPhoneNumber: function(res) {
+      debugger;
+      if (res.detail.encryptedData) {
+  
+        //用户按了允许授权按钮
+  
+        var that = this;
+  
+        // 获取到用户的信息了，打印到控制台上看下
+  
+        console.log("用户的手机号如下：");
+  
+        console.log(e.detail.encryptedData);
+  
+        //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
+        //授权成功后加加密信息和jscode传给后台，后台换回手机号 并且可以注册用户信息（存手机号，用户openid），调用成功后返回用户手机号、userId，
+        //进入tab页面 
+        that.setData({
+  
+          isHide: true
+  
+        });
+  
+      } else {
+  
+        //用户按了拒绝按钮
+  
+        wx.showModal({
+  
+          title: '警告',
+  
+          content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+  
+          showCancel: false,
+  
+          confirmText: '返回授权',
+  
+          success: function(res) {
+  
+            // 用户没有授权成功，不需要改变 isHide 的值
+  
+            if (res.confirm) {
+  
+              console.log('用户点击了“返回授权”');
+  
+            }
+  
+          }
+  
+        });
+  
+      }
+  
+   }
     
-    that.setData({
-      startDate:e.detail.value
-    })
-    console.log(that.data.startDate)
-  },
-  endDatePickerBindchange:function(e){
-    var that = this;
-    that.setData({
-      endDate:e.detail.value
-    })
-  },
-  searchDate: function(){
-    
-    var that = this;
-    console.log(that.data.startDate)
-    // var startDate = that.data.startDate;
-    // var endDate = that.data.endDate;
-   
-  },
-  upload: function(){
-    var that = this;
-    //选择图片
-    wx.chooseImage({//调起选择图片
-      count: 6 - that.data.uploaderNum, // 默认6
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        that.data.uploaderList.concat(res.tempFilePaths);
-        var uploaderList = res.tempFilePaths;
-        that.setData({
-          uploaderList: that.data.uploaderList.concat(res.tempFilePaths),
-        })
-        that.setData({
-          uploaderNum: that.data.uploaderList.length
-        })
-        debugger
-        if (uploaderList.length == 6) {
-          that.setData({
-            showUpload:false
-          })
-          console.log(that.showUpload)
-        }
-        //图片选择完就可以显示在本地，可以提交的时候再去存入oss，换入可直接访问的图片链接，存入数据库
-        //将压缩或者不压缩图片本地连接上传给oss，oss返回带域名可以直接访问的图片链接，本地将图片链接逗号拼接，保存的时候存入数据库
-        // for (var i = 0; i < uploaderList.length; i++) {
-        //   wx.uploadFile({
-        //     url: 'xxxxx',
-        //     filePath: uploaderList[i],
-        //     name: 'files',
-        //     formData: {
-        //       files: uploaderList,
-        //     },
-        //     success: function (res) {
-        //        var id = JSON.parse(res.data).data.attId
-        //         that.setData({
-        //         id: that.data.id + `${id},`,
-        //         joinString: (that.data.id + `${id},`).slice(0, -1)
-        //       })
-        //     }
-        //   })
-        // }
-      }
-    })
-  },
-  //展示图片
-  showImg: function (e) {
-    var that = this;
-    wx.previewImage({
-      urls: that.data.uploaderList,
-      current: that.data.uploaderList[e.currentTarget.dataset.index]
-    })
-  },
- // 删除图片
-  clearImg: function (e) {
-    var that = this
-    var nowList = [];//新数据
-    var uploaderList = that.data.uploaderList;//原数据
-    
-    for (let i = 0; i < uploaderList.length; i++) {
-      if (i == e.currentTarget.dataset.index) {
-        var arr = that.data.joinString.split(',')
-            arr.splice(i, 1);                              //删除图片的同时删除掉其对应的ID
-            var newArr = arr.join(',')
-            that.setData({
-              joinString:newArr,
-              id:newArr+','
-            })
-           } else {
-        nowList.push(uploaderList[i])
-      }
-    }
-    this.setData({
-      uploaderNum: this.data.uploaderNum - 1,
-      uploaderList: nowList,
-      showUpload: true,
-    })
-   },
 })

@@ -14,6 +14,11 @@ page {
   --content-gray: #f8f8f8;
   --line-gray-light: #ebebeb;
 
+  --button-orange-dark: #fe784a;
+  --button-blue: #2489fb;
+  --button-main-style: #2583F5;
+  --button-outline-border: #979797;
+  
   --bg-gray-a: #a6a6a6;
   --icon-gray: #999999;
   --icon-black: #333333;

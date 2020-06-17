@@ -1,0 +1,45 @@
+<lm-framework sliderBar="false" contentBg="white" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"
+  lockScroll="{{showProductItemDetail}}">
+    <view slot="top" class="search-top">
+        <lm-picker-time  type="date"  startDate="{{startDate}}" endDate="{{endDate}}" catchSearchEvent="searchDate" bindStartDateEvent="startDatePickerBindchange" bindEndDateEvent="endDatePickerBindchange">
+        </lm-picker-time>
+    </view>
+    <view slot="content" class="slot-content">
+        <!-- <view >
+            测试content
+        </view> -->
+        <form bindsubmit="formSubmit"> 
+            <view class='content'> 
+                <block wx:for="{{Length}}" wx:key="item"> 
+                    <!-- disabled -->
+                <input class='iptbox' value="{{Value.length>=index+1?Value[index]:''}}" disabled  password='{{ispassword}}'  catchtap='tap'></input> 
+                </block> 
+                </view> 
+                <input name="password" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="focus"></input> 
+                <view> 
+                <button class="btn-area" formType="submit">Submit</button> 
+            </view> 
+            <view class="upload-view">
+                <view class='upload'>
+                    <!-- 根据已选择的图片临时路径数组展示图片-->
+                    <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+                        <!-- 删除-->
+                        <!-- <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="30" color="red"/> -->
+                        <i class="icon icon-right ui_uploader_item_icon icon-yellow" ></i>
+                        <!-- 图片-->
+                        <image class="special-image" bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+                    </view>
+                    <!-- 上传按钮+框 -->
+                    <view class="image" wx:if="{{showUpload}}" style="height:96rpx;width:96rpx"> 
+                        <image  bindtap='upload' src="/assets/img/photo.png" ></image>
+                    </view>
+                </view>
+            </view>
+        </form>
+    </view>
+   
+
+</lm-framework>
+
+
