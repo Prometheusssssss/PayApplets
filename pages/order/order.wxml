@@ -3,7 +3,7 @@
   lockScroll="{{showProductItemDetail}}">
     <view slot="top" class="search-top">
         <view >
-             <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" initValue="{{searchText}}" type="text" iconName="" rightIconName="plus-circle" catchRightEvent="addGuest" />
+             <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{}}" catchPickerEvent="bindPickerChange" />
             <view class="picker-content">
             <view class="picker-title">结算方式：</view>
             <picker class="picker-text" bindchange="bindSettlementWayPickerChange" value="{{settlementWayIndex}}"

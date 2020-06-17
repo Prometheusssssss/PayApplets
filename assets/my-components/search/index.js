@@ -1,4 +1,4 @@
-var recorder = require("../../../pages/public-js/recorder.js");
+// var recorder = require("../../../pages/public-js/recorder.js");
 Component({
   /**
    * 组件的属性列表
@@ -41,9 +41,17 @@ Component({
       type: Boolean,
       value: true,
     },
+    allowedPicker: {
+      type: Boolean,
+      value: true,
+    },
     rightIconStyle: {
       type: String,
       value: '',
+    },
+    pickerList:{
+      type: Array,
+      value: [],
     }
   },
 
@@ -53,12 +61,25 @@ Component({
   data: {
     voiceStatus: 'stop',
     startTimeStamp: '',
+    pickerIndex: 0,
+    pickerList:[]
   },
-
+  lifetimes: {
+    // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+    attached: function () {
+      var that = this;
+      that.loadPickerList();
+      // that.loadCountry();
+    },
+  },
   /**
    * 组件的方法列表
    */
   methods: {
+    loadPickerList: function () {
+      debugger
+      // this.triggerEvent('InputEvent', detail.value);
+    },
     handleInput: function ({
       detail
     }) {
@@ -75,63 +96,68 @@ Component({
     }) {
       this.triggerEvent('RightEvent', detail.value);
     },
+    bindPickerChange:function({
+      detail
+    }){
+      this.triggerEvent('PickerEvent', detail.value);
+    }
 
 
-    startVoice: function (e) {
-      var that = this;
+    // startVoice: function (e) {
+    //   var that = this;
 
 
-      that.data.startTimeStamp = e.timeStamp;
-      recorder.recorderManagerStart(that, 'searchList');
-    },
+    //   that.data.startTimeStamp = e.timeStamp;
+    //   recorder.recorderManagerStart(that, 'searchList');
+    // },
 
    
-    endVoice: function (e) {
-      var that = this;
-      var startTimeStamp = that.data.startTimeStamp;
-      var endTimeStamp = e.timeStamp;
+    // endVoice: function (e) {
+    //   var that = this;
+    //   var startTimeStamp = that.data.startTimeStamp;
+    //   var endTimeStamp = e.timeStamp;
 
 
 
-      if(endTimeStamp - startTimeStamp>=1000){
+    //   if(endTimeStamp - startTimeStamp>=1000){
 
-        that.end();
-      }else{
+    //     that.end();
+    //   }else{
 
-        that.endQuick();
-      }
+    //     that.endQuick();
+    //   }
      
-      // recorder.recorderManagerStop(that, 'searchList');
-    },
+    //   // recorder.recorderManagerStop(that, 'searchList');
+    // },
 
-    end: function () {
-      var that = this;
+    // end: function () {
+    //   var that = this;
 
-      recorder.recorderManagerStop(that, 'searchList');
-    },
+    //   recorder.recorderManagerStop(that, 'searchList');
+    // },
 
-    endQuick: function () {
-      var that = this;
+    // endQuick: function () {
+    //   var that = this;
 
-      recorder.recorderManagerStopAndNoUpload(that, 'searchList');
-    },
+    //   recorder.recorderManagerStopAndNoUpload(that, 'searchList');
+    // },
 
 
-    setVoiceStatus: function (status, targetType) {
-      var that = this;
-      that.setData({
-        voiceStatus: status,
-      })
-    },
+    // setVoiceStatus: function (status, targetType) {
+    //   var that = this;
+    //   that.setData({
+    //     voiceStatus: status,
+    //   })
+    // },
 
-    searchProductListByVoice: function (searchText) {
+    // searchProductListByVoice: function (searchText) {
 
-      var that = this;
-      that.setData({
-        initValue: searchText
-      })
-      this.triggerEvent('InputEvent', searchText);
-    },
+    //   var that = this;
+    //   that.setData({
+    //     initValue: searchText
+    //   })
+    //   this.triggerEvent('InputEvent', searchText);
+    // },
 
   }
 })
