@@ -13,12 +13,22 @@
 		"autoAudits": false,
 		"coverView": true,
 		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.0",
 	"appid": "wx8d679b4970bda4df",
-	"projectname": "test",
+	"projectname": "payApplets",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

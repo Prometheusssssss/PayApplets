@@ -5,19 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    startDate:'',
-    endDate:'',
-    defaultPageSize:10,
-    showProductItemDetail: false,
-    Length:6,    //输入框个数 
-    isFocus:true,  //聚焦 
-    Value:"",    //输入的内容 
-    ispassword:false, //是否密文显示 true为密文， false为明文。 
-    id:'',                        //上传时后端返回的图片ID,拼接后存入
-    joinString:'',                    
-    uploaderList: [],              //保存上传图片url的数组
-    uploaderNum: 0,             //已经上传的图片数目
-    showUpload: true,           //控制上传框的显隐
+   searchText:'',
+   pickerIndex:0,
+   pickerList:[{
+    KID:0,
+    NAME:'天游区'},{
+    KID:1,
+    NAME:'滴游区'}
+   ]
   },
 
   /**
@@ -60,4 +55,19 @@ Page({
     //   that.sjFramework.dealWithList(type, dataList, pageSize);
     // })
   },
+  searchList: function ({
+    detail
+  }) {
+    var that = this;
+    that.setData({
+      searchText: detail
+    })
+    // that.sjFramework.dealPageNoSize('enter');
+  },
+  bindPickerChange:function(e){
+    var that = this;
+    that.setData({
+      pickerIndex: e.detail.value
+    })
+  }
 })
