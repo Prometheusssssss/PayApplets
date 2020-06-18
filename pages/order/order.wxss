@@ -1,1 +1,16 @@
 /* pages/order/order.wxss */
+.search{
+    background-color: red!important;
+}
+.my-product-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+.item-product-image{
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 24rpx;
+
+}

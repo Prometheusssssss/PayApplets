@@ -8,11 +8,17 @@ Page({
    searchText:'',
    pickerIndex:0,
    pickerList:[{
-    KID:0,
+    // KID:0,
     NAME:'天游区'},{
-    KID:1,
+    // KID:1,
     NAME:'滴游区'}
-   ]
+   ],
+   orderList:[{
+    PHOTO_URL:"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3580855975,999874519&fm=26&gp=0.jpg",
+    PRODUCT_NAME:"大白菜",
+    NOW_QUOTE: '3.4',
+    PRICING_UNIT:"斤",
+   }]
   },
 
   /**
@@ -66,6 +72,7 @@ Page({
   },
   bindPickerChange:function(e){
     var that = this;
+    // debugger
     that.setData({
       pickerIndex: e.detail.value
     })

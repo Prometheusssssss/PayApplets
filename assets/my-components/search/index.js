@@ -77,7 +77,7 @@ Component({
    */
   methods: {
     loadPickerList: function () {
-      debugger
+      // debugger
       // this.triggerEvent('InputEvent', detail.value);
     },
     handleInput: function ({
@@ -99,8 +99,16 @@ Component({
     bindPickerChange:function({
       detail
     }){
-      this.triggerEvent('PickerEvent', detail.value);
-    }
+      var that = this;
+      that.setData({pickerIndex: detail.value})
+      this.triggerEvent('PickerEvent', detail);
+    },
+    // bindMultiPickerColumnChange:function({
+    //   detail
+    // }){
+    //   debugger
+    //   this.triggerEvent('PickerEvent', detail.value);
+    // }
 
 
     // startVoice: function (e) {

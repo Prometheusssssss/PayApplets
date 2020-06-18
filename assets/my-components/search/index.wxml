@@ -53,7 +53,8 @@
 
     <i class="icon icon-{{rightIconName}} left-i" catchtap="handleClick" wx:if="{{rightIconName!=''}}"
       style="{{rightIconStyle}}"></i>
-    <picker class="picker-text" wx:if="{{allowedPicker}}" bindchange="bindPickerChange" value="{{pickerIndex}}"
+     
+    <picker class="picker-text" wx:if="{{allowedPicker}}" bindchange="bindPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{pickerIndex}}"
             range="{{pickerList}}" range-key="NAME">
       <view class="picker">
           {{pickerList[pickerIndex].NAME}}

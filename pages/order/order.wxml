@@ -2,25 +2,39 @@
   bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"
   lockScroll="{{showProductItemDetail}}">
     <view slot="top" class="search-top">
-        <view >
-             <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{}}" catchPickerEvent="bindPickerChange" />
-            <view class="picker-content">
-            <view class="picker-title">结算方式：</view>
-            <picker class="picker-text" bindchange="bindSettlementWayPickerChange" value="{{settlementWayIndex}}"
-            range="{{settlementWay}}" range-key="NAME">
-            <view class="picker">
-                {{settlementWay[settlementWayIndex].NAME}}
-                <i class="icon icon-right iconc-main-style"></i>
-            </view>
-            </picker>
+        <view class="search">
+            <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{pickerList}}" catchPickerEvent="bindPickerChange" />
         </view>
-       
-      </view>
+        
     </view>
     <view slot="content" class="slot-content">
         <!-- <view >
             测试content
         </view> -->
+        <block wx:for="{{orderList}}">
+            <view class='my-product-item' data-item="{{item}}" data-t-index="{{tIndex}}" data-d-index="{{dIndex}}"
+                bindtap='chooseProductItem'>
+                <image class='item-product-image {{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"no-image":""}}'
+                mode='aspectFit' src='{{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"":item.PHOTO_URL+"/200x200"}}'>
+                </image>
+                <view class='item-product-info'>
+                <view class="item-product-name-area">
+                    <text class='item-product-name'>{{item.PRODUCT_NAME}}</text>
+                </view>
+                <view class="price-button-content">
+                    <view class='item-product-detail'>
+                        <text class='item-product-price'>{{convert.toMoney(item.NOW_QUOTE)}}/{{item.PRICING_UNIT}}</text>
+                    </view>
+                    <view>
+                    <button class='mini-operate main-color'>
+                        立即购买
+                        <!-- {{item.cartInfo.productNumber}} {{item.cartInfo.selectUnit}} -->
+                    </button>
+                    </view>
+                </view>
+                </view>
+            </view>
+        </block>
        
     </view>
    
