@@ -1,0 +1,159 @@
+button {
+  border-radius: 0;
+}
+
+button::after {
+  border: none;
+}
+
+.rectangle {
+  /* padding: 0; */
+  margin: 0;
+  padding: 4rpx 8rpx;
+  min-width: 140rpx;
+  height: 80rpx;
+  border: none;
+  border-radius: 0;
+  color: white;
+  line-height: 80rpx;
+  font-size: 24rpx;
+}
+
+.outline-rectangle{
+  margin: 0;
+  padding: 0 8rpx;
+  min-width: 10rpx;
+  max-width: 180rpx;
+  height: 60rpx;
+  line-height: 58rpx;
+  border: none;
+  border-radius: 0;
+  color: var(--main-lgb);
+  
+  font-size: 24rpx;
+  border-radius: 16rpx;
+}
+
+.rect {
+  margin: 0;
+  padding: 0 16rpx;
+  min-width: 84rpx;
+  height: 34rpx;
+  border: none;
+  border-radius: 6rpx;
+  color: white;
+  line-height: 34rpx;
+  font-size: 24rpx;
+}
+
+.bottom-rect {
+  color: white;
+  border-radius: 0;
+  margin-right: 0;
+  height: 102rpx;
+  min-width: 190rpx;
+  line-height: 102rpx;
+  font-size: 30rpx;
+  letter-spacing: 0.8rpx;
+}
+
+.mask-oval {
+  color: white;
+  border-radius: 38rpx;
+  margin: 0 4rpx;
+  padding: 0 22rpx;
+  height: 52rpx;
+  min-width: 152rpx;
+  line-height: 52rpx;
+  font-size: 24rpx;
+}
+
+.mask-rect {
+  color: white;
+  border-radius: 8rpx;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+  height: 70rpx;
+  min-width: 480rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  letter-spacing: 0.3rpx;
+  margin-bottom: 20rpx;
+}
+
+.oval {
+  color: white;
+  border-radius: 24rpx;
+  margin: 0 12rpx;
+  padding: 0 30rpx;
+  height: 48rpx;
+  min-width: 128rpx;
+  line-height: 48rpx;
+  font-size: 28rpx;
+}
+
+.red {
+  background: #e51c23;
+}
+
+.orange {
+  background-image: linear-gradient(90deg, #FE924F 0%, #FE754A 100%);
+}
+
+.yellow {
+}
+
+.green {
+}
+
+.blue {
+}
+
+.green-blue {
+}
+
+.gray {
+  background: #e6e6e6;
+}
+
+.dark-gray {
+  background: #999999;
+}
+.main-bgcolor {
+  background: linear-gradient(90deg, var(--main-lgba) 5%, var(--main-lgbb) 100%);
+}
+
+.main-color {
+  background: linear-gradient(-90deg, var(--main-lga) 4%, var(--main-lgb) 100%);
+}
+.main-color.outline {
+  border: 2rpx solid var(--main-style) !important;
+  background: white;
+}
+/*操作用小按钮 主要在侧边栏*/
+.mini-operate {
+  margin: 0;
+
+  min-width: 100rpx;
+  height: 48rpx;
+  border: none;
+  border-radius: 10rpx;
+  color: white;
+  line-height: 48rpx;
+  font-size: 24rpx;
+  letter-spacing: 0.88rpx;
+}
+
+.mask-operate {
+  margin: 0;
+  min-width: 204rpx;
+  height: 48rpx;
+  border: none;
+  border-radius: 24rpx;
+  color: black;
+  line-height: 48rpx;
+  font-size: 24rpx;
+  letter-spacing: 0.88rpx;
+}

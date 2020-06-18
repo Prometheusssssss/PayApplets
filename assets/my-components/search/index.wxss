@@ -1,5 +1,11 @@
 @import "../../private-icon/font.wxss";
 @import "../../../config.wxss";
+.picker-text{
+  margin-left: 30rpx;
+  font-size: 28rpx;
+  /* color: ; */
+}
+.icon-down{font-size: 28rpx;}
 .recorder-loadding-pos {
   position: absolute;
   top: calc(50% - 150rpx);
@@ -36,7 +42,7 @@
 }
 
 .search {
-  position: relative;
+  /* position: relative; */
   padding: 24rpx 20rpx;
   background: white;
   width: calc(100% - 40rpx);
@@ -59,6 +65,7 @@
 }
 
 .gray-search-bg {
+  position: relative;
   padding: 0 22rpx;
   background: var(--page-bg);
   height: 72rpx;
@@ -113,8 +120,8 @@
 
 .delete-i {
   position: absolute;
-  right: 78rpx;
-  top: 40rpx;
+  left: 490rpx;
+  top: 36rpx;
   font-size: 44rpx !important;
   z-index: 10;
   color: var(--main-style);
@@ -123,15 +130,16 @@
 .search-i {
   position: absolute;
   right: 32rpx;
-  top: 38rpx;
+  top: 34rpx;
   font-size: 48rpx !important;
   color: var(--icon-gray);
 }
 
 .icon-search {
   position: absolute;
-  left: 37rpx;
-  top: 41rpx;
+  left: 30rpx;
+  top: 40rpx;  
+  z-index: 1;
   color: var(--icon-gray);
   font-size: 38rpx !important;
 }

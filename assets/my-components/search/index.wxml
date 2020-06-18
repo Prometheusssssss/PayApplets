@@ -58,7 +58,7 @@
             range="{{pickerList}}" range-key="NAME">
       <view class="picker">
           {{pickerList[pickerIndex].NAME}}
-          <i class="icon icon-right iconc-main-style"></i>
+          <i class="icon icon-down iconc-main-style"></i>
       </view>
     </picker>
   </view>

@@ -1,0 +1,156 @@
+
+var convert = {
+  toMoney: function (value) {
+    if (value == '' || value == NaN || value == undefined) {
+      return '¥0.00'
+    } else {
+      value = (value + '').replace('¥', '').replace(',', '');
+      var valueStr = value.toString();
+      var index = valueStr.indexOf(".");
+      var len = valueStr.length;
+
+      var num = index > 0 ? valueStr.substring(0, index) : valueStr;
+      var cents = index > 0 ? valueStr.substring(index + 1, len) : '00';
+      if (cents != undefined) {
+        cents = cents.substring(0, 2);
+        if (cents.length == 1) {
+          cents = cents + '0';
+        }
+      } else {
+        cents = '00';
+      }
+      if (num.length > 4) {
+
+      }
+      for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
+        num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+      }
+      return '¥' + num + '.' + cents;
+    }
+  },
+
+  toProductQuotationMoney: function (value, connectText = '', showText = '', ) {
+    if (value == '' || value == null || value == NaN || value == undefined) {
+      return '¥0.00';
+    } else {
+      value = (value + '').replace('¥', '').replace(',', '');
+      var valueStr = value.toString();
+      var index = valueStr.indexOf(".");
+      var len = valueStr.length;
+
+      var num = index > 0 ? valueStr.substring(0, index) : valueStr;
+      var cents = index > 0 ? valueStr.substring(index + 1, len) : '00';
+      if (cents != undefined) {
+        cents = cents.substring(0, 2);
+        if (cents.length == 1) {
+          cents = cents + '0';
+        }
+      } else {
+        cents = '00';
+      }
+      if (num.length > 4) {
+
+      }
+      for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
+        num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+      }
+      return '¥' + num + '.' + cents + connectText;
+    }
+  },
+
+  tofixed2: function (value) {
+    if (value == '' || value == NaN || value == undefined) {
+      return '0.00'
+    } else {
+      value = (value + '').replace('', '').replace(',', '');
+      var valueStr = value.toString();
+      var index = valueStr.indexOf(".");
+      var len = valueStr.length;
+
+      var num = index > 0 ? valueStr.substring(0, index) : valueStr;
+      var cents = index > 0 ? valueStr.substring(index + 1, len) : '00';
+      if (cents != undefined) {
+        cents = cents.substring(0, 2);
+        if (cents.length == 1) {
+          cents = cents + '0';
+        }
+      } else {
+        cents = '00';
+      }
+      if (num.length > 4) {
+
+      }
+      for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
+        num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+      }
+      return '' + num + '.' + cents;
+    }
+  },
+
+  decimalPointToPercentSign: function (value) {
+    if (value != null) {
+      var percent = convert.mul(value, 100);
+      return percent + '%';
+    } else {
+      return '0%';
+    }
+
+  },
+
+  mul: function (a1, a2) {
+    var m = 0,
+      s1 = a1.toString(),
+      s2 = a2.toString();
+
+    var len = s1.split(".")[1];
+    if (len != undefined) {
+      m = m + len.length;
+    }
+
+    var lenn = s2.split(".")[1];
+
+    if (lenn != undefined) {
+      m = m + lenn.length;
+    }
+
+    var s1Str = s1.replace(".", "");
+    var s2Str = s2.replace(".", "");
+
+    var result1 = s1Str * s2Str;
+    var result2 = Math.pow(10, m);
+    var result = result1 / result2;
+    return result;
+  },
+
+  sum: function (a1, a2) {
+    a1 = a1 == undefined ? 0 : Number(a1);
+    a2 = a2 == undefined ? 0 : Number(a2);
+    return parseFloat(a1) + parseFloat(a2);
+  },
+
+  priceMul: function (a1, a2) {
+    a1 = a1 == undefined ? 0 : Number(a1);
+    a2 = a2 == undefined ? 0 : Number(a2);
+    if (a1 == 0 || a2 == 0) {
+      return convert.toMoney(0);
+    }
+    return convert.toMoney(parseFloat(a1) * parseFloat(a2));
+  },
+
+  substr: function(value,length){
+    value = value == undefined ? '' : value;
+    var subStrs = value.substring(0,length);
+    if(value.length>20)
+      subStrs = subStrs+'...'
+    return subStrs
+  }
+}
+module.exports = {
+  sum: convert.sum,
+  toMoney: convert.toMoney,
+  decimalPointToPercentSign: convert.decimalPointToPercentSign,
+  priceMul: convert.priceMul,
+  tofixed2: convert.tofixed2,
+  toProductQuotationMoney: convert.toProductQuotationMoney,
+  substr: convert.substr,
+}

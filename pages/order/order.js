@@ -7,18 +7,31 @@ Page({
   data: {
    searchText:'',
    pickerIndex:0,
+   gameAreaIndex:0,//大区
    pickerList:[{
     // KID:0,
-    NAME:'天游区'},{
+    NAME:'笑傲专区'},{
     // KID:1,
     NAME:'滴游区'}
    ],
    orderList:[{
-    PHOTO_URL:"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3580855975,999874519&fm=26&gp=0.jpg",
-    PRODUCT_NAME:"大白菜",
-    NOW_QUOTE: '3.4',
-    PRICING_UNIT:"斤",
-   }]
+    PHOTO_URL:"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2533624503,3545106441&fm=26&gp=0.jpg",
+    PRODUCT_NAME:"天刀",
+    NOW_QUOTE: '98',
+   },{
+    PHOTO_URL:"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2024790844,1861513762&fm=26&gp=0.jpg",
+    PRODUCT_NAME:"钟馗",
+    NOW_QUOTE: '1200',
+   }],
+   gameArea:[{
+      KID:0,
+      NAME:'第一大区'
+    },
+    {
+      KID:1,
+      NAME:'第二区'
+    }
+   ],
   },
 
   /**
@@ -75,6 +88,13 @@ Page({
     // debugger
     that.setData({
       pickerIndex: e.detail.value
+    })
+  },
+  bindGameAreaPickerChange:function(e){
+    var that = this;
+    // debugger
+    that.setData({
+      gameAreaIndex: e.detail.value
     })
   }
 })
