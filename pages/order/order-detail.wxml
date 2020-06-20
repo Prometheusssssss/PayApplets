@@ -1,0 +1,61 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<lm-framework sliderBar="false" contentBg="var(--page-bg)" id="lm-framework">
+    <view slot="content">
+        <view class='main-container'>
+            <!-- <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true"
+                interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="var(--main-style)">
+                <swiper-item wx:for="{{coverImageList}}" wx:key bindtap="bingSwiperChange" data-item="{{item}}">
+                    <image src="{{item}}" mode="aspectFill"></image>
+                </swiper-item>
+            </swiper> -->
+            <view class="image-info">
+                 <view class="img-info">
+                     <image src="{{mainImg}}" mode="widthFix"></image>
+                </view>
+            </view>
+           
+            <view class="main-info">
+                <view>
+                    <view>
+                        <view class="main-info-price">{{detailInfo.PRODUCT_NAME}}</view>
+                    </view>
+                </view>
+               <view>
+                    <view class="main-info-end-time">
+                        <text>{{convert.toMoney(detailInfo.PRICE)}}</text>
+                    </view>
+                </view>
+            </view>
+
+          
+
+
+            <view class="detail-group">
+                <view class="detail-group-title-bar">
+                    <view>商品详情</view>
+                </view>
+                <view  class="detail-group-title-bar description">
+                    <view>{{detailInfo.DETAIL_DESC}}</view>
+                </view>
+                <view class="detail-group-image">
+                    <block wx:for="{{detailImageList}}" wx:for-item="item">
+                        <image src="{{item}}" mode="widthFix"></image>
+                    </block>
+                </view>
+            </view>
+
+        </view>
+    </view>
+    <view slot="bottom" class="bottom">
+        <!-- <view class="share-button">
+            <button open-type="share">
+                <i class="icon icon-share"></i>
+                <text>分享</text>
+            </button>
+        </view> -->
+        <block>
+            <lm-button shape="bottom-rect" title="立即购买" buttonColor="bottom-rect main-bgcolor long "  bindButtonClick="buyProduct" />
+        </block>
+
+    </view>
+</lm-framework>

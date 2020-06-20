@@ -1,0 +1,125 @@
+/* pages/order/order-slider.wxss */
+/* pages/product/product.wxss */
+@import "/assets/my-components/button/index.wxss";
+/* @import "../public-css/product-mask.wxss";
+ @import "../voice-order/recorder-animation.wxss"; */
+
+.my-product-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 2rpx solid var(--line-gray);
+
+}
+
+.my-product-title .icon{
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.my-product-item {
+  margin: 0 0 0 17rpx;
+  padding: 12rpx 30rpx 12rpx 0;
+  width: calc(100% - 47rpx);
+  border-bottom: none !important;
+  display: flex;
+  align-items: center;
+} 
+.my-product-item .icon{
+  margin-right: 20rpx;
+  font-size: 30rpx;
+}
+
+.my-product-item-content {
+  border-bottom: 2rpx solid var(--page-bg);
+}
+
+.orgin-price .origin-promotion-price {
+  text-decoration: line-through;
+}
+
+.orgin-price .item-product-text {
+  font-size: 20rpx;
+}
+
+.item-product-name-area {
+  margin-bottom: 12rpx;
+}
+
+.item-product-name {
+  line-height: 30rpx;
+  margin-bottom: 0 !important;
+  font-size: 28rpx;
+}
+
+.icon-promotion {
+  font-size: 30rpx;
+  position: relative;
+  top: 4rpx;
+}
+
+
+
+.kc-1SQ {
+  border-radius: 4rpx;
+  border: 2rpx solid var(--line-gray);
+  color: var(--line-gray);
+  padding: 3rpx 10rpx;
+}
+
+.kc-KCJZ {
+  border-radius: 4rpx;
+  border: 2rpx solid var(--text-red);
+  color: var(--text-red);
+  padding: 3rpx 10rpx;
+}
+
+.inventory-status.mask {
+  position: relative;
+  min-height: 14rpx;
+}
+
+.inventory-status.mask .kc-KCJZ {
+  position: absolute;
+  top: -32rpx;
+  min-height: 0;
+  margin: 0;
+}
+
+.recorder {
+  bottom: 20rpx !important;
+}
+
+.icon-voice-order-content{
+  z-index: 3;
+  position: fixed;
+bottom: 38rpx;
+  right: 22vw;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 140rpx;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  
+  
+}
+
+.icon-order-bg {
+  background: var(--main-style);
+  color: white;
+  width: inherit;
+  height: inherit;
+  display: flex;
+  border-radius: 140rpx;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-size: 50rpx;
+}
+
+

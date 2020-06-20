@@ -1,0 +1,18 @@
+@import "../../assets/my-components/button/index.wxss";
+@import "../public-css/activity-product-detail.wxss";
+
+
+/* .image-info{
+    height: 200px;
+    text-align: center;
+} */
+.img-info image{
+    width: 100%;
+}
+.main-info-people{
+    margin: 0!important;
+    height:45rpx!important;
+    width: 100rpx!important;
+    justify-content: center!important;
+    flex:none!important;
+}

@@ -49,6 +49,10 @@ Component({
       type: String,
       value: '',
     },
+    picker: {
+      type: Boolean,
+      value: false,
+    },
     pickerList:{
       type: Array,
       value: [],

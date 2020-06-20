@@ -1,24 +1,17 @@
 <!-- 检索 录音 -->
 <block wx:if="{{type=='recorder'}}">
-  <!-- <view class="search pri-class">
+  <view class="search pri-class">
     <view class="gray-search-bg">
       <input bindinput="handleInput" placeholder="{{placeholder}}" placeholder-class="search-placeholder"
         value="{{initValue}}" />
     </view>
-    <i wx:if="{{allowedClear==true && initValue!=''}}" class="icon icon-close delete-i" catchtap="handleClear"
-      style="right:{{rightIconName!=''?'180rpx':'104rpx'}}"></i>
-    <i wx:if="{{voice=='true'}}" style="right:{{rightIconName!=''?'108rpx':'32rpx'}}" class="icon icon-voice search-i"
+    <i  class="icon icon-close delete-i" catchtap="handleClear"
+      style="left:{{picker?'500rpx':'670rpx'}}"></i>
+    <!-- <i wx:if="{{voice=='true'}}" style="right:{{rightIconName!=''?'108rpx':'32rpx'}}" class="icon icon-voice search-i"
       catchtouchstart='startVoice' catchtouchend='endVoice' catchtouchcancel='endVoice'></i>
     <i class="icon icon-{{rightIconName}} left-i" catchtap="handleClick" wx:if="{{rightIconName!=''}}"
-      style="{{rightIconStyle}}"></i>
+      style="{{rightIconStyle}}"></i> -->
   </view>
-  <view class="recorder-loadding-pos" wx:if="{{voiceStatus == 'start'}}">
-    <view class="recorder-loadding">
-      <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-black response"
-        style="height:100rpx"></image>
-      <text>松开查询...</text>
-    </view>
-  </view> -->
 </block>
 
 <block wx:if="{{type=='text'}}">
@@ -53,15 +46,18 @@
 
     <i class="icon icon-{{rightIconName}} left-i" catchtap="handleClick" wx:if="{{rightIconName!=''}}"
       style="{{rightIconStyle}}"></i>
-     
-    <picker class="picker-text" wx:if="{{allowedPicker}}" bindchange="bindPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{pickerIndex}}"
+    <view wx:if="{{picker}}">
+      <picker  class="picker-text" wx:if="{{allowedPicker}}" bindchange="bindPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{pickerIndex}}"
             range="{{pickerList}}" range-key="NAME">
-      <view class="picker">
-          {{pickerList[pickerIndex].NAME}}
-          <i class="icon icon-down iconc-main-style"></i>
-      </view>
-    </picker>
+        <view class="picker">
+            {{pickerList[pickerIndex].NAME}}
+            <i class="icon icon-down iconc-main-style"></i>
+        </view>
+      </picker>
+    </view>
+    
   </view>
+  
 </block>
 
 <!-- 日期 -->

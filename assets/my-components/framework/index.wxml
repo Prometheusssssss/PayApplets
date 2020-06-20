@@ -7,6 +7,11 @@
     </slot>
   </view>
   <view class="middle">
+    <scroll-view scroll-y upper-threshold="0" lower-threshold="0" class="slider" enable-flex="true"
+      style="{{sliderBar=='true'?'width:27%;margin-bottom:16rpx':'flex:0;border-right:0'}};left:0">
+      <slot name="slider">
+      </slot>
+    </scroll-view>
     <scroll-view class="content" enable-flex="true" scroll-y enable-back-to-top='true'
       style="{{sliderBar=='true'?'width:73%;':'width:100%;'}};background:{{contentBg}};right:0"
       scroll-top='{{topNum}}' bindscroll="scrollViewEventHander">
@@ -27,5 +32,9 @@
         </view>
       </view>
     </scroll-view>
+  </view>
+  <view class="bottom">
+    <slot name="bottom">
+    </slot>
   </view>
 </view>

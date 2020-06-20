@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText":"商品交易",
+  "usingComponents": {
+    "lm-framework":"../../assets/my-components/framework/index",
+    "lm-button": "../../../assets/my-components/button/index"
+  }
+}

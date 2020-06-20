@@ -1,0 +1,45 @@
+<lm-framework sliderBar="true" contentBg="white" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}">
+    <view slot="top" class="search-top">
+        <!-- <lm-search placeholder="服务器名称" catchInputEvent="searchProductListByText" initValue="{{searchText}}"
+        type="text" bindSearchList="getProductList" rightIconName=""  iconName='' catchRightEvent="" picker="{{isPicker}}" /> -->
+        <lm-search placeholder="服务器名称" picker='{{hasPicker}}' catchInputEvent="searchProductListByText" initValue="{{searchText}}"
+      type="recorder" bindSearchList="getProductList" allowedClear='true' rightIconName="" catchRightEvent="" />
+  </view>
+  <lm-slider-bar slot="slider" items="{{sliderList}}" current="{{currentSliderbar}}" itemsKey="NAME"
+    bindChangeSliderBar="changeSliderBar">
+  </lm-slider-bar>
+  <view slot="content">
+    <view class='main-container'>
+    <view class="my-product-title">
+        <view >
+            <i class="icon icon-gray icon-uncheck"></i>
+            <text >维护</text>
+        </view>
+         <view >
+            <i class="icon icon-red icon-uncheck"></i>
+            <text >爆满</text>
+        </view>
+        <view >
+            <i class="icon icon-green icon-uncheck"></i>
+            <text >流畅</text>
+        </view>
+    </view>
+      <block wx:for="{{totalList}}" wx:for-item="listItem">
+        <block wx:for="{{listItem}}" wx:key="listItem.productName" wx:for-item="item">
+          <view class="my-product-item-content">
+            <view class='my-product-item' data-item="{{item}}" >
+                <i class="icon icon-red icon-uncheck"></i>
+              <view class='item-product-info'>
+                <view class="item-product-name-area"><text
+                    class='item-product-name'>{{item.NAME}}</text><i
+                    class="icon icon-red "></i></view>
+              </view>
+
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
+  </view>
+</lm-framework>

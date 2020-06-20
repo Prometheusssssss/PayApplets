@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/order/order",
+    "pages/order/order-slider",
+    "pages/order/order-detail",
     "pages/login/login",
     "pages/test/test",
     "pages/index/index",

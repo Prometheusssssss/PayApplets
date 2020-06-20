@@ -42,7 +42,7 @@
 }
 
 .search {
-  /* position: relative; */
+  position: relative;
   padding: 24rpx 20rpx;
   background: white;
   width: calc(100% - 40rpx);
@@ -65,7 +65,7 @@
 }
 
 .gray-search-bg {
-  position: relative;
+  
   padding: 0 22rpx;
   background: var(--page-bg);
   height: 72rpx;
@@ -120,7 +120,7 @@
 
 .delete-i {
   position: absolute;
-  left: 490rpx;
+  left: 500rpx;
   top: 36rpx;
   font-size: 44rpx !important;
   z-index: 10;

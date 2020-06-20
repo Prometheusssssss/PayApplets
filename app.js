@@ -21,7 +21,7 @@ App({
     userInfo: null,
     sliderBar: [],
 
-    manageUrl: 'https://app1.keyun.link:543', //体验
+    manageUrl: 'https://www.dazuiba.cloud', //体验
     // manageUrl: 'https://app.keyun.link', //体验
   },
   setHostUrl: function (hostUrl) {
@@ -51,6 +51,65 @@ App({
     const pageLargeSize = this.globalData.pageLargeSize;
     return pageLargeSize;
   },
+  ManageExecuteApi: async function (path, headerString, param, way) {
+    var that = this;
+    var header = {
+      'Content-Type': 'application/json',
+    }
+    if (headerString) {
+      header = {
+        'Content-Type': 'application/json',
+        'authorization': 'Basic ' + headerString,
+      }
+    }
+    var result = await that.reTryRequest(that.globalData.manageUrl + '' + path, way, param, header);
+    // return result
+    if (result == 'error') {
+      return 'error'
+    } else {
+      return result
+    }
+  },
+  reTryRequest: async function (url, method, data, header, retryTimes = 0) {
+    var that = this;
+    // that.showPhoneLog(`请求开始！！！！！！请求方式:${method}||请求路径:${url}||头部:${JSON.stringify(header)}||参数:${JSON.stringify(data)}！！！！！`);
+    var result = await new Promise(resolve => {
+      wx.request({
+        url: url,
+        method: method, data: data, header: header,
+        complete: function (res) {
+          // debugger
+          resolve(res);
+        }
+      })
+    })
+    var data = JSON.parse(result);
+    debugger
+    // return data
+    if(data.errMsg){
+      wx.showToast({
+        title: data.errMsg,
+        icon: 'none',
+        duration: 2000
+      });
+      return 'error'
+    }else{
+      return data
+     
+    }
+
+  },
+  // GetDBSliderBarList: function () {
+  //   var that = this;
+  //   var p = {
+  //     store_code: that.getStore().CODE,
+  //     cid: that.getUser().cid,
+  //   }
+  //   //获取当前选中客户的产品类别
+  //   that.ExecuteProcess('sel_customer_product_category_sjn', p).then((slider) => {
+  //     that.globalData.sliderBar = slider;
+  //   })
+  // },
   // clearLogsStorageList: function () {
   //   this.globalData.logsStorageList = [];
   // },
