@@ -37,16 +37,49 @@ Component({
    * 组件的初始数据
    */
   data: {
+    lastTime: 0,
+  },
 
+  lifetimes: {
+    // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+    ready: function () {
+    },
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    handleClick: function(e) {
+    handleClick: function (e) {
+      var that = this;
       var { dataset } = e.currentTarget;
-      this.triggerEvent('ButtonClick', dataset);
+      // var date = new Date();
+      // var time = date.toLocaleTimeString() + ':' + date.getMilliseconds()
+      that.throttle(that.triggerMyEvent, 2000)(dataset)
+
+    },
+
+    triggerMyEvent: function (dataset) {
+      var that = this;
+ 
+      that.triggerEvent('ButtonClick', dataset);
+    },
+
+    throttle: function (func, gapTime) {
+      const that = this;
+      if (typeof func !== 'function') {
+        throw new TypeError('need a function');
+      }
+      gapTime = +gapTime || 0;
+      var lastTime = that.data.lastTime;
+      return function () {
+        const args = arguments;
+        let time = + new Date();
+        if (time - lastTime > gapTime || !lastTime) {
+          func.apply(that, args)
+          that.data.lastTime = time;
+        }
+      }
     }
   }
 })

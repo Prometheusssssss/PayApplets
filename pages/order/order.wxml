@@ -4,27 +4,22 @@
   lockScroll="{{showProductItemDetail}}">
     <view slot="top" class="search-top">
         <view class="search">
-            <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{pickerList}}" catchPickerEvent="bindPickerChange" />
+            <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{areaList}}" catchPickerEvent="bindAreaChange" />
         </view>
     </view>
     <view slot="content" class="slot-content">
-        <!-- <view >
-            测试content
-        </view> -->
-        <!-- <view class="picker-content">
-            <picker class="picker-text" bindchange="bindGameAreaPickerChange" value="{{gameAreaIndex}}"
-            range="{{gameArea}}" range-key="NAME">
-            <view class="picker">
-                {{gameArea[gameAreaIndex].NAME}}
-                <i class="icon icon-down iconc-main-style"></i>
-            </view>
-            </picker>
-        </view> -->
+        <!-- <picker class="picker-content" bindchange="bindRegionChange" value="{{regionIndex}}"
+          range="{{regionList}}" range-key="NAME">
+          <view class="picker">
+            {{regionList[regionIndex].NAME}}
+            <i class="icon icon-right iconc-main-style"></i>
+          </view>
+        </picker> -->
         <view class="picker-content" bindtap="selectSlider" >
-            <view class="picker" >
-                {{gameArea[gameAreaIndex].NAME}}
-                <i class="icon icon-down iconc-main-style"></i>
-            </view>
+          <view class="picker">
+            {{serverList[serverIndex].NAME}}
+            <i class="icon icon-right iconc-main-style"></i>
+          </view>
         </view>
         <block wx:for="{{orderList}}">
             <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}"

@@ -1,17 +1,17 @@
-<!-- <block wx:if="{{shape=='rectangle'}}">
+<block wx:if="{{shape=='rectangle'}}">
   <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='rectangle {{buttonColor}}'
     catchtap='handleClick'>{{title}}</button>
-</block> -->
+</block>
 
 <block wx:if="{{shape=='rect'}}">
   <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='rect {{buttonColor}}' catchtap='handleClick'>{{title}}</button>
 </block>
 
-<block wx:if="{{shape=='rectangle-circle'}}">
-  <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='rectangle-circle {{buttonColor}}' catchtap='handleClick'>{{title}}</button>
+
+<block wx:if="{{shape=='bottom-rect'}}">
+  <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='bottom-rect {{buttonColor}}'
+    catchtap='handleClick'>{{title}}</button>
 </block>
-
-
 
 <block wx:if="{{shape=='mask-oval'}}">
   <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='mask-oval {{buttonColor}}'
@@ -34,20 +34,10 @@
     catchtap='handleClick'>{{title}}</button>
 </block>
 
-
-
-
-
-<block wx:if="{{shape=='bottom-rect'}}">
-  <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='bottom-rect {{buttonColor}}'
-    catchtap='handleClick'>{{title}}</button>
-</block>
-
 <block wx:if="{{shape=='mask-rect'}}">
   <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='mask-rect {{buttonColor}}'
     catchtap='handleClick'>{{title}}</button>
 </block>
-
 
 <block wx:if="{{shape=='outline-rectangle'}}">
   <button data-item="{{dataItem}}" data-arr="{{dataArr}}" data-obj="{{dataObj}}" class='outline-rectangle {{buttonColor}}'

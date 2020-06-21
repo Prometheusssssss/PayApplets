@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "备注",
+    "usingComponents": {
+      "sj-framework": "../../assets/my-components/framework/index",
+      "sj-button": "../../assets/my-components/button/index"
+    }
+  }

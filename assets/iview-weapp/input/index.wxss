@@ -1,0 +1,130 @@
+@import "../../private-icon/font.wxss";
+@import "../../../config.wxss";
+
+.i-input {
+  padding: 10rpx 0;
+  margin-left: 40rpx;
+  width: calc(100% - 40rpx);
+  color: var(--text-black);
+  background: white;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+
+.i-input:not(.no-line)::after {
+  content: "";
+  width: 100%;
+  border-top: 2rpx solid var(--line-gray-light);
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.i-input-title {
+  font-weight: 500;
+  min-width: 180rpx;
+  font-size: 30rpx;
+  letter-spacing: -1rpx;
+  margin-top: 16rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+}
+
+.i-input-input {
+  flex: 1;
+  line-height: 1.6;
+  padding: 16rpx 0;
+  height: 36rpx;
+  width: 100%;
+  min-height: 36rpx;
+  max-height: 36rpx;
+  max-width: 100%;
+
+  font-size: 26rpx;
+  letter-spacing: -1rpx;
+}
+
+.i-input-placeholder {
+  font-size: 26rpx;
+  letter-spacing: -1rpx;
+  color: var(--text-gray);
+  display: flex;
+  flex-direction: colunm;
+  align-items: center;
+}
+
+.i-input-wrapped {
+  margin: 20rpx 30rpx;
+  background-color: #fff;
+}
+
+.i-input-wrapped::after {
+  left: 0;
+  border-width: 2rpx;
+  border-radius: 8rpx;
+}
+
+.i-input-error {
+  color: #ed3f14;
+}
+
+.i-input.i-input-wrapped::after {
+  display: block;
+}
+
+.i-input-wrapped.i-input-error::after {
+  border-color: #ed3f14;
+}
+
+.no-line {
+  width: 100%;
+  margin: 0;
+}
+
+.i-input.column {
+  flex-direction: column;
+  height: 125rpx;
+  max-height: 125rpx;
+  align-items: flex-start;
+}
+
+.i-input.column .i-input-title {
+}
+
+.i-input.column .i-input-placeholder {
+}
+
+.i-input.column .i-input-input {
+  display: flex;
+  flex-direction: colunm;
+  align-items: center;
+}
+
+.i-input.right {
+  flex-direction: row;
+  height: 92rpx;
+  max-height: 92rpx;
+  align-items: flex-end;
+}
+
+.i-input.right .i-input-title {
+  margin-bottom: 16rpx;
+}
+
+.i-input.right .i-input-placeholder {
+}
+
+.i-input.right .i-input-input {
+  padding: 16rpx 0 18rpx 0;
+}
+
+.icon-right {
+  font-size: 48rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 46rpx;
+}

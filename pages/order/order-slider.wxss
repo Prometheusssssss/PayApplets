@@ -21,19 +21,28 @@
 }
 
 .my-product-item {
-  margin: 0 0 0 17rpx;
+  /* margin: 0 0 0 17rpx; */
   padding: 12rpx 30rpx 12rpx 0;
-  width: calc(100% - 47rpx);
-  border-bottom: none !important;
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  width: calc(50% - 30rpx);
+  border-bottom: 2rpx solid var(--line-gray);
+  /* align-items: center; */
 } 
+
+.my-product-item .item-product-info{
+  display: inline-block;
+}
+
 .my-product-item .icon{
   margin-right: 20rpx;
-  font-size: 30rpx;
+  font-size: 40rpx;
+}
+.my-product-item .icon-main-style{
+  color: var(--main-style);
 }
 
 .my-product-item-content {
+  display: inline-block;
   border-bottom: 2rpx solid var(--page-bg);
 }
 

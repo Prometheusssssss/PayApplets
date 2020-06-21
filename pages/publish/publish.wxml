@@ -1,0 +1,92 @@
+<form bindsubmit="saveGuestValue">
+  <sj-framework sliderBar="false" contentBg="white">
+    <view slot="content">
+        <view class="area line">
+          <view class="picker-content">
+            <view class="picker-title">游戏专区：</view>
+            <picker class="picker-text" bindchange="bindAreaChange" value="{{areaIndex}}"
+              range="{{areaList}}" range-key="NAME">
+              <view class="picker">
+                {{areaList[areaIndex].NAME}}
+                <i class="icon icon-right icon-main-color"></i>
+              </view>
+            </picker>
+          </view>
+          <i-input name="PRODUCT_NAME" value="{{publishInfo.PRODUCT_NAME}}" type="text" title="商品名称" right
+            bindchange="convertNameFirst" placeholder="请输入商品名称（必填）" />
+          <i-input name="PRICE" value="{{publishInfo.PRICE}}" title="价格" right placeholder="请输入价格（必填）" />
+          <view class="upload-view">
+            <view class="picker-title">主图：</view>
+              <view class='upload'>
+                 
+                  <!-- 根据已选择的图片临时路径数组展示图片-->
+                  <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+                      <!-- 删除-->
+                      <!-- <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="30" color="red"/> -->
+                      <i class="icon icon-close ui_uploader_item_icon icon-red" data-index="{{index}}" bindtap='clearImg' ></i>
+                      <!-- 图片-->
+                      <image class="special-image" bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+                  </view>
+                   <!-- 上传按钮+框 -->
+                  <view class="image" wx:if="{{showUpload}}" > 
+                      <image  bindtap='upload' mode='aspectFit' src="/assets/img/photo.png" ></image>
+                  </view>
+              </view>
+            </view>
+          </view>
+        <view class="region line">
+          <view class="picker-content">
+              <view class="picker-title">游戏大区：</view>
+              <view class="picker-text" bindtap="bindServerChange">
+                <view class="picker">
+                  {{serverList[serverIndex].NAME}}
+                  <i class="icon icon-right icon-main-color"></i>
+                </view>
+              </view>
+          </view>
+          <i-input name="RETRIEVAL" value="{{publishInfo.RETRIEVAL}}" title="等级要求" right placeholder="请输入等级要求" />
+        </view>
+        <view class="product-detail">
+            <!-- <i-input name="DESCRIPTION" value="{{publishInfo.DESCRIPTION}}"  title="商品详情" right
+        placeholder="请输入商品详情" /> -->
+            <!-- <view slot="top" class="can-edit-main-detail"> -->
+             <view class="picker-content can-edit-main-detail">
+                <view class="picker-title">商品详情：</view>
+                <view class="picker-detail" bindtap="remarkEvent">
+                    <view class="picker">
+                      <text>{{publishInfo.DESCRIPTION}}</text>
+                      <i class="icon icon-right icon-main-color"></i>
+                    </view>
+                </view>
+              </view>
+            <!-- <i-input name="FAX" value="{{publishInfo.FAX}}" title="详情图片" right placeholder="请输入传真" /> -->
+            <view class="upload-view">
+              <view class="picker-title">详情图：</view>
+              <view class='upload'>
+                  <!-- 根据已选择的图片临时路径数组展示图片-->
+                  <view class='ui_uploader_item' wx:for="{{uploaderDetailList}}" wx:key="{{index}}">
+                      <!-- 删除-->
+                      <!-- <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="30" color="red"/> -->
+                      <i class="icon icon-delete ui_uploader_item_icon icon-red" ></i>
+                      <!-- 图片-->
+                      <image class="special-image" bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+                  </view>
+                  <!-- 上传按钮+框 -->
+                  <view class="image" wx:if="{{showUpload}}" > 
+                      <image  bindtap='upload' mode='aspectFit' src="/assets/img/photo.png" ></image>
+                  </view>
+              </view>
+            </view>
+        </view>
+        <view class="warning">
+            上架七天后的产品自动下架，请注意及时维护
+        </view>
+     
+     
+    </view>
+
+    <view slot="bottom">
+      <button formType="submit" class="bottom-rect main-bgcolor">保存</button>
+    </view>
+  </sj-framework>
+</form>

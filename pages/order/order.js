@@ -9,14 +9,13 @@ Page({
    searchText:'',
    areaIndex:0,//大区
    regionIndex:0,//小区
+   serverIndex:0,//小区
+   areaId:0,//大区
+   regionId:0,//小区
+   serverId:0,//小区
    areaList:[],
    regionList:[],
-  //  pickerList:[{
-  //   KID:0,
-  //   NAME:'笑傲专区'},{
-  //   KID:1,
-  //   NAME:'滴游区'}
-  //  ],
+   serverList:[],
    orderList:[{
     KID:1,
     PRODUCT_NAME:'天刀爆款',
@@ -50,6 +49,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.sjFramework = that.selectComponent("#lm-framework");
+   
   },
 
   // http://www.dazuiba.cloud:8001/api/_search/defaultSearch/a_game_setting?filter={"PARENT_ID":null}
@@ -61,46 +61,52 @@ Page({
   onShow: function () {
     var that = this;
     that.loadArea();
-    // that.loadGre();
     // that.sjFramework.dealPageNoSize('enter');
   },
   loadArea:function(){
-    // http://www.dazuiba.cloud:8001/api/_search/defaultSearch/a_game_setting?filter={"PARENT_ID":null}
+    var that = this;
     var p = {"PARENT_ID":null}
-    var url = `https://www.dazuiba.cloud/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
+    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
     console.log(url)
-    wx.request({
-      url: `${url}`,
-      method: "GET",
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        debugger
+    app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {
+      if (result != 'error') {
+        var data = result;
+        that.setData({
+          areaList : result,
+        })
+        that.loadRegion()
       }
     })
-    // app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {
-    //   if (result != 'error') {
-    //     var data = result;
-    //     that.setData({
-    //       areaList : result
-    //     })
-    //     that.loadRegion()
-    //   }
-    // })
   },
   loadRegion:function(){
-    // http://www.dazuiba.cloud:8001/api/_search/defaultSearch/a_game_setting?filter={"PARENT_ID":null}
     var that = this;
-    var parengId = that.data.areaList[0].KID;
-    var p = {"PARENT_ID":parengId}
+    var areaIndex = that.data.areaIndex;
+    var parentId = that.data.areaList[areaIndex].KID;
+    var p = {"PARENT_ID":parentId}
    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
    console.log(url)
     app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {
       if (result != 'error') {
         var data = result;
         that.setData({
-          regionList : result
+          regionList : result,
+        })
+        that.loadServer()
+      }
+    })
+  },
+  loadServer:function(){
+    var that = this;
+    var regionIndex = that.data.regionIndex;
+    var parentId = that.data.regionList[regionIndex].KID;
+    var p = {"PARENT_ID":parentId}
+   var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
+   console.log(url)
+    app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {
+      if (result != 'error') {
+        var data = result;
+        that.setData({
+          serverList : result
         })
       }
     })
@@ -137,28 +143,34 @@ Page({
     })
     // that.sjFramework.dealPageNoSize('enter');
   },
-  bindPickerChange:function(e){
+  bindAreaChange:function(e){
     var that = this;
+    var areaId = that.data.areaList[e.detail.value].KID;
     that.setData({
-      pickerIndex: e.detail.value
+      areaIndex: e.detail.value
     })
+    that.loadRegion()
   },
-  bindGameAreaPickerChange:function(e){
-    var that = this;
-    // debugger
-    that.setData({
-      gameAreaIndex: e.detail.value
-    })
-  },
+  
   //立即购买进入详情页
   openOrderDetailPage:function(e){
     var that = this;
     var item = JSON.stringify(e.currentTarget.dataset.item);
     wx.navigateTo({url:`order-detail?detailData=${item}`})
   },
+  // bindRegionChange:function(e){
+  //   var that = this;
+  //   that.setData({
+  //     regionIndex: e.detail.value
+  //   })
+  // },
   //先拉出大区 默认给一个值
   selectSlider:function(){
-    var areaId = 0;
-    wx.navigateTo({url:`order-slider?${areaId}`})
+    var that = this;
+    var regionIndex = that.data.regionIndex;
+    var regionId = that.data.regionList[regionIndex].KID;
+    var areaId = that.data.areaList[that.data.areaIndex].KID;
+    var serverId = that.data.serverList[that.data.serverIndex].KID;
+    wx.navigateTo({url:`order-slider?regionId=${regionId}&&areaId=${areaId}&&serverId=${serverId}&regionIndex=${that.data.regionIndex}&&areaIndex=${that.data.areaIndex}&&serverIndex=${that.data.serverIndex}`})
   }
 })

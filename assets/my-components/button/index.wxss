@@ -6,34 +6,6 @@ button::after {
   border: none;
 }
 
-.rectangle {
-  /* padding: 0; */
-  margin: 0;
-  padding: 4rpx 8rpx;
-  min-width: 140rpx;
-  height: 80rpx;
-  border: none;
-  border-radius: 0;
-  color: white;
-  line-height: 80rpx;
-  font-size: 24rpx;
-}
-
-.outline-rectangle{
-  margin: 0;
-  padding: 0 8rpx;
-  min-width: 10rpx;
-  max-width: 180rpx;
-  height: 60rpx;
-  line-height: 58rpx;
-  border: none;
-  border-radius: 0;
-  color: var(--main-lgb);
-  
-  font-size: 24rpx;
-  border-radius: 16rpx;
-}
-
 .rect {
   margin: 0;
   padding: 0 16rpx;
@@ -43,18 +15,21 @@ button::after {
   border-radius: 6rpx;
   color: white;
   line-height: 34rpx;
-  font-size: 24rpx;
+  font-size: 32rpx;
+  letter-spacing: 0.9rpx;
 }
 
-.bottom-rect {
+.rectangle-circle {
+  min-width: 120rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  font-size: 24rpx;
+  border-radius: 46rpx;
+  margin: 0;
+  padding: 0 16rpx;
+  border: none;
+  letter-spacing: 0.9rpx;
   color: white;
-  border-radius: 0;
-  margin-right: 0;
-  height: 102rpx;
-  min-width: 190rpx;
-  line-height: 102rpx;
-  font-size: 30rpx;
-  letter-spacing: 0.8rpx;
 }
 
 .mask-oval {
@@ -68,79 +43,173 @@ button::after {
   font-size: 24rpx;
 }
 
+.oval {
+  color: white;
+  border-radius: 6rpx;
+  margin: 0 12rpx;
+  padding: 0 30rpx;
+  background: var(--button-outline-border);
+  height: 56rpx;
+  min-width: 180rpx;
+  line-height: 56rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.oval.small {
+  height: 50rpx;
+  min-width: 100rpx;
+  line-height: 50rpx;
+  padding: 0;
+}
+
+/* start*/
+/* 遮罩层内的button*/
 .mask-rect {
   color: white;
   border-radius: 8rpx;
   padding: 0;
   margin-left: 0;
   margin-right: 0;
-  height: 70rpx;
-  min-width: 480rpx;
-  line-height: 70rpx;
+  height: 80rpx;
+  min-width: 200rpx;
+  line-height: 80rpx;
   font-size: 28rpx;
   font-weight: 500;
   letter-spacing: 0.3rpx;
-  margin-bottom: 20rpx;
 }
 
-.oval {
+.mask-rect.small {
+  min-width: 180rpx;
+}
+
+.mask-rect.long {
+  min-width: 480rpx;
+}
+
+.bottom-rect {
   color: white;
-  border-radius: 24rpx;
-  margin: 0 12rpx;
-  padding: 0 30rpx;
-  height: 48rpx;
-  min-width: 128rpx;
-  line-height: 48rpx;
-  font-size: 28rpx;
+  border-radius: 0;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+  height: 104rpx;
+  min-width: 190rpx;
+  line-height: 112rpx;
+  font-size: 30rpx;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.bottom-rect.long {
+  min-width: 250rpx;
+}
+
+.bottom-rect.large {
+  min-width: 672rpx;
+}
+
+.bottom-rect.with-radius {
+  border-radius: 8rpx;
+}
+
+.bottom-rect.medium {
+  font-size: 36rpx;
+  font-weight: 500;
+}
+
+
+/* `end*/
 .red {
-  background: #e51c23;
+  background: #E51C23;
 }
 
 .orange {
   background-image: linear-gradient(90deg, #FE924F 0%, #FE754A 100%);
 }
 
-.yellow {
+.blue {
+  background-image: linear-gradient(90deg, #2489FB 2%, #1B83FB 100%);
 }
 
 .green {
+  background-image: linear-gradient(90deg, #37B38C 0%, #04AFB2 100%);
 }
 
-.blue {
+.purple {
+  background-image: linear-gradient(90deg, #809EFF 0%, #677CFE 100%);
 }
 
-.green-blue {
+.yellow {
+  background-image: linear-gradient(90deg, #FCD156 0%, #FEB425 100%);
 }
 
-.gray {
-  background: #e6e6e6;
+
+
+.gray.no-border.delete {
+  color: var(--text-gray);
+  background: transparent;
+  position: relative;
+  right: calc(100vw - 250rpx - 250rpx);
+  min-width: 250rpx;
+}
+
+.gray.no-border.delete.short {
+  color: var(--text-gray);
+  background: transparent;
+  position: relative;
+  right: calc(100vw - 190rpx - 190rpx);
+  min-width: 190rpx;
 }
 
 .dark-gray {
-  background: #999999;
+  background: #999999
 }
-.main-bgcolor {
+
+.main-bgcolor,
+.main-color {
   background: linear-gradient(90deg, var(--main-lgba) 5%, var(--main-lgbb) 100%);
 }
 
-.main-color {
-  background: linear-gradient(-90deg, var(--main-lga) 4%, var(--main-lgb) 100%);
+.gray {
+  background: #E6E6E6;
 }
-.main-color.outline {
-  border: 2rpx solid var(--main-style) !important;
+
+.outline.gray {
+  color: var(--text-gray);
+  background: transparent;
+  border: 2rpx solid var(--button-outline-border)
+}
+
+
+.orange.outline {
+  border: 2rpx solid var(--button-orange-dark);
+  color: var(--button-orange-dark);
   background: white;
 }
+
+.blue.outline {
+  border: 2rpx solid var(--button-blue);
+  color: var(--button-blue);
+  background: white;
+}
+
+.main-color.outline {
+  border: 2rpx solid var(--main-style);
+  color: var(--main-style);
+  background: white;
+}
+
 /*操作用小按钮 主要在侧边栏*/
 .mini-operate {
   margin: 0;
-
   min-width: 100rpx;
   height: 48rpx;
   border: none;
   border-radius: 10rpx;
-  color: white;
+  color: black;
   line-height: 48rpx;
   font-size: 24rpx;
   letter-spacing: 0.88rpx;
@@ -156,4 +225,19 @@ button::after {
   line-height: 48rpx;
   font-size: 24rpx;
   letter-spacing: 0.88rpx;
+}
+
+.outline-rectangle{
+  margin: 0;
+  padding: 0 8rpx;
+  min-width: 10rpx;
+  max-width: 180rpx;
+  height: 60rpx;
+  line-height: 58rpx;
+  border: none;
+  border-radius: 0;
+  color: var(--main-lgb);
+  
+  font-size: 24rpx;
+  border-radius: 16rpx;
 }

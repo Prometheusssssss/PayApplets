@@ -83,12 +83,13 @@ App({
         }
       })
     })
-    var data = JSON.parse(result);
-    debugger
+    // IS_SUCCESS  MSG  TABLE
+    var data = result.data.Table;
+   
     // return data
-    if(data.errMsg){
+    if(result.statusCode != 200){
       wx.showToast({
-        title: data.errMsg,
+        title: result.errMsg,
         icon: 'none',
         duration: 2000
       });

@@ -1,0 +1,28 @@
+<view class="i-class i-input  {{ right ? 'right' : '' }}  {{ column ? 'column' : '' }} {{ error ? 'i-input-error' : '' }} {{ mode === 'wrapped' ? 'i-input-wrapped' : '' }}  {{noline=='true'?'no-line':''}}"
+  bindtap="{{ type === 'textarea'?'openRemarkPage':'' }}">
+  <view wx:if="{{ title }}" class="i-input-title">{{ title }}{{ right ? '：' : '' }}</view>
+  <block wx:if="{{ type === 'textarea' }}">
+    <block wx:if="{{isdisabled == 'true'}}">
+      <input type="{{ type }}" disabled focus="{{ autofocus }}" value="{{ value }}" placeholder="{{ placeholder }}"
+        maxlength="{{ maxlength }}" class="i-input-input" placeholder-class="i-input-placeholder" />
+      <i class="icon icon-right iconc-main-style"></i>
+    </block>
+    <block wx:if="{{isdisabled == 'false'}}">
+      <input type="{{ type }}" disabled focus="{{ autofocus }}" value="{{ value }}" placeholder="{{ placeholder }}"
+        maxlength="{{ maxlength }}" class="i-input-input" placeholder-class="i-input-placeholder" />
+      <i class="icon icon-right iconc-main-style"></i>
+    </block>
+  </block>
+  <block wx:else>
+    <block wx:if="{{isdisabled == 'true'}}">
+      <input type="{{ type }}" disabled="true" focus="{{ autofocus }}" value="{{ value }}" bindinput="handleInputChange"
+        placeholder="{{ placeholder }}" maxlength="{{ maxlength }}" class="i-input-input" placeholder-class="i-input-placeholder" />
+      <!-- bindfocus="handleInputFocus" bindinput="handleInputBlur"  -->
+    </block>
+    <block wx:if="{{isdisabled == 'false'}}">
+      <input type="{{ type }}" focus="{{ autofocus }}" value="{{ value }}" bindinput="handleInputChange" placeholder="{{ placeholder }}"
+        maxlength="{{ maxlength }}" class="i-input-input" placeholder-class="i-input-placeholder" />
+      <!-- bindfocus="handleInputFocus" bindinput="handleInputBlur"  -->
+    </block>
+  </block>
+</view>

@@ -7,13 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    totalList: [[{
-      KID:1,
-      NAME:'一站到底'
-    }],[{
-      KID:2,
-      NAME:'一到底'
-    }]],
+    totalList: [],
     defaultPageSize: app.getPageSize(),
 
     sliderList: [],
@@ -22,91 +16,87 @@ Page({
 
     hasPicker:false,
     currentSliderbarChangeId: "",
+    areaId:'',
+    serverId:'',
+    areaIndex:'',
+    regionIndex:'',
+    serverIndex:'',
     isPicker:false
   },
 
   onLoad: function(options) {
     var that = this;
     console.log(options)
-    if (options.areaId != undefined) {
+    if (options != undefined) {
       that.setData({
-        currentSliderbarChangeId: options.areaId,
+        currentSliderbar:options.regionId,
+        currentSliderbarChangeId: options.regionId,
+        areaId :options.areaId,
+        serverId:options.serverId,
+        areaIndex: options.areaIndex,
+        regionIndex: options.regionIndex,
+        serverIndex: options.serverIndex,
       })
     }
-    that.sjFramework = that.selectComponent("#lm-framework");
-    
   },
   onShow:function(){
     var that = this;
     that.loadSliderList();
   },
-  callBackPageSetData: function(e) {
-    // var that = this;
-    // wx.hideLoading();
-    // that.setData(e.detail.returnSetObj)
-  },
+  // callBackPageSetData: function(e) {
+  //   var that = this;
+  //   wx.hideLoading();
+  //   that.setData(e.detail.returnSetObj)
+  // },
 
   //获取产品列表
-  loadMainList: async function(e) {
-    // var {
-    //   pageNo,
-    //   pageSize,
-    //   type
-    // } = e.detail;
-    // var that = this;
-    // var p = {
-    //   category_id: that.data.currentSliderbar,
-    //   s_t: that.data.searchText,
-    //   // cid: app.getUser().cid,
-    //   // user_id: app.getUser().id, //有一列是收藏
-    //   // page_size: pageSize,
-    //   // page_no: pageNo,
-    // }
-    // //获取当前选中客户的产品报价
-    // // var list = await app.ExecuteProcess('sel_customer_product_information_sjn', p);
-    // that.sjFramework.dealWithList(type, dataList, pageSize);
+  // loadMainList: async function(e) {
+  //   var {
+  //     pageNo,
+  //     pageSize,
+  //     type
+  //   } = e.detail;
+  //   var that = this;
+  //   var p = {"PARENT_ID": that.data.regionId}
+  //   var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
+  //   console.log(url)
+  //   app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
+  //     if (dataList != 'error') {
+  //       that.sjFramework.dealWithList(type, dataList, pageSize);
+  //     }
+  //   })
+    
+  // },
+  loadServer: async function() {
+    var that = this;
+    var p = {"PARENT_ID": that.data.currentSliderbar}
+    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
+    console.log(url)
+    app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
+      wx.hideLoading()
+      if (dataList != 'error') {
+        that.setData({totalList:dataList})
+      }
+    })
+    
   },
-  
   loadSliderList: async function() {
     var that = this;
-    var sliderList = [{
-      KID: 0,
-      IS_ENABLE: true,
-      NAME: "全部"
-    },{
-      KID: -2,
-      IS_ENABLE: true,
-      NAME: "促销"
-    },{
-      KID: -1,
-      IS_ENABLE: true,
-      NAME: "收藏"
-    }];
-
-    that.setData({
-      sliderList: sliderList,
-    })
-
     //获取slider列表
-    
-    // var p = {
-    //   store_code: that.getStore().CODE,
-    //   cid: that.getUser().cid,
-    // }
-    // //获取当前选中客户的产品类别
-    // that.ExecuteProcess('sel_customer_product_category_sjn', p).then((slider) => {
 
-    //   that.setSliderList(slider);
-     
-    // })
-    
-   
+    var p = {"PARENT_ID": that.data.areaId}
+    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
+    console.log(url)
+    app.ManageExecuteApi(url, '', {}, 'GET').then((slider) => {
+      if (slider != 'error') {
+        that.setSliderList(slider);
+      }
+    })
   },
    //获取初始化侧边栏
    setSliderList: function(slider) {
     var that = this;
     var sliderList = slider;
-
     that.setData({
       sliderList: sliderList,
     })
@@ -141,7 +131,40 @@ Page({
 
     }
     //加载产品列表
-    that.sjFramework.dealPageNoSize('enter');
+    that.loadServer();
+    // that.sjFramework.dealPageNoSize('enter');
   },
+
+  changeSliderBar: function({
+    detail
+  }) {
+    var that = this;
+    var regionIndex = that.data.sliderList.findIndex(region=>region.KID == detail.KID);
+    that.setData({
+      currentSliderbar: detail.KID,
+      regionIndex: regionIndex,
+    })
+    that.loadServer()
+  },
+
+  selecServer: function(e){
+    var that = this;
+    var serverData =e.currentTarget.dataset.item;
+    that.setData({
+      serverId:serverData.KID
+    })
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]; //上一个页面
+    var serverIndex = that.data.totalList.findIndex(server=>server.KID == serverData.KID);
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      areaIndex: that.data.areaIndex,//大区
+      regionIndex: that.data.regionIndex,//小区
+      serverIndex: serverIndex,//小区
+    })
+    wx.navigateBack({
+      delta: 1
+    })
+  }
   
 })

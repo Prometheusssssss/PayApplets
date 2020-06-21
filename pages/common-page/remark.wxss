@@ -1,0 +1,13 @@
+textarea {
+    width: calc(100% - 40rpx);
+    margin-top: 24rpx;
+    padding: 32rpx 20rpx;
+    height: 300rpx;
+    background: white;
+}
+
+.bottom-content {
+    position: fixed;
+    bottom: 30rpx;
+    left: 40rpx;
+}

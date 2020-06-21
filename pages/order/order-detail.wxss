@@ -9,6 +9,7 @@
 .img-info image{
     width: 100%;
 }
+
 .main-info-people{
     margin: 0!important;
     height:45rpx!important;

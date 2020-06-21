@@ -1,0 +1,7 @@
+<view>
+    <textarea bindinput="bindChangeTextArea" value="{{value}}" placeholder="{{(title == '' || title == undefined)?'请输入备注':'请输入'+title}}"
+        auto-focus="true" />
+    </view>
+    <view class="bottom-content">
+    <sj-button shape="bottom-rect" title="保存" buttonColor="main-bgcolor large medium with-radius" bindButtonClick="getRemark" />
+    </view>
