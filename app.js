@@ -84,21 +84,23 @@ App({
       })
     })
     // IS_SUCCESS  MSG  TABLE
-    var data = result.data.Table;
-   
-    // return data
-    if(result.statusCode != 200){
+    var data = result.data;
+    if(!data.IS_SUCCESS){
       wx.showToast({
-        title: result.errMsg,
+        title: data.MSG,
         icon: 'none',
         duration: 2000
       });
       return 'error'
     }else{
-      return data
-     
+      return data.Table
     }
 
+  },
+  UploadImage: async function (p) {
+    var that = this;
+    var result = await that.reTryRequest(that.globalData.manageUrl+'/api/_oss/ossimg', 'POST', p, {});
+    return result;
   },
   // GetDBSliderBarList: function () {
   //   var that = this;

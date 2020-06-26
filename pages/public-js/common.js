@@ -21,6 +21,28 @@ const time = {
   fullDateString: function() {
     let nowTime = new Date();
     return time.formatDay(nowTime) + ' ' + time.formatTime(nowTime)
+  },
+  formatNumber: function(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+ },
+  formatTimeTwo: function(number, format) {
+      var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
+      var returnArr = [];
+
+      var date = new Date(number * 1000);
+      returnArr.push(time.formatNumber(date.getFullYear()));
+      returnArr.push(time.formatNumber(date.getMonth() + 1));
+      returnArr.push(time.formatNumber(date.getDate()));
+
+      returnArr.push(time.formatNumber(date.getHours()));
+      returnArr.push(time.formatNumber(date.getMinutes()));
+      returnArr.push(time.formatNumber(date.getSeconds()));
+
+      for (var i in returnArr) {
+          format = format.replace(formateArr[i], returnArr[i]);
+      }
+      return format;
   }
 }
 

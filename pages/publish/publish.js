@@ -3,6 +3,7 @@ const app = getApp()
 const {
   common
 } = global;
+var compressor = require("../../assets/js/compressor-image.js");
 // var covertPingYin = require("../../../pages/public-js/covertPingYin.js");
 Page({
 
@@ -20,15 +21,21 @@ Page({
     publishInfo: {},
     myForm: {},
     showLocationPageConfirm: false,
+    // kid:-1,//发布商品信息的kid
+
     id:'',                        //上传时后端返回的图片ID,拼接后存入
-    joinString:'',                    
-    joinDetailString:'',                    
+    joinString:'',                 
     uploaderList: [],              //保存上传图片url的数组
-    uploaderDetailList: [],              //保存上传详情图片url的数组
     uploaderNum: 0,             //已经上传的图片数目
-    uploaderDetailNum: 0,             //已经上传的详情图片数目
     showUpload: true,           //控制上传框的显隐
+
+    detailId:'',
+    joinDetailString:'',      
+    uploaderDetailList: [],              //保存上传详情图片url的数组
+    uploaderDetailNum: 0,             //已经上传的详情图片数目
     showDetailUpload: true,           //控制上传框的显隐
+    
+    
   },
 
   /**
@@ -45,9 +52,10 @@ Page({
         title: "编辑发布",
       });
       var publishInfo = JSON.parse(options.info);
-      //获取对应deindex
+      //获取对应的index
       that.setData({
-        publishInfo: publishInfo
+        publishInfo: publishInfo,
+        // kid: publishInfo.kid
       })
      
     }else{
@@ -131,7 +139,6 @@ Page({
     var regionId = that.data.regionList[regionIndex].KID;
     var areaId = that.data.areaList[that.data.areaIndex].KID;
     var serverId = that.data.serverList[that.data.serverIndex].KID;
-    debugger;
     wx.navigateTo({url:`../order/order-slider?regionId=${regionId}&&areaId=${areaId}&&serverId=${serverId}&regionIndex=${that.data.regionIndex}&&areaIndex=${that.data.areaIndex}&&serverIndex=${that.data.serverIndex}`})
     
 
@@ -152,7 +159,7 @@ Page({
     var that = this;
     //选择图片
     wx.chooseImage({//调起选择图片
-      count: 6 - that.data.uploaderNum, // 默认6
+      count: 1 - that.data.uploaderNum, // 默认6
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -165,13 +172,16 @@ Page({
         that.setData({
           uploaderNum: that.data.uploaderList.length
         })
-        debugger
-        if (uploaderList.length == 6) {
+        console.log('that.data.uploaderList')
+        console.log(that.data.uploaderList)
+        if (that.data.uploaderList.length == 1) {
           that.setData({
             showUpload:false
           })
-          console.log(that.showUpload)
         }
+
+        
+
         //图片选择完就可以显示在本地，可以提交的时候再去存入oss，换入可直接访问的图片链接，存入数据库
         //将压缩或者不压缩图片本地连接上传给oss，oss返回带域名可以直接访问的图片链接，本地将图片链接逗号拼接，保存的时候存入数据库
         // for (var i = 0; i < uploaderList.length; i++) {
@@ -204,7 +214,6 @@ Page({
   },
  // 删除图片
   clearImg: function (e) {
-    debugger
     var that = this
     var nowList = [];//新数据
     var uploaderList = that.data.uploaderList;//原数据
@@ -214,11 +223,11 @@ Page({
         var arr = that.data.joinString.split(',')
             arr.splice(i, 1);                              //删除图片的同时删除掉其对应的ID
             var newArr = arr.join(',')
-            that.setData({
-              joinString:newArr,
-              id:newArr+','
-            })
-           } else {
+            // that.setData({
+            //   joinString:newArr,
+            //   id:newArr+','
+            // })
+      } else {
         nowList.push(uploaderList[i])
       }
     }
@@ -229,68 +238,226 @@ Page({
     })
    },
 
-
-  saveGuestValue: function (e) {
+   upDetailload: function(){
     var that = this;
+    //选择图片
+    wx.chooseImage({//调起选择图片
+      count: 5 - that.data.uploaderDetailNum, // 默认6
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        that.data.uploaderDetailList.concat(res.tempFilePaths);
+        var uploaderDetailList = res.tempFilePaths;
+        that.setData({
+          uploaderDetailList: that.data.uploaderDetailList.concat(res.tempFilePaths),
+        })
+        that.setData({
+          uploaderDetailNum: that.data.uploaderDetailList.length
+        })
+        if (that.data.uploaderDetailList.length == 5) {
+          that.setData({
+            showDetailUpload:false
+          })
+          console.log(that.showDetailUpload)
+        }
+        //图片选择完就可以显示在本地，可以提交的时候再去存入oss，换入可直接访问的图片链接，存入数据库
+        //将压缩或者不压缩图片本地连接上传给oss，oss返回带域名可以直接访问的图片链接，本地将图片链接逗号拼接，保存的时候存入数据库
+        // for (var i = 0; i < uploaderDetailList.length; i++) {
+        //   wx.uploadFile({
+        //     url: 'xxxxx',
+        //     filePath: uploaderDetailList[i],
+        //     name: 'files',
+        //     formData: {
+        //       files: uploaderDetailList,
+        //     },
+        //     success: function (res) {
+        //        var id = JSON.parse(res.data).data.attId
+        //         that.setData({
+        //         detailId: that.data.id + `${id},`,
+        //         joinDetailString: (that.data.id + `${id},`).slice(0, -1)
+        //       })
+        //     }
+        //   })
+        // }
+      }
+    })
+  },
+  //展示图片
+  showDetailImg: function (e) {
+    var that = this;
+    wx.previewImage({
+      urls: that.data.uploaderDetailList,
+      current: that.data.uploaderDetailList[e.currentTarget.dataset.index]
+    })
+  },
+ // 删除图片
+  clearDetailImg: function (e) {
+    var that = this
+    var nowList = [];//新数据
+    var uploaderDetailList = that.data.uploaderDetailList;//原数据
+    
+    for (let i = 0; i < uploaderDetailList.length; i++) {
+      if (i == e.currentTarget.dataset.index) {
+        var arr = that.data.joinDetailString.split(',')
+            arr.splice(i, 1);                              //删除图片的同时删除掉其对应的ID
+            var newArr = arr.join(',')
+            // that.setData({
+            //   joinDetailString:newArr,
+            //   detailId:newArr+','
+            // })
+      } else {
+        nowList.push(uploaderDetailList[i])
+      }
+    }
+    this.setData({
+      uploaderDetailNum: this.data.uploaderNum - 1,
+      uploaderDetailList: nowList,
+      showDetailUpload: true,
+    })
+   },
+
+  saveGuestValue: async function (e) {
+    var that = this;
+    var data = that.data;
     var form = e.detail.value;
-    var myForm = that.data.myForm;
-    // var location = that.data.locationArr;
-    var settlementWayIndex = that.data.settlementWayIndex;
-    var settlementWay = that.data.settlementWay;
-    var quotationGroupIndex = that.data.quotationGroupIndex;
-    var quotationGroup = that.data.quotationGroup;
-    var customerKid;
-    // 客户名称省份城市区域销售人员必填 缺少“分拣码”、“公司邮编”、“网址”输入项
-    if (common.validators.isEmptyText(that.data.customerInfo.REGION_ID, '片区')||common.validators.isEmptyText(form.CUSTOMER_NAME, '客户名称') || common.validators.isEmptyText(settlementWay[settlementWayIndex].VALUE, '结算方式') ) {
-      // || common.validators.isEmptyText(that.data.customerInfo.SALESMAN, '销售人员')
+    // 校验必填项，专区，大区，价格（非空数字），商品名称，
+    var areaName = data.areaList[data.areaIndex].NAME;
+    var serverName = data.serverList[data.serverIndex].NAME;
+    if (common.validators.isEmptyText(areaName, '游戏专区')||common.validators.isEmptyText(serverName, '游戏大区') || common.validators.isEmptyText(form.PRODUCT_NAME, '商品名称') ) {
       return;
     }
-
+    if (common.validators.isInValidNum(form.PRICE, '价格') ) {
+      return;
+    }
+    
+    
+    // //获取可以压缩的图片
+    var uploaderList = data.uploaderList;
+    var mainImgUrl = '';
+    var uploaderDetailList = data.uploaderDetailList;
+    var detailImgUrl = '';
+    
+    // //主图start
+    // if(uploaderList.length>0){
+    //   var minFile = await compressor.Main(uploaderList[0], that)
+    //   var base64 = wx.getFileSystemManager().readFileSync(minFile, "base64");
+    //   // console.log('data:image/jpeg;base64,' + base64)
+    //   var UploadImageP = [{
+    //     name: 'productPicture',
+    //     content: base64
+    //   }]
+    //   app.UploadImage(UploadImageP).then((uploadImageResult) => {
+    //     mainImgUrl = uploadImageResult.url;
+    //   })//主图end
+    // }
+    // if(uploaderDetailList.length>0){
+    //    //详情图start
+    //     for (var i = 0; i < uploaderDetailList.length; i++) {
+    //       var minFile = await compressor.Main(uploaderDetailList[i], that)
+    //       var base64 = wx.getFileSystemManager().readFileSync(minFile, "base64");
+    //       var UploadImageP = [{
+    //         name: 'productPicture',
+    //         content: base64
+    //       }]
+    //       app.UploadImage(UploadImageP).then((uploadImageResult) => {
+    //         detailImgUrl += uploadImageResult.url +',';
+    //       })
+    //   }
+    //   //详情图end
+    // }
+    //商品表多存一个二级区的id和name 不然编辑的时候不好找到服务器
+    var nowDate = new Date();
+    var timestamp = Math.round(new Date().getTime());
+    //想在系统当前时间基础上，想加的天数或小时
+     var dayNum = 7;
+    //天数*24小时
+     var newtimestamp = timestamp + (dayNum * 24) * 60 * 3600 * 1000;
+    //转化成年月日 时分秒 的形式
+    var today = common.time.formatTimeTwo(timestamp,'Y-M-D h:m:s');
+    var newDay = common.time.formatTimeTwo(newtimestamp,'Y-M-D h:m:s');
+    // debugger
     var p = {
-      'KID': customerKid,
-      'CID': app.getUser().cid,
-      'CRT_CODE': app.getUser().code,
-      'CUSTOMER_NAME': form.CUSTOMER_NAME,
-      'ABBREVIATION': form.ABBREVIATION,
-      'RETRIEVAL': form.RETRIEVAL,
-      'COMPANY_ADDR': form.COMPANY_ADDR,
-      'COMPANY_TEL': form.COMPANY_TEL,
-      'FAX': form.FAX,
-      'PAYMENT_DAYS': form.PAYMENT_DAYS,
-      'PAYMENT_WAY': settlementWay[settlementWayIndex].VALUE,
-      'DEPOSIT_BANK': form.DEPOSIT_BANK,
-      'BANK_ACCOUNT': form.BANK_ACCOUNT,
-      'TAX_FONT': form.TAX_FONT,
-      'COMPANY_POSTCODE': form.COMPANY_POSTCODE,
-      'URL': form.URL,
-      'SORT_CODE': form.SORT_CODE,
-      'REMARK': form.REMARK,
-      // 'SALESMAN': that.data.customerInfo.SALESMAN,//add 
-      // 'SALESMAN_ID': that.data.customerInfo.SALESMAN_ID,//add
-      "REGION_ID": that.data.customerInfo.REGION_ID,
-      "REGION": that.data.customerInfo.REGION,
-      "CHANNEL_ID": that.data.customerInfo.CHANNEL_ID,
-      "CHANNEL": that.data.customerInfo.CHANNEL,
-      "CUSTOMER_LEVEL_ID": that.data.customerInfo.CUSTOMER_LEVEL_ID,
-      "CUSTOMER_LEVEL": that.data.customerInfo.CUSTOMER_LEVEL,
-      "QUOTATION_GROUP": quotationGroup[quotationGroupIndex].KID,//add
-      "CONTACT_NAME": form.CONTACT_NAME,
-      "CONTACT_TEL": form.CONTACT_TEL,
-      'LATITUDE': myForm.LATITUDE,
-      'LONGITUDE': myForm.LONGITUDE,
-      'IS_ENABLE': (that.data.customerInfo.IS_ENABLE == undefined || that.data.customerInfo.IS_ENABLE == 0) ? 0 : 1,
+      KID: -1,
+      NAME:form.PRODUCT_NAME,//商品名称
+      DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
+      STATUS:'上架中',//状态
+      TYPE:'商品',//商品
+      SELL_USER_ID:1,//卖家id
+      SELL_USER_NAME:'耗子',//卖家昵称
+      SELL_USER_PHONE:'15736879889',//卖家手机号
+      PRICE: form.PRICE,//价格
+      PHOTO_URL: mainImgUrl,//主图
+      DESC_PHOTO: detailImgUrl.substring(detailImgUrl.length-1,0),//详情图
+      GAME_ZONE_KID: data.areaList[data.areaIndex].KID,//游戏专区
+      GAME_ZONE_NAME: areaName,
+      GAME_PARTITION_KID: data.serverList[data.serverIndex].KID,//游戏大区
+      GAME_PARTITION_NAME: serverName,
+      GAME_SECONDARY_KID: data.regionList[data.regionIndex].KID,//游戏二级区
+      GGAME_SECONDARY_NAME: data.regionList[data.regionIndex].NAME,//游戏二级区
     }
 
     if (that.data.pagetype == 'add') {
       p.KID = -1;
     }
     else {
-      p.KID = that.data.customerInfo.KID;
+      p.KID = that.data.publishInfo.KID;
     }
+    console.log('发布')
+    console.log(JSON.stringify(p))
 
-    that.createCutomer(p)
+    // that.createProduct(p)
   },
-
+  //发布商品
+  createProduct: function (p) {
+    this.setData({
+      uploaderNum: 0,
+      uploaderList: [],
+      showUpload: true,
+      uploaderDetailNum: 0,
+      uploaderDetailList: [],
+      showDetailUpload: true,
+    })
+    setTimeout(()=>{
+      wx.navigateTo({
+        url: '../order/order',
+      })
+    },200)
+    wx.showToast({
+      title: '发布成功',
+      icon: 'none',
+      duration: 1500
+    })
+    // app.ExecuteProcessWithToast('create_cutomer_kyl', p).then((data) => {
+    //   //data包含客户的kid
+    //   if (data[0].MSG) {
+    //     wx.showToast({
+    //       title: data[0].MSG,
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   }else{
+    //     this.setData({
+    //       uploaderNum: 0,
+    //       uploaderList: [],
+    //       showUpload: true,
+    //       uploaderDetailNum: 0,
+    //       uploaderDetailList: [],
+    //       showDetailUpload: true,
+    //     })
+    //     setTimeout(()=>{
+    //       wx.navigateTo({
+    //         url: '../order/order',
+    //       })
+    //     },200)
+    //     wx.showToast({
+    //       title: '发布成功',
+    //       icon: 'none',
+    //       duration: 1500
+    //     })
+    //   }
+    // }, (reject) => { });
+  },
  
 
 

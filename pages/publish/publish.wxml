@@ -67,13 +67,13 @@
                   <view class='ui_uploader_item' wx:for="{{uploaderDetailList}}" wx:key="{{index}}">
                       <!-- 删除-->
                       <!-- <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="30" color="red"/> -->
-                      <i class="icon icon-delete ui_uploader_item_icon icon-red" ></i>
+                      <i class="icon icon-close ui_uploader_item_icon icon-red" data-index="{{index}}" bindtap='clearDetailImg' ></i>
                       <!-- 图片-->
-                      <image class="special-image" bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+                      <image class="special-image" bindtap='showDetailImg' data-index="{{index}}" src='{{item}}'></image>
                   </view>
                   <!-- 上传按钮+框 -->
-                  <view class="image" wx:if="{{showUpload}}" > 
-                      <image  bindtap='upload' mode='aspectFit' src="/assets/img/photo.png" ></image>
+                  <view class="image" wx:if="{{showDetailUpload}}" > 
+                      <image  bindtap='upDetailload' mode='aspectFit' src="/assets/img/photo.png" ></image>
                   </view>
               </view>
             </view>
