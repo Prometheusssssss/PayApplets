@@ -337,46 +337,16 @@ Page({
     var mainImgUrl = '';
     var uploaderDetailList = data.uploaderDetailList;
     var detailImgUrl = '';
-    
-    // //主图start
-    // if(uploaderList.length>0){
-    //   var minFile = await compressor.Main(uploaderList[0], that)
-    //   var base64 = wx.getFileSystemManager().readFileSync(minFile, "base64");
-    //   // console.log('data:image/jpeg;base64,' + base64)
-    //   var UploadImageP = [{
-    //     name: 'productPicture',
-    //     content: base64
-    //   }]
-    //   app.UploadImage(UploadImageP).then((uploadImageResult) => {
-    //     mainImgUrl = uploadImageResult.url;
-    //   })//主图end
-    // }
-    // if(uploaderDetailList.length>0){
-    //    //详情图start
-    //     for (var i = 0; i < uploaderDetailList.length; i++) {
-    //       var minFile = await compressor.Main(uploaderDetailList[i], that)
-    //       var base64 = wx.getFileSystemManager().readFileSync(minFile, "base64");
-    //       var UploadImageP = [{
-    //         name: 'productPicture',
-    //         content: base64
-    //       }]
-    //       app.UploadImage(UploadImageP).then((uploadImageResult) => {
-    //         detailImgUrl += uploadImageResult.url +',';
-    //       })
-    //   }
-    //   //详情图end
-    // }
+    mainImgUrl =  await that.getImgUrl(uploaderList);
+    detailImgUrl =  await that.getImgUrl(uploaderDetailList);
+
     //商品表多存一个二级区的id和name 不然编辑的时候不好找到服务器
-    var nowDate = new Date();
-    var timestamp = Math.round(new Date().getTime());
-    //想在系统当前时间基础上，想加的天数或小时
+
+    var timestamp = Date.parse(new Date());
      var dayNum = 7;
-    //天数*24小时
-     var newtimestamp = timestamp + (dayNum * 24) * 60 * 3600 * 1000;
-    //转化成年月日 时分秒 的形式
-    var today = common.time.formatTimeTwo(timestamp,'Y-M-D h:m:s');
-    var newDay = common.time.formatTimeTwo(newtimestamp,'Y-M-D h:m:s');
-    // debugger
+     var newtimestamp = timestamp + (dayNum * 24) * 60 * 60 * 1000;
+    var shelfTime = common.time.formatTimeTwo(timestamp/1000,'Y-M-D h:m:s');
+    var offTime = common.time.formatTimeTwo(newtimestamp/1000,'Y-M-D h:m:s');
     var p = {
       KID: -1,
       NAME:form.PRODUCT_NAME,//商品名称
@@ -388,13 +358,15 @@ Page({
       SELL_USER_PHONE:'15736879889',//卖家手机号
       PRICE: form.PRICE,//价格
       PHOTO_URL: mainImgUrl,//主图
-      DESC_PHOTO: detailImgUrl.substring(detailImgUrl.length-1,0),//详情图
+      DESC_PHOTO: detailImgUrl,//详情图
       GAME_ZONE_KID: data.areaList[data.areaIndex].KID,//游戏专区
       GAME_ZONE_NAME: areaName,
       GAME_PARTITION_KID: data.serverList[data.serverIndex].KID,//游戏大区
       GAME_PARTITION_NAME: serverName,
       GAME_SECONDARY_KID: data.regionList[data.regionIndex].KID,//游戏二级区
       GGAME_SECONDARY_NAME: data.regionList[data.regionIndex].NAME,//游戏二级区
+      SHELF_TIME: shelfTime,
+      OFF_SHELF_TIME: offTime
     }
 
     if (that.data.pagetype == 'add') {
@@ -405,58 +377,57 @@ Page({
     }
     console.log('发布')
     console.log(JSON.stringify(p))
+    debugger
+    that.createProduct(p)
+  },
+  getImgUrl:async function(imgList){
+    var that = this;
+    var url = '';
+    if(imgList.length == 0){
+      return url
+    }else{
+      
+      for (var i = 0; i < imgList.length; i++) {
+        var minFile = await compressor.Main(imgList[i], that)
+        var base64 = wx.getFileSystemManager().readFileSync(minFile, "base64");
+        var UploadImageP = [{
+          name: 'productPicture',
+          content: base64
+        }]
+        await app.UploadImage(UploadImageP).then((uploadImageResult) => {
+          url += uploadImageResult.url +',';
+        })
+      }
+      url = url.substring(url.length-1,0);
+      return url
 
-    // that.createProduct(p)
+    }
   },
   //发布商品
   createProduct: function (p) {
-    this.setData({
-      uploaderNum: 0,
-      uploaderList: [],
-      showUpload: true,
-      uploaderDetailNum: 0,
-      uploaderDetailList: [],
-      showDetailUpload: true,
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        this.setData({
+          uploaderNum: 0,
+          uploaderList: [],
+          showUpload: true,
+          uploaderDetailNum: 0,
+          uploaderDetailList: [],
+          showDetailUpload: true,
+        })
+        setTimeout(()=>{
+          wx.navigateTo({
+            url: '../order/order',
+          })
+        },200)
+        wx.showToast({
+          title: '发布成功',
+          icon: 'none',
+          duration: 1500
+        })
+      }
     })
-    setTimeout(()=>{
-      wx.navigateTo({
-        url: '../order/order',
-      })
-    },200)
-    wx.showToast({
-      title: '发布成功',
-      icon: 'none',
-      duration: 1500
-    })
-    // app.ExecuteProcessWithToast('create_cutomer_kyl', p).then((data) => {
-    //   //data包含客户的kid
-    //   if (data[0].MSG) {
-    //     wx.showToast({
-    //       title: data[0].MSG,
-    //       icon: 'none',
-    //       duration: 2000
-    //     })
-    //   }else{
-    //     this.setData({
-    //       uploaderNum: 0,
-    //       uploaderList: [],
-    //       showUpload: true,
-    //       uploaderDetailNum: 0,
-    //       uploaderDetailList: [],
-    //       showDetailUpload: true,
-    //     })
-    //     setTimeout(()=>{
-    //       wx.navigateTo({
-    //         url: '../order/order',
-    //       })
-    //     },200)
-    //     wx.showToast({
-    //       title: '发布成功',
-    //       icon: 'none',
-    //       duration: 1500
-    //     })
-    //   }
-    // }, (reject) => { });
+    
   },
  
 
