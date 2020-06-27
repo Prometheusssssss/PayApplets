@@ -1,7 +1,9 @@
 {
   "pages":[
-    "pages/order/order",
+    "pages/myPublish/myPublish",
+    "pages/msgs/msgs",
     "pages/publish/publish",
+    "pages/order/order",
     
     "pages/order/order-slider",
     "pages/order/order-detail",
@@ -37,7 +39,7 @@
       {
         "selectedIconPath": "assets/img/tabs-focus/msg-focus.png",
         "iconPath": "assets/img/tabs-unfocus/msg.png",
-        "pagePath": "pages/test/test",
+        "pagePath": "pages/msgs/msgs",
         "text": "消息"
       },
       {
