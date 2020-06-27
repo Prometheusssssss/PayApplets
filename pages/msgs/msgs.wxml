@@ -1,0 +1,9 @@
+<block wx:for="{{msgList}}">
+            <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}">
+                <view class='item-product-info'>
+                    <view class="item-product-name-area">
+                        <text class='item-product-name'>{{item.THEME}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
