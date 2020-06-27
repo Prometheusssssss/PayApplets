@@ -17,7 +17,7 @@
             <view class="main-info">
                 <view>
                     <view>
-                        <view class="main-info-price">{{detailInfo.PRODUCT_NAME}}</view>
+                        <view class="main-info-price">{{detailInfo.NAME}}</view>
                     </view>
                 </view>
                <view>
@@ -34,8 +34,8 @@
                 <view class="detail-group-title-bar">
                     <view>商品详情</view>
                 </view>
-                <view  class="detail-group-title-bar description">
-                    <view>{{detailInfo.DETAIL_DESC}}</view>
+                <view  class="detail-group-title-bar description" wx:if="{{detailInfo.DESCRIPTION != '' && detailInfo.DESCRIPTION != undefined}}">
+                    <view>{{detailInfo.DESCRIPTION}}</view>
                 </view>
                 <view class="detail-group-image">
                     <block wx:for="{{detailImageList}}" wx:for-item="item">

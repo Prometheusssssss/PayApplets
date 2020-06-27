@@ -4,7 +4,7 @@
   lockScroll="{{showProductItemDetail}}">
     <view slot="top" class="search-top">
         <view class="search">
-            <sj-search placeholder="客户名称/检索码" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{areaList}}" catchPickerEvent="bindAreaChange" />
+            <sj-search placeholder="产品名称/价格" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{areaList}}" catchPickerEvent="bindAreaChange" />
         </view>
     </view>
     <view slot="content" class="slot-content">
@@ -21,15 +21,18 @@
             <i class="icon icon-right iconc-main-style"></i>
           </view>
         </view>
-        <block wx:for="{{orderList}}">
+         <!-- <block wx:for="{{totalList}}" wx:for-item="listItem">
+      <block wx:for="{{listItem}}" wx:key="listItem.productName" wx:for-item="item"> -->
+        <block wx:for="{{totalList}}" wx:for-item="listItem">
+          <block wx:for="{{listItem}}"  wx:for-item="item">
             <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}"
                 >
-                <image class='item-product-image {{(item.MAIN_IMG==""||item.MAIN_IMG==null)?"no-image":""}}'
-                mode='aspectFit' src='{{(item.MAIN_IMG==""||item.MAIN_IMG==null)?"":item.MAIN_IMG+"/200x200"}}'>
+                <image class='item-product-image {{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"no-image":""}}'
+                mode='aspectFit' src='{{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"":item.PHOTO_URL+"/200x200"}}'>
                 </image>
                 <view class='item-product-info'>
                     <view class="item-product-name-area">
-                        <text class='item-product-name'>{{item.PRODUCT_NAME}}</text>
+                        <text class='item-product-name'>{{item.NAME}}</text>
                     </view>
                     <view class="price-button-content">
                         <view class='item-product-detail'>
@@ -41,6 +44,7 @@
                     </view>
                 </view>
             </view>
+          </block>
         </block>
        
     </view>

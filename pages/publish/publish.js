@@ -330,7 +330,9 @@ Page({
     if (common.validators.isInValidNum(form.PRICE, '价格') ) {
       return;
     }
-    
+    wx.showLoading({
+      title: '保存中...',
+    })
     
     // //获取可以压缩的图片
     var uploaderList = data.uploaderList;
@@ -359,12 +361,12 @@ Page({
       PRICE: form.PRICE,//价格
       PHOTO_URL: mainImgUrl,//主图
       DESC_PHOTO: detailImgUrl,//详情图
-      GAME_ZONE_KID: data.areaList[data.areaIndex].KID,//游戏专区
-      GAME_ZONE_NAME: areaName,
-      GAME_PARTITION_KID: data.serverList[data.serverIndex].KID,//游戏大区
-      GAME_PARTITION_NAME: serverName,
+      GAME_PARTITION_KID: data.areaList[data.areaIndex].KID,//游戏大区
+      GAME_PARTITION_NAME: areaName,
       GAME_SECONDARY_KID: data.regionList[data.regionIndex].KID,//游戏二级区
-      GGAME_SECONDARY_NAME: data.regionList[data.regionIndex].NAME,//游戏二级区
+      GAME_SECONDARY_NAME: data.regionList[data.regionIndex].NAME,//游戏二级区
+      GAME_ZONE_KID: data.serverList[data.serverIndex].KID,//服务器
+      GAME_ZONE_NAME: serverName,
       SHELF_TIME: shelfTime,
       OFF_SHELF_TIME: offTime
     }
@@ -377,7 +379,6 @@ Page({
     }
     console.log('发布')
     console.log(JSON.stringify(p))
-    debugger
     that.createProduct(p)
   },
   getImgUrl:async function(imgList){
@@ -406,6 +407,7 @@ Page({
   //发布商品
   createProduct: function (p) {
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
+      wx.hideLoading()
       if (result != 'error') {
         this.setData({
           uploaderNum: 0,
@@ -416,7 +418,7 @@ Page({
           showDetailUpload: true,
         })
         setTimeout(()=>{
-          wx.navigateTo({
+          wx.switchTab({
             url: '../order/order',
           })
         },200)

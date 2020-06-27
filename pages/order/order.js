@@ -6,7 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-   searchText:'',
+   totalList: [],
+   defaultPageSize: app.getPageSize(),
+
+   searchText:"",
    areaIndex:0,//大区
    regionIndex:0,//小区
    serverIndex:0,//小区
@@ -32,15 +35,6 @@ Page({
     BUYER_REMARK:'',//买家备注
     MAIN_IMG:'https://img.yxbao.com/pic/201307/25/1374743139_zh.jpg'
    }],
-   gameArea:[{
-      KID:0,
-      NAME:'第一大区'
-    },
-    {
-      KID:1,
-      NAME:'第二区'
-    }
-   ],
   },
 
   /**
@@ -58,12 +52,12 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: async function () {
     var that = this;
-    that.loadArea();
+    await that.loadArea();
     // that.sjFramework.dealPageNoSize('enter');
   },
-  loadArea:function(){
+  loadArea: async function(){
     var that = this;
     var p = {"PARENT_ID":null}
     var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
@@ -108,6 +102,7 @@ Page({
         that.setData({
           serverList : result
         })
+        that.sjFramework.dealPageNoSize('enter');
       }
     })
   },
@@ -119,20 +114,45 @@ Page({
   loadMainList: function (e) {
     var { pageNo, pageSize, type } = e.detail;
     var that = this;
-    that.sjFramework.dealWithList(type, [], pageSize);
-    // var p = {
-    //   id: that.data.customerList[that.data.customerIndex].KID,
-    //   salesman_id: app.getUser().id,
-    //   cid: app.getUser().cid,
-    //   cid: app.getUser().cid,
-    //   page_size: pageSize,
-    //   page_no: pageNo,
-    // }
-
-    // app.ExecuteProcess('sel_sales_order_kyl', p).then((list) => {
-    //   var dataList = common.arrayProcessing.convertStatusCss(list, 'sales-order');
-    //   that.sjFramework.dealWithList(type, dataList, pageSize);
-    // })
+    var data = that.data;
+    var p = {
+        "tableName":"b_product_list",
+        "page": pageNo,
+        "limit": pageSize,
+        "filters":[
+            {
+              "fieldName":"NAME",
+              "type":"string",
+              "compared":"like",
+              "filterValue": data.searchText
+            },
+            {
+              "fieldName":"PRICE",
+              "type":"string",
+              "compared":"like",
+              "filterValue": data.searchText
+            },
+            {
+              "fieldName":"GAME_ZONE_KID",
+              "type":"date",
+              "compared":"=",
+              "filterValue": data.serverList[data.serverIndex].KID
+            },
+            {//卖家id
+              "fieldName":"SELL_USER_ID",
+              "type":"date",
+              "compared":"=",
+              "filterValue": 1
+            },
+        ]
+    }
+    console.log('查询报错')
+    console.log(JSON.stringify(p))
+    app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
+      if (dataList != 'error') {
+        that.sjFramework.dealWithList(type, dataList, pageSize);
+      }
+    })
   },
   searchList: function ({
     detail
@@ -141,7 +161,7 @@ Page({
     that.setData({
       searchText: detail
     })
-    // that.sjFramework.dealPageNoSize('enter');
+    that.sjFramework.dealPageNoSize('enter');
   },
   bindAreaChange:function(e){
     var that = this;
@@ -149,7 +169,8 @@ Page({
     that.setData({
       areaIndex: e.detail.value
     })
-    that.loadRegion()
+    that.loadRegion();
+    that.sjFramework.dealPageNoSize('enter');
   },
   
   //立即购买进入详情页
@@ -158,13 +179,8 @@ Page({
     var item = JSON.stringify(e.currentTarget.dataset.item);
     wx.navigateTo({url:`order-detail?detailData=${item}`})
   },
-  // bindRegionChange:function(e){
-  //   var that = this;
-  //   that.setData({
-  //     regionIndex: e.detail.value
-  //   })
-  // },
-  //先拉出大区 默认给一个值
+ 
+  //先拉出大区 默认给一个值  选择完小区返回页面
   selectSlider:function(){
     var that = this;
     var regionIndex = that.data.regionIndex;

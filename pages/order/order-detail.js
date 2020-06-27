@@ -18,10 +18,10 @@ Page({
     console.log(options.detailData)
     
     const detailData =  JSON.parse(options.detailData);
-    var imageList = detailData.DETAIL_IMG.split(',');
+    var imageList = detailData.DESC_PHOTO.split(',');
     // debugger
     that.setData({
-      mainImg:detailData.MAIN_IMG,
+      mainImg:detailData.PHOTO_URL,
       detailImageList: imageList,
       detailInfo: detailData
     })
