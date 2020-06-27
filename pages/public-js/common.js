@@ -31,7 +31,7 @@ const time = {
       var returnArr = [];
 
       var date = new Date(number * 1000);
-      returnArr.push(time.formatNumber(date.getFullYear()));
+      returnArr.push(date.getFullYear());
       returnArr.push(time.formatNumber(date.getMonth() + 1));
       returnArr.push(time.formatNumber(date.getDate()));
 
