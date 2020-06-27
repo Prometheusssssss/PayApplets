@@ -4,7 +4,7 @@
   lockScroll="{{showProductItemDetail}}">
     <view slot="top" class="search-top">
         <view class="search">
-            <sj-search placeholder="产品名称/价格" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{areaList}}" catchPickerEvent="bindAreaChange" />
+            <sj-search placeholder="产品名称" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{areaList}}" catchPickerEvent="bindAreaChange" />
         </view>
     </view>
     <view slot="content" class="slot-content">

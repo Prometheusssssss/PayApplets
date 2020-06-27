@@ -1,9 +1,15 @@
 <block wx:for="{{msgList}}">
-            <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}">
-                <view class='item-product-info'>
-                    <view class="item-product-name-area">
-                        <text class='item-product-name'>{{item.THEME}}</text>
-                    </view>
-                </view>
+    <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}">
+        <view class="send-time">
+            {{item.SEND_TIME}}
+        </view>
+        <view class='msg-info'>
+            <view class="msg-theme">
+                <text class='msg-name'>{{item.THEME}}</text>
             </view>
-        </block>
+            <view class="msg-content">
+                <text class='msg-name'>{{item.CONTENT}}</text>
+            </view>
+        </view>
+    </view>
+</block>

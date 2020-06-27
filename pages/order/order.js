@@ -126,12 +126,12 @@ Page({
               "compared":"like",
               "filterValue": data.searchText
             },
-            {
-              "fieldName":"PRICE",
-              "type":"string",
-              "compared":"like",
-              "filterValue": data.searchText
-            },
+            // {
+            //   "fieldName":"PRICE",
+            //   "type":"string",
+            //   "compared":"like",
+            //   "filterValue": data.searchText
+            // },
             {
               "fieldName":"GAME_ZONE_KID",
               "type":"date",

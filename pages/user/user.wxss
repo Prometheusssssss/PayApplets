@@ -1,0 +1,178 @@
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  padding: 1vh 0 1vh 0;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20rpx;
+  padding-left: calc(22rpx + 20rpx);
+  padding-right: 20rpx;
+  /* margin-left: calc(42rpx + 20rpx);
+  margin-top: 20rpx; */
+  width: calc(100vw - 20rpx - 42rpx); 
+  background-color: white;
+}
+
+.user-info open-data.user-image {
+  width: 11vh;
+  height: 11vh;
+  margin-right: 41rpx;
+  border-radius: 100%;
+  overflow: hidden;
+  border: 2rpx solid var(--text-gray);
+}
+
+.user-info .title-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
+  flex: 1;
+  line-height: 56rpx;
+}
+.user-info .invalidate-user {
+  /* background: var(--main-style); */
+  color: var(--text-black);
+  /* border-radius: 8rpx; */
+  padding: 8rpx 16rpx;
+  font-size: 26rpx;
+}
+.user-info .invalidate-user .icon{
+  font-size: 48rpx;
+}
+
+
+.menu {
+  height: 12vh;
+  /* width: calc(100vw - 40rpx); */
+  /* margin-left: 20rpx; */
+  margin-top: 1vh;
+  background: var(--main-style);
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu > view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.menu view.cashout {
+  border-right: 2rpx solid white;
+}
+
+.menu view.price {
+  font-size: 30rpx;
+  margin-bottom: 8rpx;
+}
+
+.menu view.detail-msg {
+  margin-top: 8rpx;
+  font-size: 20rpx;
+}
+
+.user-last-wallet {
+  padding: 0 32rpx;
+  height: 7vh;
+  /* width: calc(100vw - 40rpx - 64rpx);
+  margin-left: 20rpx; */
+  background: white;
+  color: var(--main-style);
+  border-radius: 10rpx;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.user-last-wallet .last-price {
+  flex: 1;
+}
+
+.user-last-wallet .immediate-withdrawal {
+  border: 2rpx solid var(--main-style);
+  background: white;
+  color: var(--main-style);
+  border-radius: 8rpx;
+  padding: 10rpx 24rpx;
+  font-size: 30rpx;
+}
+
+.menu-item {
+  margin-top: 1vh;
+  height: 12vh;
+  /* width: calc(100vw - 40rpx);
+  margin-left: 20rpx; */
+  background: white;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.menu-item > view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 10rpx 0;
+  height: calc(100% - 20rpx);
+}
+.menu-item > view .icon.icon-cashout {
+  font-size: 44rpx;
+}
+.menu-item > view .icon.icon-settlement {
+  font-size: 52rpx;
+}
+.menu-item > view .icon.icon-invitation-custom {
+  font-size: 55rpx;
+}
+.menu-item > view .icon.icon-second-hod-manager {
+  font-size: 38rpx;
+}
+
+.menu-item > view .icon {
+  color: var(--main-style);
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50rpx;
+  height: 50rpx;
+  font-size: 50rpx;
+}
+.menu-item > view .text {
+  color: var(--text-black);
+  text-align: center;
+}
+.mask-layer-content-invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+}
+
+.button-area {
+  /*  width: 35vw; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-info {
+  padding: 22rpx 22rpx;
+  color: var(--text-gray-dark);
+}

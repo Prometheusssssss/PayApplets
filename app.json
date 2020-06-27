@@ -1,10 +1,12 @@
 {
   "pages":[
-    "pages/myPublish/myPublish",
+    "pages/user/user",
     "pages/msgs/msgs",
+
+    "pages/myPublish/myPublish",
     "pages/publish/publish",
+
     "pages/order/order",
-    
     "pages/order/order-slider",
     "pages/order/order-detail",
     "pages/login/login",
@@ -45,7 +47,7 @@
       {
         "selectedIconPath": "assets/img/tabs-focus/user-focus.png",
         "iconPath": "assets/img/tabs-unfocus/user.png",
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/user/user",
         "text": "我的"
       }
     ]

@@ -1,0 +1,57 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<view class="user-info">
+    <!-- <view class="user-image"> -->
+    <open-data type="userAvatarUrl" class="user-image"></open-data>
+   
+    <!-- </view> -->
+    <view class="title-info">
+        <open-data type="userNickName" class="user-name"></open-data>
+        <!-- <text class="user-name">{{hodInfo.NAME}}</text>
+        <text class="user-tel">{{hodInfo.TEL}}</text> -->
+    </view>
+    <view bindtap="invalidateUser" class="invalidate-user">
+        <i class="icon icon-right" bindtap='editUser' ></i>
+    </view>
+</view>
+<view class="menu">
+    <view class="cashout">
+        <view class="price">{{convert.toMoney(hodInfo.A_SETTLEMANT_AMOUNT)}}</view>
+        <view class="title">累计收入</view>
+        <!-- <view class="detail-msg">审核中：{{convert.toMoney(hodInfo.PENDING_AMOUNT)}}</view> -->
+    </view>
+    <view class="settlement">
+        <view class="price">{{convert.toMoney(hodInfo.P_CASHOUT_AMOUNT)}}</view>
+        <view class="title">即将收入</view>
+        <!-- <view class="detail-msg">{{convert.toMoney(hodInfo.CASHOUT_AMOUNT)}}</view> -->
+    </view>
+</view>
+<view class="user-last-wallet">
+    <view class="last-price">可用资金：0.00</view>
+    <view bindtap="goImmediateWithdrawalPage" class="immediate-withdrawal">立即提现</view>
+</view>
+
+<view class="menu-item">
+    <view class="cashout" bindtap="goSettlementDetailPage">
+        <!-- <view class="icon icon-fabu"></view> -->
+        <i class="icon icon-fabu"></i>
+        <view class="text">我发布的</view>
+    </view>
+
+    <view class="settlement" bindtap="goCashoutDetailPage">
+        <view class="icon icon-check1"></view>
+        <view class="text">我卖出的</view>
+    </view>
+
+    <view class="invitation-custom" bindtap="goInvitationCustomPage">
+        <view class="icon icon-qianbao"></view>
+        <view class="text">我买到的</view>
+    </view>
+
+    <view class="second-hod-manager" bindtap="goSecondHodManagerPage">
+        <view class="icon icon-collect"></view>
+        <view class="text">我收藏的</view>
+    </view>
+</view>
+
+
+
