@@ -1,0 +1,133 @@
+/* pages/order/order.wxss */
+.search{
+  background-color: red!important;
+}
+.picker-content{
+display: flex;
+font-size: 28rpx;
+background-color: white;
+border-bottom: 2rpx solid var(--page-bg);
+align-items: center;
+flex-direction: row;
+height: 80rpx;
+padding: 0 20rpx;
+
+}
+.picker-content .icon{
+font-size: 28rpx;
+margin-left: 10rpx;
+
+}
+
+.my-product-item {
+  width: calc(100% - 40rpx);
+  border-bottom: 2rpx solid var(--page-bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 12rpx 20rpx;
+  /* margin: 0 22rpx; */
+}
+
+.item-product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 15vh;
+}
+
+.item-product-image {
+  width: 170rpx;
+  height: 200rpx;
+  margin-right: 24rpx;
+}
+
+.item-product-name {
+  font-size: 30rpx;
+  letter-spacing: 0.8rpx;
+  font-weight: 500;
+  margin-right: 12rpx;
+  margin-bottom: 12rpx;
+}
+.price-button-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx
+}
+
+.item-product-detail {
+  height: 34rpx;
+  line-height: 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+.item-product-detail.end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.item-product-detail.disrequire {
+  border-top: 2rpx solid var(--page-bg);
+  margin-top: 12rpx;
+  padding-top: 16rpx;
+}
+
+.item-product-text {
+  color: var(--text-gray);
+  font-size: 24rpx;
+  letter-spacing: 0.88rpx;
+}
+
+.item-product-price {
+  color: var(--text-red);
+  font-size: 28rpx;
+  letter-spacing: 0.88rpx;
+  line-height: 34rpx;
+}
+
+.item-product-large-price {
+  color: var(--text-red);
+  font-size: 34rpx;
+  letter-spacing: 0.68rpx;
+  min-width: 20vw;
+  text-align: right;
+}
+
+.text-style-a {
+  color: var(--text-black);
+  letter-spacing: 0.8rpx;
+  font-size: 28rpx;
+}
+.item-poduct-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+}
+
+button{
+  margin: 0!important;
+}
+.item-poduct-btn button{
+  border: 2rpx solid var(--main-style);
+  color: var(--main-style);
+  font-size: 24rpx;
+  font-weight: normal;
+  background: white;
+  margin: 0;
+  padding: 0 8rpx;
+  min-width: 110rpx;
+  max-width: 110rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  border-radius: 12rpx;
+  margin-left: 10rpx!important;
+}

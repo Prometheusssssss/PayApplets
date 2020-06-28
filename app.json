@@ -1,5 +1,8 @@
 {
   "pages":[
+    "pages/customerOrder/customerOrder",
+    "pages/mySold/mySold",
+    "pages/myBought/myBought",
     "pages/myPublish/myPublish",
     "pages/publish/publish",
     "pages/user/user",
