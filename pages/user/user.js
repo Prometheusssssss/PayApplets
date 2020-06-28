@@ -22,5 +22,10 @@ Page({
   onShow: function () {
 
   },
-
+  //“我发布的”页面
+  goMyPublishPage: function(){
+    wx.navigateTo({
+      url: '../myPublish/myPublish',
+    })
+  }
 })

@@ -102,11 +102,12 @@
   color: var(--main-style);
   border-radius: 8rpx;
   padding: 10rpx 24rpx;
-  font-size: 30rpx;
+  font-size: 26rpx;
 }
 
-.menu-item {
+.menu-items {
   margin-top: 1vh;
+  margin-bottom: 30rpx;
   height: 12vh;
   /* width: calc(100vw - 40rpx);
   margin-left: 20rpx; */
@@ -118,7 +119,7 @@
   align-items: center;
   justify-content: center;
 }
-.menu-item > view {
+.menu-items > view {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -127,20 +128,14 @@
   padding: 10rpx 0;
   height: calc(100% - 20rpx);
 }
-.menu-item > view .icon.icon-cashout {
-  font-size: 44rpx;
-}
-.menu-item > view .icon.icon-settlement {
-  font-size: 52rpx;
-}
-.menu-item > view .icon.icon-invitation-custom {
-  font-size: 55rpx;
-}
-.menu-item > view .icon.icon-second-hod-manager {
+.menu-items > view .icon.icon-check1 {
   font-size: 38rpx;
 }
+.menu-items > view .icon.icon-qianbao {
+  font-size: 50rpx;
+}
 
-.menu-item > view .icon {
+.menu-items > view .icon {
   color: var(--main-style);
   margin-top: 10rpx;
   display: flex;
@@ -151,7 +146,10 @@
   height: 50rpx;
   font-size: 50rpx;
 }
-.menu-item > view .text {
+.menu-items > view .icon.icon-collect {
+  font-size: 60rpx;
+}
+.menu-items > view .text {
   color: var(--text-black);
   text-align: center;
 }
@@ -175,4 +173,58 @@
 .detail-info {
   padding: 22rpx 22rpx;
   color: var(--text-gray-dark);
+}
+
+/* 订单列表 */
+.menu-list {
+  /*position: fixed;
+  top: 58vh;
+  left: 0;*/
+  box-shadow: 0 4rpx 8rpx 0 var(--box-shadow-gray);
+}
+
+.menu-list .menu-item {
+  background: white;
+  height: 8.6vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6vw;
+  width: 88vw;
+  border-bottom: 2rpx solid var(--page-bg);
+  overflow: hidden;
+}
+
+.menu-list .menu-image {
+  width: 54rpx;
+  margin-right: 28rpx;
+  font-size: 50rpx;
+  text-align: center;
+}
+
+.menu-list .menu-image.icon-login-out{
+  font-size: 42rpx;
+  text-align: center;
+}
+
+
+.menu-list .menu-item.group {
+  margin-top: 30rpx;
+}
+
+.menu-list .menu-item view {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.menu-list .menu-item text {
+  font-size: 28rpx;
+  margin-left: 2vw;
+}
+
+.menu-list .menu-item i {
+  font-size: 50rpx;
 }

@@ -30,28 +30,81 @@
     <view bindtap="goImmediateWithdrawalPage" class="immediate-withdrawal">立即提现</view>
 </view>
 
-<view class="menu-item">
-    <view class="cashout" bindtap="goSettlementDetailPage">
-        <!-- <view class="icon icon-fabu"></view> -->
+<view class="menu-items">
+    <view class="cashout" bindtap="goMyPublishPage">
         <i class="icon icon-fabu"></i>
         <view class="text">我发布的</view>
     </view>
 
-    <view class="settlement" bindtap="goCashoutDetailPage">
+    <view class="settlement" bindtap="goMySellPage">
         <view class="icon icon-check1"></view>
         <view class="text">我卖出的</view>
     </view>
 
-    <view class="invitation-custom" bindtap="goInvitationCustomPage">
+    <view class="invitation-custom" bindtap="goMyBuyPage">
         <view class="icon icon-qianbao"></view>
         <view class="text">我买到的</view>
     </view>
 
-    <view class="second-hod-manager" bindtap="goSecondHodManagerPage">
+    <view class="second-hod-manager" bindtap="goMyCollectPage">
         <view class="icon icon-collect"></view>
         <view class="text">我收藏的</view>
     </view>
 </view>
+
+ <view class="menu-list">
+    <view class="menu-item" bindtap="viewOrder">
+      <view>
+        <i class="icon  icon-order  icon-green menu-image"></i>
+        <text>订单处理</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view>
+    <view class="menu-item" bindtap="viewBill">
+      <view>
+        <i class="icon  icon-tixian  icon-green menu-image"></i>
+        <text>提现核对</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view>
+    <view class="menu-item" bindtap="viewAddress">
+      <view>
+        <i class="icon  icon-contact  icon-green menu-image"></i>
+        <text>联系客服</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view>
+    <view class="menu-item" bindtap="callHelp">
+      <view>
+        <i class="icon  icon-feedback  icon-green menu-image"></i>
+        <text>意见反馈</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view>
+    <view class="menu-item" bindtap="loginOut">
+      <view>
+        <i class="icon  icon-login-out  icon-green menu-image"></i>
+        <text>注销</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view>
+
+    <!-- <view wx:if="{{isInTestAliyun}}" class="menu-item group" bindtap="getDebugParam">
+      <view>
+        <image class='menu-image' mode='aspectFit' src='/assets/img/user/edit-pwd.png'></image>
+        <text>协助postman调试/获取参数</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view>
+
+    <view wx:if="{{isInTestAliyun}}" class="menu-item" bindtap="openRequestLogs">
+      <view>
+        <image class='menu-image' mode='aspectFit' src='/assets/img/user/edit-pwd.png'></image>
+        <text>请求日志</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view> -->
+  </view>
 
 
 

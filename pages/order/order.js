@@ -19,22 +19,6 @@ Page({
    areaList:[],
    regionList:[],
    serverList:[],
-   orderList:[{
-    KID:1,
-    PRODUCT_NAME:'天刀爆款',
-    PRICE: '98',
-    SELLER_ID:1,//买家id
-    SELLER_TEL:'15736876465',//手机号可以发布的时候必填？？？
-    SELLER_NICK:'nick',
-    GAME_AREA:'新笑奥江湖',//专区
-    GAME_AREA_ID:1,//专区
-    GAME_REGION:'一站到底',//大区
-    GAME_REGION_ID:'1',//大区
-    DETAIL_IMG:'https://img.yxbao.com/pic/201307/25/1374743137_pm.jpg,https://img.yxbao.com/pic/201307/25/1374743139_zh.jpg',//string  字符串拼接 多条 字段长度给长一点
-    DETAIL_DESC:'爆款装备来抢！',//商品详情描述
-    BUYER_REMARK:'',//买家备注
-    MAIN_IMG:'https://img.yxbao.com/pic/201307/25/1374743139_zh.jpg'
-   }],
   },
 
   /**

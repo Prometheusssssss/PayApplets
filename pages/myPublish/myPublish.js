@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    totalList: [],
+    defaultPageSize: app.getPageSize(),
     searchText: '',
     selectStatus: '全部', //状态
     comboboxStatusList: [{
@@ -38,9 +40,77 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.loadMyPublishList();
+    that.lmFramework = that.selectComponent("#lm-framework");
   },
-
+  onShow:function(){
+    var that = this;
+    that.lmFramework.dealPageNoSize('enter');
+  },
+  callBackPageSetData: function (e) {
+    var that = this;
+    that.setData(e.detail.returnSetObj)
+  },
+   //订单页面方法开始
+   loadMainList: function (e) {
+    var { pageNo, pageSize, type } = e.detail;
+    var that = this;
+    var data = that.data;
+    if(data.selectStatus == '全部'){
+      var p = {
+        "tableName":"b_product_list",
+        "page": pageNo,
+        "limit": pageSize,
+        "filters":[
+            {
+              "fieldName":"NAME",
+              "type":"string",
+              "compared":"like",
+              "filterValue": data.searchText
+            },
+            {//卖家id
+              "fieldName":"SELL_USER_ID",
+              "type":"date",
+              "compared":"=",
+              "filterValue": 1
+            },
+        ]
+      }
+    }else{
+      var status = data.selectStatus;
+      var p = {
+        "tableName":"b_product_list",
+        "page": pageNo,
+        "limit": pageSize,
+        "filters":[
+            {
+              "fieldName":"NAME",
+              "type":"string",
+              "compared":"like",
+              "filterValue": data.searchText
+            },
+            {
+              "fieldName":"STATUS",
+              "type":"date",
+              "compared":"=",
+              "filterValue": status
+            },
+            {//卖家id
+              "fieldName":"SELL_USER_ID",
+              "type":"date",
+              "compared":"=",
+              "filterValue": 1
+            },
+        ]
+      }
+    }
+    console.log('查询数据')
+    console.log(JSON.stringify(p))
+    app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
+      if (dataList != 'error') {
+        that.lmFramework.dealWithList(type, dataList, pageSize);
+      }
+    })
+  },
   searchList: function ({
     detail
   }) {
@@ -48,40 +118,13 @@ Page({
     that.setData({
       searchText: detail
     })
-    // that.sjFramework.dealPageNoSize('enter');
+    that.lmFramework.dealPageNoSize('enter');
   },
   bindStatusCboChange: function (e) {
     var that = this;
-    var select = that.data.comboboxStatusList[e.detail.value].KID;
     that.setData({
-      selectStatus: e.detail.value
+      selectStatus: that.data.comboboxStatusList[e.detail.value].NAME
     })
-    that.loadMyPublishList()
+    that.lmFramework.dealPageNoSize('enter');
   },
-
-  loadMyPublishList: function () {
-    var that = this;
-    var p = {};
-    if (that.selectStatus = "全部") {
-      p = {
-        "SELL_USER_ID": "1"
-      }
-    } else {
-      p = {
-        "SELL_USER_ID": "1",
-        "STATUS": that.selectStatus,
-      }
-    }
-    var url = `/api/_search/defaultSearch/b_product_list?filter=${JSON.stringify(p)}`;
-    app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {
-      if (result != 'error') {
-        var data = result;
-        that.setData({
-          myPublishList: result,
-        })
-      }
-    })
-  }
-
-
 })

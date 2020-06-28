@@ -1,9 +1,10 @@
 {
   "pages":[
+    "pages/myPublish/myPublish",
     "pages/user/user",
     "pages/msgs/msgs",
 
-    "pages/myPublish/myPublish",
+    
     "pages/publish/publish",
 
     "pages/order/order",
