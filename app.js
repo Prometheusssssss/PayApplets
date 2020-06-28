@@ -19,6 +19,7 @@ App({
     pageSize: 10,
     pageLargeSize: 30,
     userInfo: null,
+    areaInfo:null,
     sliderBar: [],
 
     manageUrl: 'https://www.dazuiba.cloud', //体验
@@ -36,6 +37,16 @@ App({
   getUser: function () {
     var user = this.globalData.userInfo;
     return user;
+  },
+
+  setArea: function (areaInfo) {
+    var that = this;
+    this.globalData.areaInfo = areaInfo;
+  },
+
+  getArea: function () {
+    var areaInfo = this.globalData.areaInfo;
+    return areaInfo;
   },
 
   getToastDuration: function () {

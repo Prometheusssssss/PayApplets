@@ -26,9 +26,9 @@
                             </view>
                         </view>
                         <view class="item-poduct-btn">
-                            <button class="outline-rectangle">编辑</button>
-                            <button class="outline-rectangle">下架</button>
-                            <button class="outline-rectangle">删除</button>
+                            <button class="outline-rectangle" data-item="{{item}}" bindtap="editPubilshProduct">编辑</button>
+                            <button class="outline-rectangle" data-kid="{{item.KID}}" >下架</button>
+                            <button class="outline-rectangle" data-kid="{{item.KID}}">删除</button>
                             <!-- <sj-button shape="outline-rectangle" title="编辑" buttonColor="main-color outline" data-item="{{item}}" bindButtonClick="openOrderDetailPage" /> -->
                         </view>
                     </view>

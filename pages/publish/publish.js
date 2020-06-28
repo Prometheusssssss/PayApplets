@@ -17,6 +17,11 @@ Page({
     regionList: [],
     serverIndex:0,
     serverList:[],
+
+    areaId:'',
+    regionId:'',
+    serverId:'',
+
     pagetype: 'add',
     publishInfo: {},
     myForm: {},
@@ -41,23 +46,34 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     var that = this;
-    var pagetype = options.type;
-    var setData = {
-      pagetype: pagetype,
+    var publishInfo = app.getArea();
+    var pagetype = that.data.pagetype;
+    if(publishInfo != undefined && publishInfo != null){
+      pagetype = publishInfo.type;
+      var setData = {
+        pagetype: pagetype,
+      }
     }
     if(pagetype == 'edit'){
       wx.setNavigationBarTitle({
         title: "编辑发布",
       });
-      var publishInfo = JSON.parse(options.info);
       //获取对应的index
+      var item = publishInfo.publishInfo;
+      var uploaderList = item.PHOTO_URL.split(',');
+      var uploaderDetailList = item.DESC_PHOTO.split(',');
+      
       that.setData({
-        publishInfo: publishInfo,
-        // kid: publishInfo.kid
+        publishInfo: item,
+        areaIndex: publishInfo.areaIndex,
+        areaId: publishInfo.areaId,
+        regionId: publishInfo.regionId,
+        serverId: publishInfo.serverId,
+        uploaderList: uploaderList,
+        uploaderDetailList: uploaderDetailList,
       })
-     
     }else{
       wx.setNavigationBarTitle({
         title: "新增发布",
@@ -92,6 +108,7 @@ Page({
   },
   loadRegion:function(){
     var that = this;
+    //根据当前大区id去找 大区的index
     var areaIndex = that.data.areaIndex;
     var parentId = that.data.areaList[areaIndex].KID;
     var p = {"PARENT_ID":parentId}
@@ -109,16 +126,30 @@ Page({
   },
   loadServer:function(){
     var that = this;
-    var regionIndex = that.data.regionIndex;
+    var data = that.data;
+    var regionIndex = data.regionIndex;
+    if(data.regionId != ''){
+      regionIndex = data.regionList.findIndex((region)=>region.KID == data.regionId); 
+    }
+    
+    that.setData({
+      regionIndex:regionIndex
+    })
     var parentId = that.data.regionList[regionIndex].KID;
     var p = {"PARENT_ID":parentId}
    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
    console.log(url)
     app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {
       if (result != 'error') {
-        var data = result;
+        // var data = result;
+        var serverIndex = data.serverIndex;
+        if(data.serverId != ''){
+          serverIndex =result.findIndex((server)=>server.KID == data.serverId); 
+        }
+        
         that.setData({
-          serverList : result
+          serverList : result,
+          serverIndex: serverIndex
         })
       }
     })
@@ -128,7 +159,8 @@ Page({
     var that = this;
     var areaId = that.data.areaList[e.detail.value].KID;
     that.setData({
-      areaIndex: e.detail.value
+      areaIndex: e.detail.value,
+      areaId: areaId
     })
     that.loadRegion()
   },
@@ -139,7 +171,7 @@ Page({
     var regionId = that.data.regionList[regionIndex].KID;
     var areaId = that.data.areaList[that.data.areaIndex].KID;
     var serverId = that.data.serverList[that.data.serverIndex].KID;
-    wx.navigateTo({url:`../order/order-slider?regionId=${regionId}&&areaId=${areaId}&&serverId=${serverId}&regionIndex=${that.data.regionIndex}&&areaIndex=${that.data.areaIndex}&&serverIndex=${that.data.serverIndex}`})
+    wx.navigateTo({url:`../order/order-slider?regionId=${regionId}&&areaId=${areaId}&&serverId=${serverId}&&regionIndex=${that.data.regionIndex}&&areaIndex=${that.data.areaIndex}&&serverIndex=${that.data.serverIndex}`})
     
 
   },
@@ -351,7 +383,7 @@ Page({
     var offTime = common.time.formatTimeTwo(newtimestamp/1000,'Y-M-D h:m:s');
     var p = {
       KID: -1,
-      NAME:form.PRODUCT_NAME,//商品名称
+      NAME:form.NAME,//商品名称
       DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
       STATUS:'上架中',//状态
       TYPE:'商品',//商品
@@ -409,6 +441,7 @@ Page({
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
       wx.hideLoading()
       if (result != 'error') {
+        app.setArea(null)
         this.setData({
           uploaderNum: 0,
           uploaderList: [],

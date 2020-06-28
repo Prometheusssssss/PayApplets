@@ -12,7 +12,7 @@
               </view>
             </picker>
           </view>
-          <i-input name="PRODUCT_NAME" value="{{publishInfo.PRODUCT_NAME}}" type="text" title="商品名称" right
+          <i-input name="NAME" value="{{publishInfo.NAME}}" type="text" title="商品名称" right
             bindchange="convertNameFirst" placeholder="请输入商品名称（必填）" />
           <i-input name="PRICE" value="{{publishInfo.PRICE}}" title="价格" right placeholder="请输入价格（必填）" />
           <view class="upload-view">

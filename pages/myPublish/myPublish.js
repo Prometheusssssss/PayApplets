@@ -32,7 +32,17 @@ Page({
         NAME: '已下架'
       }
     ],
-    myPublishList: []
+    myPublishList: [],
+
+    areaIndex: 0,
+    regionIndex: 0,
+    serverIndex:0,
+    areaList: [],
+    regionList: [],
+    serverList:[],
+    areaId:'',
+    regionId:'',
+    serverId:'',
   },
 
   /**
@@ -45,6 +55,21 @@ Page({
   onShow:function(){
     var that = this;
     that.lmFramework.dealPageNoSize('enter');
+    that.loadArea()
+  },
+  loadArea:function(){
+    var that = this;
+    var p = {"PARENT_ID":null}
+    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
+    console.log(url)
+    app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {
+      if (result != 'error') {
+        var data = result;
+        that.setData({
+          areaList : result,
+        })
+      }
+    })
   },
   callBackPageSetData: function (e) {
     var that = this;
@@ -127,4 +152,26 @@ Page({
     })
     that.lmFramework.dealPageNoSize('enter');
   },
+  editPubilshProduct:function(e){
+    var that = this;
+    var data = that.data;
+    var publishInfo = e.target.dataset.item;
+    var areaId = publishInfo.GAME_PARTITION_KID;//大区
+    var areaIndex = data.areaList.findIndex((area)=>area.KID == areaId);
+    var regionId =  publishInfo.GAME_SECONDARY_KID;//二级区
+    var serverId =  publishInfo.GAME_ZONE_KID;//服务器
+    var areaInfo = {
+      type:'edit',
+      regionId:regionId,
+      areaId:areaId,
+      serverId:serverId,
+      areaIndex:areaIndex,
+      publishInfo:publishInfo
+    }
+    app.setArea(areaInfo);
+    wx.switchTab({
+      url: `../publish/publish`
+    })
+   
+  }
 })

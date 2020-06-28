@@ -17,6 +17,7 @@ Page({
     hasPicker:false,
     currentSliderbarChangeId: "",
     areaId:'',
+    regionId:'',
     serverId:'',
     areaIndex:'',
     regionIndex:'',
@@ -161,6 +162,9 @@ Page({
       areaIndex: that.data.areaIndex,//大区
       regionIndex: that.data.regionIndex,//小区
       serverIndex: serverIndex,//小区
+      areaId : that.data.areaId,
+      regionId: that.data.currentSliderbar,
+      serverId: serverData.KID,
     })
     wx.navigateBack({
       delta: 1
