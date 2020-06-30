@@ -1,4 +1,5 @@
 // pages/login/login.js
+const app = getApp()
 const { common,base64 } = global;
 Page({
 

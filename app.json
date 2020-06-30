@@ -1,11 +1,11 @@
 {
   "pages":[
+    "pages/user/user",
+    "pages/myPublish/myPublish",
     "pages/customerOrder/customerOrder",
     "pages/mySold/mySold",
     "pages/myBought/myBought",
-    "pages/myPublish/myPublish",
     "pages/publish/publish",
-    "pages/user/user",
     "pages/msgs/msgs",
     "pages/order/order",
     "pages/order/order-slider",
@@ -58,6 +58,10 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "线上交易",
     "navigationBarTextStyle":"black"
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "uploadFile": 20000
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

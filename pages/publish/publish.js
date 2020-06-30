@@ -52,9 +52,9 @@ Page({
     var pagetype = that.data.pagetype;
     if(publishInfo != undefined && publishInfo != null){
       pagetype = publishInfo.type;
-      var setData = {
-        pagetype: pagetype,
-      }
+      that.setData({
+        pagetype:pagetype
+      })
     }
     if(pagetype == 'edit'){
       wx.setNavigationBarTitle({
@@ -62,6 +62,7 @@ Page({
       });
       //获取对应的index
       var item = publishInfo.publishInfo;
+      debugger
       var uploaderList = item.PHOTO_URL.split(',');
       var uploaderDetailList = item.DESC_PHOTO.split(',');
       
@@ -356,7 +357,7 @@ Page({
     // 校验必填项，专区，大区，价格（非空数字），商品名称，
     var areaName = data.areaList[data.areaIndex].NAME;
     var serverName = data.serverList[data.serverIndex].NAME;
-    if (common.validators.isEmptyText(areaName, '游戏专区')||common.validators.isEmptyText(serverName, '游戏大区') || common.validators.isEmptyText(form.PRODUCT_NAME, '商品名称') ) {
+    if (common.validators.isEmptyText(areaName, '游戏专区')||common.validators.isEmptyText(serverName, '游戏大区') || common.validators.isEmptyText(form.NAME, '商品名称') ) {
       return;
     }
     if (common.validators.isInValidNum(form.PRICE, '价格') ) {
@@ -382,7 +383,7 @@ Page({
     var shelfTime = common.time.formatTimeTwo(timestamp/1000,'Y-M-D h:m:s');
     var offTime = common.time.formatTimeTwo(newtimestamp/1000,'Y-M-D h:m:s');
     var p = {
-      KID: -1,
+      // KID: -1,
       NAME:form.NAME,//商品名称
       DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
       STATUS:'上架中',//状态
@@ -402,7 +403,6 @@ Page({
       SHELF_TIME: shelfTime,
       OFF_SHELF_TIME: offTime
     }
-
     if (that.data.pagetype == 'add') {
       p.KID = -1;
     }
