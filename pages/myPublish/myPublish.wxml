@@ -7,11 +7,12 @@
             <sj-search placeholder="产品名称" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{comboboxStatusList}}" catchPickerEvent="bindStatusCboChange" />
         </view>
     </view>
-    <view slot="content" class="slot-content">
+    <view slot="content" class='slot-content'>
+
         <block wx:for="{{totalList}}" wx:for-item="listItem">
-            <block wx:for="{{listItem}}"  wx:for-item="item">
-                <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}"
-                    >
+            <block wx:for="{{listItem}}"  wx:for-item="item" wx:key="item">
+            <!-- <sj-slider sliderId="{{item.KID}}" info="{{item}}" activeId="{{activeSliderId}}" bindactiveSliderId="setActiveSliderId" buttonArray="{{buttonArray}}" catchEditEvent="editProductItem" catchDeleteEvent="deleteProductItem"> -->
+                <view  class='my-product-item'>
                     <image class='item-product-image {{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"no-image":""}}'
                     mode='aspectFit' src='{{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"":item.PHOTO_URL+"/200x200"}}'>
                     </image>
@@ -25,18 +26,97 @@
                                 <text class='item-product-price'>{{convert.toMoney(item.PRICE)}}</text>
                             </view>
                         </view>
+                        <!-- 侧滑加个删除 降价弹框打开可以编辑价格金额 -->
                         <view class="item-poduct-btn">
                             <button class="outline-rectangle" data-item="{{item}}" bindtap="editPubilshProduct">编辑</button>
-                            <button class="outline-rectangle" data-kid="{{item.KID}}" >下架</button>
-                            <button class="outline-rectangle" data-kid="{{item.KID}}">删除</button>
-                            <!-- <sj-button shape="outline-rectangle" title="编辑" buttonColor="main-color outline" data-item="{{item}}" bindButtonClick="openOrderDetailPage" /> -->
+                            <button class="outline-rectangle" data-item="{{item}}" bindtap="reducePubilshProductPrice">降价</button>
+                            <!-- <button class="outline-rectangle more" data-kid="{{item.KID}}" bindtap="moreButton">...</button> -->
+                            <view class="outline-rectangle more" data-item="{{item}}" bindtap="actionsheet">
+                                <view  data-item="{{item}}"  catchtap="actionsheet">...</view>
+                            </view>
                         </view>
                     </view>
                 </view>
+             <!-- </sj-slider> -->
             </block>
-        </block>
-       
+        </block>        
     </view>
+    
 </lm-framework>
 
 
+<sj-confirm visible="{{showConfirmDelete}}" addLineHeight="0" title="确认删除" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmDelete">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认将此产品永久删除吗？</text>
+    </view>
+</sj-confirm>
+
+<sj-confirm visible="{{showConfirmOff}}" addLineHeight="0" title="确认{{publishStatus}}" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmOff">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认将此产品{{publishStatus}}吗？</text>
+    </view>
+</sj-confirm>
+<sj-mask-layer visible="{{showConfirmreducce}}" addLineHeight="{{280}}" bindClose="cancel" hasButtonArea="{{false}}" hasTitleArea="{{false}}" isUpMask="{{true}}">
+    <view class="content-detail" slot="content">
+        <view class="product-name">
+            <text class="value">{{currentProductInfo.NAME}}</text><text class="value">现价:{{currentProductInfo.PRICE}}</text>
+        </view>
+        <view class="product-unit">
+            <text class="title">降价至</text>
+            <text class="value">{{newPrice}}</text>
+        </view>
+        <view class="input-num-mask-layer">
+            <view class="line">
+                <view bindtap="setPrice" data-input-text="7" class="sm-keyboard sm-keyboard-7">
+                    7
+                </view>
+                <view bindtap="setPrice" data-input-text="8" class="sm-keyboard sm-keyboard-8">
+                    8
+                </view>
+                <view bindtap="setPrice" data-input-text="9" class="sm-keyboard sm-keyboard-9">
+                    9
+                </view>
+                <view bindtap="deletePrice" class="sm-keyboard-delete">
+                    <image src="/assets/img/small-keyboard/delete.png" mode="aspectFit" />
+                </view>
+            </view>
+            <view class="line">
+                <view bindtap="setPrice" data-input-text="4" class="sm-keyboard sm-keyboard-4">
+                    4
+                </view>
+                <view bindtap="setPrice" data-input-text="5" class="sm-keyboard sm-keyboard-5">
+                    5
+                </view>
+                <view bindtap="setPrice" data-input-text="6" class="sm-keyboard sm-keyboard-6">
+                    6
+                </view>
+                <view bindtap="clearPrice" class="sm-keyboard-clear">
+                    <image src="/assets/img/small-keyboard/clear.png" mode="aspectFit" />
+                </view>
+            </view>
+            <view class="line">
+                <view bindtap="setPrice" data-input-text="1" class="sm-keyboard sm-keyboard-1">
+                    1
+                </view>
+                <view bindtap="setPrice" data-input-text="2" class="sm-keyboard sm-keyboard-2">
+                    2
+                </view>
+                <view bindtap="setPrice" data-input-text="3" class="sm-keyboard sm-keyboard-3">
+                    3
+                </view>
+                <view bindtap="setPrice" data-input-text="" class="sm-keyboard sm-keyboard-white"></view>
+            </view>
+            <view class="line save-line">
+                <view bindtap="setPrice" data-input-text="0" class="sm-keyboard sm-keyboard-0 zero">
+                    0
+                </view>
+                <view bindtap="setPrice" data-input-text="." class="sm-keyboard sm-keyboard-d">
+                    .
+                </view>
+                <view bindtap="commitPrice" class="sm-keyboard-save">保存</view>
+            </view>
+        </view>
+    </view>
+</sj-mask-layer>

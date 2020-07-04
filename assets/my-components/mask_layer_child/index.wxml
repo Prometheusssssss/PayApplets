@@ -1,0 +1,26 @@
+<!-- <block wx:if="{{visible}}"> -->
+<!-- <view class='mask-layer-bg' wx:if="{{visible}}">
+      </view> -->
+<view class="mask-layer {{visible == true?'show':''}}">
+  <view class='mask-layer-content' style="{{contentStyleStr!=''?contentStyleStr:''}}">
+    <view class="main-content">
+      <view class="img" wx:if="{{hasImageArea}}">
+        <slot name="img"></slot>
+      </view>
+      <view wx:if="{{hasTitleArea}}" class="title">
+        <slot name="title"></slot>
+      </view>
+      <view wx:if="{{hasContent}}" class="content">
+        <slot name="content"></slot>
+      </view>
+      <view class="button-area" wx:if="{{hasButtonArea}}" style="{{hasImageArea?'height:120rpx;border-top:none':''}}">
+        <slot name="button-area"></slot>
+      </view>
+    </view>
+  </view>
+  <view class='mask-layer-close' style="{{closeStyleStr!=''?closeStyleStr:''}}">
+    <i class="icon icon-close" catchtap='closeMaskLayer'></i>
+  </view>
+</view>
+<!-- </block> -->
+

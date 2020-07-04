@@ -1,4 +1,7 @@
 const app = getApp()
+const {
+  common
+} = global;
 // pages/myPublish/myPublish.js
 Page({
 
@@ -17,20 +20,10 @@ Page({
         NAME: '上架中'
       },
       {
-        NAME: '待发货'
-      },
-      {
-        NAME: '待收货'
-      },
-      {
-        NAME: '已完成'
-      },
-      {
-        NAME: '售后接入中'
-      },
-      {
+        NAME: '已售卖'
+      }, {
         NAME: '已下架'
-      }
+      },
     ],
     myPublishList: [],
 
@@ -43,6 +36,32 @@ Page({
     areaId:'',
     regionId:'',
     serverId:'',
+
+    activeSliderId: -1,//侧边栏当前活动id
+    showConfirmDelete: false,
+    showConfirmOff: false,
+    showConfirmreducce: false,
+    currentProductInfo: {},
+    currentProductKid:'',
+    newPrice:0,
+    buttonArray: [{
+      'title': '删除',
+      'triggerEvent': 'DeleteEvent',
+      'width': 140,
+      'color': 'var(--text-red)'
+    },
+    {
+      'title': '编辑',
+      'triggerEvent': 'EditEvent',
+      'width': 140,
+      'color': 'var(--main-style)'
+    }],
+
+    showButton:false,
+    offList:['下架','删除'],
+    onList:['上架','删除'],
+    newStatus:'',
+    publishStatus:'上架',
   },
 
   /**
@@ -132,7 +151,7 @@ Page({
     console.log(JSON.stringify(p))
     app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
       if (dataList != 'error') {
-        that.lmFramework.dealWithList(type, dataList, pageSize);
+         that.lmFramework.dealWithList(type, dataList, pageSize);
       }
     })
   },
@@ -152,6 +171,7 @@ Page({
     })
     that.lmFramework.dealPageNoSize('enter');
   },
+  //编辑
   editPubilshProduct:function(e){
     var that = this;
     var data = that.data;
@@ -168,10 +188,228 @@ Page({
       areaIndex:areaIndex,
       publishInfo:publishInfo
     }
-    app.setArea(areaInfo);
-    wx.switchTab({
-      url: `../publish/publish`
+    // app.setArea(areaInfo);
+    wx.navigateTo({
+      url: `../publish/publish-edit?areaInfo=${JSON.stringify(areaInfo)}`
+    })
+  },
+  showView: function (detail) {
+    var that = this;
+    var item = detail.currentTarget.dataset.obj;
+    var index = detail.currentTarget.dataset.index;
+    let currentProductInfo = item;
+    let price = currentProductInfo.PRICE;
+    let num = Number(price);
+ 
+    that.setData({
+      showNumMaskLayer: true,
+      currentProductInfo: currentProductInfo,
+      showNum: num,
+      productIndex: index,
+      firstIn: true,
+    })
+  },
+  reducePubilshProductPrice: function(e){//做个简单的框框 参考咸鱼
+    var that = this;
+    var product = e.target.dataset.item;
+    var productKid = product.KID;
+    that.setData({
+      showConfirmreducce:true,
+      currentProductKid: productKid,
+      currentProductInfo:product,
+      newPrice:product.PRICE-1,
+      firstIn: true,
+    })
+  },
+  //计算器开始
+  commitPrice: async function () {
+    var that = this;
+    var newPrice = that.data.newPrice;
+    var oldPrice = that.data.currentProductInfo.PRICE;
+    // debugger
+    if (common.validators.isInValidNum(newPrice, '价格') ) {
+      return;
+    }
+    if(newPrice>= oldPrice){
+      wx.showToast({
+        title: '新的价格不能高于原价',
+        icon:'none',
+        duration:1000
+      })
+      return
+    }
+    //降价更新价格 
+    var p = {
+      KID: that.data.currentProductKid,
+      PRICE: newPrice,
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        this.setData({
+          showConfirmreducce:false
+        })
+        wx.showToast({
+          title: '降价成功',
+          icon: 'none',
+          duration: 1500
+        })
+        that.lmFramework.dealPageNoSize('enter');
+      }
+    })
+  },
+
+  setPrice: function (e) {
+    var that = this;
+    var firstIn = that.data.firstIn;
+    var newPrice = that.data.newPrice
+    var num = e.currentTarget.dataset.inputText;
+    if (firstIn == true) {
+      that.setData({
+        ["newPrice"]: num,
+        firstIn: false,
+      })
+    } else {
+      if (newPrice == '0' && num != '.') {
+        that.setData({
+          ["newPrice"]: num,
+        })
+      } else {
+        that.setData({
+          ["newPrice"]: newPrice + '' + num
+        })
+      }
+    }
+  },
+  deletePrice: function (e) {
+    var that = this;
+    var num = that.data.newPrice;
+    if (num.toString().length > 0) {
+      that.setData({
+        ["newPrice"]: num.toString().substring(0, num.toString().length - 1)
+      })
+    }
+  },
+
+  clearPrice: function () {
+    var that = this;
+    var num = 0;
+    that.setData({
+      ["newPrice"]: num
+    })
+  },
+
+  cancel: function () {
+    var that = this;
+    that.setData({ showConfirmreducce: false })
+
+  },//计算器结束\
+
+
+  //点击点点点 显示更多
+  actionsheet: function(e){
+    var that = this;
+    var productInfo = e.target.dataset.item;
+    that.setData({currentProductKid : productInfo.KID})
+    var status = productInfo.STATUS;
+    var sheetList = [];
+    if(status =='上架中'){
+      sheetList = that.data.offList
+    }else  if(status =='已下架'){
+      sheetList = that.data.onList
+    }
+    wx.showActionSheet({
+      itemList: sheetList,
+      // itemColor :'#2583F5',
+      success(e) {
+       if(e.errMsg == 'showActionSheet:ok' ){
+        console.log(e.tapIndex)
+          var index = e.tapIndex;
+          if(index == 0){//下架 更新发布商品状态
+            var status = '上架中';
+            if(sheetList[0] == '上架'){
+              status = '上架中'
+              that.setData({
+                newStatus : status,
+                publishStatus: sheetList[0]
+              })
+              var p = {
+                KID: productInfo.KID,
+                STATUS: status,
+              }
+              app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
+                if (result != 'error') {
+                  //更新商品发布状态
+                  wx.showToast({
+                    title: sheetList[0]+'成功',
+                    icon: 'none',
+                    duration: 1500
+                  })
+                  that.lmFramework.dealPageNoSize('enter');
+                }
+              })
+
+            }else if(sheetList[0] == '下架'){
+              status = '已下架'
+              that.setData({
+                newStatus : status,
+                showConfirmOff :true,
+                publishStatus: sheetList[0]
+              })
+            }
+           
+            
+           
+          }else if(index == 1){//删除 kid 表名
+            that.deleteProductItem(productInfo)
+          }
+       }
+      },
+      fail(e) {
+      },
+    })
+  },
+  
+  //删除 上架中的删除，给确认提示，然后确认删除，确认删除之前先刷一下产品状态，已售卖不能删除
+  deleteProductItem:function(product){
+    var that = this;
+
+    that.setData({
+      currentProductInfo : product,
+      showConfirmDelete: true,
+    })
+  },
+
+  confirmDelete: function (e) {
+    var that = this;
+    var kid = that.data.currentProductKid;
+    //接入删除接口 
+    that.setData({
+      showConfirmDelete: false,
+    })
+  },
+  confirmOff: function () {
+    var that = this;
+    var kid = that.data.currentProductKid;
+    //接入下架接口 
+    //更新状态
+    var p = {
+      KID: kid,
+      STATUS: that.data.newStatus,
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        //更新商品发布状态
+        wx.showToast({
+          title: that.data.publishStatus+'成功',
+          icon: 'none',
+          duration: 1500
+        })
+        that.setData({
+          showConfirmOff: false,
+        })
+        that.lmFramework.dealPageNoSize('enter');
+      }
     })
    
-  }
+  },
 })

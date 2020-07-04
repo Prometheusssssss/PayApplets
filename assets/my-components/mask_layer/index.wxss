@@ -1,0 +1,133 @@
+.mask-layer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  opacity: 0;
+  -ms-transform: scale(1.185);
+  transform: scale(1.185);
+  backface-visibility: hidden;
+  perspective: 200rpx;
+  background: rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease-in-out 0s;
+  pointer-events: none;
+}
+
+.mask-layer.show {
+  opacity: 1;
+  transition-duration: 0.3s;
+  -ms-transform: scale(1);
+  transform: scale(1);
+  overflow-x: hidden;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+/*
+.mask-layer-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  opacity: 0.65;
+  background-color: #000;
+}
+*/
+
+.mask-layer-content {
+  background-color: white;
+  position: fixed;
+  left: 0;
+  border-radius: 4rpx;
+  margin-left: 8.5%;
+  width: 83%;
+  /*top: 240rpx;*/
+  top: calc(50vh - 341rpx);
+  height: 682rpx;
+  z-index: 100;
+  /*overflow: hidden;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mask-layer-content > .main-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  width: 100%;
+}
+
+.mask-layer-content > .main-content > .img {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mask-layer-content > .main-content > .img image {
+  width: 100%;
+}
+
+.mask-layer-content > .main-content > .title {
+  font-weight: 600;
+  font-size: 36rpx;
+  padding: 32rpx 32rpx;
+  text-align: center;
+  border-bottom: 2rpx solid var(--line-gray-dark);
+  /*height: 50rpx;*/
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mask-layer-content > .main-content > .content {
+  overflow: scroll;
+  height: auto;
+  flex: 1;
+}
+
+.mask-layer-content > .main-content > .button-area {
+  height: 160rpx;
+  border-top: 2rpx solid var(--line-gray-dark);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: white;
+}
+
+.mask-layer-content > .main-content > .button-area view {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  /*margin: 0 60rpx;*/
+}
+
+.mask-layer-close {
+  position: fixed;
+  top: calc(50vh + 341rpx + 2rpx);
+  /*top: calc(240rpx + 662rpx + 2rpx);*/
+  left: 0;
+  margin-left: calc(50% - 60rpx);
+  width: 120rpx;
+  height: 120rpx;
+  z-index: 100;
+}
+
+@import "../../private-icon/font.wxss";
+
+.icon-close {
+  margin: 13rpx;
+  font-size: 96rpx;
+  color: white;
+}

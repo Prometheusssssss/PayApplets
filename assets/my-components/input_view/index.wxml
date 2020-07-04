@@ -1,0 +1,48 @@
+<input data-data-name="{{dataName}}" bindinput="pageSetData" disabled value="{{initValue}}" bindtap="showView" />
+
+<sj-mask-layer visible="{{showNumMaskLayer==true}}" addLineHeight="{{280}}" bindClose="cancel" hasButtonArea="{{false}}"
+  hasTitleArea="{{false}}" isUpMask="{{true}}">
+  <!-- hasCloseButton="{{false}}"  -->
+  <view class="content-detail" slot="content">
+    <view class="product-name">
+      <text class="title">{{expandA==''?'':expandA}}</text>
+      <text class="value">{{expandB==''?'':expandB}}</text>
+    </view>
+    <view class="product-unit">
+      <text class="title">{{expandC==''?'':expandC}}</text>
+      <text class="value">{{showNum}}</text>
+    </view>
+
+    <view class="input-num-mask-layer">
+      <view class="line">
+        <view bindtap="setNum" data-input-text="7" class="sm-keyboard sm-keyboard-7">7</view>
+        <view bindtap="setNum" data-input-text="8" class="sm-keyboard sm-keyboard-8">8</view>
+        <view bindtap="setNum" data-input-text="9" class="sm-keyboard sm-keyboard-9">9</view>
+        <view bindtap="deleteNum" class="sm-keyboard-delete">
+          <image src="/assets/img/small-keyboard/delete.png" mode="aspectFit" />
+        </view>
+      </view>
+      <view class="line">
+        <view bindtap="setNum" data-input-text="4" class="sm-keyboard sm-keyboard-4">4</view>
+        <view bindtap="setNum" data-input-text="5" class="sm-keyboard sm-keyboard-5">5</view>
+        <view bindtap="setNum" data-input-text="6" class="sm-keyboard sm-keyboard-6">6</view>
+        <view bindtap="clearNum" class="sm-keyboard-clear">
+          <image src="/assets/img/small-keyboard/clear.png" mode="aspectFit" />
+        </view>
+      </view>
+      <view class="line">
+        <view bindtap="setNum" data-input-text="1" class="sm-keyboard sm-keyboard-1">1</view>
+        <view bindtap="setNum" data-input-text="2" class="sm-keyboard sm-keyboard-2">2</view>
+        <view bindtap="setNum" data-input-text="3" class="sm-keyboard sm-keyboard-3">3</view>
+        <view bindtap="setNum" data-input-text="" class="sm-keyboard sm-keyboard-white"></view>
+      </view>
+      <view class="line save-line">
+        <view bindtap="setNum" data-input-text="0" class="sm-keyboard sm-keyboard-0 zero">0</view>
+        <view bindtap="setNum" data-input-text="." class="sm-keyboard sm-keyboard-d">.</view>
+        <view bindtap="commitNum" class="sm-keyboard-save">
+          保存
+        </view>
+      </view>
+    </view>
+  </view>
+</sj-mask-layer>

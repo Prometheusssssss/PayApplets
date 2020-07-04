@@ -1,0 +1,113 @@
+@import "../../../config.wxss";
+
+.mask-layer{
+  position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+	z-index: 10;
+  opacity: 0;
+	-ms-transform: scale(1.185);
+	transform: scale(1.185);
+	backface-visibility: hidden;
+	perspective: 200rpx;
+	background: rgba(0, 0, 0, 0.6);
+	transition: all 0.3s ease-in-out 0s;
+	pointer-events: none;
+}
+
+
+.mask-layer.show {
+	opacity: 1;
+	transition-duration: 0.3s;
+	-ms-transform: scale(1);
+	transform: scale(1);
+	overflow-x: hidden;
+	overflow-y: auto;
+	pointer-events: auto;
+}
+
+/*
+.mask-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  opacity: 0.65;
+  background-color: #000;
+}
+*/
+.mask-layer-content {
+  background-color: white;
+  position: fixed;
+  top: calc(50vh - 187rpx);
+  left: 0;
+  border-radius: 20rpx;
+  margin-left: 8.5%;
+  width: 83%;
+  height: 374rpx;
+  z-index: 100;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mask-layer-content>.main-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0;
+  width: 100%;
+}
+
+.mask-layer-content>.main-content>.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 103rpx;
+  border-bottom: 2rpx solid var(--line-gray);
+
+}
+
+.mask-layer-content>.main-content>.title text {
+  font-weight: 500;
+  font-size: 36rpx;
+  letter-spacing: 1rpx;
+}
+
+.mask-layer-content>.main-content>.content {
+  overflow: scroll;
+  padding: 0 36rpx;
+  height: auto;
+  flex: 1;
+}
+
+
+.mask-layer-content>.main-content>.button-area {
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 2rpx solid var(--line-gray);
+}
+
+.mask-layer-content>.main-content>.button-area text {
+  height: 100rpx;
+  line-height: 100rpx;
+  flex: 1;
+  font-size: 32rpx;
+  text-align: center;
+  letter-spacing: 0.88rpx;
+}
+
+.mask-layer-content>.main-content>.button-area text:first-child {
+  border-right: 2rpx solid var(--line-gray);
+}

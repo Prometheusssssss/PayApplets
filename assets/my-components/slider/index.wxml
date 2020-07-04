@@ -1,0 +1,13 @@
+<view class="sj-label-slider i-class">
+  <view class="content " bindtouchstart="handleTouchstart" bindtouchmove="handleTouchmove" bindtouchend='handleTouchend' data-target="move-box-{{sliderId}}" style="transform: translateX({{activeId=='move-box-'+ sliderId?-totalWidth:'0'}}rpx)">
+    <slot name="content"></slot>
+    <view class="button-area move" style="width:{{totalWidth}}rpx">
+        <block wx:for="{{buttonArray}}" wx:for-item="button">
+          <view data-currentId="{{sliderId}}" data-info="{{info}}" data-trigger-event="{{button.triggerEvent}}" class="right-button"
+            catchtap="handleClick" style="background-color:{{button.color}};width:{{button.width}}rpx">
+            {{button.title}}
+          </view>
+        </block>
+      </view>
+  </view>
+</view>

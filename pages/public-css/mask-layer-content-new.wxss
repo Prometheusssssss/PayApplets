@@ -1,0 +1,141 @@
+/*picker 类型*/
+.my-content .my-mask-item {
+    border-bottom: 2rpx solid var(--line-gray-dark);
+    display: flex;
+    height: 60rpx;
+    padding: 35rpx 36rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my-content .no-line {
+    border-bottom: none;
+}
+
+.picker .my-mask-item>text:first-child,
+.blod-text {
+    font-size: 28rpx;
+    font-weight: 500;
+}
+
+.picker-text-with-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 60rpx;
+}
+
+.picker-text-with-icon>text {
+    font-size: 28rpx;
+    font-weight: 500;
+    width: 280rpx;
+    height: 60rpx;
+    border-radius: 8rpx;
+    border: 1px solid var(--line-gray-dark);
+    text-align: center;
+    color: var(--text-gray);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.picker-text-with-icon>i {
+    font-size: 50rpx;
+    margin-left: 20rpx;
+}
+
+/*picker 类型结束*/
+.my-mask-item.two-line {
+    flex-direction: column;
+    padding: 50rpx 28rpx;
+    height:154rpx;
+    align-items:flex-start;
+
+}
+
+.my-mask-item.two-line .picker-text-with-icon>text {
+    width: 450rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    border-radius: 6rpx;
+    border: 4rpx solid var(--line-gray-light);
+    font-size: 28rpx;
+    padding-left: 30rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.my-mask-item.two-line>view:first-child {
+    font-size: 28rpx;
+    color: var(--text-gray);
+    margin-bottom: 20rpx
+}
+
+.mask-order-no {
+    display: flex;
+    flex-direction: column;
+    padding: 33rpx 0 0 20rpx;
+}
+
+.mask-order-no text {
+    font-size: 24rpx;
+    font-weight: 500;
+    letter-spacing: -0.5rpx;
+}
+
+
+.my-mask-item.show-input-content,
+.my-mask-item.write-input-content {
+    padding: 40rpx 36rpx 40rpx 20rpx;
+
+}
+
+.my-mask-item.show-input-content view,
+.my-mask-item.write-input-content view {
+    display: flex;
+    align-items: center;
+}
+
+
+.my-mask-item.show-input-content text,
+.my-mask-item.write-input-content text {
+    font-size: 28rpx;
+    font-weight: 500rpx;
+}
+
+
+.my-mask-item.write-input-content .input {
+    width: 100rpx;
+    height: 40rpx;
+    border-radius: 8rpx;
+    border: 2rpx solid var(--icon-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10rpx 0 40rpx;
+}
+
+.my-mask-item.write-input-content .input.large {
+    width: 192rpx;
+    height: 48rpx;
+}
+
+.my-mask-item.write-input-content .input input,
+.my-mask-item.write-input-content .input text {
+    text-align: center;
+    color: var(--text-gray);
+}
+
+.my-mask-item.show-input-content .text-gray-dark {
+    margin-left: 10rpx;
+}
+
+.my-mask-item .text-gray {
+    margin-left: 28rpx;
+}
+
+
+.write-input-content {}

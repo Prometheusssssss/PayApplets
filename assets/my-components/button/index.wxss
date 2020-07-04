@@ -230,14 +230,13 @@ button::after {
 .outline-rectangle{
   margin: 0;
   padding: 0 8rpx;
-  min-width: 10rpx;
+  min-width: 100rpx;
   max-width: 180rpx;
   height: 60rpx;
   line-height: 58rpx;
   border: none;
   border-radius: 0;
   color: var(--main-lgb);
-  
   font-size: 24rpx;
   border-radius: 16rpx;
 }

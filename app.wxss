@@ -23,3 +23,12 @@ lm-slider-bar {
 page{
   background-color: #eeeeee;
 }
+.delete-confirm-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-weight: 500;
+  font-size: 28rpx;
+}

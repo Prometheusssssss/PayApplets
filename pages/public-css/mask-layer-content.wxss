@@ -1,0 +1,114 @@
+.my-content {
+  padding: 24rpx 0;
+  height: calc(100% - 48rpx) !important;
+}
+
+.my-content.purchase {
+  padding: 50rpx 0;
+  height: calc(100% - 100rpx) !important;
+}
+
+.my-content-middle {
+  height:100%;
+  padding-top: 18rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.my-mask-item {
+  margin-bottom: 24rpx;
+}
+
+.my-mask-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 68rpx;
+}
+
+.my-mask-item text {
+  font-weight: 500;
+  color: var(--text-gray);
+}
+
+.item-a {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-a>text {
+  border: 2rpx solid var(--line-gray-light);
+  width: 244rpx;
+  height: 40rpx;
+  padding-left: 40rpx;
+  margin-right: 20rpx;
+  line-height: 40rpx;
+}
+
+.item-b,
+.item-b-input {
+  flex: 1;
+  margin-left: 80rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item-b>text,
+.item-b-input>text,
+.item-b-input>.input {
+  flex: 1;
+}
+
+.item-b>text:nth-child(even),
+.item-b-input>text:nth-child(even),
+.item-c>text:nth-child(even) {
+  color: var(--main-style);
+}
+
+.my-mask-item i {
+  font-size: 56rpx;
+}
+
+.icon-delete {
+  font-size: 48rpx;
+}
+
+.item-c {
+  height: 68rpx;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.item-c>.input,
+.item-b-input>.input {
+  width: 70rpx;
+  min-height: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid var(--line-gray-light);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item-c>.input input,
+.item-b-input>.input input,
+.item-b-input>.input textarea {
+  color: var(--text-gray);
+  text-align: center;
+  font-weight: 500;
+  width: 100%;
+}
+
+.item-c>.input:first-child {
+  width: 120rpx;
+}

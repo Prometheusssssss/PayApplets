@@ -1,0 +1,132 @@
+.input-num-mask-layer {
+  max-height: 70%;
+  flex: 1;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  --sm-keyboard-light-blue: #477cb9;
+  --sm-keyboard-dark-blue: #366294;
+  --sm-keyboard-orange: #f09518;
+  --sm-keyboard-dark-gray: #efefef;
+  --sm-keyboard-dark-border-gray: #d6d6d6;
+}
+button.input-num-mask-layer {
+  float: left;
+}
+
+.line {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start !important;
+}
+.sm-keyboard {
+  flex: 1;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  background-color: var(--sm-keyboard-dark-gray);
+  border: 2rpx solid var(--sm-keyboard-dark-border-gray);
+  font-size: 100rpx;
+  font-weight: 200;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-black) !important;
+}
+
+.sm-keyboard-delete,
+.sm-keyboard-clear,
+.sm-keyboard-save,
+.sm-keyboard-white {
+  flex: 1;
+  height: 100%;
+  border: none;
+  margin: 0;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sm-keyboard-delete {
+  background: var(--sm-keyboard-light-blue);
+  /* url("/assets/img/small-keyboard/delete.png") 50% 50% no-repeat*/
+}
+.sm-keyboard-clear {
+  background: var(--sm-keyboard-dark-blue);
+  /* url("/assets/img/small-keyboard/clear.png") 50% 50% no-repeat*/
+}
+.sm-keyboard-clear image,
+.sm-keyboard-delete image {
+  width: 50%;
+  height: 50%;
+}
+.sm-keyboard-save {
+  height: 200%;
+  background: var(--sm-keyboard-orange);
+  font-weight: 400;
+  font-size: 50rpx;
+  color: white;
+  position: relative;
+  bottom: calc(100%);
+}
+.sm-keyboard.zero {
+  flex: 2;
+  min-width: calc(50% - 2rpx);
+}
+
+.content-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  overflow: hidden;
+  z-index: 200;
+}
+
+.content-detail .product-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start !important;
+  border-bottom: 2rpx solid var(--line-gray-light);
+  padding: 32rpx 8rpx 16rpx 8rpx;
+  margin: 0 24rpx;
+  width: calc(100% - 48rpx);
+}
+
+.content-detail .product-name .title {
+  font-size: 28rpx;
+  color: var(--text-black) !important;
+}
+.content-detail .product-name .value {
+  font-size: 32rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-black) !important;
+}
+
+.content-detail .product-unit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 8rpx;
+  margin: 0 24rpx;
+  align-items: center;
+  color: var(--text-black) !important;
+  width: calc(100% - 48rpx);
+  min-height: 176rpx;
+}
+.content-detail .product-unit .title {
+  font-size: 36rpx;
+  color: var(--text-black) !important;
+}
+.content-detail .product-unit .value {
+  font-size: 120rpx;
+  color: var(--text-black) !important;
+}

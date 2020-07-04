@@ -46,12 +46,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
-    var publishInfo = app.getArea();
+    var areaInfo = JSON.parse(options.areaInfo);
     var pagetype = that.data.pagetype;
-    if(publishInfo != undefined && publishInfo != null){
-      pagetype = publishInfo.type;
+    if(areaInfo != undefined && areaInfo != null){
+      pagetype = areaInfo.type;
       that.setData({
         pagetype:pagetype
       })
@@ -61,17 +61,16 @@ Page({
         title: "编辑发布",
       });
       //获取对应的index
-      var item = publishInfo.publishInfo;
-      debugger
+      var item = areaInfo.publishInfo;
       var uploaderList = item.PHOTO_URL.split(',');
       var uploaderDetailList = item.DESC_PHOTO.split(',');
       
       that.setData({
         publishInfo: item,
-        areaIndex: publishInfo.areaIndex,
-        areaId: publishInfo.areaId,
-        regionId: publishInfo.regionId,
-        serverId: publishInfo.serverId,
+        areaIndex: areaInfo.areaIndex,
+        areaId: areaInfo.areaId,
+        regionId: areaInfo.regionId,
+        serverId: areaInfo.serverId,
         uploaderList: uploaderList,
         uploaderDetailList: uploaderDetailList,
       })
@@ -155,7 +154,7 @@ Page({
       }
     })
   },
-
+  //
   bindAreaChange:function(e){
     var that = this;
     var areaId = that.data.areaList[e.detail.value].KID;
@@ -378,7 +377,7 @@ Page({
       mainImgUrl = imgList[0];
       detailImgUrl = imgList.slice(1,imgList.length).toString()
     }
-    
+
     //商品表多存一个二级区的id和name 不然编辑的时候不好找到服务器
 
     var timestamp = Date.parse(new Date());
@@ -387,13 +386,14 @@ Page({
     var shelfTime = common.time.formatTimeTwo(timestamp/1000,'Y-M-D h:m:s');
     var offTime = common.time.formatTimeTwo(newtimestamp/1000,'Y-M-D h:m:s');
     var p = {
+      // KID: -1,
       NAME:form.NAME,//商品名称
       DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
-      STATUS:'上架中',//状态
-      TYPE:'商品',//商品
-      SELL_USER_ID:1,//卖家id
-      SELL_USER_NAME:'耗子',//卖家昵称
-      SELL_USER_PHONE:'15736879889',//卖家手机号
+      // STATUS:'上架中',//状态
+      // TYPE:'商品',//商品
+      // SELL_USER_ID:1,//卖家id
+      // SELL_USER_NAME:'耗子',//卖家昵称
+      // SELL_USER_PHONE:'15736879889',//卖家手机号
       PRICE: form.PRICE,//价格
       PHOTO_URL: mainImgUrl,//主图
       DESC_PHOTO: detailImgUrl,//详情图
@@ -403,8 +403,8 @@ Page({
       GAME_SECONDARY_NAME: data.regionList[data.regionIndex].NAME,//游戏二级区
       GAME_ZONE_KID: data.serverList[data.serverIndex].KID,//服务器
       GAME_ZONE_NAME: serverName,
-      SHELF_TIME: shelfTime,
-      OFF_SHELF_TIME: offTime
+      // SHELF_TIME: shelfTime,
+      // OFF_SHELF_TIME: offTime
     }
     if (that.data.pagetype == 'add') {
       p.KID = -1;
@@ -459,12 +459,12 @@ Page({
           showDetailUpload: true,
         })
         setTimeout(()=>{
-          wx.switchTab({
-            url: '../order/order',
+          wx.navigateBack({
+            delta: 1
           })
         },200)
         wx.showToast({
-          title: '发布成功',
+          title: '保存成功',
           icon: 'none',
           duration: 1500
         })

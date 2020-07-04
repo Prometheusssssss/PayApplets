@@ -27,7 +27,7 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.1",
+	"libVersion": "2.11.3",
 	"appid": "wx8d679b4970bda4df",
 	"projectname": "payApplets",
 	"debugOptions": {

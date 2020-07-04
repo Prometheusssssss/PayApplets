@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "sj-mask-layer": "../mask_layer_child/index"
+  }
+}
