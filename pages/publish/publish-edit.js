@@ -449,7 +449,6 @@ Page({
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
       wx.hideLoading()
       if (result != 'error') {
-        app.setArea(null)
         this.setData({
           uploaderNum: 0,
           uploaderList: [],

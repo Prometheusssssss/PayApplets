@@ -1,0 +1,41 @@
+.i-tabs-tab {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    height: calc(100% - 4rpx);
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+.i-tabs-tab-title {
+    font-size: 30rpx;
+    text-align: center;
+    box-sizing: border-box;
+    color: var(--text-gray);
+    line-height: 28rpx;
+    height: 38rpx;
+    padding: 0rpx 12rpx;
+    letter-spacing: 1.1rpx;
+
+}
+
+.i-tabs-tab-current {}
+
+.i-tabs-tab-title-current {
+    color: var(--main-style);
+    border-bottom: 3rpx solid var(--main-style);
+
+
+}
+
+.i-tabs-tab-scroll {
+    display: inline-block;
+    width: 120rpx
+}

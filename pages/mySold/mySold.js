@@ -9,7 +9,7 @@ Page({
     totalList: [],
     defaultPageSize: app.getPageSize(),
     searchText: '',
-    selectStatus: '待发货', //状态
+    selectStatus: '', //状态
     selectType: '全部', //状态
     comboboxTypeList: [{
         NAME: '全部'
@@ -20,7 +20,8 @@ Page({
       {
         NAME: '代练'
       }
-    ]
+    ],
+    // currentSegment: '',
   },
 
   /**
@@ -48,10 +49,10 @@ Page({
     var that = this;
     var data = that.data;
     var filter = [];
-    var type = data.selectType;
-    if (type == '全部') {
+    var selectType = data.selectType;
+    if (selectType == '全部') {
       filter = [{
-          "fieldName": "NAME",
+          "fieldName": "PRODUCT_NAME",
           "type": "string",
           "compared": "like",
           "filterValue": data.searchText
@@ -86,7 +87,7 @@ Page({
           "fieldName": "TYPE",
           "type": "date",
           "compared": "=",
-          "filterValue": type
+          "filterValue": selectType
         },
         { //卖家id
           "fieldName": "SELL_USER_ID",
@@ -116,6 +117,16 @@ Page({
     var that = this;
     that.setData({
       searchText: detail
+    })
+    that.lmFramework.dealPageNoSize('enter');
+  },
+  // 待发货 卖家点击发货状态变成待收货，卖家点击提醒收货给对应的买家发送一条收货提醒
+  changeCurrentSegment: function ({
+    detail
+  }) {
+    var that = this;
+    that.setData({
+      selectStatus: detail.key
     })
     that.lmFramework.dealPageNoSize('enter');
   },

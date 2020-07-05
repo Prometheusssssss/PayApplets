@@ -27,5 +27,15 @@ Page({
     wx.navigateTo({
       url: '../myPublish/myPublish',
     })
-  }
+  },
+  goMySoldPage: function(){
+    wx.navigateTo({
+      url: '../mySold/mySold',
+    })
+  },
+  goMyBoughtPage: function(){
+    wx.navigateTo({
+      url: '../myBought/myBought',
+    })
+  },
 })

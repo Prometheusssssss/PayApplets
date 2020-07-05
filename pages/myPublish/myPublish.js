@@ -151,6 +151,7 @@ Page({
     console.log(JSON.stringify(p))
     app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
       if (dataList != 'error') {
+        debugger
          that.lmFramework.dealWithList(type, dataList, pageSize);
       }
     })
@@ -369,22 +370,37 @@ Page({
     })
   },
   
-  //删除 上架中的删除，给确认提示，然后确认删除，确认删除之前先刷一下产品状态，已售卖不能删除
+  //删除 
   deleteProductItem:function(product){
     var that = this;
-
     that.setData({
       currentProductInfo : product,
       showConfirmDelete: true,
     })
+   
+   
   },
-
+  //上架中的删除，给确认提示，然后确认删除，确认删除之前先刷一下产品状态，已售卖不能删除 ；；一下架的可以删除
   confirmDelete: function (e) {
     var that = this;
-    var kid = that.data.currentProductKid;
+    var currentProductInfo = that.data.currentProductInfo;
+    //先查询一下产品的最新状态
     //接入删除接口 
-    that.setData({
-      showConfirmDelete: false,
+    var p ={
+      KID: currentProductInfo.KID
+    }
+    app.ManageExecuteApi('/api/_cud/del/b_product_list', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        wx.showToast({
+          title: '删除成功',
+          duration:1000,
+          icon:'none'
+        })
+        that.setData({
+          showConfirmDelete: false,
+        })
+        that.lmFramework.dealPageNoSize('enter')
+      }
     })
   },
   confirmOff: function () {

@@ -36,12 +36,12 @@
         <view class="text">我发布的</view>
     </view>
 
-    <view class="settlement" bindtap="goMySellPage">
+    <view class="settlement" bindtap="goMySoldPage">
         <view class="icon icon-check1"></view>
         <view class="text">我卖出的</view>
     </view>
 
-    <view class="invitation-custom" bindtap="goMyBuyPage">
+    <view class="invitation-custom" bindtap="goMyBoughtPage">
         <view class="icon icon-qianbao"></view>
         <view class="text">我买到的</view>
     </view>

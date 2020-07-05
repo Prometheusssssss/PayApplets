@@ -6,6 +6,14 @@
         <view class="search">
             <sj-search placeholder="产品名称" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{comboboxTypeList}}" catchPickerEvent="bindTypeCboChange" />
         </view>
+        <i-tabs current="{{ selectStatus }}" bindchange="changeCurrentSegment">
+        <!-- 待发货、待收货、已完成、售后接入中 -->
+            <i-tab key="全部" title="全部"></i-tab>
+            <i-tab key="待发货" title="待发货"></i-tab>
+            <i-tab key="待收货" title="待收货"></i-tab>
+            <i-tab key="已完成" title="已完成"></i-tab>
+            <i-tab key="售后接入" title="售后接入"></i-tab>
+        </i-tabs>
     </view>
     <view slot="content" class="slot-content">
         <block wx:for="{{totalList}}" wx:for-item="listItem">

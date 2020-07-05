@@ -9,7 +9,7 @@ Page({
     totalList: [],
     defaultPageSize: app.getPageSize(),
     searchText: '',
-    selectStatus: '待发货', //状态
+    selectStatus: '全部', //状态
     selectType: '全部', //状态
     comboboxTypeList: [{
         NAME: '全部'
@@ -17,9 +17,9 @@ Page({
       {
         NAME: '商品'
       },
-      {
-        NAME: '代练'
-      }
+      // {
+      //   NAME: '代练'
+      // }
     ]
   },
 
@@ -104,6 +104,15 @@ Page({
     var that = this;
     that.setData({
       searchText: detail
+    })
+    that.lmFramework.dealPageNoSize('enter');
+  },
+  changeCurrentSegment: function ({
+    detail
+  }) {
+    var that = this;
+    that.setData({
+      selectStatus: detail.key
     })
     that.lmFramework.dealPageNoSize('enter');
   },
