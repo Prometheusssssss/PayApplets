@@ -25,7 +25,10 @@
                                 <text class='item-product-name order-time'>{{item.ORDER_TIME}}</text>
                             </view>
                            <view>
-                                <text class='item-product-name orange'>{{item.STATUS}}</text>
+                                 <!-- 待发货 待收货=》橘色 已完成=》绿色 交易关闭=》灰色 -->
+                                <text class='item-product-name orange' wx:if="{{item.STATUS == '待收货' || item.STATUS == '待发货'}}">{{item.STATUS}}</text>
+                                <text class='item-product-name green' wx:if="{{item.STATUS == '已完成'  || item.STATUS == '售后接入'}}">{{item.STATUS}}</text>
+                                <text class='item-product-name gray' wx:if="{{item.STATUS == '交易关闭'}}">{{item.STATUS}}</text>
                            </view>
                             
                         </view>
@@ -39,9 +42,11 @@
                                 <!-- </view> -->
                             </view>
                             <view class="buttons-view">
-                                <button class="outline-rectangle">客服介入</button>
-                                <button class="outline-rectangle button-orange" wx:if="{{item.STATUS == '待收货'}}">提醒发货</button>
-                                <button class="outline-rectangle button-orange"  wx:if="{{item.STATUS == '待发货'}}">确认收货</button>
+                                <contact-button type="default-light"   size="20" session-from="weapp">
+                                </contact-button>
+                                <button class="outline-rectangle" open-type="contact" data-item="{{item}}" bindcontact="handleContact">客服介入</button>
+                                <button class="outline-rectangle button-orange" wx:if="{{item.STATUS == '待发货'}}" bindtap="remindShip">提醒发货</button>
+                                <button class="outline-rectangle button-orange"  wx:if="{{item.STATUS == '待收货'}}" bindtap="confirmReceipt">确认收货</button>
                             </view>
                             
                         </view>

@@ -1,11 +1,10 @@
 {
   "pages":[
+    "pages/customerOrder/customerOrder",
     "pages/user/user",
     "pages/mySold/mySold",
     "pages/myPublish/myPublish",
     "pages/publish/publish",
-    
-    "pages/customerOrder/customerOrder",
     "pages/myBought/myBought",
     "pages/publish/publish-edit",
     "pages/msgs/msgs",

@@ -151,7 +151,6 @@ Page({
     console.log(JSON.stringify(p))
     app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
       if (dataList != 'error') {
-        debugger
          that.lmFramework.dealWithList(type, dataList, pageSize);
       }
     })

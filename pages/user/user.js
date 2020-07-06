@@ -38,4 +38,9 @@ Page({
       url: '../myBought/myBought',
     })
   },
+  goCustomerPage: function(){
+    wx.navigateTo({
+      url: '../customerOrder/customerOrder',
+    })
+  },
 })

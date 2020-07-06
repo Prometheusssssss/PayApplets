@@ -1,1 +1,5 @@
 @import "../public-css/order.wxss";
+.item-product-info{
+  height: 20vh !important;
+
+}

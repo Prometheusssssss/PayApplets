@@ -21,7 +21,7 @@ Page({
   getMsgData: function () {
     var that = this;
     var p = {
-      "USER_ID": "1"
+      "USER_ID": "1"//过滤userid
     }
     var url = `/api/_search/defaultSearch/b_message?filter=${JSON.stringify(p)}`;
     app.ManageExecuteApi(url, '', {}, 'GET').then((result) => {

@@ -2,6 +2,12 @@
 .orange{
   color:var(--text-orange)
 }
+.green{
+  color:var(--text-green)
+}
+.gray{
+  color:var(--text-gray)
+}
 .search-top{
   border-bottom: 36rpx solid #eeeeee;
 }

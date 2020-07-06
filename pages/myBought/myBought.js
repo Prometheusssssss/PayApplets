@@ -135,4 +135,35 @@ Page({
     })
     that.lmFramework.dealPageNoSize('enter');
   },
+  //客服接入可能要接入客服消息
+  handleContact (e) {
+    console.log(e.detail.path)
+    console.log(e.detail.query)
+  },
+  //确认收货 更改订单状态为已完成
+  confirmReceipt: function(e){
+    var that = this;
+    var order = e.target.dataset.item;
+    var p = {
+      KID: order.KID,
+      STATUS: '待已完成',
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_order', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        //更新订单
+        wx.showToast({
+          title: '发货成功',
+          icon: 'none',
+          duration: 1500
+        })
+        that.lmFramework.dealPageNoSize('enter');
+      }
+    })
+  },
+  //提醒收货 给买家消息表插入消息，或者给公众号发消息
+  remindShip: function(e){
+    var that = this;
+    var order = e.target.dataset.item;
+    
+  },
 })

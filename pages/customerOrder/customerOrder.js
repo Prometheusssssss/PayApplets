@@ -9,18 +9,14 @@ Page({
     totalList: [],
     defaultPageSize: app.getPageSize(),
     searchText: '',
-    selectStatus: '全部', //状态
+    selectStatus: '', //状态
     selectType: '全部', //状态
     comboboxTypeList: [{
         NAME: '全部'
       },
       {
         NAME: '商品'
-      },
-      // {
-      //   NAME: '代练'
-      // }
-    ]
+      }],
   },
 
   /**
@@ -48,10 +44,26 @@ Page({
     var that = this;
     var data = that.data;
     var filter = [];
-    var type = data.selectType;
-    if (type == '全部') {
+    var selectType = data.selectType;
+    if (selectType == '全部') {
       filter = [{
-          "fieldName": "NAME",
+          "fieldName": "PRODUCT_NAME",
+          "type": "string",
+          "compared": "like",
+          "filterValue": data.searchText
+        },
+        {
+          "fieldName": "BUY_USER_PHONE",
+          "type": "string",
+          "compared": "like",
+          "filterValue": data.searchText
+        },{
+          "fieldName": "SELL_USER_PHONE",
+          "type": "string",
+          "compared": "like",
+          "filterValue": data.searchText
+        },{
+          "fieldName": "CODE",
           "type": "string",
           "compared": "like",
           "filterValue": data.searchText
@@ -61,15 +73,37 @@ Page({
           "type": "date",
           "compared": "=",
           "filterValue": data.selectStatus
-        }
+        },
+        { //买家id
+          "fieldName": "BUY_USER_ID",
+          "type": "date",
+          "compared": "=",
+          "filterValue": 1
+        },
       ];
     } else {
       filter = [{
-          "fieldName": "NAME",
-          "type": "string",
-          "compared": "like",
-          "filterValue": data.searchText
-        },
+        "fieldName": "PRODUCT_NAME",
+        "type": "string",
+        "compared": "like",
+        "filterValue": data.searchText
+      },
+      {
+        "fieldName": "BUY_USER_PHONE",
+        "type": "string",
+        "compared": "like",
+        "filterValue": data.searchText
+      },{
+        "fieldName": "SELL_USER_PHONE",
+        "type": "string",
+        "compared": "like",
+        "filterValue": data.searchText
+      },{
+        "fieldName": "CODE",
+        "type": "string",
+        "compared": "like",
+        "filterValue": data.searchText
+      },
         {
           "fieldName": "STATUS",
           "type": "date",
@@ -80,8 +114,14 @@ Page({
           "fieldName": "TYPE",
           "type": "date",
           "compared": "=",
-          "filterValue": type
-        }
+          "filterValue": selectType
+        },
+        { //买家id
+          "fieldName": "BUY_USER_ID",
+          "type": "date",
+          "compared": "=",
+          "filterValue": 1
+        },
       ]
     }
     var p = {
