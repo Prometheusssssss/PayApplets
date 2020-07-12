@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "sj-confirm": "/assets/my-components/mask-confirm/index"
+    }
+}

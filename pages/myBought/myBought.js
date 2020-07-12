@@ -146,7 +146,7 @@ Page({
     var order = e.target.dataset.item;
     var p = {
       KID: order.KID,
-      STATUS: '待已完成',
+      STATUS: '已完成',
     }
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_order', '', p, 'POST').then((result) => {
       if (result != 'error') {

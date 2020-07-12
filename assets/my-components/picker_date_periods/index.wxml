@@ -1,0 +1,33 @@
+<view bindtap="openDateViewPicker" class="date-show">
+    <view>
+        <text>{{date1}}</text>
+        <text>{{date2}}</text>
+    </view>
+    <i class="icon icon-down"> </i>
+
+
+</view>
+
+
+<sj-confirm visible="{{showDateDetail}}" addLineHeight="286" title="选择时间段" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmEvent">
+    <view slot='content' class="content">
+        <view class="date">
+            <text bindtap='changeDateStart' class="startDate {{status == 'S'?'select':''}}">{{syear}}-{{smonth}}-{{sday}}</text>
+            <text class="to">至</text>
+            <text bindtap='changeDateEnd' class="endDate {{status == 'E'?'select':''}}">{{eyear}}-{{emonth}}-{{eday}}</text>
+        </view>
+
+        <picker-view indicator-class='picker-line' value="{{value}}" bindchange="bindChange">
+            <picker-view-column>
+                <view wx:for="{{years}}" class="picker-view-item">{{item}}年</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{months}}" class="picker-view-item">{{item}}月</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{days}}" class="picker-view-item">{{item}}日</view>
+            </picker-view-column>
+        </picker-view>
+    </view>
+</sj-confirm>

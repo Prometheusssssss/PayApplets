@@ -12,13 +12,14 @@
             <i-tab key="待发货" title="待发货"></i-tab>
             <i-tab key="待收货" title="待收货"></i-tab>
             <i-tab key="已完成" title="已完成"></i-tab>
-            <i-tab key="售后接入" title="售后接入"></i-tab>
+            <!-- <i-tab key="售后接入" title="售后接入"></i-tab> -->
+            <i-tab key="交易关闭" title="交易关闭"></i-tab>
         </i-tabs>
     </view>
      <view slot="content" class="slot-content">
         <block wx:for="{{totalList}}" wx:for-item="listItem">
             <block wx:for="{{listItem}}"  wx:for-item="item">
-                <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}">
+                <view class='my-product-item'  data-item="{{item}}"  bindtap="goCustomerOrderDetailPage">
                     <view class='item-product-info'>
                         <view class="item-product-name-title">
                             <view>

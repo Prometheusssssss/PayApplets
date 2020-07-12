@@ -1,0 +1,32 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<lm-framework sliderBar="false" contentBg="var(--page-bg)" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}">
+  <view slot="top" class="search-top">
+    <view>
+      <sj-date-view-picker bindconfirm="searchDateViewPickerChange"></sj-date-view-picker>
+      <view><text class="total-amount">合计: {{convert.toMoney(totalList[currentNo-1][0].DETAIL[0].ALL_ORDERS_TOTALAMOUNT)}}</text>
+      </view>
+    </view>
+  </view>
+  <view slot="content">
+    <block wx:for="{{totalList}}" wx:for-item="listItem">
+      <block wx:for="{{listItem}}" wx:key="listItem.productName" wx:for-item="item">
+        <view class="extract-cash-info">
+            <view class="extract-detail">
+              <view >
+                <text>提现</text>
+                <text class="status {{item.STATUS =='待审核'?'orange':''}} {{item.STATUS =='已打款'?'green':''}} {{item.STATUS =='已打回'?'gray':''}}">{{item.STATUS}}</text>
+              </view>
+              <view class="extract-time">
+                {{item.APPLICATION_TIME}}
+              </view>
+            </view>
+            <view class="extract-price">
+              {{convert.toMoney(item.APPLICATION_AMOUNT)}}
+            </view>
+        </view>
+      </block>
+    </block>
+   
+  </view>
+</lm-framework>

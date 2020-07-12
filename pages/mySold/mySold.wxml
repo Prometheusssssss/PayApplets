@@ -44,7 +44,7 @@
                             <view class="buttons-view">
                                 <contact-button type="default-light"   size="20" session-from="weapp">
                                 </contact-button>
-                                <button class="outline-rectangle" open-type="contact" data-item="{{item}}" bindcontact="handleContact">客服介入</button>
+                                <button class="outline-rectangle" open-type="contact" data-item="{{item}}" bindcontact="handleContact">联系客服</button>
                                 <button class="outline-rectangle button-orange" data-item="{{item}}"  wx:if="{{item.STATUS == '待发货'}}" bindtap="ship">发货</button>
                                 <button class="outline-rectangle button-orange" data-item="{{item}}" wx:if="{{item.STATUS == '待收货'}}" bindtap="remindReceipt">提醒收货</button>
                             </view>

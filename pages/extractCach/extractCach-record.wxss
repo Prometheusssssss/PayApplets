@@ -1,0 +1,69 @@
+/* pages/extractCach/extractCach-record.wxss */
+.orange{
+  color:var(--text-orange)
+}
+.green{
+  color:var(--text-green)
+}
+.gray{
+  color:var(--text-gray)
+}
+.search-top {
+  display: flex;
+  flex-direction: column;
+  height: 130rpx;
+  padding-top: 20rpx;
+}
+
+.search-top > view {
+  display: flex;
+  margin: 20rpx 0;
+  padding: 0 24rpx;
+}
+
+.search-top > view > view {
+  flex: 1;
+  display: flex;
+}
+
+.search-top > view > view text {
+  flex: 1;
+}
+
+.total-amount {
+  font-size: 26rpx;
+  color: var(--text-gray);
+  letter-spacing: 0.88rpx;
+  line-height: 80rpx;
+  text-align: right;
+  padding-left: 50rpx;
+}
+.extract-cash-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background: white;
+  border-bottom: 2rpx solid var(--page-bg);
+}
+
+.extract-detail>view:first-child{
+  margin-bottom: 12rpx;
+}
+.extract-detail>view:first-child text{
+  font-size: 28rpx;
+  /* color: var(--text-black); */
+}
+.extract-time{
+  font-size: 26rpx;
+  color: var(--text-gray);
+}
+.extract-price{
+  font-size: 38rpx ;
+  color: var(--text-black);
+}
+.extract-detail >view:first-child .status{
+  margin-left: 20rpx;
+  font-size: 26rpx;
+}

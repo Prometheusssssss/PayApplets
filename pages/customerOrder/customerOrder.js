@@ -163,4 +163,11 @@ Page({
     })
     that.lmFramework.dealPageNoSize('enter');
   },
+  goCustomerOrderDetailPage: function(e){
+    var that = this;
+    var orderItem = e.currentTarget.dataset.item;
+    wx.navigateTo({
+      url: `customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`,
+    })
+  },
 })

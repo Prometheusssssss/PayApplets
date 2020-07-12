@@ -43,4 +43,14 @@ Page({
       url: '../customerOrder/customerOrder',
     })
   },
+  goImmediateWithdrawalPage:function(){
+    wx.navigateTo({
+      url: '../extractCach/extractCach-apply',
+    })
+  },
+  extractCashRecord:function(){
+    wx.navigateTo({
+      url: '../extractCach/extractCach-record',
+    })
+  },
 })

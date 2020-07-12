@@ -1,0 +1,95 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<lm-framework sliderBar="false" contentBg="white">
+    <view slot="content">
+      <view class="customer-detail">
+        <view class="customer-header">
+          <view class="customer-status">
+            <i class="icon  icon-check1  {{orderItem.STATUS == '待发货'? 'icon-blue' : 'icon-black'}}"></i>
+            <view class="text">已付款</view>
+          </view>
+          <view class="customer-status">
+            <i class="icon  icon-check1  {{orderItem.STATUS == '待收货'? 'icon-blue' : 'icon-black'}}"></i>
+            <view class="text">已发货</view>
+          </view>
+          <view class="customer-status">
+            <i class="icon  icon-check1   {{orderItem.STATUS == '已完成'? 'icon-blue' : 'icon-black'}}"></i>
+            <!-- 已完成 -->
+            <view class="text">交易成功</view>
+          </view>
+          <view class="customer-status">
+            <i class="icon  icon-check1   {{orderItem.STATUS == '交易关闭'? 'icon-blue' : 'icon-black '}}"></i>
+            <view class="text">交易关闭</view>
+          </view>
+          
+        </view>
+        <view  class='my-product-item'>
+          <image class='item-product-image {{(orderItem.PHOTO_URL==""||orderItem.PHOTO_URL==null||orderItem.PHOTO_URL=="1")?"no-image":""}}'
+          mode='aspectFit' src='{{(orderItem.PHOTO_URL==""||orderItem.PHOTO_URL==null)?"":orderItem.PHOTO_URL+"/200x200"}}'>
+          </image>
+          <view class='item-product-info'>
+              <view class="item-product-name-area">
+                  <text class='item-product-name'>{{orderItem.PRODUCT_NAME}}</text>
+                  <!-- <text class='item-product-name'>{{orderItem.TYPE}}</text> -->
+              </view>
+              <view class="item-product-price-info">
+                  <view class='item-product-detail'>
+                      <text>付款金额：</text><text class='item-product-price'>{{convert.toMoney(orderItem.PRICE)}}</text>
+                  </view>
+              </view>
+          </view>
+        </view>
+        <view class="customer-bought-info">
+          <view class="bought-title">
+              <text>买家信息</text>
+          </view>
+          <view class="bought-detail">
+              <text>买家信息：</text>
+              <text class="buyUserName">{{orderItem.BUY_USER_NAME}}</text>
+              <text>{{orderItem.BUY_USER_PHONE}}</text>
+          </view>
+          <!-- <view class="bought-detail">
+              <text>卖家信息：</text><text>{{orderItem.SELL_USER_NAME}}</text><text>{{orderItem.SELL_USER_PHONE}}</text>
+          </view> -->
+          <!-- <view class="bought-detail">
+              <text>相关信息：</text><text>lily</text><text>15736879887</text>
+          </view> -->
+          <view class="bought-detail">
+              <text>备注：</text><text>{{orderItem.REMARK}}</text>
+          </view>
+        </view>
+        <view class="customer-bought-info">
+          <view class="bought-title">
+              <text>订单信息</text>
+          </view>
+          <view class="bought-detail">
+              <text>订单编号：</text>
+              <text class="buyUserName">{{orderItem.CODE}}</text>
+              <text class="copy" bindtap="copyBtn">复制</text>
+          </view>
+          <view class="bought-detail">
+              <text>卖家信息：</text><text class="buyUserName">{{orderItem.SELL_USER_NAME}}</text><text>{{orderItem.SELL_USER_PHONE}}</text>
+          </view>
+          <view class="bought-detail" wx:if="{{orderItem.ORDER_TIME != null}}">
+              <text>下单时间：</text><text>{{orderItem.ORDER_TIME}}</text>
+          </view>
+          <view class="bought-detail" wx:if="{{orderItem.CONFIRMED_TIME != null}}">
+              <text>确认收货时间：</text><text>{{orderItem.CONFIRMED_TIME}}</text>
+          </view>
+          <!-- TRAN_CLOSE_TIME -->
+          <view class="bought-detail" wx:if="{{orderItem.TRAN_CLOSE_TIME != null}}">
+              <text>交易关闭时间：</text><text>{{orderItem.TRAN_CLOSE_TIME}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view slot="bottom" class="bottom" wx:if="{{orderItem.STATUS != '交易关闭'}}">
+      <button  class="bottom-rect main-bgcolor" bindtap="closeOrder">交易关闭</button>
+      <!-- <button formType="submit" class="bottom-rect main-bgcolor">处 理</button> -->
+    </view>
+</lm-framework>
+<sj-confirm visible="{{showConfirmOff}}" addLineHeight="0" title="确认交易关闭" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmOff">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认交易关闭吗？</text>
+    </view>
+</sj-confirm>
