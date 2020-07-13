@@ -1,1 +1,40 @@
 /* pages/extractCach/extractCach-apply.wxss */
+
+@import "/pages/public-css/picker-with-title.wxss";
+@import "/assets/my-components/button/index.wxss";
+
+sj-framework {
+  height: 100%;
+}
+page{
+  background-color: white;
+}
+.top{
+  /* border-bottom: 2rpx solid var(--main-style) !important; */
+  border:none !important;
+}
+text{
+  color: var(--text-black);
+  font-size: 28rpx;
+}
+.title-info{
+  display: flex;
+  flex-direction: column;
+  padding-left: 50rpx;
+  height: 14vh;
+  background-color: var(--main-style);
+  padding-top: 40rpx;
+  
+}
+.title-info>view:first-child{
+  margin-bottom: 10rpx;
+}
+.title-info>view:first-child text{
+  font-size: 28rpx;
+  color: white;
+ 
+}
+.title-info>view:last-child text{
+  font-size: 40rpx;
+  color: white;
+}

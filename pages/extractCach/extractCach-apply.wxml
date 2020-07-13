@@ -1,2 +1,36 @@
-<!--pages/extractCach/extractCach-apply.wxml-->
-<text>pages/extractCach/extractCach-apply.wxml</text>
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<form bindsubmit="saveGuestValue">
+  <lm-framework sliderBar="false" contentBg="white">
+    <!-- <view slot="top" class="top-info"></view> -->
+    <view slot="content">
+        <view class="title-info">
+            <view><text>账户余额</text></view>
+            <view><text>{{convert.toMoney(accountAmount)}}</text></view>
+        </view>
+        <view class="apply-info">
+            <i-input name="APPLY_PRICE" value="{{applyInfo.APPLY_PRICE}}" title="提现金额" right placeholder="请输入提现金额" />
+           <view class="picker-content">
+              <view class="picker-title">收款方式：</view>
+              <picker class="picker-text" bindchange="bindPayMent" value="{{paymentIndex}}"
+                range="{{payMentList}}" range-key="NAME">
+                <view class="picker">
+                  {{payMentList[paymentIndex].NAME}}
+                  <i class="icon icon-right icon-main-color"></i>
+                </view>
+              </picker>
+            </view>
+            <i-input name="APPLY_ACCOUNT" value="{{applyInfo.APPLY_ACCOUNT}}" title="提现账户" right placeholder="请输入提现账户" />
+        </view>
+        <view class="remark">
+          <view><text>温馨提示：</text></view>
+          <view><text>1、提现金额必须大于50元</text></view>
+          <view><text>2、请确保以上信息填写无误</text></view>
+        </view>
+        <view>
+          
+        </view>
+    </view>
+  </lm-framework>
+</form>
+  
+

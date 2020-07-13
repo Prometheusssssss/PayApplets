@@ -28,7 +28,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.3",
-	"appid": "wx8d679b4970bda4df",
+	"appid": "wx05139f8f621618bd",
 	"projectname": "payApplets",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -69,8 +69,8 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/extractCach/extractCach-record",
-					"pathName": "pages/extractCach/extractCach-record",
+					"name": "提现申请",
+					"pathName": "pages/extractCach/extractCach-apply",
 					"query": "",
 					"scene": null
 				}

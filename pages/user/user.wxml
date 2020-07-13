@@ -26,7 +26,7 @@
     </view>
 </view>
 <view class="user-last-wallet">
-    <view class="last-price">可用资金：0.00</view>
+    <view class="last-price" bindtap="extractCashRecord">可用资金：0.00</view>
     <view bindtap="goImmediateWithdrawalPage" class="immediate-withdrawal">立即提现</view>
 </view>
 
@@ -67,13 +67,13 @@
       </view>
       <i class="icon icon-arrow-right"></i>
     </view>
-    <view class="menu-item" bindtap="extractCashRecord">
+    <!-- <view class="menu-item" bindtap="extractCashRecord">
       <view>
         <i class="icon  icon-tixian  icon-green menu-image"></i>
         <text>提现记录</text>
       </view>
       <i class="icon icon-arrow-right"></i>
-    </view>
+    </view> -->
     <view class="menu-item" bindtap="viewAddress">
       <view>
         <i class="icon  icon-contact  icon-green menu-image"></i>

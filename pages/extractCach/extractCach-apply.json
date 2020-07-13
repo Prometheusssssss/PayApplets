@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText":"提现申请",
+  "usingComponents": {
+    "lm-framework": "../../assets/my-components/framework/index",
+    "i-input": "../../../assets/iview-weapp/input/index",
+    "sj-button": "../../../assets/my-components/button/index"
+  }
 }

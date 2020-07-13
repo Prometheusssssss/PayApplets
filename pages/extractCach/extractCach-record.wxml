@@ -4,7 +4,7 @@
   <view slot="top" class="search-top">
     <view>
       <sj-date-view-picker bindconfirm="searchDateViewPickerChange"></sj-date-view-picker>
-      <view><text class="total-amount">合计: {{convert.toMoney(totalList[currentNo-1][0].DETAIL[0].ALL_ORDERS_TOTALAMOUNT)}}</text>
+      <view><text class="total-amount">合计: {{convert.toMoney(totalAmount)}}</text>
       </view>
     </view>
   </view>

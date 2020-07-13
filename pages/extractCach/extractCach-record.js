@@ -1,5 +1,6 @@
 // pages/extractCach/extractCach-record.js
 const app = getApp()
+const { common } = global;
 Page({
 
   /**
@@ -10,6 +11,7 @@ Page({
     defaultPageSize: app.getPageSize(),
     startTime: '',
     endTime: '',
+    totalAmount:0
   },
 
   /**
@@ -30,6 +32,14 @@ Page({
   callBackPageSetData: function (e) {
     var that = this;
     console.log(e.detail.returnSetObj.totalList[0])
+    var data = e.detail.returnSetObj.totalList[0];
+    var totalAmount = 0;
+    data.forEach(item=>{
+      if(item.APPLICATION_AMOUNT == null)
+        item.APPLICATION_AMOUNT = 0
+      totalAmount =  common.mathEquation.add(totalAmount,item.APPLICATION_AMOUNT);
+    })
+    that.setData({totalAmount:totalAmount})
     that.setData(e.detail.returnSetObj)
   },
 

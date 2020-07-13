@@ -50,7 +50,7 @@
             <!-- <i-input name="DESCRIPTION" value="{{publishInfo.DESCRIPTION}}"  title="商品详情" right
         placeholder="请输入商品详情" /> -->
             <!-- <view slot="top" class="can-edit-main-detail"> -->
-             <view class="picker-content can-edit-main-detail">
+            <view class="picker-content can-edit-main-detail">
                 <view class="picker-title">商品详情：</view>
                 <view class="picker-detail" bindtap="remarkEvent">
                     <view class="picker">
@@ -58,7 +58,7 @@
                       <i class="icon icon-right icon-main-color"></i>
                     </view>
                 </view>
-              </view>
+            </view>
             <!-- <i-input name="FAX" value="{{publishInfo.FAX}}" title="详情图片" right placeholder="请输入传真" /> -->
             <view class="upload-view">
               <view class="picker-title">详情图：</view>
