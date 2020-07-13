@@ -38,3 +38,27 @@ text{
   font-size: 40rpx;
   color: white;
 }
+.remark{
+  margin :24rpx 0 0 40rpx
+}
+.remark text{
+  font-size: 22rpx;
+  color: var(--text-gray);
+}
+.bottom-content{
+  margin-top: 80rpx;
+}
+.bottom-rect{
+  width: 600rpx !important;
+  min-width: 600rpx !important;
+  height: 90rpx;
+  border-radius: 10rpx;
+}
+/* .i-input,.picker-content {
+  margin-left: 0 !important;
+  padding-left: 40rpx;
+}
+.i-input{
+  margin-left: 0 !important;
+  padding-left: 40rpx;
+} */

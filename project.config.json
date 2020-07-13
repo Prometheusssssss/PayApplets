@@ -6,7 +6,7 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
-		"enhance": true,
+		"enhance": false,
 		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": true,
@@ -18,16 +18,18 @@
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
 		},
+		"useIsolateContext": true,
 		"useCompilerModule": true,
-		"userConfirmedUseCompilerModuleSwitch": false
+		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.11.3",
+	"libVersion": "2.11.2",
 	"appid": "wx05139f8f621618bd",
 	"projectname": "payApplets",
 	"debugOptions": {
@@ -72,6 +74,12 @@
 					"name": "提现申请",
 					"pathName": "pages/extractCach/extractCach-apply",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现记录",
+					"pathName": "pages/extractCach/extractCach-record",
 					"scene": null
 				}
 			]

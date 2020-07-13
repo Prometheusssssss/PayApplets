@@ -1,5 +1,5 @@
 <wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
-<form bindsubmit="saveGuestValue">
+<form bindsubmit="saveExtactValue">
   <lm-framework sliderBar="false" contentBg="white">
     <!-- <view slot="top" class="top-info"></view> -->
     <view slot="content">
@@ -8,7 +8,7 @@
             <view><text>{{convert.toMoney(accountAmount)}}</text></view>
         </view>
         <view class="apply-info">
-            <i-input name="APPLY_PRICE" value="{{applyInfo.APPLY_PRICE}}" title="提现金额" right placeholder="请输入提现金额" />
+          <i-input name="APPLY_PRICE" class="i-input-margin" value="{{applyInfo.APPLY_PRICE}}" title="提现金额" right placeholder="请输入提现金额" />
            <view class="picker-content">
               <view class="picker-title">收款方式：</view>
               <picker class="picker-text" bindchange="bindPayMent" value="{{paymentIndex}}"
@@ -26,8 +26,8 @@
           <view><text>1、提现金额必须大于50元</text></view>
           <view><text>2、请确保以上信息填写无误</text></view>
         </view>
-        <view>
-          
+        <view class="bottom-content">
+            <button  formType="submit" class="bottom-rect long blue" >确认提交</button>
         </view>
     </view>
   </lm-framework>

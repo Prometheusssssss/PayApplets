@@ -33,7 +33,8 @@ App({
   },
 
   getUser: function () {
-    var user = this.globalData.userInfo;
+    // var user = this.globalData.userInfo;
+    var user = {id:1,name:'测试',tel:'15635678989'};
     return user;
   },
 

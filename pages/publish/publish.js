@@ -62,7 +62,7 @@ Page({
       });
       //获取对应的index
       var item = publishInfo.publishInfo;
-      debugger
+      // debugger
       var uploaderList = item.PHOTO_URL.split(',');
       var uploaderDetailList = item.DESC_PHOTO.split(',');
       

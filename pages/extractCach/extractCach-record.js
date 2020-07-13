@@ -62,8 +62,8 @@ Page({
     { //卖家id
       "fieldName": "APPLICATION_TIME",
       "type": "date",
-      "compared": "<=",
-      "filterValue": that.data.endTime
+      "compared": "<",
+      "filterValue": that.data.endTime+1
     },
   ]
     var p = {
