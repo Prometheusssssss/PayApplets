@@ -1,2 +1,122 @@
-<!--pages/extractCach/extractCach-detail.wxml-->
-<text>pages/extractCach/extractCach-detail.wxml</text>
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<lm-framework sliderBar="false" contentBg="white">
+    <view slot="content">
+      <view class="customer-detail">
+        <view class="customer-bought-info">
+          <view class="bought-detail">
+              <text>用户：</text>
+              <text class="buyUserName">{{extractInfo.USER_NAME}}</text>
+              <text>{{extractInfo.USER_PHONE}}</text>
+          </view>
+          <view class="bought-detail">
+              <text>申请时间：</text><text>{{extractInfo.APPLICATION_TIME}}</text>
+          </view>
+          <view class="bought-detail">
+              <text>账户余额：</text><text>{{convert.toMoney(extractInfo.APPLICATION_AMOUNT)}}</text>
+          </view>
+          <view class="bought-detail">
+              <text>提现金额：</text><text>{{convert.toMoney(extractInfo.APPLICATION_AMOUNT)}}</text>
+          </view>
+          <view class="bought-detail">
+              <text>付款金额：</text><text>{{convert.toMoney(extractInfo.PAY_AMOUNT)}}</text>
+          </view>
+        </view>
+        <view class="customer-bought-info">
+          <view class="bought-detail">
+              <text>付款方式：</text>
+              <text class="buyUserName">{{extractInfo.PAY_MODE}}</text>
+          </view>
+          <view class="bought-detail">
+              <text>提现账户：</text><text>{{extractInfo.ACCOUNT}}</text>
+          </view>
+          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已审核' || extractInfo.STATUS == '已打款'}}">
+              <text>审核人：</text><text>{{extractInfo.APPROVAL_USER_NAME}}</text>
+          </view>
+          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已审核' || extractInfo.STATUS == '已打款'}}">
+              <text>审核时间：</text><text>{{extractInfo.APPROVAL_TIME}}</text>
+          </view>
+          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已打款'}}">
+              <text>付款人：</text><text>{{extractInfo.CONFIRMED_TIME}}</text>
+          </view>
+          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已打款'}}">
+              <text>付款时间：</text><text>{{extractInfo.PAY_TIME}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view slot="bottom" class="bottom" wx:if="{{extractInfo.STATUS != '已打回' && extractInfo.STATUS != '已打款'}}">
+      <view wx:if="{{extractInfo.STATUS != '待审核'}}"></view>
+      <button  class="bottom-rect gray" bindtap="refuseApply"  wx:if="{{extractInfo.STATUS == '待审核'}}">打回</button>
+      <button bindtap="checkApply" class="bottom-rect main-bgcolor" wx:if="{{extractInfo.STATUS == '待审核'}}">审 核</button>
+      <button bindtap="payApply" wx:if="{{extractInfo.STATUS == '已审核'}}" class="bottom-rect main-bgcolor" >打 款</button>
+    </view>
+</lm-framework>
+<sj-confirm visible="{{showConfirmOff}}" addLineHeight="0" title="确认打回" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmOff">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认打回吗？</text>
+    </view>
+</sj-confirm>
+
+<sj-mask-layer visible="{{showConfirmPay}}" addLineHeight="{{280}}" bindClose="cancel" hasButtonArea="{{false}}" hasTitleArea="{{false}}" isUpMask="{{true}}">
+    <view class="content-detail" slot="content">
+        <view class="product-name">
+            <text class="value">{{extractInfo.USER_NAME}}</text>
+        </view>
+        <view class="product-unit">
+            <text class="title">提现金额</text>
+            <text class="value">{{finalApplyAmount}}</text>
+        </view>
+        <view class="input-num-mask-layer">
+            <view class="line">
+                <view bindtap="setPrice" data-input-text="7" class="sm-keyboard sm-keyboard-7">
+                    7
+                </view>
+                <view bindtap="setPrice" data-input-text="8" class="sm-keyboard sm-keyboard-8">
+                    8
+                </view>
+                <view bindtap="setPrice" data-input-text="9" class="sm-keyboard sm-keyboard-9">
+                    9
+                </view>
+                <view bindtap="deletePrice" class="sm-keyboard-delete">
+                    <image src="/assets/img/small-keyboard/delete.png" mode="aspectFit" />
+                </view>
+            </view>
+            <view class="line">
+                <view bindtap="setPrice" data-input-text="4" class="sm-keyboard sm-keyboard-4">
+                    4
+                </view>
+                <view bindtap="setPrice" data-input-text="5" class="sm-keyboard sm-keyboard-5">
+                    5
+                </view>
+                <view bindtap="setPrice" data-input-text="6" class="sm-keyboard sm-keyboard-6">
+                    6
+                </view>
+                <view bindtap="clearPrice" class="sm-keyboard-clear">
+                    <image src="/assets/img/small-keyboard/clear.png" mode="aspectFit" />
+                </view>
+            </view>
+            <view class="line">
+                <view bindtap="setPrice" data-input-text="1" class="sm-keyboard sm-keyboard-1">
+                    1
+                </view>
+                <view bindtap="setPrice" data-input-text="2" class="sm-keyboard sm-keyboard-2">
+                    2
+                </view>
+                <view bindtap="setPrice" data-input-text="3" class="sm-keyboard sm-keyboard-3">
+                    3
+                </view>
+                <view bindtap="setPrice" data-input-text="" class="sm-keyboard sm-keyboard-white"></view>
+            </view>
+            <view class="line save-line">
+                <view bindtap="setPrice" data-input-text="0" class="sm-keyboard sm-keyboard-0 zero">
+                    0
+                </view>
+                <view bindtap="setPrice" data-input-text="." class="sm-keyboard sm-keyboard-d">
+                    .
+                </view>
+                <view bindtap="commitPrice" class="sm-keyboard-save">保存</view>
+            </view>
+        </view>
+    </view>
+</sj-mask-layer>

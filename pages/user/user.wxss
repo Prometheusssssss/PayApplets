@@ -38,7 +38,7 @@
   font-size: 26rpx;
 }
 .user-info .invalidate-user .icon{
-  font-size: 48rpx;
+  font-size: 42rpx;
 }
 
 
@@ -227,4 +227,11 @@
 
 .menu-list .menu-item i {
   font-size: 50rpx;
+}
+
+.menu-item .contact-server{
+  width: 100%;
+  height: 8.6vh;
+  background: transparent;
+  position: absolute;
 }

@@ -94,11 +94,12 @@ Page({
     var that = this;
     that.setData(e.detail.returnSetObj)
   },
-  //订单页面方法开始
+  //订单处理 只有客服可以看到 不用限制状态
   loadMainList: function (e) {
     var { pageNo, pageSize, type } = e.detail;
     var that = this;
     var data = that.data;
+    // var id = app.getUser().id    
     var p = {
         "tableName":"b_product_list",
         "page": pageNo,
@@ -122,12 +123,12 @@ Page({
               "compared":"=",
               "filterValue": data.serverList[data.serverIndex].KID
             },
-            {//卖家id
-              "fieldName":"SELL_USER_ID",
-              "type":"date",
-              "compared":"=",
-              "filterValue": 1
-            },
+            // {//卖家id
+            //   "fieldName":"SELL_USER_ID",
+            //   "type":"date",
+            //   "compared":"=",
+            //   "filterValue": 1
+            // },
         ]
     }
     console.log('查询报错')

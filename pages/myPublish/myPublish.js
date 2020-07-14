@@ -99,6 +99,8 @@ Page({
     var { pageNo, pageSize, type } = e.detail;
     var that = this;
     var data = that.data;
+    var id = app.getUser().id    
+    //我发布的 是作为卖家存在
     if(data.selectStatus == '全部'){
       var p = {
         "tableName":"b_product_list",
@@ -115,7 +117,7 @@ Page({
               "fieldName":"SELL_USER_ID",
               "type":"date",
               "compared":"=",
-              "filterValue": 1
+              "filterValue": id
             },
         ]
       }
@@ -142,7 +144,7 @@ Page({
               "fieldName":"SELL_USER_ID",
               "type":"date",
               "compared":"=",
-              "filterValue": 1
+              "filterValue": id
             },
         ]
       }

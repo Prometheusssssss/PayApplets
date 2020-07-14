@@ -49,6 +49,8 @@ Page({
     var data = that.data;
     var filter = [];
     var selectType = data.selectType;
+    var id = app.getUser().id
+    //我买的 是作为买家存在
     if (selectType == '全部') {
       filter = [{
           "fieldName": "NAME",
@@ -66,7 +68,7 @@ Page({
           "fieldName": "BUY_USER_ID",
           "type": "date",
           "compared": "=",
-          "filterValue": 1
+          "filterValue": id
         },
       ];
     } else {
@@ -92,7 +94,7 @@ Page({
           "fieldName": "BUY_USER_ID",
           "type": "date",
           "compared": "=",
-          "filterValue": 1
+          "filterValue": id
         },
       ]
     }

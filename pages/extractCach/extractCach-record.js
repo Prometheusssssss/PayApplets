@@ -52,7 +52,14 @@ Page({
     var that = this;
     var data = that.data;
     var filter = [];
+    var id = app.getUser().id;
    var filter = [
+    { //卖家id
+      "fieldName": "USER_ID",
+      "type": "date",
+      "compared": "=",
+      "filterValue": id
+    },
     { //卖家id
       "fieldName": "APPLICATION_TIME",
       "type": "date",

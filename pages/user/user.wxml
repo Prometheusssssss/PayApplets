@@ -60,7 +60,7 @@
       </view>
       <i class="icon icon-arrow-right"></i>
     </view>
-    <view class="menu-item" bindtap="viewBill">
+    <view class="menu-item" bindtap="extractCachCheck">
       <view>
         <i class="icon  icon-tixian  icon-green menu-image"></i>
         <text>提现核对</text>
@@ -79,9 +79,12 @@
         <i class="icon  icon-contact  icon-green menu-image"></i>
         <text>联系客服</text>
       </view>
-      <i class="icon icon-arrow-right"></i>
+      <contact-button type="default-light"   size="20" session-from="weapp">
+      </contact-button>
+      <button class="contact-server" open-type="contact" bindcontact="handleContact"></button>
+      <i class="icon icon-arrow-right" ></i>
     </view>
-    <view class="menu-item" bindtap="callHelp">
+    <view class="menu-item" bindtap="editRemark">
       <view>
         <i class="icon  icon-feedback  icon-green menu-image"></i>
         <text>意见反馈</text>

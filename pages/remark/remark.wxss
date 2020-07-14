@@ -1,0 +1,34 @@
+/* pages/remark/remark.wxss */
+textarea {
+  width: calc(100% - 40rpx);
+  margin-top: 24rpx;
+  padding: 32rpx 20rpx;
+  height: 300rpx;
+  background: white;
+}
+
+.bottom-content {
+  position: absolute;
+  top: 440rpx;
+  left: 40rpx;
+}
+
+.bottom-rect{
+  min-width: 672rpx  !important; 
+  border-radius: 8rpx;
+  background-color: var(--main-style);
+  color: white;
+}
+.remark-content{
+  position: absolute;
+  top: 550rpx;
+  margin: 0 30rpx;
+  color: var(--text-black);
+  background-color: white;
+  padding: 0 16rpx;
+  height: 34vh;
+
+}
+.company-name{
+  font-size: 26rpx;
+}

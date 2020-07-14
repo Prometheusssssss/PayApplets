@@ -15,7 +15,7 @@
             <view class="extract-detail">
               <view >
                 <text>提现</text>
-                <text class="status {{item.STATUS =='审核中'?'orange':''}} {{item.STATUS =='已打款'?'green':''}} {{item.STATUS =='已打回'?'gray':''}}">{{item.STATUS}}</text>
+                <text class="status {{item.STATUS =='待审核'?'orange':''}} {{item.STATUS =='已打款'?'green':''}} {{item.STATUS =='已打回'?'gray':''}}">{{item.STATUS}}</text>
               </view>
               <view class="extract-time">
                 {{item.APPLICATION_TIME}}

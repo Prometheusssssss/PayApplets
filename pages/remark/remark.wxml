@@ -1,0 +1,12 @@
+<view>
+    <textarea bindinput="bindChangeTextArea" value="{{value}}"
+        placeholder="请输入意见" auto-focus="true" />
+</view>
+<view class="bottom-content">
+        <button  class="bottom-rect long " bindtap="getRemark">保存</button>
+</view>
+<view class="remark-content"><text>
+       [新笑傲江湖大嘴巴]秉着无偿提供游戏攻略研究，作为公益性公众号，所有攻略都是无偿传播和使用，纯属大嘴巴自己贴钱（几个模拟器价格不菲，大嘴巴能力有限，只能外包）及精力运作
+
+        在这里非常感谢所有支持大嘴巴的粉丝和攻略作者，是你们让大嘴巴的内容越来越丰富和实用。大嘴巴一直致力于内容模块的不断更新和对原创攻略作者版权的保护。
+</text></view>
