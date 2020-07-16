@@ -135,7 +135,7 @@ Page({
         that.setData({
           uploaderNum: that.data.uploaderList.length
         })
-        debugger
+        // debugger
         if (uploaderList.length == 6) {
           that.setData({
             showUpload:false

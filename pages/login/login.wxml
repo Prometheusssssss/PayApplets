@@ -1,11 +1,9 @@
 <view wx:if="{{!isHide}}">
-    <view wx:if="{{canIUse}}">
+    <view >
 
       <view class='headView'>
 
         <view class='headImageView'>
-
-    <!--       <image class='headImage' src='/pages/imageSource/IMG_3456.png' mode='scaleToFill'></image> -->
             <open-data type="userAvatarUrl" class="headImage"></open-data>
         </view>
 
@@ -13,11 +11,11 @@
 
         <view class='contentText'>获得你的公开信息(昵称,头像,手机等)</view>
 
-        <button class='authBtn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信授权快捷登录</button>
-
+        <button class='authBtn' wx:if="{{!hasUserInfo && hasUserInfo}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信授权快捷登录</button>
+         <button  open-type="getUserInfo" wx:if="{{hasUserInfo}}" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
       </view>
 
     </view>
 
-    <view wx:else>请升级微信版本</view>
+    <!-- <view wx:else>请升级微信版本</view> -->
 </view>

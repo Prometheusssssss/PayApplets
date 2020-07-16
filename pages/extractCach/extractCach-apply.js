@@ -85,7 +85,7 @@ Page({
         APPLICATION_TIME: time,//申请时间
         APPLICATION_AMOUNT: form.APPLY_PRICE,//申请金额
         PAY_MODE: data.payMentList[data.paymentIndex].NAME,//收款方式
-        ACCOUNT: form.APPLY_ACCOUNT
+        ACCOUNT: form.APPLY_ACCOUNT ,//申请账户
       }
       console.log('发布')
       console.log(JSON.stringify(p))

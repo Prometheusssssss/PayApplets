@@ -12,13 +12,13 @@
               <text>申请时间：</text><text>{{extractInfo.APPLICATION_TIME}}</text>
           </view>
           <view class="bought-detail">
-              <text>账户余额：</text><text>{{convert.toMoney(extractInfo.APPLICATION_AMOUNT)}}</text>
+              <text>账户余额：</text><text class="bought-detail-amount {{extractInfo.APPLICATION_AMOUNT > accountBalance?'text-red':'' }}">{{convert.toMoney(accountBalance)}}</text>
           </view>
           <view class="bought-detail">
-              <text>提现金额：</text><text>{{convert.toMoney(extractInfo.APPLICATION_AMOUNT)}}</text>
+              <text>提现金额：</text><text  class="bought-detail-amount {{extractInfo.APPLICATION_AMOUNT > accountBalance?'text-red':'' }}">{{convert.toMoney(extractInfo.APPLICATION_AMOUNT)}}</text>
           </view>
           <view class="bought-detail">
-              <text>付款金额：</text><text>{{convert.toMoney(extractInfo.PAY_AMOUNT)}}</text>
+              <text>付款金额：</text><text  class="bought-detail-amount">{{convert.toMoney(extractInfo.PAY_AMOUNT)}}</text>
           </view>
         </view>
         <view class="customer-bought-info">
@@ -36,7 +36,7 @@
               <text>审核时间：</text><text>{{extractInfo.APPROVAL_TIME}}</text>
           </view>
           <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已打款'}}">
-              <text>付款人：</text><text>{{extractInfo.CONFIRMED_TIME}}</text>
+              <text>付款人：</text><text>{{extractInfo.PAY_USER_NAME}}</text>
           </view>
           <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已打款'}}">
               <text>付款时间：</text><text>{{extractInfo.PAY_TIME}}</text>
@@ -55,6 +55,13 @@
     catchConfirmEvent="confirmOff">
     <view slot='content' class="delete-confirm-content">
         <text>确认打回吗？</text>
+    </view>
+</sj-confirm>
+
+<sj-confirm visible="{{showConfirmServerPay}}" addLineHeight="0" title="确认打款" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmServerPay">
+    <view slot='content' class="delete-confirm-content">
+        <text>打款金额大于用户的账户余额，确认打款吗？</text>
     </view>
 </sj-confirm>
 

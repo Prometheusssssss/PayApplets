@@ -128,3 +128,10 @@ padding-bottom: 10rpx;
 .bought-detail .copy{
   text-decoration: underline ;
 }
+
+.customer-bought-info .bought-detail .bought-detail-amount{
+  font-size: 28rpx;
+}
+.customer-bought-info .bought-detail .text-red{
+  color: var(--text-red);
+}

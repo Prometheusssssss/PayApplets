@@ -1,5 +1,8 @@
 global.base64 = require('/pages/public-js/base64Encode.js')
 global.common = require('/pages/public-js/common.js')
+//1、提现详情里付款结束后没有扣除用户的账户余额
+//2、提现详情里要实时查一下用户的账户余额
+//3、登录页面
 App({
   onLaunch: function () {
     
