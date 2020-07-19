@@ -9,9 +9,10 @@
         <i-tabs current="{{ selectStatus }}" bindchange="changeCurrentSegment">
         <!-- 待发货、待收货、已完成、售后接入中 -->
             <i-tab key="" title="全部"></i-tab>
+            <i-tab key="待收货" title="待收货"></i-tab>
             <i-tab key="待发货" title="待发货"></i-tab>
             <i-tab key="已完成" title="已完成"></i-tab>
-            <i-tab key="售后接入" title="售后接入"></i-tab>
+            <i-tab key="交易关闭" title="交易关闭"></i-tab>
         </i-tabs>
     </view>
     <view slot="content" class="slot-content">

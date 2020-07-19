@@ -112,14 +112,14 @@ Page({
     if (common.validators.isInValidNum(finalApplyAmount, '价格') ) {
       return;
     }
-    // if(finalApplyAmount>= originApplyAmount){
-    //   wx.showToast({
-    //     title: '打款金额不能高于提现金额',
-    //     icon:'none',
-    //     duration:1000
-    //   })
-    //   return
-    // }
+    if(finalApplyAmount>= originApplyAmount){
+      wx.showToast({
+        title: '打款金额不能高于提现金额',
+        icon:'none',
+        duration:1000
+      })
+      return
+    }
 
 
     //提现金额大于账户余额 确认是否打款，确认打款后更新账户余额

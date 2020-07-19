@@ -1,10 +1,12 @@
 {
   "pages":[
+    "pages/order/order",
+    "pages/home/home",
+    "pages/publish/publish",
+    "pages/publish/publish-edit",
     "pages/login/login",
     "pages/user/user",
     "pages/remark/remark",
-    "pages/order/order",
-    "pages/publish/publish",
     "pages/extractCach/extractCach-record",
     "pages/extractCach/extractCach-apply",
     "pages/extractCach/extractCach-check",
@@ -14,7 +16,6 @@
     "pages/customerOrder/customerOrder-detail",
     "pages/myPublish/myPublish",
     "pages/myBought/myBought",
-    "pages/publish/publish-edit",
     "pages/msgs/msgs",
     "pages/order/order-slider",
     "pages/order/order-detail",
@@ -31,7 +32,7 @@
       {
         "selectedIconPath": "assets/img/tabs-focus/home-focus.png",
         "iconPath": "assets/img/tabs-unfocus/home.png",
-        "pagePath": "pages/test/test",
+        "pagePath": "pages/home/home",
         "text": "首页"
       },
       {
