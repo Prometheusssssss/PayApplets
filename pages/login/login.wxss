@@ -1,4 +1,65 @@
 /**index.wxss**/
+@import "/assets/my-components/mask-confirm/index.wxss";
+page{
+  position: relative;
+}
+.bottom{
+  position: absolute;
+  bottom: 50rpx;
+  left: 22vw
+}
+image{
+  width: 48rpx;
+  height: 48rpx;
+  position: relative;
+  left: 128rpx;
+  z-index: 1;
+  top: 88rpx;
+}
+.user-info-image{
+  /* position: relative;
+  left: 128rpx;
+  z-index: 1;
+  top: 85rpx; */
+}
+.phone-image{
+  left: 96rpx;
+}
+.blue{color: var(--main-style);}
+.header,.bottom{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.framework .content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 20vh;
+  margin-top: 220rpx;
+}
+.header{
+  justify-content: space-start;
+  height: 14vh;
+}
+.header .line{
+  width: 150rpx;
+  border-bottom: 2rpx solid var(--line-gray);
+}
+/* .header .line:first-child{
+  margin-right: 16rpx;
+}
+.header .line:last-child{
+  margin-left: 16rpx;
+} */
+.header text{
+  color: var(--text-black);
+  font-size: 30rpx;
+}
+
+
 .headView {
   margin: 90rpx 50rpx 90rpx 50rpx;
 }
@@ -9,7 +70,7 @@
   height: 100rpx;
   }
   
-  .headImage{
+.headImage{
     display: flex;
     width: 100rpx;
     height: 100rpx;
@@ -35,4 +96,32 @@
     color: white;
     font-weight: 500;
     background-color: var(--button-main-style);
+    min-width: 520rpx;
+    border-radius: 40rpx;
+
+}
+.authBtn:last-child{
+  margin-top: 20rpx;
+}
+.mask-layer-content>.main-content>.content{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+.mask-layer-content>.main-content>.content text{
+  font-size: 26rpx;
+}
+.confirm-btn:first-child{
+  border-right: 2rpx solid var(--line-gray);
+}
+.confirm-btn{
+  height: 100rpx;
+  padding: 26rpx 24rpx;
+  border-radius: 0;
+  font-size: 30rpx;
+  font-weight: normal;
+}
+.confirm-btn:last-child{
+  color: var(--main-style);
 }

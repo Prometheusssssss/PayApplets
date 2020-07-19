@@ -7,103 +7,161 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hasPhoneNumber: wx.canIUse('button.open-type.getPhoneNumber'),
-    hasUserInfo: wx.canIUse('button.open-type.getUserInfo'),
-    isHide:false,
+    canPhoneNumberUse: wx.canIUse('button.open-type.getPhoneNumber'),//当前api在此版在中是否可用
+    canUserInfoUse: wx.canIUse('button.open-type.getUserInfo'),
+    hasPhoneNumber:false,
+    hasUserInfo: false,
+    isLogin: true,
     userInfo:{},
+    showConfirmAuthorization:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function(options) {
-        var that = this;
-        //查看是否授权 是否授权过昵称 授权过手机号
-      // debugger
-      // if(hasUserInfo){
-      //   await that.getExistUserInfo()
-      // }else{
-        
-      // }
+      var that = this;
+      // wx.checkSession({success:res=>{
+      //   debugger
+      // },fail:erro=>{
+      //   debugger
+      // }})
+      //查看是否授权 是否授权过昵称 授权过手机号
+      await that.isAuthoraization()
+     
+      that.isCodeHasUser();
+     
        
-       that.isCodeHasUser();
     
   },
-  getExistUserInfo:async function(){
-    wx.getUserInfo({
-      success: res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+  //后边可用再加一个授权是否过期校验
+  isAuthoraization:async function(){
+    var that = this;
+      wx.getSetting({
+        success: res=> {
+        if (res.authSetting['scope.userInfo']) {
+          // debugger
+        // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: res=> {
+              console.log(res)
+              var userInfo = {
+                name: res.userInfo.nickName,
+                url: res.userInfo.avatarUrl
+              }
+              that.setData({
+                userInfo:userInfo,
+                hasUserInfo: true
+              })
+            }
+          })
+        }else{
+          that.setData({
+            hasUserInfo: false
+          })
+        }
       }
     })
   },
   isCodeHasUser: async function () {
     var that = this;
-    var code = await new Promise(r => {
-      wx.login({
-        timeout: 2000,
-        success(newRes) {
-          if (newRes.code) {
-            r(newRes.code)
-          } else {
-            r('')
-          }
-        }, fail() { r('') },
-      })
-    })
-    console.log('jscode')
+    var code = await app.getJsCode();
     console.log(code)
-    // if (code != '') {
-    //   var auth = base64.encode(code);
-    //   // 把jscode传给后台查给有没有openid对应的手机号 可以把token缓存起来
-    //要考虑一下是不是每次授权微信手机号登录的都去新建一条用户 还是用原来旧的匹配
-    //   var userInfo= await app.ManageExecuteApi(`/api/security/validusername/kyljscode`, auth, {}, "GET").then((companyList) => {
-    //   if(userInfo != 'erro'){//存入user  跳转页面
-    //     that.setData({
-    //       isHide : true
-    //     })
-    //   }else{
-    //     //重新授权登录
-    //     that.setData({
-    //       isHide : false
-    //     })
-    //   }
-      
-
-    //   })
-    // } else {
-    //   setTimeout(() => {
-    //     wx.login({
-    //       timeout: 2000,
-    //       success(newRes) {
-    //         if (newRes.code) {
-    //           r(newRes.code)
-    //         } else {
-    //           r('')
-    //         }
-    //       }, fail() { r('') },
-    //     })
-    //   }, 400)
-    // }
+    if (code != '') {
+      //是否可以自动登录 可以返回给我用户的手机id昵称头像url,不可以跳到用户授权页面，授权注册或者更新
+      var p = {
+        "jsCode": code
+      }
+      await app.ManageExecuteApi(`/api/_login/doAutoLogin`, '', p, "POST").then((userInfo) => {
+        if(userInfo != 'error'){//存入user  跳转页面
+          var data = userInfo[0];
+          var info = {
+            id: data.KID,
+            code: data.CODE,
+            name: data.NAME,
+            url: data.IMG_URL,
+            isManager: data.IS_SA,
+            tel: data.PHONE,
+          };
+          app.setUser(info)
+          wx.switchTab({
+            url: '../publish/publish',
+          })
+          that.setData({
+            isLogin : true
+          })
+        }else{
+          //重新授权登录
+          that.setData({
+            isLogin : false
+          })
+        }
+      })
+    } else {
+      setTimeout(() => {
+        wx.login({
+          timeout: 2000,
+          success(newRes) {
+            if (newRes.code) {
+              r(newRes.code)
+            } else {
+              r('')
+            }
+          }, fail() { r('') },
+        })
+      }, 400)
+    }
   },
     //第一次授权
-  getPhoneNumber: function(res) {
-      // debugger;
-      if (res.detail.encryptedData) {
+  getPhoneNumber:async function(res) {
+      var that = this;
+      if (res.detail.errMsg == 'getPhoneNumber:ok') {
         //用户按了允许授权按钮
-        var that = this;
         // 获取到用户的信息了，打印到控制台上看下
         console.log("用户的手机号如下：");
-        console.log(e.detail.encryptedData);
-        //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
+        console.log(res);
+        
+        var data = res.detail;
+        var encryptedData = data.encryptedData;
+        var iv = data.iv;
+        var code = await app.getJsCode()
+        //授权成功后,通过改变 isLogin 的值，让实现页面显示出来，把授权页面隐藏起来
         //授权成功后加加密信息和jscode传给后台，后台换回手机号 并且可以注册用户信息（存手机号，用户openid），调用成功后返回用户手机号、userId，userName
         //进入tab页面 
-        that.setData({
-          isHide: true
-        });
-  
+          var p = {
+            "jsCode": code,
+            "encryptedData": encryptedData,
+            "iv": iv,
+            "name": that.data.userInfo.name,
+            "url": that.data.userInfo.url
+          }
+          await app.ManageExecuteApi(`/api/_login/doLogin`, '', p, "POST").then((userInfo) => {
+            if(userInfo != 'error'){//存入user  跳转页面
+              var data = userInfo[0];
+              var info = {
+                id: data.KID,
+                code: data.CODE,
+                name: data.NAME,
+                url: data.IMG_URL,
+                isManager: data.IS_SA,
+                tel: data.PHONE,
+              };
+              app.setUser(info)
+              wx.switchTab({
+                url: '../publish/publish',
+              })
+              that.setData({
+                isLogin : true,
+                hasPhoneNumber:true
+              })
+            }else{
+              //重新授权登录
+              that.setData({
+                isLogin : false,
+                hasPhoneNumber:false
+              })
+            }
+          })
       } else {
   
         //用户按了拒绝按钮
@@ -113,7 +171,7 @@ Page({
           showCancel: false,
           confirmText: '返回授权',
           success: function(res) {
-            // 用户没有授权成功，不需要改变 isHide 的值
+            // 用户没有授权成功，不需要改变 isLogin 的值
             if (res.confirm) {
               console.log('用户点击了“返回授权”');
             }
@@ -121,21 +179,21 @@ Page({
         });
       }
    },
+  //授权同意之后 弹出确认弹框 提示用手机来注册或者登录小程序
   getUserInfo:function(res){
-    if (res.detail.encryptedData) {
+    if (res.detail.errMsg == 'getUserInfo:ok') {
         //用户按了允许授权按钮
         var that = this;
-        // 获取到用户的信息了，打印到控制台上看下
-        console.log("用户的手机号如下：");
-        console.log(e.detail.encryptedData);
-        //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
-        //授权成功后加加密信息和jscode传给后台，后台换回手机号 并且可以注册用户信息（存手机号，用户openid），调用成功后返回用户手机号、userId，userName
-        //进入tab页面 
-  //       that.setData({
-  //         hasUserInfo:true,
-  //         userInfo:e.detail.encryptedData
-  //       })
-    
+        var data = JSON.parse(res.detail.rawData);
+        var userInfo = {
+            name: data.nickName,
+            url: data.avatarUrl
+        }
+        that.setData({
+          userInfo:userInfo,
+          hasUserInfo: true,
+          showConfirmAuthorization:true
+        })
       } else {
   
         //用户按了拒绝按钮
@@ -145,13 +203,21 @@ Page({
           showCancel: false,
           confirmText: '返回授权',
           success: function(res) {
-            // 用户没有授权成功，不需要改变 isHide 的值
+            // 用户没有授权成功，不需要改变 isLogin 的值
             if (res.confirm) {
               console.log('用户点击了“返回授权”');
             }
           }
         });
       }
+  },
+  cancel:function(){
+    var that  = this;
+    that.setData({showConfirmAuthorization:false})
+  },
+  closeMask:function(){
+    var that  = this;
+    that.setData({showConfirmAuthorization:false})
   }
     
 })

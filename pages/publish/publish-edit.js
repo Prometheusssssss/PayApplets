@@ -388,6 +388,7 @@ Page({
     var p = {
       // KID: -1,
       NAME:form.NAME,//商品名称
+      NEED_LEVEL:form.NEED_LEVEL,
       DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
       // STATUS:'上架中',//状态
       // TYPE:'商品',//商品

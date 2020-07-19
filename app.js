@@ -30,14 +30,27 @@ App({
   setHostUrl: function (hostUrl) {
     this.globalData.hostUrl = this.globalData.manageUrl + '/' + hostUrl;
   },
+  getJsCode: async function () {
+    return await new Promise(re => {
+      wx.login({
+        success(res) {
+          if (res.code) {
+            var code = res.code;
+            re(code);
+          }
+        }
+      })
+    })
+  },
   setUser: function (user) {
     var that = this;
-    this.globalData.userInfo = user;
+    that.globalData.userInfo = user;
   },
 
   getUser: function () {
-    // var user = this.globalData.userInfo;
-    var user = {id:1,name:'测试',tel:'15635678989'};
+    var that = this;
+    var user = that.globalData.userInfo;
+    // var user = {id:1,name:'测试',tel:'15635678989'};
     return user;
   },
 
