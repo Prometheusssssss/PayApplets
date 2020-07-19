@@ -44,7 +44,7 @@
                 </view>
               </view>
           </view>
-          <i-input name="RETRIEVAL" value="{{publishInfo.RETRIEVAL}}" title="等级要求" right placeholder="请输入等级要求" />
+          <i-input name="NEED_LEVEL" value="{{publishInfo.NEED_LEVEL}}" title="等级要求" right placeholder="请输入等级要求" />
         </view>
         <view class="product-detail">
             <!-- <i-input name="DESCRIPTION" value="{{publishInfo.DESCRIPTION}}"  title="商品详情" right

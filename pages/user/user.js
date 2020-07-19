@@ -106,4 +106,21 @@ Page({
       url: '../remark/remark',
     })
   },
+  //注销
+  loginOut:function(){
+    var that = this;
+    var kid = app.getUser().id;
+    var p = {
+      KID: kid,
+      OPEN_ID: '',
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/a_user', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        //更新订单
+        wx.reLaunch({
+          url: '../login/login?hasUserInfo=1'
+        })
+      }
+    })
+  }
 })

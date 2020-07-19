@@ -1,21 +1,57 @@
-<view wx:if="{{!isHide}}">
-    <view >
+<!-- <view wx:if="{{!isLogin}}">
+    <view wx:if="canPhoneNumberUse&&canUserInfoUse">
 
-      <view class='headView'>
+        <view class='headView'>
+            <view class='headImageView'>
+                <open-data type="userAvatarUrl" class="headImage"></open-data>
+            </view>
 
-        <view class='headImageView'>
-            <open-data type="userAvatarUrl" class="headImage"></open-data>
-        </view>
+            <view class='titleText'>申请获取以下权限</view>
 
-        <view class='titleText'>申请获取以下权限</view>
+            <view class='contentText'>获得你的公开信息(昵称,头像等)</view>
 
-        <view class='contentText'>获得你的公开信息(昵称,头像,手机等)</view>
-
-        <button class='authBtn' wx:if="{{!hasUserInfo && hasUserInfo}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信授权快捷登录</button>
-         <button  open-type="getUserInfo" wx:if="{{hasUserInfo}}" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      </view>
-
+            <button class='authBtn' wx:if="{{hasUserInfo && !hasPhoneNumber}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
+            <button  open-type="getUserInfo" wx:if="{{!hasUserInfo}}" bindgetuserinfo="getUserInfo"> 微信登录 </button>
+        </view>
     </view>
 
-    <!-- <view wx:else>请升级微信版本</view> -->
+    <view wx:else>请升级微信版本</view>
+</view> -->
+
+<view  wx:if="{{!isLogin}}" class="framework">
+    <view class="header">
+        <view class="line"></view>
+        <view><text>推荐登录方式</text></view>
+        <view class="line"></view>
+    </view>
+    <view class="content">
+        <view  wx:if="{{hasUserInfo && !hasPhoneNumber}}">
+            <image  mode='aspectFit' src="/assets/img/wechat.png" class="phone-image"></image>
+            <button class='authBtn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
+        </view>
+        <view wx:if="{{!hasUserInfo}}">
+            <image  mode='aspectFit' src="/assets/img/wechat.png" class="user-info-image"></image>
+            <button class='authBtn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo"> 微信登录 </button>
+        </view>
+        
+    </view>
+    <view class="bottom">
+        <text>登录即代表您同意<text class="blue">《大嘴巴交易平台协议》</text></text>
+    </view>
+</view>
+<view class="mask-layer {{showConfirmAuthorization == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>确认</text>
+      </view>
+      <view class="content">
+        <text>使用手机号登录/注册大嘴巴交易平台</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancel" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="closeMask">确认</button>
+      </view>
+    </view>
+  </view>
 </view>

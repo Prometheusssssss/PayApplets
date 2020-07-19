@@ -388,12 +388,13 @@ Page({
     var offTime = common.time.formatTimeTwo(newtimestamp/1000,'Y-M-D h:m:s');
     var p = {
       NAME:form.NAME,//商品名称
+      NEED_LEVEL:form.NEED_LEVEL,
       DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
       STATUS:'上架中',//状态
       TYPE:'商品',//商品
-      SELL_USER_ID:1,//卖家id
-      SELL_USER_NAME:'耗子',//卖家昵称
-      SELL_USER_PHONE:'15736879889',//卖家手机号
+      SELL_USER_ID: app.getUser().id,//卖家id
+      SELL_USER_NAME: app.getUser().name,//卖家昵称
+      SELL_USER_PHONE: app.getUser().tel,//卖家手机号
       PRICE: form.PRICE,//价格
       PHOTO_URL: mainImgUrl,//主图
       DESC_PHOTO: detailImgUrl,//详情图
