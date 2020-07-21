@@ -388,7 +388,7 @@ Page({
     var offTime = common.time.formatTimeTwo(newtimestamp/1000,'Y-M-D h:m:s');
     var p = {
       NAME:form.NAME,//商品名称
-      NEED_LEVEL:form.NEED_LEVEL,
+      NEED_LEVEL:form.NEED_LEVEL==null? '' : form.NEED_LEVEL,
       DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
       STATUS:'上架中',//状态
       TYPE:'商品',//商品

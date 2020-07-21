@@ -137,6 +137,8 @@ const utf8Eecode = (string) => {
 
 module.exports = {
   encode: base64Encode,
+  utf8Encode: utf8Eecode,
+  utf8Decode: utf8Decode,
   decode: base64Decode,
 }
 

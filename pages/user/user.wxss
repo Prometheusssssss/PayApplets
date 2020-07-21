@@ -235,3 +235,9 @@
   background: transparent;
   position: absolute;
 }
+.user-name{
+  font-size: 30rpx;
+}
+.user-tel{
+  font-size: 26rpx;
+}

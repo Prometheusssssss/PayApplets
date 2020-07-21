@@ -14,7 +14,8 @@ Page({
     showConfirmPay: false,
     finalApplyAmount:0,
     accountBalance:0,
-    showConfirmServerPay:false
+    showConfirmServerPay:false,
+    lastTime:0
   },
 
   /**
@@ -32,7 +33,17 @@ Page({
   },
   onShow: function () {
     var that = this;
-    // that.loadDetail()
+    that.loadUserInfo()
+  },
+  loadUserInfo:function(){
+    var that = this;
+    var p = {"KID": that.data.extractInfo.USER_ID}//提现人的账户余额
+    var url = `/api/_search/defaultSearch/a_user?filter=${JSON.stringify(p)}`;
+    app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
+      if (dataList != 'error') {
+        that.setData({accountBalance: dataList[0].BALANCE})
+      }
+    })
   },
   //打回
   refuseApply:function(){
@@ -53,10 +64,31 @@ Page({
           icon: 'none',
           duration: 1500
         })
+        that.returnBackMsg()
         that.setData({
           ['extractInfo.STATUS']:'已打回',
           showConfirmOff:false
         })
+      }
+    })
+  },
+  returnBackMsg:function(){
+    var that = this;
+    var item = that.data.extractInfo;
+    //先插入消息表吧  给买家发消息 
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    var p = {
+      THEME:'提现打回提醒',
+      USER_ID: that.data.extractInfo.USER_ID,
+      USER_NAME: that.data.extractInfo.USER_NAME,
+      USER_PHONE: that.data.extractInfo.USER_PHONE,
+      CONTENT: '提现打回',//商品名称
+      STATUS: "已发送",
+      SEND_TIME: time
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
+      if (result != 'error') {
+    
       }
     })
   },
@@ -108,7 +140,8 @@ Page({
     var finalApplyAmount = Number(that.data.finalApplyAmount);
     var originApplyAmount = that.data.extractInfo.APPLICATION_AMOUNT;
     var accountBalance = that.data.accountBalance
-    
+    var gapTime = 2000;
+    var lastTime = that.data.lastTime ;
     if (common.validators.isInValidNum(finalApplyAmount, '价格') ) {
       return;
     }
@@ -130,29 +163,50 @@ Page({
         })
     }else {
       console.log('提现金额小于等于打款金额')
-      that.updatePayAmount()
+      // 防重复点击校验
+      let time = + new Date();
+      if (time - lastTime > gapTime || !lastTime) {
+        console.log('执行')
+        that.updatePayAmount()
+        that.setData({lastTime:time})
+      }
+      
     }
  
   },
   confirmServerPay:function(){
     var that = this;
     that.setData({showConfirmServerPay:false})
-    that.updatePayAmount()
+    var gapTime = 2000;
+    var lastTime = that.data.lastTime ;
+    // 防重复点击校验
+    let time = + new Date();
+    if (time - lastTime > gapTime || !lastTime) {
+      console.log('执行')
+      that.updatePayAmount()
+      that.setData({lastTime:time})
+    }
   },
   updatePayAmount:function(){
     var that = this;
     var finalApplyAmount = that.data.finalApplyAmount;
-    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    // var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     //提现金额大于账户余额 确认是否打款，确认打款后更新账户余额
+
+    //更新提现单 ，账户流水插入支付类型。可用资金减少，用打款金额扣除，可用资金可以为负数，发送提现消息给提现客户
     var p = {
       KID: that.data.extractInfo.KID,
+      ORDER_CODE:  that.data.extractInfo.CODE,
       PAY_USER_NAME: app.getUser().name,
-      PAY_USER_ID: app.getUser().id,
-      APPROVAL_TIME: time,
-      PAY_AMOUNT: finalApplyAmount,//打款金额
-      STATUS: '已打款',
+      PAY_USER_ID : app.getUser().id,
+      PAY_AMOUNT: finalApplyAmount,
+      ORDER_AMOUNT: that.data.extractInfo.APPLICATION_AMOUNT,
+      USER_ID: that.data.extractInfo.USER_ID,
+      USER_NAME: that.data.extractInfo.USER_NAME,
+      USER_PHONE: that.data.extractInfo.USER_PHONE,
     }
-    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_withdrawal', '', p, 'POST').then((result) => {
+    console.log(p)
+    app.ManageExecuteApi('/api/_cud/submitOrder', '', p, 'POST').then((result) => {
       if (result != 'error') {
         //成功之后插入账户流水为支出类型流水 调用流水表插入数据
         wx.showToast({
@@ -160,21 +214,40 @@ Page({
           icon: 'none',
           duration: 1500
         })
+        //可能需要返回一个付款时间
+        that.loadUserInfo()
         that.setData({
           ['extractInfo.STATUS']:'已打款',
-          ['extractInfo.PAY_AMOUNT']: finalApplyAmount,
-          ['extractInfo.PAY_USER_NAME']: app.getUser().name,//付款人
-          ['extractInfo.PAY_TIME']: time,//付款时间
+          ['extractInfo.PAY_AMOUNT']: result[0].PAY_AMOUNT,
+          ['extractInfo.PAY_USER_NAME']: result[0].PAY_USER_NAME,//付款人
+          ['extractInfo.PAY_TIME']: result[0].PAY_TIME,//付款时间
           showConfirmPay:false,
-
         })
-        that.createAccountRecord()
       }
     })
+    // app.ManageExecuteApi('/api/_cud/createAndUpdate/b_withdrawal', '', p, 'POST').then((result) => {
+    //   if (result != 'error') {
+    //     //成功之后插入账户流水为支出类型流水 调用流水表插入数据
+    //     wx.showToast({
+    //       title: '打款成功',
+    //       icon: 'none',
+    //       duration: 1500
+    //     })
+    //     that.setData({
+    //       ['extractInfo.STATUS']:'已打款',
+    //       ['extractInfo.PAY_AMOUNT']: finalApplyAmount,
+    //       ['extractInfo.PAY_USER_NAME']: app.getUser().name,//付款人
+    //       ['extractInfo.PAY_TIME']: time,//付款时间
+    //       showConfirmPay:false,
+    //     })
+    //     // that.createAccountRecord()
+    //   }
+    // })
   },
   createAccountRecord: function(){
     var that = this;
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    //提现审核完的流水 用户id应该是卖家的 还是客服还是买家的
     var p = {
       USER_ID: app.getUser().id,
       USER_NAME: app.getUser().name,
@@ -186,6 +259,7 @@ Page({
       SELETTMENT_AMOUNT: that.data.finalApplyAmount,
       ORDER_AMOUNT: that.data.extractInfo.APPLICATION_AMOUNT,
     }
+    
     console.log('生成账户流水参数')
     console.log(p)
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_account_record', '', p, 'POST').then((result) => {

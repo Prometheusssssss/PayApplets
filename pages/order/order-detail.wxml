@@ -10,7 +10,7 @@
             </swiper> -->
             <view class="image-info">
                  <view class="img-info">
-                     <image src="{{mainImg}}" mode="widthFix"></image>
+                     <image src="{{mainImg}}" mode="aspectFit"></image>
                 </view>
             </view>
            

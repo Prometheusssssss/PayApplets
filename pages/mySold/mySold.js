@@ -1,4 +1,7 @@
 const app = getApp()
+const {
+  common
+} = global;
 // pages/mySold/mySold.js
 Page({
 
@@ -103,7 +106,8 @@ Page({
       "tableName": "b_order",
       "page": pageNo,
       "limit": pageSize,
-      "filters": filter
+      "filters": filter,
+      "orderByField": "ORDER_TIME",
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))
@@ -160,14 +164,67 @@ Page({
           icon: 'none',
           duration: 1500
         })
+        // 给买家发消息
+        that.shipMsg(order)
         that.lmFramework.dealPageNoSize('enter');
       }
     })
   },
+  shipMsg:function(order){
+    var that = this;
+    var item = order;
+    // debugger
+    //先插入消息表吧  给买家发消息 
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    var p = {
+      THEME:'发货提醒',
+      USER_ID: item.BUY_USER_ID,
+      USER_NAME: item.BUY_USER_NAME,
+      USER_PHONE: item.BUY_USER_PHONE,
+      CONTENT: '您的宝贝卖家已发货',//商品名称
+      STATUS: "已发送",
+      SEND_TIME: time
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
+      if (result != 'error') {
+    
+      }
+    })
+
+  },
   //提醒收货 给买家消息表插入消息，或者给公众号发消息
   remindReceipt: function(e){
     var that = this;
-    var order = e.target.dataset.item;
+    var item = e.target.dataset.item;
+    // debugger
+    //先插入消息表吧  给买家发消息 
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    var p = {
+      THEME:'收货提醒',
+      USER_ID: item.BUY_USER_ID,
+      USER_NAME: item.BUY_USER_NAME,
+      USER_PHONE: item.BUY_USER_PHONE,
+      CONTENT: '请尽快确认收货',//商品名称
+      STATUS: "已发送",
+      SEND_TIME: time
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
+      if (result != 'error') {
+        wx.showToast({
+          title: '提醒成功',
+          icon:'none',
+          duration:1500
+        })
+      }
+    })
     
   },
+
+  goCustomerOrderDetailPage:function(e){
+    var that = this;
+    var orderItem = e.currentTarget.dataset.item;
+    wx.navigateTo({
+      url: `../customerOrder/customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`,
+    })
+  }
 })

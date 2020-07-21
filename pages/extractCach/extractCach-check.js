@@ -77,7 +77,8 @@ Page({
       "tableName": "b_withdrawal",
       "page": pageNo,
       "limit": pageSize,
-      "filters": filter
+      "filters": filter,
+      "orderByField":"APPLICATION_TIME"
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))

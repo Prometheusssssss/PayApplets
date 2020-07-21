@@ -6,22 +6,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    userInfo:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.loadUserInfo()
   },
-
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  
+  loadUserInfo:function(){
+    var that = this;
+    var p = {"KID": app.getUser().id}
+    var url = `/api/_search/defaultSearch/a_user?filter=${JSON.stringify(p)}`;
+    app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
+      if (dataList != 'error') {
+        that.setData({userInfo: dataList[0]})
+      }
+    })
   },
   //“我发布的”页面
   goMyPublishPage: function(){

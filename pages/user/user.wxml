@@ -5,9 +5,9 @@
    
     <!-- </view> -->
     <view class="title-info">
-        <open-data type="userNickName" class="user-name"></open-data>
-        <!-- <text class="user-name">{{hodInfo.NAME}}</text>
-        <text class="user-tel">{{hodInfo.TEL}}</text> -->
+        <!-- <open-data type="userNickName" class="user-name"></open-data> -->
+        <text class="user-name">{{userInfo.NAME}}</text>
+        <text class="user-tel">{{userInfo.PHONE}}</text>
     </view>
     <view bindtap="invalidateUser" class="invalidate-user">
         <i class="icon icon-right" bindtap='editUser' ></i>
@@ -15,18 +15,18 @@
 </view>
 <view class="menu">
     <view class="cashout">
-        <view class="price">{{convert.toMoney(hodInfo.A_SETTLEMANT_AMOUNT)}}</view>
+        <view class="price">{{convert.toMoney(userInfo.CUMULATIVE_INCOME)}}</view>
         <view class="title">累计收入</view>
         <!-- <view class="detail-msg">审核中：{{convert.toMoney(hodInfo.PENDING_AMOUNT)}}</view> -->
     </view>
     <view class="settlement">
-        <view class="price">{{convert.toMoney(hodInfo.P_CASHOUT_AMOUNT)}}</view>
+        <view class="price">{{convert.toMoney(userInfo.UPCOMING_INCOME)}}</view>
         <view class="title">即将收入</view>
         <!-- <view class="detail-msg">{{convert.toMoney(hodInfo.CASHOUT_AMOUNT)}}</view> -->
     </view>
 </view>
 <view class="user-last-wallet">
-    <view class="last-price" bindtap="extractCashRecord">可用资金：0.00</view>
+    <view class="last-price" bindtap="extractCashRecord">可用资金：{{convert.toMoney(userInfo.BALANCE)}}</view>
     <view bindtap="goImmediateWithdrawalPage" class="immediate-withdrawal">立即提现</view>
 </view>
 
@@ -91,6 +91,13 @@
       </view>
       <i class="icon icon-arrow-right"></i>
     </view>
+     <!-- <view class="menu-item" bindtap="loginOut">
+      <view>
+        <i class="icon  icon-login-out  icon-green menu-image"></i>
+        <text>{{userInfo.NAME}}</text>
+      </view>
+      <i class="icon icon-arrow-right"></i>
+    </view> -->
     <view class="menu-item" bindtap="loginOut">
       <view>
         <i class="icon  icon-login-out  icon-green menu-image"></i>

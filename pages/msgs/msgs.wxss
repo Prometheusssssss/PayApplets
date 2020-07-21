@@ -8,6 +8,7 @@
   /* margin: 5rpx 0; */
   padding: 20rpx 0;
   padding-top: 10rpx;
+  margin-top: 20rpx;
 }
 .my-product-item:first-child{
   margin-top: 20rpx;
@@ -15,7 +16,7 @@
 .my-product-item .send-time{
   font-size: 24rpx;
   color: white;
-  margin: 0 0 40rpx 0;
+  margin: 0 0 30rpx 0;
   background: var(--line-gray);
   height: 40rpx;
   line-height: 40rpx;

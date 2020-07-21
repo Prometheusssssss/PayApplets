@@ -1,15 +1,23 @@
-<block wx:for="{{msgList}}">
-    <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}">
-        <view class="send-time">
-            {{item.SEND_TIME}}
-        </view>
-        <view class='msg-info'>
-            <view class="msg-theme">
-                <text class='msg-name'>{{item.THEME}}</text>
+<lm-framework sliderBar="false" contentBg="var(--page-bg)" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"
+  lockScroll="{{showProductItemDetail}}">
+    <view slot="content" class='slot-content'>
+     <block wx:for="{{totalList}}" wx:for-item="listItem">
+        <block wx:for="{{listItem}}"  wx:for-item="item" wx:key="item">
+            <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}">
+                <view class="send-time">
+                    {{item.SEND_TIME}}
+                </view>
+                <view class='msg-info'>
+                    <view class="msg-theme">
+                        <text class='msg-name'>{{item.THEME}}</text>
+                    </view>
+                    <view class="msg-content">
+                        <text class='msg-name'>{{item.CONTENT}}</text>
+                    </view>
+                </view>
             </view>
-            <view class="msg-content">
-                <text class='msg-name'>{{item.CONTENT}}</text>
-            </view>
-        </view>
+        </block>
+    </block>
     </view>
-</block>
+</lm-framework>

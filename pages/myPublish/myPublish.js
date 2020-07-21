@@ -100,54 +100,48 @@ Page({
     var that = this;
     var data = that.data;
     var id = app.getUser().id    
+    var filter = [];
     //我发布的 是作为卖家存在
     if(data.selectStatus == '全部'){
-      var p = {
-        "tableName":"b_product_list",
-        "page": pageNo,
-        "limit": pageSize,
-        "filters":[
-            {
-              "fieldName":"NAME",
-              "type":"string",
-              "compared":"like",
-              "filterValue": data.searchText
-            },
-            {//卖家id
-              "fieldName":"SELL_USER_ID",
-              "type":"date",
-              "compared":"=",
-              "filterValue": id
-            },
-        ]
-      }
+      filter=[{
+          "fieldName":"NAME",
+          "type":"string",
+          "compared":"like",
+          "filterValue": data.searchText
+        },
+        {//卖家id
+          "fieldName":"SELL_USER_ID",
+          "type":"date",
+          "compared":"=",
+          "filterValue": id
+        }]
     }else{
       var status = data.selectStatus;
-      var p = {
-        "tableName":"b_product_list",
-        "page": pageNo,
-        "limit": pageSize,
-        "filters":[
-            {
-              "fieldName":"NAME",
-              "type":"string",
-              "compared":"like",
-              "filterValue": data.searchText
-            },
-            {
-              "fieldName":"STATUS",
-              "type":"date",
-              "compared":"=",
-              "filterValue": status
-            },
-            {//卖家id
-              "fieldName":"SELL_USER_ID",
-              "type":"date",
-              "compared":"=",
-              "filterValue": id
-            },
-        ]
-      }
+      filter=[{
+          "fieldName":"NAME",
+          "type":"string",
+          "compared":"like",
+          "filterValue": data.searchText
+        },
+        {
+          "fieldName":"STATUS",
+          "type":"date",
+          "compared":"=",
+          "filterValue": status
+        },
+        {//卖家id
+          "fieldName":"SELL_USER_ID",
+          "type":"date",
+          "compared":"=",
+          "filterValue": id
+        }]
+    }
+    var p = {
+      "tableName":"b_product_list",
+      "page": pageNo,
+      "limit": pageSize,
+      "filters": filter,
+      "orderByField":"SHELF_TIME",
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))

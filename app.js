@@ -147,4 +147,5 @@ App({
     var result = await that.reTryRequest(that.globalData.manageUrl+'/api/_oss/ossimg', 'POST', p, {});
     return result;
   },
+  
 })

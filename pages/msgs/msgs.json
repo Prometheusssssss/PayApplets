@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText":"消息",
-  "usingComponents": {}
+  "usingComponents": {
+    "lm-framework":"../../assets/my-components/framework/index"
+  }
 }

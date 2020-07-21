@@ -1,4 +1,7 @@
 const app = getApp()
+const {
+  common
+} = global;
 // pages/myBought/myBought.js
 Page({
 
@@ -102,7 +105,8 @@ Page({
       "tableName": "b_order",
       "page": pageNo,
       "limit": pageSize,
-      "filters": filter
+      "filters": filter,
+      "orderByField": "ORDER_TIME"
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))
@@ -146,26 +150,70 @@ Page({
   confirmReceipt: function(e){
     var that = this;
     var order = e.target.dataset.item;
+    // /api/_cud/confirmedOrder
     var p = {
       KID: order.KID,
-      STATUS: '已完成',
+      // STATUS: '已完成',
     }
-    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_order', '', p, 'POST').then((result) => {
+     //确认收货 发消息给卖家，主题交易完成提醒，买家已收货；；更新订单状态为已完成; 更新用户表，卖家累计受益和可用资金都会增加，即将收入减少
+    app.ManageExecuteApi('/api/_cud/confirmedOrder', '', p, 'POST').then((result) => {
       if (result != 'error') {
-        //更新订单
+        //成功之后插入账户流水为支出类型流水 调用流水表插入数据
         wx.showToast({
-          title: '发货成功',
+          title: '确认收货成功',
           icon: 'none',
           duration: 1500
         })
-        that.lmFramework.dealPageNoSize('enter');
+        that.lmFramework.dealPageNoSize('enter')
       }
     })
+
+   
+    // app.ManageExecuteApi('/api/_cud/createAndUpdate/b_order', '', p, 'POST').then((result) => {
+    //   if (result != 'error') {
+    //     //更新订单
+    //     wx.showToast({
+    //       title: '确认收货成功',
+    //       icon: 'none',
+    //       duration: 1500
+    //     })
+    //     that.lmFramework.dealPageNoSize('enter');
+    //   }
+    // })
   },
   //提醒收货 给买家消息表插入消息，或者给公众号发消息
   remindShip: function(e){
     var that = this;
-    var order = e.target.dataset.item;
+    var item = e.target.dataset.item;
+    //先插入消息表吧  给买家发消息 
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    var p = {
+      THEME:'发货提醒',
+      USER_ID: item.SELL_USER_ID,
+      USER_NAME: item.SELL_USER_NAME,
+      USER_PHONE: item.SELL_USER_PHONE,
+      CONTENT: '请尽快发货',//商品名称
+      STATUS: "已发送",
+      SEND_TIME: time
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
+      if (result != 'error') {
+        console.log('发送成功')
+        wx.showToast({
+          title: '提醒成功',
+          icon:'none',
+          duration:1500
+        })
+      }
+    })
     
   },
+
+  goCustomerOrderDetailPage:function(e){
+    var that = this;
+    var orderItem = e.currentTarget.dataset.item;
+    wx.navigateTo({
+      url: `../customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`,
+    })
+  }
 })

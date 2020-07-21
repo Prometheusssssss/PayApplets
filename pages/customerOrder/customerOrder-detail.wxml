@@ -82,7 +82,7 @@
         </view>
       </view>
     </view>
-    <view slot="bottom" class="bottom" wx:if="{{orderItem.STATUS != '交易关闭'}}">
+    <view slot="bottom" class="bottom" wx:if="{{orderItem.STATUS != '交易关闭' && userInfo.isManager}}">
       <button  class="bottom-rect main-bgcolor" bindtap="closeOrder">交易关闭</button>
       <!-- <button formType="submit" class="bottom-rect main-bgcolor">处 理</button> -->
     </view>

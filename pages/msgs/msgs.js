@@ -7,6 +7,8 @@ Page({
    */
   data: {
     msgList: [], //消息列表
+    totalList: [],
+    defaultPageSize: 30,
   },
 
   /**
@@ -14,9 +16,45 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    this.getMsgData();
+    that.lmFramework = that.selectComponent("#lm-framework");
+    that.lmFramework.dealPageNoSize('enter');
+    // this.getMsgData();
   },
-
+  onShow:function(){
+    var that = this;
+    // that.lmFramework.dealPageNoSize('enter');
+    // debugger
+  },
+  callBackPageSetData: function (e) {
+    var that = this;
+    that.setData(e.detail.returnSetObj)
+  },
+   //订单页面方法开始
+   loadMainList: function (e) {
+    var { pageNo, pageSize, type } = e.detail;
+    var that = this;
+    var p = {
+      "tableName":"b_message",
+      "page": pageNo,
+      "limit": pageSize,
+      "filters":[
+          {
+            "fieldName":"USER_ID",
+            "type":"date",
+            "compared":"=",
+            "filterValue": app.getUser().id
+          },
+      ]
+    }
+    // var url = `/api/_search/defaultSearch/b_message?filter=${JSON.stringify(p)}`;
+    app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
+      if (dataList != 'error') {
+        that.lmFramework.dealWithList(type, dataList, pageSize);
+      }
+    })
+    
+  
+  },
   //加载数据
   getMsgData: function () {
     var that = this;

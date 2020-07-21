@@ -155,3 +155,13 @@ button{
 .picker-content .picker-detail i{
   font-size: 40rpx;
 }
+
+.picker-title{
+  font-weight: 500;
+  min-width: 180rpx;
+  font-size: 30rpx;
+  letter-spacing: -1rpx;
+  margin-top: 16rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+}

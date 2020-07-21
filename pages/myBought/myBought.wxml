@@ -9,8 +9,8 @@
         <i-tabs current="{{ selectStatus }}" bindchange="changeCurrentSegment">
         <!-- 待发货、待收货、已完成、售后接入中 -->
             <i-tab key="" title="全部"></i-tab>
-            <i-tab key="待收货" title="待收货"></i-tab>
             <i-tab key="待发货" title="待发货"></i-tab>
+            <i-tab key="待收货" title="待收货"></i-tab>
             <i-tab key="已完成" title="已完成"></i-tab>
             <i-tab key="交易关闭" title="交易关闭"></i-tab>
         </i-tabs>
@@ -18,7 +18,7 @@
      <view slot="content" class="slot-content">
         <block wx:for="{{totalList}}" wx:for-item="listItem">
             <block wx:for="{{listItem}}"  wx:for-item="item">
-                <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}">
+                <view class='my-product-item'  data-t-index="{{tIndex}}" data-d-index="{{dIndex}}" data-item="{{item}}" bindtap="goCustomerOrderDetailPage">
                     <view class='item-product-info'>
                         <view class="item-product-name-title">
                             <view>
@@ -45,9 +45,11 @@
                             <view class="buttons-view">
                                 <contact-button type="default-light"   size="20" session-from="weapp">
                                 </contact-button>
-                                <button class="outline-rectangle" open-type="contact" data-item="{{item}}" bindcontact="handleContact">联系客服</button>
-                                <button class="outline-rectangle button-orange" wx:if="{{item.STATUS == '待发货'}}" bindtap="remindShip">提醒发货</button>
-                                <button class="outline-rectangle button-orange"  wx:if="{{item.STATUS == '待收货'}}" bindtap="confirmReceipt">确认收货</button>
+                                 <!-- <button wx:if="{{store.show_customer_service==1}}" class="flex-grow-0 flex-y-center bar-bottom-btn" open-type="contact" send-message-title="商品" send-message-img="{{goods.pic_list[0].pic_url}}" send-message-path="/pages/goods/goods?id={{id}}" bindcontact='contact' show-message-card plain> </button> -->
+
+                                <button class="outline-rectangle" open-type="contact" send-message-title="交易单号：{{item.CODE}}" send-message-img="assets/img/wechat.png" send-message-path="/pages/myBought/myBought"  catchcontact="handleContact" show-message-card >联系客服</button>
+                                <button class="outline-rectangle button-orange" data-item="{{item}}" wx:if="{{item.STATUS == '待发货'}}" bindtap="remindShip">提醒发货</button>
+                                <button class="outline-rectangle button-orange" data-item="{{item}}"  wx:if="{{item.STATUS == '待收货'}}" bindtap="confirmReceipt">确认收货</button>
                             </view>
                             
                         </view>

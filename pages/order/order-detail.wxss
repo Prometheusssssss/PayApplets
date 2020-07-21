@@ -2,10 +2,16 @@
 @import "../public-css/activity-product-detail.wxss";
 
 
-/* .image-info{
-    height: 200px;
-    text-align: center;
-} */
+.image-info{
+    height: 66vw;
+}
+.img-info{
+    height: 100%;
+    display: flex;
+    justify-content: column;
+    align-items: center;
+
+}
 .img-info image{
     width: 100%;
 }

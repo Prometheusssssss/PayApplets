@@ -30,12 +30,14 @@
         <!-- <block wx:for="{{listItem}}" wx:key="listItem.productName" wx:for-item="item"> -->
           <!-- <view class="my-product-item-content"> -->
             <view class='my-product-item' data-item="{{item}}" bindtap="selecServer">
-                <i wx:if="{{item.KID == serverId}}" class="icon icon-main-style icon-check"></i>
-                <i wx:else class="icon icon-main-style icon-uncheck"></i>
-              <view class='item-product-info'>
-                <view class="item-product-name-area"><text
-                    class='item-product-name'>{{item.NAME}}</text>
-                </view>
+              <view class="my-product-item-server">
+                  <i wx:if="{{item.KID == serverId}}" class="icon icon-main-style icon-check"></i>
+                  <i wx:else class="icon icon-main-style icon-uncheck"></i>
+                  <view class='item-product-info'>
+                    <view class="item-product-name-area"><text
+                        class='item-product-name'>{{item.NAME}}</text>
+                    </view>
+                  </view>
               </view>
             </view>
           <!-- </view> -->

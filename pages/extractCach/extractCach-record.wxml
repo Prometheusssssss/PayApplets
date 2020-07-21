@@ -21,7 +21,10 @@
                 {{item.APPLICATION_TIME}}
               </view>
             </view>
-            <view class="extract-price">
+            <view class="extract-price" wx:if="{{item.STATUS == '已打款'}}">
+              {{convert.toMoney(item.PAY_AMOUNT)}}
+            </view>
+            <view class="extract-price" wx:if="{{item.STATUS == '审核中'}}">
               {{convert.toMoney(item.APPLICATION_AMOUNT)}}
             </view>
         </view>

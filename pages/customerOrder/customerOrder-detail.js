@@ -10,7 +10,8 @@ Page({
    */
   data: {
     orderItem : '',
-    showConfirmOff:false
+    showConfirmOff:false,
+    userInfo:{}
   },
 
   /**
@@ -21,7 +22,7 @@ Page({
     var orderItem = JSON.parse(options.orderItem);
     console.log('orderUtem')
     console.log(orderItem)
-    that.setData({orderItem:orderItem})
+    that.setData({orderItem:orderItem,userInfo:app.getUser()})
 
   },
   onShow: function () {

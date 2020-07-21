@@ -55,7 +55,7 @@
 }
 
 .item-product-name-area {
-  margin-bottom: 12rpx;
+  /* margin-bottom: 12rpx; */
 }
 
 .item-product-name {
@@ -130,5 +130,10 @@ bottom: 38rpx;
   align-items: center;
   font-size: 50rpx;
 }
-
+.my-product-item-server{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
 

@@ -64,7 +64,12 @@ Page({
       var item = areaInfo.publishInfo;
       var uploaderList = item.PHOTO_URL.split(',');
       var uploaderDetailList = item.DESC_PHOTO.split(',');
-      
+      if(uploaderList.length>=1){
+        that.setData({showUpload:false})
+      }
+      if(uploaderDetailList.length>=5){
+        that.setData({showUpload:false})
+      }
       that.setData({
         publishInfo: item,
         areaIndex: areaInfo.areaIndex,

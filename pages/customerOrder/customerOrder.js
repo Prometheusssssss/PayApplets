@@ -74,12 +74,12 @@ Page({
           "compared": "=",
           "filterValue": data.selectStatus
         },
-        { //买家id
-          "fieldName": "BUY_USER_ID",
-          "type": "date",
-          "compared": "=",
-          "filterValue": 1
-        },
+        // { //买家id
+        //   "fieldName": "BUY_USER_ID",
+        //   "type": "date",
+        //   "compared": "=",
+        //   "filterValue": 1
+        // },
       ];
     } else {
       filter = [{
@@ -116,19 +116,20 @@ Page({
           "compared": "=",
           "filterValue": selectType
         },
-        { //买家id
-          "fieldName": "BUY_USER_ID",
-          "type": "date",
-          "compared": "=",
-          "filterValue": 1
-        },
+        // { //买家id
+        //   "fieldName": "BUY_USER_ID",
+        //   "type": "date",
+        //   "compared": "=",
+        //   "filterValue": 1
+        // },
       ]
     }
     var p = {
       "tableName": "b_order",
       "page": pageNo,
       "limit": pageSize,
-      "filters": filter
+      "filters": filter,
+      "orderByField": "ORDER_TIME"
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))
