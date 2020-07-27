@@ -15,7 +15,8 @@ Page({
     finalApplyAmount:0,
     accountBalance:0,
     showConfirmServerPay:false,
-    lastTime:0
+    lastTime:0,
+    showConfirmApproval: false
   },
 
   /**
@@ -92,8 +93,15 @@ Page({
       }
     })
   },
+  // 弱检验最新账户账户余额是否大于提现金额
   checkApply:function(){
     var that = this;
+    var accountBalance = that.data.accountBalance;
+    if(that.data.extractInfo.APPLICATION_AMOUNT > accountBalance){
+        that.setData({showConfirmApproval:true})
+    }
+  },
+  confirmServerApproval:function(){
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
       KID: that.data.extractInfo.KID,//审核人id name 审核时间
@@ -114,6 +122,7 @@ Page({
           ['extractInfo.STATUS']:'已审核',
           ['extractInfo.APPROVAL_USER_NAME']: app.getUser().id,
           ['extractInfo.APPROVAL_TIME']: time,
+          showConfirmApproval:false
         })
       }
     })

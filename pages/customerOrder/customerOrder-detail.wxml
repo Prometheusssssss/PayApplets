@@ -54,7 +54,7 @@
               <text>相关信息：</text><text>lily</text><text>15736879887</text>
           </view> -->
           <view class="bought-detail">
-              <text>备注：</text><text>{{orderItem.REMARK}}</text>
+              <text>备注：</text><text>{{orderItem.REMARK == null ? '' : orderItem.REMARK}}</text>
           </view>
         </view>
         <view class="customer-bought-info">

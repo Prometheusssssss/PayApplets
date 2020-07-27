@@ -15,7 +15,7 @@
           <i-input name="NAME" value="{{publishInfo.NAME}}" type="text" title="商品名称" right
             bindchange="convertNameFirst" placeholder="请输入商品名称（必填）" />
           <i-input name="PRICE" value="{{publishInfo.PRICE}}" title="价格" right placeholder="请输入价格（必填）" />
-          <view class="upload-view">
+          <view class="upload-view {{uploaderList.length == 1 ? 'start' : ''}}">
             <view class="picker-title">主图：</view>
               <view class='upload'>
                  
@@ -47,9 +47,6 @@
           <i-input name="NEED_LEVEL" value="{{publishInfo.NEED_LEVEL}}" title="等级要求" right placeholder="请输入等级要求" />
         </view>
         <view class="product-detail">
-            <!-- <i-input name="DESCRIPTION" value="{{publishInfo.DESCRIPTION}}"  title="商品详情" right
-        placeholder="请输入商品详情" /> -->
-            <!-- <view slot="top" class="can-edit-main-detail"> -->
             <view class="picker-content can-edit-main-detail">
                 <view class="picker-title">商品详情：</view>
                 <view class="picker-detail" bindtap="remarkEvent">
@@ -59,7 +56,6 @@
                     </view>
                 </view>
             </view>
-            <!-- <i-input name="FAX" value="{{publishInfo.FAX}}" title="详情图片" right placeholder="请输入传真" /> -->
             <view class="upload-view">
               <view class="picker-title">详情图：</view>
               <view class='upload'>

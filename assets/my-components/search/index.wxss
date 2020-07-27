@@ -1,8 +1,12 @@
 @import "../../private-icon/font.wxss";
 @import "../../../config.wxss";
+/* .picker-content{
+  width: 170rpx;
+} */
 .picker-text{
   margin-left: 30rpx;
   font-size: 28rpx;
+  /* text-align: right; */
   /* color: ; */
 }
 .icon-down{font-size: 28rpx;}
@@ -121,6 +125,15 @@
 .delete-i {
   position: absolute;
   left: 500rpx;
+  top: 36rpx;
+  font-size: 44rpx !important;
+  z-index: 10;
+  color: var(--main-style);
+}
+
+.delete-i-short {
+  position: absolute;
+  left: 550rpx;
   top: 36rpx;
   font-size: 44rpx !important;
   z-index: 10;

@@ -20,18 +20,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  //优化一下 自动登录和注销后登录都不需要再登录用户的昵称，所以不用每次去检验一下用户信息授权是否还在
+ //手动登录注册时会用到用户头像，已有账号登录不会登录用户头像信息
   onLoad: async function(options) {
       var that = this;
-      
       //查看是否授权 是否授权过昵称 授权过手机号
       that.isAuthoraization();
-     
       that.isCodeHasUser();
-     
-       
-    
   },
-  //后边可用再加一个授权是否过期校验
+ 
   isAuthoraization:async function(){
     var that = this;
       wx.getSetting({
@@ -78,7 +75,6 @@ Page({
             id: data.KID,
             code: data.CODE,
             name: data.NAME,
-            // "name": app.utf8Eecode(data.NAME),
             url: data.IMG_URL,
             isManager: data.IS_SA,
             tel: data.PHONE,
@@ -159,6 +155,10 @@ Page({
           })
           return
         }})
+
+        //检查一下jscode是否过期 过期了重新刷新页面获取新的jscode
+
+
         var code = that.data.jscode;
         //授权成功后,通过改变 isLogin 的值，让实现页面显示出来，把授权页面隐藏起来
         //授权成功后加加密信息和jscode传给后台，后台换回手机号 并且可以注册用户信息（存手机号，用户openid），调用成功后返回用户手机号、userId，userName
@@ -171,7 +171,6 @@ Page({
             "encryptedData": encryptedData,
             "iv": iv,
             "name": base64.encode(that.data.userInfo.name),
-            // "name": that.data.userInfo.name,
             "url": that.data.userInfo.url
           }
           console.log('baser')
@@ -197,6 +196,7 @@ Page({
               })
             }else{
               //重新授权登录
+              that.isCodeHasUser()
               that.setData({
                 isLogin : false,
                 hasPhoneNumber:false
@@ -262,6 +262,12 @@ Page({
   closeMask:function(){
     var that  = this;
     that.setData({showConfirmAuthorization:false})
+  },
+
+  goTermsServicePage:function(){
+    wx.navigateTo({
+      url: 'terms-of-service',
+    })
   }
     
 })

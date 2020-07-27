@@ -240,3 +240,7 @@ button::after {
   font-size: 24rpx;
   border-radius: 16rpx;
 }
+
+.outline-rectangle.long{
+  min-width: 150rpx;
+}

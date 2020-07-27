@@ -7,7 +7,13 @@ const time = {
   formatTime: function(localDateTime) {
     return (localDateTime.getHours().toString().length < 2 ? '0' + localDateTime.getHours().toString() : localDateTime.getHours().toString()) + ":" + (localDateTime.getMinutes().toString().length < 2 ? '0' + localDateTime.getMinutes().toString() : localDateTime.getMinutes().toString()) + ":" + (localDateTime.getSeconds().toString().length < 2 ? '0' + localDateTime.getSeconds().toString() : localDateTime.getSeconds().toString());
   },
-
+  addOneDay:function(date){
+     var dateTime = new Date(date);
+      dateTime = dateTime.setDate(dateTime.getDate() + 1);
+      dateTime = new Date(dateTime);
+      var newDate = dateTime.toLocaleDateString().replace(/\//g,"-");
+      return newDate;
+ },
   dayString: function() {
     let nowTime = new Date();
     return time.formatDay(nowTime);

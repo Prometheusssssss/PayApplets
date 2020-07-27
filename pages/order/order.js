@@ -111,25 +111,15 @@ Page({
               "compared":"like",
               "filterValue": data.searchText
             },
-            // {
-            //   "fieldName":"PRICE",
-            //   "type":"string",
-            //   "compared":"like",
-            //   "filterValue": data.searchText
-            // },
             {
               "fieldName":"GAME_ZONE_KID",
               "type":"date",
               "compared":"=",
               "filterValue": data.serverList[data.serverIndex].KID
             },
-            // {//卖家id
-            //   "fieldName":"SELL_USER_ID",
-            //   "type":"date",
-            //   "compared":"=",
-            //   "filterValue": 1
-            // },
-        ]
+        ],
+        "orderByField":"SHELF_TIME",
+        "isDesc":1
     }
     console.log('查询报错')
     console.log(JSON.stringify(p))

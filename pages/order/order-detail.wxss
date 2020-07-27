@@ -1,7 +1,6 @@
 @import "../../assets/my-components/button/index.wxss";
 @import "../public-css/activity-product-detail.wxss";
 
-
 .image-info{
     height: 66vw;
 }

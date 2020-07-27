@@ -42,7 +42,52 @@
 
     <i class="icon icon-{{rightIconName}} left-i" catchtap="handleClick" wx:if="{{rightIconName!=''}}"
       style="{{rightIconStyle}}"></i>
-    <view wx:if="{{picker == true}}">
+    <view wx:if="{{picker == true}}" class="picker-content">
+      <picker  class="picker-text" wx:if="{{allowedPicker}}" bindchange="bindPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{pickerIndex}}"
+            range="{{pickerList}}" range-key="NAME">
+        <view class="picker">
+            {{pickerList[pickerIndex].NAME}}
+            <i class="icon icon-down iconc-main-style"></i>
+        </view>
+      </picker>
+    </view>
+    
+  </view>
+  
+</block>
+<block wx:if="{{type=='textShort'}}">
+  <view class="search pri-class">
+    <i class="icon icon-search"></i>
+    <view class="gray-search-bg" style="padding-left:35px;">
+      <input bindinput="handleInput" placeholder="{{placeholder}}" placeholder-class="search-placeholder"
+        value="{{initValue}}" />
+    </view>
+    <!-- 仅仅有功能性图标 -->
+    <block wx:if="{{rightIconName!=''&&iconName==''}}">
+      <i wx:if="{{allowedClear==true && initValue!=''}}" class="icon icon-close delete-i-short" catchtap="handleClear"
+        style="right:104rpx"></i>
+    </block>
+    <!-- 仅仅有展示图标 -->
+    <block wx:if="{{rightIconName==''&&iconName!=''}}">
+      <i wx:if="{{allowedClear==true && initValue!=''}}" class="icon icon-close delete-i-short" catchtap="handleClear"
+        style="right:{{rightIconName!=''?'180rpx':'104rpx'}}"></i>
+    </block>
+    <!-- 都有 -->
+    <block wx:if="{{rightIconName!=''&&iconName!=''}}">
+      <i wx:if="{{allowedClear==true && initValue!=''}}" class="icon icon-close delete-i-short" catchtap="handleClear"
+        style="right:180rpx"></i>
+    </block>
+    <!-- 都没有 -->
+    <block wx:if="{{rightIconName==''&&iconName==''}}">
+      <i wx:if="{{allowedClear==true && initValue!=''}}" class="icon icon-close delete-i-short" catchtap="handleClear"
+        style="right:32rpx"></i>
+    </block>
+    <i wx:if="{{iconName!=''}}" class="icon icon-{{iconName}} search-i"
+      style="right:{{rightIconName!=''?'108rpx':'32rpx'}}"></i>
+
+    <i class="icon icon-{{rightIconName}} left-i" catchtap="handleClick" wx:if="{{rightIconName!=''}}"
+      style="{{rightIconStyle}}"></i>
+    <view wx:if="{{picker == true}}" class="picker-content">
       <picker  class="picker-text" wx:if="{{allowedPicker}}" bindchange="bindPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{pickerIndex}}"
             range="{{pickerList}}" range-key="NAME">
         <view class="picker">

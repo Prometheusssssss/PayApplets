@@ -108,6 +108,7 @@ Page({
       "limit": pageSize,
       "filters": filter,
       "orderByField": "ORDER_TIME",
+      "isDesc":1
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))
@@ -181,7 +182,7 @@ Page({
       USER_ID: item.BUY_USER_ID,
       USER_NAME: item.BUY_USER_NAME,
       USER_PHONE: item.BUY_USER_PHONE,
-      CONTENT: '您的宝贝卖家已发货',//商品名称
+      CONTENT: "您拍下的宝贝“"+item.PRODUCT_NAME+"”卖家已发货，请注意验收。",//商品名称
       STATUS: "已发送",
       SEND_TIME: time
     }
@@ -204,7 +205,7 @@ Page({
       USER_ID: item.BUY_USER_ID,
       USER_NAME: item.BUY_USER_NAME,
       USER_PHONE: item.BUY_USER_PHONE,
-      CONTENT: '请尽快确认收货',//商品名称
+      CONTENT: "您的宝贝“"+item.PRODUCT_NAME+"”已发货，卖家提醒您注意及时收货。",//商品名称
       STATUS: "已发送",
       SEND_TIME: time
     }

@@ -1,5 +1,15 @@
 @import "../public-css/order.wxss";
+/* @import "../../assets/private-icon/font.wxss";
+@import "../../config.wxss"; */
 .item-product-info{
-  height: 20vh !important;
+  height: 26vh !important;
 
+}
+.delete-i{
+  position: absolute;
+  left: 550rpx !important;
+  top: 36rpx;
+  font-size: 44rpx !important;
+  z-index: 10;
+  color: var(--main-style);
 }

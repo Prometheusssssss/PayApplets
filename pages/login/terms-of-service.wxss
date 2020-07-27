@@ -1,0 +1,13 @@
+/* pages/login/terms-of-service.wxss */
+view {
+    text-align: center;
+    font-size: 40rpx;
+    margin-top: 30rpx;
+  }
+  
+  page {
+    padding: 0 32rpx;
+    width: calc(100% - 64rpx);
+    background: white;
+  }
+  

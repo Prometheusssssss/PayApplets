@@ -47,64 +47,42 @@ Page({
     var selectType = data.selectType;
     if (selectType == '全部') {
       filter = [{
-          "fieldName": "PRODUCT_NAME",
+          "fieldName": "PRODUCT_NAME,BUY_USER_PHONE,SELL_USER_PHONE,CODE",
           "type": "string",
           "compared": "like",
           "filterValue": data.searchText
         },
-        {
-          "fieldName": "BUY_USER_PHONE",
-          "type": "string",
-          "compared": "like",
-          "filterValue": data.searchText
-        },{
-          "fieldName": "SELL_USER_PHONE",
-          "type": "string",
-          "compared": "like",
-          "filterValue": data.searchText
-        },{
-          "fieldName": "CODE",
-          "type": "string",
-          "compared": "like",
-          "filterValue": data.searchText
-        },
+        // {
+        //   "fieldName": "BUY_USER_PHONE",
+        //   "type": "string",
+        //   "compared": "like",
+        //   "filterValue": data.searchText
+        // },{
+        //   "fieldName": "SELL_USER_PHONE",
+        //   "type": "string",
+        //   "compared": "like",
+        //   "filterValue": data.searchText
+        // },{
+        //   "fieldName": "CODE",
+        //   "type": "string",
+        //   "compared": "like",
+        //   "filterValue": data.searchText
+        // },
         {
           "fieldName": "STATUS",
           "type": "date",
           "compared": "=",
           "filterValue": data.selectStatus
         },
-        // { //买家id
-        //   "fieldName": "BUY_USER_ID",
-        //   "type": "date",
-        //   "compared": "=",
-        //   "filterValue": 1
-        // },
       ];
     } else {
       filter = [{
-        "fieldName": "PRODUCT_NAME",
+        "fieldName": "PRODUCT_NAME,BUY_USER_PHONE,SELL_USER_PHONE,CODE",
         "type": "string",
         "compared": "like",
         "filterValue": data.searchText
       },
       {
-        "fieldName": "BUY_USER_PHONE",
-        "type": "string",
-        "compared": "like",
-        "filterValue": data.searchText
-      },{
-        "fieldName": "SELL_USER_PHONE",
-        "type": "string",
-        "compared": "like",
-        "filterValue": data.searchText
-      },{
-        "fieldName": "CODE",
-        "type": "string",
-        "compared": "like",
-        "filterValue": data.searchText
-      },
-        {
           "fieldName": "STATUS",
           "type": "date",
           "compared": "=",
@@ -115,21 +93,17 @@ Page({
           "type": "date",
           "compared": "=",
           "filterValue": selectType
-        },
-        // { //买家id
-        //   "fieldName": "BUY_USER_ID",
-        //   "type": "date",
-        //   "compared": "=",
-        //   "filterValue": 1
-        // },
+        }
       ]
     }
+    // isDesc 1代表倒序，0代表正序
     var p = {
       "tableName": "b_order",
       "page": pageNo,
       "limit": pageSize,
       "filters": filter,
-      "orderByField": "ORDER_TIME"
+      "orderByField": "ORDER_TIME",
+      "isDesc":1
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))

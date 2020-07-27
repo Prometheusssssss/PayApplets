@@ -44,7 +44,9 @@ Page({
             "compared":"=",
             "filterValue": app.getUser().id
           },
-      ]
+      ],
+      "orderByField":"SEND_TIME",
+      "isDesc":1
     }
     // var url = `/api/_search/defaultSearch/b_message?filter=${JSON.stringify(p)}`;
     app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {

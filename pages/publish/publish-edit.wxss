@@ -27,12 +27,20 @@ sj-framework {
   display: flex;
   align-items: center;
   flex-direction: row;
+  /* justify-content: flex-start; */
   justify-content: space-between;
   border-bottom: 2rpx solid var(--line-gray-light);
   padding: 10rpx 0;
   margin-left: 40rpx;
   width: calc(100% - 40rpx);
   color: var(--text-black);
+}
+.upload-view.start{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  justify-content: flex-start;
 }
 .upload-view .ui_uploader_item i{
   font-size: 44rpx;
@@ -154,4 +162,13 @@ button{
 }
 .picker-content .picker-detail i{
   font-size: 40rpx;
+}
+.picker-title{
+  font-weight: 500;
+  min-width: 180rpx;
+  font-size: 30rpx;
+  letter-spacing: -1rpx;
+  margin-top: 16rpx;
+  height: 36rpx;
+  line-height: 36rpx;
 }

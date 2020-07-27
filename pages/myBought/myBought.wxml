@@ -4,7 +4,7 @@
   lockScroll="{{showProductItemDetail}}">
     <view slot="top" class="search-top">
         <view class="search">
-            <sj-search placeholder="产品名称" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{comboboxTypeList}}" catchPickerEvent="bindTypeCboChange" />
+            <sj-search placeholder="产品名称" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="textShort" iconName="" rightIconName="" pickerList="{{comboboxTypeList}}" catchPickerEvent="bindTypeCboChange" />
         </view>
         <i-tabs current="{{ selectStatus }}" bindchange="changeCurrentSegment">
         <!-- 待发货、待收货、已完成、售后接入中 -->

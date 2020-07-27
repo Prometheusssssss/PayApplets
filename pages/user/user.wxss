@@ -14,7 +14,7 @@
   background-color: white;
 }
 
-.user-info open-data.user-image {
+.user-info .user-image {
   width: 11vh;
   height: 11vh;
   margin-right: 41rpx;
@@ -240,4 +240,10 @@
 }
 .user-tel{
   font-size: 26rpx;
+}
+.i-input{
+  margin-left: ;
+}
+.upload-view{
+
 }

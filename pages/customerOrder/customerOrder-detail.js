@@ -42,6 +42,7 @@ Page({
     })
   },
   //交易关闭 更新订单状态为已关闭
+  //
   closeOrder:function(){
     var that = this;
     that.setData({
@@ -49,6 +50,7 @@ Page({
     })
     
   },
+  //交易关闭 发送信息给卖家买家 
   confirmOff:function(){
     var that = this;
     var p = {
@@ -63,6 +65,8 @@ Page({
           icon: 'none',
           duration: 1500
         })
+        that.sendMsgToBuyer(that.data.orderItem)
+        that.sendMsgToSell(that.data.orderItem)
         that.setData({
           ['orderItem.STATUS']:'交易关闭',
           showConfirmOff:false
@@ -70,7 +74,51 @@ Page({
         // that.lmFramework.dealPageNoSize('enter');
       }
     })
-  }
+  },
+  sendMsgToBuyer:function(order){
+    var that = this;
+    var item = order;
+    // debugger
+    //先插入消息表吧  给买家发消息 
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    var p = {
+      THEME:'交易关闭提醒',
+      USER_ID: item.BUY_USER_ID,
+      USER_NAME: item.BUY_USER_NAME,
+      USER_PHONE: item.BUY_USER_PHONE,
+      CONTENT: "您拍下的宝贝“"+item.PRODUCT_NAME+"”交易关闭，请注意。",//商品名称
+      STATUS: "已发送",
+      SEND_TIME: time
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
+      if (result != 'error') {
+    
+      }
+    })
+
+  },
+  sendMsgToSell:function(order){
+    var that = this;
+    var item = order;
+    // debugger
+    //先插入消息表吧  给买家发消息 
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    var p = {
+      THEME:'交易关闭提醒',
+      USER_ID: item.SELL_USER_ID,
+      USER_NAME: item.SELL_USER_NAME,
+      USER_PHONE: item.SELL_USER_PHONE,
+      CONTENT: "您卖出的宝贝“"+item.PRODUCT_NAME+"”交易关闭，请注意。",//商品名称
+      STATUS: "已发送",
+      SEND_TIME: time
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
+      if (result != 'error') {
+    
+      }
+    })
+
+  },
   // loadDetail: function(){
   //   var that = this;
   //   var orderItem = that.data.orderItem;

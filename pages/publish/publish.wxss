@@ -34,6 +34,12 @@ sj-framework {
   width: calc(100% - 40rpx);
   color: var(--text-black);
 }
+.upload-view.start{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 .upload-view .ui_uploader_item i{
   font-size: 44rpx;
   /* width: calc(25% - 10rpx); */
@@ -151,6 +157,11 @@ button{
 }
 .picker-content .picker text{
   /* font-size: 28rpx; */
+  width: 450rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
 }
 .picker-content .picker-detail i{
   font-size: 40rpx;

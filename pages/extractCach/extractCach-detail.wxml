@@ -58,6 +58,13 @@
     </view>
 </sj-confirm>
 
+<sj-confirm visible="{{showConfirmApproval}}" addLineHeight="0" title="确认审核" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmServerApproval">
+    <view slot='content' class="delete-confirm-content">
+        <text>用户的提现金额大于账户余额，确认审核通过吗？</text>
+    </view>
+</sj-confirm>
+
 <sj-confirm visible="{{showConfirmServerPay}}" addLineHeight="0" title="确认打款" confirmText="确认" cancelText="取消"
     catchConfirmEvent="confirmServerPay">
     <view slot='content' class="delete-confirm-content">

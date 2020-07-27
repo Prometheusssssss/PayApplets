@@ -14,6 +14,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+  },
+
+  onShow: function(){
+    var that = this;
     that.loadUserInfo()
   },
   
@@ -23,6 +27,15 @@ Page({
     var url = `/api/_search/defaultSearch/a_user?filter=${JSON.stringify(p)}`;
     app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
       if (dataList != 'error') {
+          var info = {
+            id: dataList[0].KID,
+            code: dataList[0].CODE,
+            name: dataList[0].NAME,
+            url: dataList[0].IMG_URL,
+            isManager: dataList[0].IS_SA,
+            tel: dataList[0].PHONE
+          };
+        app.setUser(info)
         that.setData({userInfo: dataList[0]})
       }
     })
@@ -108,6 +121,17 @@ Page({
     //意见反馈页面
     wx.navigateTo({
       url: '../remark/remark',
+    })
+  },
+  changeUser:function(){
+    var that = this;
+    var userInfo = {
+      IMG_URL: that.data.userInfo.IMG_URL,
+      NAME: that.data.userInfo.NAME,
+      PHONE: that.data.userInfo.PHONE
+    };
+    wx.navigateTo({
+      url: `change-info?userInfo=${JSON.stringify(userInfo)}`,
     })
   },
   //注销

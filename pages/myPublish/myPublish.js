@@ -142,6 +142,7 @@ Page({
       "limit": pageSize,
       "filters": filter,
       "orderByField":"SHELF_TIME",
+      "isDesc":1
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))

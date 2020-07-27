@@ -1,0 +1,50 @@
+<form bindsubmit="saveUserInfo">
+  <lm-framework sliderBar="false" contentBg="white">
+    <view slot="content">
+        <view class="area">
+          <view class="upload-view {{uploaderList.length == 1 ? 'start' : ''}}">
+            <view class="picker-title">头像：</view>
+              <view class='upload'>
+                 
+                  <!-- 根据已选择的图片临时路径数组展示图片-->
+                  <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+                      <!-- 删除-->
+                      <i class="icon icon-close ui_uploader_item_icon icon-red" data-index="{{index}}" bindtap='clearImg' ></i>
+                      <!-- 图片-->
+                      <image class="special-image" bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+                  </view>
+                   <!-- 上传按钮+框 -->
+                  <view class="image" wx:if="{{showUpload}}" > 
+                      <image  bindtap='upload' mode='aspectFit' src="/assets/img/photo.png" ></image>
+                  </view>
+              </view>
+            </view>
+          </view>
+          <view class="upload-view">
+            <view class="picker-title">手机号：</view>
+              <view class='upload'>
+                 {{userInfo.PHONE}}
+              </view>
+          </view>
+          <view class="nick-name">
+            <view class="picker-title">
+                昵称：
+            </view>
+            <view>
+               <input type="text"  value="{{ userInfo.NAME }}" bindinput="handleInputChange" placeholder="请输入昵称"  class="i-input-input" placeholder-class="i-input-placeholder" />
+            </view>
+              <!-- <i-input name="NAME" value="{{userInfo.NAME}}" title="昵称" right placeholder="昵称（必填）" /> -->
+          </view>
+          <view class="bottom-content">
+            <button  class="bottom-rect long " formType="submit">保存</button>
+          </view>
+      </view>
+          
+        <!-- </view>
+    </view> -->
+
+    <!-- <view slot="bottom">
+      <button formType="submit" class="bottom-rect main-bgcolor">保存</button>
+    </view> -->
+  </lm-framework>
+</form>

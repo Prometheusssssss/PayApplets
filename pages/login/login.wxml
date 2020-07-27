@@ -35,8 +35,8 @@
         </view>
         
     </view>
-    <view class="bottom">
-        <text>登录即代表您同意<text class="blue">《大嘴巴交易平台协议》</text></text>
+    <view class="bottom" bindtap='goTermsServicePage'>
+        <text>登录即代表您同意<text class="blue" >《大嘴巴交易平台协议》</text></text>
     </view>
 </view>
 <view class="mask-layer {{showConfirmAuthorization == true?'show':''}}">

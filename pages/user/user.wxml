@@ -1,15 +1,15 @@
 <wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
 <view class="user-info">
     <!-- <view class="user-image"> -->
-    <open-data type="userAvatarUrl" class="user-image"></open-data>
-   
+    <!-- <open-data type="userAvatarUrl" class="user-image"></open-data> -->
+    <image src="{{userInfo.IMG_URL}}" class="user-image"></image>
     <!-- </view> -->
     <view class="title-info">
         <!-- <open-data type="userNickName" class="user-name"></open-data> -->
         <text class="user-name">{{userInfo.NAME}}</text>
         <text class="user-tel">{{userInfo.PHONE}}</text>
     </view>
-    <view bindtap="invalidateUser" class="invalidate-user">
+    <view bindtap="changeUser" class="invalidate-user">
         <i class="icon icon-right" bindtap='editUser' ></i>
     </view>
 </view>

@@ -70,7 +70,7 @@ Page({
       "fieldName": "APPLICATION_TIME",
       "type": "date",
       "compared": "<",
-      "filterValue": that.data.endTime+1
+      "filterValue": that.data.endTime
     },
   ]
     var p = {
@@ -78,7 +78,8 @@ Page({
       "page": pageNo,
       "limit": pageSize,
       "filters": filter,
-      "orderByField":"APPLICATION_TIME"
+      "orderByField":"APPLICATION_TIME",
+      "isDesc":1
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))
@@ -92,9 +93,11 @@ Page({
     detail
   }) {
     var that = this;
+    var endTime = common.time.addOneDay(detail.date2);
+    var newDay = common.time.formatDay(new Date(endTime))
     that.setData({
       startTime: detail.date1,
-      endTime: detail.date2
+      endTime: newDay
     })
     if (that.lmFramework != undefined) {
       that.lmFramework.dealPageNoSize('enter');

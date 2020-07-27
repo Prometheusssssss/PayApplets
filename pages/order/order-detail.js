@@ -1,5 +1,8 @@
 // pages/order/order-detail.js
 const app = getApp()
+const {
+  common
+} = global;
 Page({
 
   /**
@@ -28,8 +31,76 @@ Page({
     })
 
   },
-
- 
+  buyProduct:function(){
+    var that = this;
+    var detailInfo = that.data.detailInfo;
+    console.log(detailInfo)
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+    console.log(time)
+    
+    var p = {
+      STATUS: '待发货',
+      TYPE:'商品',
+      GAME_PARTITION_KID: detailInfo.GAME_PARTITION_KID,
+      GAME_PARTITION_NAME: detailInfo.GAME_PARTITION_NAME,
+      GAME_SECONDARY_KID: detailInfo.GAME_SECONDARY_KID,
+      GAME_SECONDARY_NAME: detailInfo.GAME_SECONDARY_NAME,
+      GAME_ZONE_KID: detailInfo.GAME_ZONE_KID,
+      GAME_ZONE_NAME: detailInfo.GAME_ZONE_NAME,
+      BUY_USER_ID: app.getUser().id,
+      BUY_USER_NAME: app.getUser().name,
+      BUY_USER_PHONE: app.getUser().tel,
+      SELL_USER_ID: detailInfo.SELL_USER_ID,
+      SELL_USER_NAME: detailInfo.SELL_USER_NAME,
+      SELL_USER_PHONE: detailInfo.SELL_USER_PHONE,
+      PRODUCT_NAME: detailInfo.NAME,
+      PRODUCT_ID: detailInfo.KID,
+      PRICE: detailInfo.PRICE,
+      PHOTO_URL: detailInfo.PHOTO_URL,
+      DESC_PHOTO: detailInfo.DESC_PHOTO,
+      NEED_LEVEL: detailInfo.NEED_LEVEL,
+      DESCRIPTION: detailInfo.DESCRIPTION,
+      ORDER_TIME: time,
+    }
+    console.log(p)
+    that.createOrder(p)
+  },
+  createOrder: function (p) {
+    console.log('立即购买')
+    app.ManageExecuteApi('/api/_cud/createOrder', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        wx.showToast({
+          title: '购买成功',
+          icon: 'none',
+          duration: 1500
+        })
+        var orderItem = result.Table[0];
+        //我买到的
+        setTimeout(() => {
+          wx.switchTab({
+            url: '../user/user'//main-in
+          })
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '../myBought/myBought'//main-in
+            })
+            setTimeout(() => {
+              wx.navigateTo({
+                url: `../customerOrder/customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`//main-in
+              })
+            }, 800)
+          }, 600)
+        }, 200)
+      }else{
+        setTimeout(() => {
+          wx.navigateBack({
+            delta:1
+          })
+        }, 400)
+      }
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -121,5 +192,5 @@ Page({
   //     })
   //   }
   // }
-
+ 
 })

@@ -177,3 +177,9 @@ button{
   border:2rpx solid var(--button-orange-dark);
   color: var(--button-orange-dark);
 }
+
+.delete-i{
+  position: absolute;
+  left: 550rpx !important;
+  top: 36rpx;
+}

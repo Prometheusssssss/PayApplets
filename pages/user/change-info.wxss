@@ -1,0 +1,36 @@
+/* pages/user/change-info.wxss */
+@import "/pages/publish/publish-edit.wxss";
+@import "/assets/iview-weapp/input/index.wxss";
+.upload-view{
+  margin-left: 0 !important;
+  padding-left: 40rpx;
+  justify-content: flex-start !important;
+  height: 120rpx;
+  max-height: 120rpx;
+
+}
+.nick-name{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 120rpx;
+  max-height: 120rpx;
+  padding-left: 40rpx;
+  border-bottom: 2rpx solid var(--line-gray-light);
+  align-items: center;
+
+}
+
+
+.bottom-content {
+  position: absolute;
+  bottom: 150rpx;
+  left: 40rpx;
+}
+
+.bottom-rect{
+  min-width: 672rpx  !important; 
+  border-radius: 8rpx;
+  background-color: var(--main-style);
+  color: white;
+}

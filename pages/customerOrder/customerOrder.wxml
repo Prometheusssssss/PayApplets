@@ -4,7 +4,7 @@
   lockScroll="{{showProductItemDetail}}">
     <view slot="top" class="search-top">
         <view class="search">
-            <sj-search placeholder="商品名称/手机号/订单编号" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="text" iconName="" rightIconName="" pickerList="{{comboboxTypeList}}" catchPickerEvent="bindTypeCboChange" />
+            <sj-search placeholder="商品名称/手机号/订单编号" catchInputEvent="searchList" picker='true' initValue="{{searchText}}" type="textShort" iconName="" rightIconName="" pickerList="{{comboboxTypeList}}" catchPickerEvent="bindTypeCboChange" />
         </view>
         <i-tabs current="{{ selectStatus }}" bindchange="changeCurrentSegment">
         <!-- 待发货、待收货、已完成、售后接入中 -->
@@ -37,6 +37,9 @@
                         <view class="item-product-name-area">
                             <text class='item-product-name'>{{item.PRODUCT_NAME}}</text>
                         </view>
+                        <view>
+                                <text>订单编号：</text> <text class='item-code'>{{item.CODE}}</text>
+                        </view>
                         <view class="item-poduct-btn">
                             <view class="price-button-content">
                                 <text>付款金额：</text> <text class='item-product-price'>{{convert.toMoney(item.PRICE)}}</text>
@@ -59,9 +62,9 @@
                              <view class="price-button-content">
                                 <text>卖家：</text> <text class='item-nick'>{{item.SELL_USER_NAME}}</text><text class='item-tel'>{{item.SELL_USER_PHONE}}</text>
                             </view>
-                            <view>
+                            <!-- <view>
                                  <text>订单编号：</text> <text class='item-code'>{{item.CODE}}</text>
-                            </view>
+                            </view> -->
                         </view>
                     </view>
                 </view>

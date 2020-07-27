@@ -106,7 +106,8 @@ Page({
       "page": pageNo,
       "limit": pageSize,
       "filters": filter,
-      "orderByField": "ORDER_TIME"
+      "orderByField": "ORDER_TIME",
+      "isDesc":1
     }
     console.log('查询数据')
     console.log(JSON.stringify(p))
@@ -152,8 +153,7 @@ Page({
     var order = e.target.dataset.item;
     // /api/_cud/confirmedOrder
     var p = {
-      KID: order.KID,
-      // STATUS: '已完成',
+      KID: order.KID
     }
      //确认收货 发消息给卖家，主题交易完成提醒，买家已收货；；更新订单状态为已完成; 更新用户表，卖家累计受益和可用资金都会增加，即将收入减少
     app.ManageExecuteApi('/api/_cud/confirmedOrder', '', p, 'POST').then((result) => {
@@ -193,7 +193,7 @@ Page({
       USER_NAME: item.SELL_USER_NAME,
       USER_PHONE: item.SELL_USER_PHONE,
       CONTENT: '请尽快发货',//商品名称
-      STATUS: "已发送",
+      STATUS: "您的宝贝“"+item.PRODUCT_NAME+"”已被拍下，买家提醒您注意及时发货。",
       SEND_TIME: time
     }
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
@@ -213,7 +213,7 @@ Page({
     var that = this;
     var orderItem = e.currentTarget.dataset.item;
     wx.navigateTo({
-      url: `../customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`,
+      url: `../customerOrder/customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`,
     })
   }
 })

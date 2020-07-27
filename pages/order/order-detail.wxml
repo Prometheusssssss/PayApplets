@@ -54,7 +54,7 @@
             </button>
         </view> -->
         <block>
-            <lm-button shape="bottom-rect" title="立即购买" buttonColor="bottom-rect main-bgcolor long "  bindButtonClick="buyProduct" />
+            <lm-button shape="bottom-rect" title="立即购买" buttonColor="bottom-rect main-bgcolor long"  bindButtonClick="buyProduct" />
         </block>
 
     </view>

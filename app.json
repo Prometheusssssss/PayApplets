@@ -1,10 +1,12 @@
 {
   "pages":[
     "pages/login/login",
+    "pages/login/terms-of-service",
     "pages/order/order",
     "pages/home/home",
     "pages/publish/publish",
     "pages/publish/publish-edit",
+    "pages/user/change-info",
     "pages/user/user",
     "pages/remark/remark",
     "pages/extractCach/extractCach-record",
@@ -71,6 +73,5 @@
     "request": 20000,
     "uploadFile": 20000
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
