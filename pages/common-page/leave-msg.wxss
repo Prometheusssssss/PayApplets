@@ -1,0 +1,95 @@
+/* pages/remark/remark.wxss */
+textarea {
+  width: calc(100% - 40rpx);
+  margin-top: 24rpx;
+  padding: 32rpx 20rpx;
+  height: 300rpx;
+  background: white;
+}
+
+.bottom-content {
+  position: absolute;
+  bottom: 100rpx;
+  left: 40rpx;
+}
+
+.bottom-rect{
+  min-width: 672rpx  !important; 
+  border-radius: 8rpx;
+  background-color: var(--main-style);
+  color: white;
+}
+.remark-content{
+  position: absolute;
+  top: 550rpx;
+  margin: 0 30rpx;
+  color: var(--text-black);
+  background-color: white;
+  padding: 0 16rpx;
+  height: 34vh;
+
+}
+.company-name{
+  font-size: 26rpx;
+}
+
+.upload>view{
+  display: inline-block;
+  /* display: flex; */
+}
+
+.upload-view{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 20rpx solid var(--line-gray-light);
+  padding: 10rpx 20rpx;
+  /* margin-left: 40rpx; */
+  width: calc(100% - 40rpx);
+  color: var(--text-black);
+  background-color: white;
+}
+.upload-view .picker-title{
+  width: 290rpx;
+}
+.upload-view.start{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.upload-view .ui_uploader_item i{
+  font-size: 44rpx;
+  /* width: calc(25% - 10rpx); */
+  /* margin-right: 10rpx; */
+
+}
+.upload-view image{
+  height: 56rpx;
+  width: 56rpx;
+  margin-right: 20rpx;
+}
+
+image{
+  height: 96rpx;
+  width: 96rpx;
+}
+.ui_uploader_item{
+  position: relative;
+  height: 150rpx;
+  width: 140rpx;
+  margin-right: 10rpx;
+}
+.ui_uploader_item .special-image{
+ 
+  width: 100%;
+  height: 100%;
+}
+.ui_uploader_item .ui_uploader_item_icon{
+  position: absolute;
+  /* right: 0;
+  top: 0; */
+  right: 2rpx;
+  top: -4rpx;
+}

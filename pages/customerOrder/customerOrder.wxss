@@ -2,7 +2,7 @@
 /* @import "../../assets/private-icon/font.wxss";
 @import "../../config.wxss"; */
 .item-product-info{
-  height: 26vh !important;
+  /* height: 26vh !important; */
 
 }
 .delete-i{

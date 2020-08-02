@@ -167,19 +167,6 @@ Page({
         that.lmFramework.dealPageNoSize('enter')
       }
     })
-
-   
-    // app.ManageExecuteApi('/api/_cud/createAndUpdate/b_order', '', p, 'POST').then((result) => {
-    //   if (result != 'error') {
-    //     //更新订单
-    //     wx.showToast({
-    //       title: '确认收货成功',
-    //       icon: 'none',
-    //       duration: 1500
-    //     })
-    //     that.lmFramework.dealPageNoSize('enter');
-    //   }
-    // })
   },
   //提醒收货 给买家消息表插入消息，或者给公众号发消息
   remindShip: function(e){
@@ -188,12 +175,13 @@ Page({
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
+      KID:-1,
       THEME:'发货提醒',
       USER_ID: item.SELL_USER_ID,
       USER_NAME: item.SELL_USER_NAME,
       USER_PHONE: item.SELL_USER_PHONE,
-      CONTENT: '请尽快发货',//商品名称
-      STATUS: "您的宝贝“"+item.PRODUCT_NAME+"”已被拍下，买家提醒您注意及时发货。",
+      CONTENT: "您的宝贝“"+item.PRODUCT_NAME+"”已被拍下，买家提醒您注意及时发货。",//商品名称
+      STATUS: '已发送' ,
       SEND_TIME: time
     }
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
@@ -213,7 +201,7 @@ Page({
     var that = this;
     var orderItem = e.currentTarget.dataset.item;
     wx.navigateTo({
-      url: `../customerOrder/customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`,
+      url: `../myBought/myBought-detail?orderItem=${JSON.stringify(orderItem)}`,
     })
   }
 })

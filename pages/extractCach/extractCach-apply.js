@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    accountAmount:100,
+    accountAmount:0,
     payMentList:[{
       KID:0,
       NAME:'微信'
@@ -33,7 +33,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    that.loadUserAccountAmount()
+  },
+  loadUserAccountAmount:function(){
+    var that = this;
+    var that = this;
+    var p = {"KID": app.getUser().id}//提现人的账户余额
+    var url = `/api/_search/defaultSearch/a_user?filter=${JSON.stringify(p)}`;
+    app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
+      if (dataList != 'error') {
+        that.setData({accountAmount: dataList[0].BALANCE})
+      }
+    })
   },
   bindPayMent:function(e){
     var that = this;

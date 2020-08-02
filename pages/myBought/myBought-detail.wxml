@@ -80,16 +80,37 @@
               <text>交易关闭时间：</text><text>{{orderItem.TRAN_CLOSE_TIME}}</text>
           </view>
         </view>
+        <view class="customer-bought-info" wx:if="{{msgList.length>0}}">
+          <view class="bought-title">
+              <text>留言信息</text>
+          </view>
+          <view wx:for='{{msgList}}' wx:for-index="index">
+            <view class="bought-detail">
+              <!-- 留言时间 内容 -->
+              <view>
+                <text class="buyUserName">{{item.sendName}}: </text>
+                <text class="buyUserName">{{item.createTime}}</text>
+              </view>
+              <view class="msg-content">
+                <text class="buyUserName" >{{item.content}}</text>
+                <block wx:for="{{item.imgUrls}}" wx:for-item="imgItem" wx:for-index="imageIndex">
+                <!-- <view> -->
+                  <image class="special-image"  bindtap='showImg'  data-item="{{item}}"  data-index="{{imageIndex}}" mode='aspectFit'  src='{{imgItem}}'></image>
+                <!-- </view> -->
+                </block>
+              </view>
+              <!-- <block wx:for="{{item.imgUrls}}" wx:for-item="imgItem" wx:for-index="imageIndex">
+                <view>
+                  <image class="special-image"  bindtap='showImg'  data-index="{{imageIndex}}" mode='aspectFit'  src='{{imgItem}}'></image>
+                </view>
+              </block> -->
+              
+            </view>
+          </view>
+        </view>
       </view>
     </view>
     <view slot="bottom" class="bottom" wx:if="{{orderItem.STATUS != '交易关闭'}}">
-      <button  class="bottom-rect main-bgcolor" bindtap="closeOrder">交易关闭</button>
-      <!-- <button formType="submit" class="bottom-rect main-bgcolor">处 理</button> -->
+      <button  class="bottom-rect main-bgcolor" bindtap="leaveMsgToSeller">给卖家留言</button>
     </view>
 </lm-framework>
-<sj-confirm visible="{{showConfirmOff}}" addLineHeight="0" title="确认交易关闭" confirmText="确认" cancelText="取消"
-    catchConfirmEvent="confirmOff">
-    <view slot='content' class="delete-confirm-content">
-        <text>确认交易关闭吗？</text>
-    </view>
-</sj-confirm>

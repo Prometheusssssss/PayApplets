@@ -178,6 +178,7 @@ Page({
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
+      KID:-1,
       THEME:'发货提醒',
       USER_ID: item.BUY_USER_ID,
       USER_NAME: item.BUY_USER_NAME,
@@ -201,6 +202,7 @@ Page({
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
+      KID:-1,
       THEME:'收货提醒',
       USER_ID: item.BUY_USER_ID,
       USER_NAME: item.BUY_USER_NAME,
@@ -225,7 +227,7 @@ Page({
     var that = this;
     var orderItem = e.currentTarget.dataset.item;
     wx.navigateTo({
-      url: `../customerOrder/customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`,
+      url: `../mySold/mySold-detail?orderItem=${JSON.stringify(orderItem)}`,
     })
   }
 })

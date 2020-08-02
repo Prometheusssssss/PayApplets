@@ -48,8 +48,8 @@
                                  <!-- <button wx:if="{{store.show_customer_service==1}}" class="flex-grow-0 flex-y-center bar-bottom-btn" open-type="contact" send-message-title="商品" send-message-img="{{goods.pic_list[0].pic_url}}" send-message-path="/pages/goods/goods?id={{id}}" bindcontact='contact' show-message-card plain> </button> -->
 
                                 <button class="outline-rectangle" open-type="contact" send-message-title="交易单号：{{item.CODE}}" send-message-img="assets/img/wechat.png" send-message-path="/pages/myBought/myBought"  catchcontact="handleContact" show-message-card >联系客服</button>
-                                <button class="outline-rectangle button-orange" data-item="{{item}}" wx:if="{{item.STATUS == '待发货'}}" bindtap="remindShip">提醒发货</button>
-                                <button class="outline-rectangle button-orange" data-item="{{item}}"  wx:if="{{item.STATUS == '待收货'}}" bindtap="confirmReceipt">确认收货</button>
+                                <button class="outline-rectangle button-orange" data-item="{{item}}" wx:if="{{item.STATUS == '待发货'}}" catchtap="remindShip">提醒发货</button>
+                                <button class="outline-rectangle button-orange" data-item="{{item}}"  wx:if="{{item.STATUS == '待收货'}}" catchtap="confirmReceipt">确认收货</button>
                             </view>
                             
                         </view>

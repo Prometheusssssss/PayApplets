@@ -212,28 +212,6 @@ Page({
             showUpload:false
           })
         }
-
-        
-
-        //图片选择完就可以显示在本地，可以提交的时候再去存入oss，换入可直接访问的图片链接，存入数据库
-        //将压缩或者不压缩图片本地连接上传给oss，oss返回带域名可以直接访问的图片链接，本地将图片链接逗号拼接，保存的时候存入数据库
-        // for (var i = 0; i < uploaderList.length; i++) {
-        //   wx.uploadFile({
-        //     url: 'xxxxx',
-        //     filePath: uploaderList[i],
-        //     name: 'files',
-        //     formData: {
-        //       files: uploaderList,
-        //     },
-        //     success: function (res) {
-        //        var id = JSON.parse(res.data).data.attId
-        //         that.setData({
-        //         id: that.data.id + `${id},`,
-        //         joinString: (that.data.id + `${id},`).slice(0, -1)
-        //       })
-        //     }
-        //   })
-        // }
       }
     })
   },
@@ -275,7 +253,7 @@ Page({
     var that = this;
     //选择图片
     wx.chooseImage({//调起选择图片
-      count: 5 - that.data.uploaderDetailNum, // 默认6
+      count: 10 - that.data.uploaderDetailNum, // 默认6
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -288,7 +266,7 @@ Page({
         that.setData({
           uploaderDetailNum: that.data.uploaderDetailList.length
         })
-        if (that.data.uploaderDetailList.length == 5) {
+        if (that.data.uploaderDetailList.length == 10) {
           that.setData({
             showDetailUpload:false
           })
@@ -356,7 +334,17 @@ Page({
     var form = e.detail.value;
     // 校验必填项，专区，大区，价格（非空数字），商品名称，
     var areaName = data.areaList[data.areaIndex].NAME;
-    var serverName = data.serverList[data.serverIndex].NAME;
+    var serverName = data.serverList[data.serverIndex].NAME; 
+    var authorizeSeller = app.getUser().authorizeSeller;
+    //没有卖家授权
+    if(!authorizeSeller){
+      wx.showToast({
+        title:'当前仅限授权卖家发布商品，如需开通卖家功能请联系客服',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     if (common.validators.isEmptyText(areaName, '游戏专区')||common.validators.isEmptyText(serverName, '游戏大区') || common.validators.isEmptyText(form.NAME, '商品名称') ) {
       return;
     }

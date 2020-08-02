@@ -78,14 +78,15 @@ Page({
             url: data.IMG_URL,
             isManager: data.IS_SA,
             tel: data.PHONE,
+            authorizeSeller: data.AUTHORIZED_SELLER
           };
           app.setUser(info)
-          wx.switchTab({
-            url: '../order/order',
-          })
           // wx.switchTab({
-          //   url: '../publish/publish',
+          //   url: '../order/order',
           // })
+          wx.switchTab({
+            url: '../user/user',
+          })
           that.setData({
             isLogin : true
           })
@@ -185,6 +186,7 @@ Page({
                 url: data.IMG_URL,
                 isManager: data.IS_SA,
                 tel: data.PHONE,
+                authorizeSeller: data.AUTHORIZED_SELLER
               };
               app.setUser(info)
               wx.switchTab({

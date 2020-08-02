@@ -1,0 +1,24 @@
+<view>
+    <textarea bindinput="bindChangeTextArea" value="{{value}}"
+        placeholder="请输入留言" auto-focus="true" />
+</view>
+<view class="upload-view">
+  <view class="picker-title">上传图片：</view>
+    <view class='upload'>
+        <!-- 根据已选择的图片临时路径数组展示图片-->
+        <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+            <!-- 删除-->
+            <!-- <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="30" color="red"/> -->
+            <i class="icon icon-close ui_uploader_item_icon icon-red" data-index="{{index}}" bindtap='clearImg' ></i>
+            <!-- 图片-->
+            <image class="special-image" bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+        </view>
+          <!-- 上传按钮+框 -->
+        <view class="image" wx:if="{{showUpload}}" > 
+            <image  bindtap='upload' mode='aspectFit' src="/assets/img/photo.png" ></image>
+        </view>
+    </view>
+</view>
+<view class="bottom-content">
+        <button  class="bottom-rect long " bindtap="saveMsg">保存</button>
+</view>

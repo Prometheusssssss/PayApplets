@@ -104,6 +104,7 @@ Page({
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
+      KID: -1,
       THEME:'交易关闭提醒',
       USER_ID: item.SELL_USER_ID,
       USER_NAME: item.SELL_USER_NAME,

@@ -79,6 +79,7 @@ Page({
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
+      KID:-1,
       THEME:'提现打回提醒',
       USER_ID: that.data.extractInfo.USER_ID,
       USER_NAME: that.data.extractInfo.USER_NAME,
@@ -234,50 +235,32 @@ Page({
         })
       }
     })
-    // app.ManageExecuteApi('/api/_cud/createAndUpdate/b_withdrawal', '', p, 'POST').then((result) => {
-    //   if (result != 'error') {
-    //     //成功之后插入账户流水为支出类型流水 调用流水表插入数据
-    //     wx.showToast({
-    //       title: '打款成功',
-    //       icon: 'none',
-    //       duration: 1500
-    //     })
-    //     that.setData({
-    //       ['extractInfo.STATUS']:'已打款',
-    //       ['extractInfo.PAY_AMOUNT']: finalApplyAmount,
-    //       ['extractInfo.PAY_USER_NAME']: app.getUser().name,//付款人
-    //       ['extractInfo.PAY_TIME']: time,//付款时间
-    //       showConfirmPay:false,
-    //     })
-    //     // that.createAccountRecord()
-    //   }
-    // })
   },
-  createAccountRecord: function(){
-    var that = this;
-    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
-    //提现审核完的流水 用户id应该是卖家的 还是客服还是买家的
-    var p = {
-      USER_ID: app.getUser().id,
-      USER_NAME: app.getUser().name,
-      USER_PHONE: app.getUser().tel,
-      TYPE: '支出',
-      RECEIVE_TYPE: '商品',
-      SELETTMENT_STATUS:'已结算',
-      SELETTMENT_TIME: time,
-      SELETTMENT_AMOUNT: that.data.finalApplyAmount,
-      ORDER_AMOUNT: that.data.extractInfo.APPLICATION_AMOUNT,
-    }
+  // createAccountRecord: function(){
+  //   var that = this;
+  //   var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+  //   //提现审核完的流水 用户id应该是卖家的 还是客服还是买家的
+  //   var p = {
+  //     USER_ID: app.getUser().id,
+  //     USER_NAME: app.getUser().name,
+  //     USER_PHONE: app.getUser().tel,
+  //     TYPE: '支出',
+  //     RECEIVE_TYPE: '商品',
+  //     SELETTMENT_STATUS:'已结算',
+  //     SELETTMENT_TIME: time,
+  //     SELETTMENT_AMOUNT: that.data.finalApplyAmount,
+  //     ORDER_AMOUNT: that.data.extractInfo.APPLICATION_AMOUNT,
+  //   }
     
-    console.log('生成账户流水参数')
-    console.log(p)
-    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_account_record', '', p, 'POST').then((result) => {
-      // wx.hideLoading()
-      if (result != 'error') {
-        console.log('生成流水成功')
-      }
-    })
-  },
+  //   console.log('生成账户流水参数')
+  //   console.log(p)
+  //   app.ManageExecuteApi('/api/_cud/createAndUpdate/b_account_record', '', p, 'POST').then((result) => {
+  //     // wx.hideLoading()
+  //     if (result != 'error') {
+  //       console.log('生成流水成功')
+  //     }
+  //   })
+  // },
   setPrice: function (e) {
     var that = this;
     var firstIn = that.data.firstIn;

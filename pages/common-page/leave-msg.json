@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText":"留言",
+  "usingComponents": {
+    "sj-button": "../../assets/my-components/button/index"
+  }
+}

@@ -21,10 +21,9 @@ text{
   display: flex;
   flex-direction: column;
   padding-left: 50rpx;
-  height: 14vh;
+  height: 10vh;
   background-color: var(--main-style);
-  padding-top: 40rpx;
-  
+  padding-top: 30rpx;
 }
 .title-info>view:first-child{
   margin-bottom: 10rpx;
@@ -47,6 +46,10 @@ text{
 }
 .bottom-content{
   margin-top: 80rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
 .bottom-rect{
   width: 600rpx !important;

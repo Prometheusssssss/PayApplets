@@ -159,6 +159,10 @@ button{
 }
 .picker-content .picker text{
   /* font-size: 28rpx; */
+  width: 450rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .picker-content .picker-detail i{
   font-size: 40rpx;

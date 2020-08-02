@@ -42,6 +42,16 @@ Page({
   },
   //“我发布的”页面
   goMyPublishPage: function(){
+    var authorizeSeller = app.getUser().authorizeSeller;
+    //没有卖家授权
+    if(!authorizeSeller){
+      wx.showToast({
+        title:'当前仅限授权卖家查看，如需开通卖家功能请联系客服',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     wx.navigateTo({
       url: '../myPublish/myPublish',
     })

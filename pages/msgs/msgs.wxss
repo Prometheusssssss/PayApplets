@@ -28,12 +28,11 @@
   background-color: white;
   border-bottom: 2rpx solid var(--line-gray);
   border-top: 2rpx solid var(--line-gray);
-  width: 100%;
+  width: calc(100% - 40rpx);
   display: flex;
-  height: 140rpx;
+  /* height: 140rpx; */
   flex-direction: column;
-  padding-left: 60rpx;
-  padding-top: 20rpx;  
+  padding: 20rpx;
 }
 .msg-info .msg-theme .msg-name{
   font-size: 28rpx;

@@ -47,7 +47,7 @@ margin-left: 10rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 16vh;
+  /* height: 16vh; */
 }
 .item-product-name-area{
   margin-bottom: 10rpx;

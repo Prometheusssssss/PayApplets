@@ -67,7 +67,7 @@ Page({
       if(uploaderList.length>=1){
         that.setData({showUpload:false})
       }
-      if(uploaderDetailList.length>=5){
+      if(uploaderDetailList.length>=10){
         that.setData({showUpload:false})
       }
       that.setData({
@@ -279,7 +279,7 @@ Page({
     var that = this;
     //选择图片
     wx.chooseImage({//调起选择图片
-      count: 5 - that.data.uploaderDetailNum, // 默认6
+      count: 10 - that.data.uploaderDetailNum, // 默认6
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -292,7 +292,7 @@ Page({
         that.setData({
           uploaderDetailNum: that.data.uploaderDetailList.length
         })
-        if (that.data.uploaderDetailList.length == 5) {
+        if (that.data.uploaderDetailList.length == 10) {
           that.setData({
             showDetailUpload:false
           })
@@ -361,6 +361,16 @@ Page({
     // 校验必填项，专区，大区，价格（非空数字），商品名称，
     var areaName = data.areaList[data.areaIndex].NAME;
     var serverName = data.serverList[data.serverIndex].NAME;
+    var authorizeSeller = app.getUser().authorizeSeller;
+    //没有卖家授权
+    if(!authorizeSeller){
+      wx.showToast({
+        title:'当前仅限授权卖家发布商品，如需开通卖家功能请联系客服',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     if (common.validators.isEmptyText(areaName, '游戏专区')||common.validators.isEmptyText(serverName, '游戏大区') || common.validators.isEmptyText(form.NAME, '商品名称') ) {
       return;
     }
@@ -391,7 +401,7 @@ Page({
     var shelfTime = common.time.formatTimeTwo(timestamp/1000,'Y-M-D h:m:s');
     var offTime = common.time.formatTimeTwo(newtimestamp/1000,'Y-M-D h:m:s');
     var p = {
-      // KID: -1,
+      KID: that.data.publishInfo.KID,
       NAME:form.NAME,//商品名称
       NEED_LEVEL:form.NEED_LEVEL,
       DESCRIPTION: data.publishInfo.DESCRIPTION,//商品详情
@@ -412,12 +422,7 @@ Page({
       // SHELF_TIME: shelfTime,
       // OFF_SHELF_TIME: offTime
     }
-    if (that.data.pagetype == 'add') {
-      p.KID = -1;
-    }
-    else {
-      p.KID = that.data.publishInfo.KID;
-    }
+  
     console.log('发布')
     console.log(JSON.stringify(p))
     that.createProduct(p)
