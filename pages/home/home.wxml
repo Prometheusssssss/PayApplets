@@ -1,2 +1,25 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+  <lm-framework sliderBar="false" contentBg="var(--page-bg)" id="lm-framework">
+    <view slot='content' class="content">
+      <block wx:if="{{bannerList.length>0}}">
+          <swiper class="banner-list" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500"
+              indicator-color="#8799a3" indicator-active-color="var(--main-style)">
+              <swiper-item wx:for="{{bannerList}}">
+                  <div data-item="{{item}}">
+                      <image src="{{item.PICTURE_URL}}" data-item="{{item}}" mode="aspectFit"></image>
+                  </div>
+              </swiper-item>
+          </swiper>
+      </block>
+      <view class="area-list">
+        <view wx:if="{{areaList.length>0}}" class="area-info" wx:for="{{areaList}}" bindtap="goPublishPage">
+            <view >
+              <image src="{{item.URL}}" data-item="{{item}}" mode="aspectFit"></image>
+            </view>
+            <view>
+                <text>{{item.NAME}}</text>
+            </view>
+        </view>
+      </view>
+    </view>
+    
+  </lm-framework>

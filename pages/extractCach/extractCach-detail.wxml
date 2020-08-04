@@ -29,10 +29,10 @@
           <view class="bought-detail">
               <text>提现账户：</text><text>{{extractInfo.ACCOUNT}}</text>
           </view>
-          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已审核' || extractInfo.STATUS == '已打款'}}">
+          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已审核' || extractInfo.STATUS == '已打款' || extractInfo.STATUS == '已打回'}}">
               <text>审核人：</text><text>{{extractInfo.APPROVAL_USER_NAME}}</text>
           </view>
-          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已审核' || extractInfo.STATUS == '已打款'}}">
+          <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已审核' || extractInfo.STATUS == '已打款' || extractInfo.STATUS == '已打回'}}">
               <text>审核时间：</text><text>{{extractInfo.APPROVAL_TIME}}</text>
           </view>
           <view class="bought-detail" wx:if="{{extractInfo.STATUS == '已打款'}}">
@@ -46,7 +46,7 @@
     </view>
     <view slot="bottom" class="bottom" wx:if="{{extractInfo.STATUS != '已打回' && extractInfo.STATUS != '已打款'}}">
       <view wx:if="{{extractInfo.STATUS != '待审核'}}"></view>
-      <button  class="bottom-rect gray" bindtap="refuseApply"  wx:if="{{extractInfo.STATUS == '待审核'}}">打回</button>
+      <button  class="bottom-rect gray" bindtap="refuseApply"  wx:if="{{extractInfo.STATUS == '待审核'}}">打 回</button>
       <button bindtap="checkApply" class="bottom-rect main-bgcolor" wx:if="{{extractInfo.STATUS == '待审核'}}">审 核</button>
       <button bindtap="payApply" wx:if="{{extractInfo.STATUS == '已审核'}}" class="bottom-rect main-bgcolor" >打 款</button>
     </view>
@@ -65,6 +65,13 @@
     </view>
 </sj-confirm>
 
+<sj-confirm visible="{{showConfirmNormalApproval}}" addLineHeight="0" title="确认审核" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmServerApproval">
+    <view slot='content' class="delete-confirm-content">
+        <text>用户的提现金额是{{convert.toMoney(extractInfo.APPLICATION_AMOUNT)}}，确认审核通过吗？</text>
+    </view>
+</sj-confirm>
+
 <sj-confirm visible="{{showConfirmServerPay}}" addLineHeight="0" title="确认打款" confirmText="确认" cancelText="取消"
     catchConfirmEvent="confirmServerPay">
     <view slot='content' class="delete-confirm-content">
@@ -78,7 +85,7 @@
             <text class="value">{{extractInfo.USER_NAME}}</text>
         </view>
         <view class="product-unit">
-            <text class="title">提现金额</text>
+            <text class="title">付款金额</text>
             <text class="value">{{finalApplyAmount}}</text>
         </view>
         <view class="input-num-mask-layer">

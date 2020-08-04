@@ -49,7 +49,7 @@ Page({
           })
         })
         that.setData({msgList:msgList})
-        // debugger
+        
       }
     })
   },

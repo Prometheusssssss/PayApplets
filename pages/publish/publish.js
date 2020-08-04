@@ -39,7 +39,7 @@ Page({
     uploaderDetailList: [],              //保存上传详情图片url的数组
     uploaderDetailNum: 0,             //已经上传的详情图片数目
     showDetailUpload: true,           //控制上传框的显隐
-    
+    authorizeSeller:false,
     
   },
 
@@ -62,7 +62,6 @@ Page({
       });
       //获取对应的index
       var item = publishInfo.publishInfo;
-      // debugger
       var uploaderList = item.PHOTO_URL.split(',');
       var uploaderDetailList = item.DESC_PHOTO.split(',');
       
@@ -77,7 +76,7 @@ Page({
       })
     }else{
       wx.setNavigationBarTitle({
-        title: "新增发布",
+        title: "发布商品",
       });
       var publishInfo = {
         DESCRIPTION: '',
@@ -90,6 +89,8 @@ Page({
 
   onShow: function(){
     var that = this;
+    var authorizeSeller = app.getUser().authorizeSeller;
+    that.setData({authorizeSeller:authorizeSeller})
     that.loadArea();
   },
   loadArea:function(){
@@ -177,11 +178,26 @@ Page({
 
   },
  
+  // convertNameFirst: function ({
+  //   detail
+  // }) {
+  //   var that = this;
+  //   var authorizeSeller = app.getUser().authorizeSeller;
+  //   //没有卖家授权
+  //   if(!authorizeSeller){
+  //     wx.showToast({
+  //       title:'当前仅限授权卖家发布商品，如需开通卖家功能请联系客服',
+  //       icon:'none',
+  //       duration:2000
+  //     })
+  //     return
+  //   }
+  // },
   remarkEvent: function(e){
     var that = this;
     var publishInfo = that.data.publishInfo;
     var value = publishInfo.DESCRIPTION == undefined ? '' : publishInfo.DESCRIPTION;
-    // debugger
+    
       var updatelocalText = "publishInfo.DESCRIPTION";
       var title = "商品详情"
       wx.navigateTo({

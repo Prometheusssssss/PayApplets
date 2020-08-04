@@ -16,7 +16,8 @@ Page({
     accountBalance:0,
     showConfirmServerPay:false,
     lastTime:0,
-    showConfirmApproval: false
+    showConfirmApproval: false,
+    showConfirmNormalApproval: false
   },
 
   /**
@@ -53,8 +54,13 @@ Page({
   },
   confirmOff:function(){
     var that = this;
+    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
-      KID: that.data.extractInfo.KID,
+      // 审核人 审核时间
+      KID: that.data.extractInfo.KID,//审核人id name 审核时间
+      APPROVAL_USER_NAME: app.getUser().name,
+      APPROVAL_USER_ID: app.getUser().id,
+      APPROVAL_TIME: time,
       STATUS: '已打回',
     }
     app.ManageExecuteApi('/api/_cud/createAndUpdate/b_withdrawal', '', p, 'POST').then((result) => {
@@ -67,6 +73,8 @@ Page({
         })
         that.returnBackMsg()
         that.setData({
+          ['extractInfo.APPROVAL_USER_NAME']: app.getUser().name,
+          ['extractInfo.APPROVAL_TIME']: time,
           ['extractInfo.STATUS']:'已打回',
           showConfirmOff:false
         })
@@ -100,9 +108,12 @@ Page({
     var accountBalance = that.data.accountBalance;
     if(that.data.extractInfo.APPLICATION_AMOUNT > accountBalance){
         that.setData({showConfirmApproval:true})
+    }else{
+      that.setData({showConfirmNormalApproval:true})
     }
   },
   confirmServerApproval:function(){
+    var that = this;
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
       KID: that.data.extractInfo.KID,//审核人id name 审核时间
@@ -121,9 +132,10 @@ Page({
         })
         that.setData({
           ['extractInfo.STATUS']:'已审核',
-          ['extractInfo.APPROVAL_USER_NAME']: app.getUser().id,
+          ['extractInfo.APPROVAL_USER_NAME']: app.getUser().name,
           ['extractInfo.APPROVAL_TIME']: time,
-          showConfirmApproval:false
+          showConfirmApproval:false,
+          showConfirmNormalApproval: false
         })
       }
     })
@@ -155,7 +167,7 @@ Page({
     if (common.validators.isInValidNum(finalApplyAmount, '价格') ) {
       return;
     }
-    if(finalApplyAmount>= originApplyAmount){
+    if(finalApplyAmount> originApplyAmount){
       wx.showToast({
         title: '打款金额不能高于提现金额',
         icon:'none',

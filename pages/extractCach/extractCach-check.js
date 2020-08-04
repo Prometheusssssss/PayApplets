@@ -46,23 +46,12 @@ Page({
       "compared": "like",
       "filterValue": data.searchText
     },
-    // {
-    //   "fieldName": "USER_PHONE",
-    //   "type": "string",
-    //   "compared": "like",
-    //   "filterValue": data.searchText
-    // },
     {
       "fieldName": "STATUS",
       "type": "date",
       "compared": "=",
       "filterValue": data.selectStatus
-    }, {
-      "fieldName": "USER_ID",
-      "type": "date",
-      "compared": "=",
-      "filterValue": app.getUser().id
-    },{ //卖家id
+    }, { //卖家id
       "fieldName": "APPLICATION_TIME",
       "type": "date",
       "compared": ">",
@@ -114,7 +103,7 @@ Page({
     var that = this;
     var endTime = common.time.addOneDay(detail.date2);
     var newDay = common.time.formatDay(new Date(endTime))
-    // debugger
+    
     that.setData({
       startTime: detail.date1,
       endTime: newDay

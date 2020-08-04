@@ -6,7 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo:{}
+    userInfo:{},
+    imageUrl:'',
+    tmpPath:'',
+    isPic : false,
   },
 
   /**
@@ -18,9 +21,122 @@ Page({
 
   onShow: function(){
     var that = this;
-    that.loadUserInfo()
+    that.loadUserInfo();
+    // await that.getImageUrl()
+    // that.createCanvas()
   },
   
+  //画完图片调起保存图片功能
+  createCanvas : async function(){
+    var that = this;
+    var imageUrl = await new Promise(r => {
+      wx.getImageInfo({
+          src: 'https://oss.dazuiba.cloud:8003//api/oss/20200804-0deffc20-1562-4720-97b0-33aa768142ba/image',
+          success(gInfo) {
+               // 下载成功 即可获取到本地路径
+              r(gInfo.path)
+          }
+      })
+  })
+    let ctx = wx.createCanvasContext('share_canvas', this);
+    // debugger
+    //画图片
+    ctx.drawImage(imageUrl, 0, 0, 300, 400);
+    ctx.draw(true,setTimeout(function(){
+       //画完了转成图片链接
+        wx.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            width: 500,
+            height: 400,
+            canvasId: 'share_canvas',
+            success: function(res){
+                console.log('res.tempFilePath')
+                console.log(res.tempFilePath)
+                that.setData({tmpPath : res.tempFilePath})
+            },
+        })
+    },1000));
+  },
+  saveImg(){
+    let that = this;
+    console.log(1)
+    wx.getSetting({
+        success: function(res){
+            //不存在相册授权
+            if (!res.authSetting['scope.writePhotosAlbum']){
+                wx.authorize({
+                    scope: 'scope.writePhotosAlbum',
+                    success: function(){
+                        that.savePhoto();
+                        that.setData({
+                            isPic: false
+                        })
+                    },
+                    fail: function(err){
+                        that.setData({
+                            isPic: true
+                        })
+                    }
+                })
+            }else{
+                that.savePhoto(); 
+            }
+        }
+    })
+    
+
+ },
+ handleSetting(e){
+     var that = this;
+     if (!e.detail.authSetting['scope.writePhotosAlbum']){
+         wx.showModal({
+             title: '警告',
+             content: '不授权无法保存',
+             showCancel: false
+         })
+         that.setData({
+             isPic: true
+         })
+     }else{
+         wx.showToast({
+             title: '保存成功'
+         })
+         that.setData({
+             isPic: false
+         })
+     }
+ },
+ savePhoto(){
+   var that = this;
+     let urlStr = that.data.tmpPath;
+     var that = this;
+     //downloadFile 调起保存
+     wx.downloadFile({
+         url: urlStr,
+         success: function (res) {
+             wx.saveImageToPhotosAlbum({
+                 filePath: res.tempFilePath,
+                 success: function (data) {
+                     wx.showToast({
+                         title: '保存成功',
+                         icon: 'success',
+                         duration: 1500
+                     })
+
+                 }
+             })
+         }
+     })
+ },
+ bindGetUserInfo(e){
+     if(!e.detail.userInfo){
+        console.log('用户点击了取消')
+     }else{
+         console.log(e.detail.userInfo)
+     } 
+},
+//生成海报end
   loadUserInfo:function(){
     var that = this;
     var p = {"KID": app.getUser().id}
@@ -33,7 +149,8 @@ Page({
             name: dataList[0].NAME,
             url: dataList[0].IMG_URL,
             isManager: dataList[0].IS_SA,
-            tel: dataList[0].PHONE
+            tel: dataList[0].PHONE,
+            authorizeSeller: dataList[0].AUTHORIZED_SELLER
           };
         app.setUser(info)
         that.setData({userInfo: dataList[0]})
@@ -57,6 +174,16 @@ Page({
     })
   },
   goMySoldPage: function(){
+    var authorizeSeller = app.getUser().authorizeSeller;
+    //没有卖家授权
+    if(!authorizeSeller){
+      wx.showToast({
+        title:'当前仅限授权卖家查看，如需开通卖家功能请联系客服',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     wx.navigateTo({
       url: '../mySold/mySold',
     })
@@ -113,6 +240,11 @@ Page({
    
   },
   extractCashRecord:function(){
+    var authorizeSeller = app.getUser().authorizeSeller;
+    //没有卖家授权
+    if(!authorizeSeller){
+      return
+    }
     wx.navigateTo({
       url: '../extractCach/extractCach-record',
     })

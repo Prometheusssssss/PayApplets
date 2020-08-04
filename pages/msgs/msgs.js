@@ -23,7 +23,7 @@ Page({
   onShow:function(){
     var that = this;
     // that.lmFramework.dealPageNoSize('enter');
-    // debugger
+    
   },
   callBackPageSetData: function (e) {
     var that = this;

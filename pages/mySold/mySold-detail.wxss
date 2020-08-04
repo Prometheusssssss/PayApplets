@@ -20,8 +20,8 @@ page{
   align-items: center;
 }
 .special-image{
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
 }
 .customer-detail{
   /* background-color:white */
@@ -56,7 +56,7 @@ page{
 
 .my-product-item {
   width: calc(100% - 40rpx);
-  border-bottom: 2rpx solid var(--page-bg);
+  border-bottom: 10rpx solid var(--page-bg);
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -105,7 +105,7 @@ page{
   padding: 20rpx 30rpx;
   display: flex;
   flex-direction: column;
-  border-bottom: 2rpx solid var(--page-bg);
+  border-bottom: 18rpx solid var(--page-bg);
   margin-top: 12rpx;
 }
 .customer-bought-info .bought-title,.customer-bought-info .bought-detail{

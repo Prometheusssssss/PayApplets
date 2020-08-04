@@ -43,13 +43,13 @@
                                 <!-- </view> -->
                             </view>
                             <view class="buttons-view">
-                                <contact-button type="default-light"   size="20" session-from="weapp">
-                                </contact-button>
+                                <!-- <contact-button type="default-light"   size="20" session-from="weapp">
+                                </contact-button> -->
                                  <!-- <button wx:if="{{store.show_customer_service==1}}" class="flex-grow-0 flex-y-center bar-bottom-btn" open-type="contact" send-message-title="商品" send-message-img="{{goods.pic_list[0].pic_url}}" send-message-path="/pages/goods/goods?id={{id}}" bindcontact='contact' show-message-card plain> </button> -->
 
                                 <button class="outline-rectangle" open-type="contact" send-message-title="交易单号：{{item.CODE}}" send-message-img="assets/img/wechat.png" send-message-path="/pages/myBought/myBought"  catchcontact="handleContact" show-message-card >联系客服</button>
                                 <button class="outline-rectangle button-orange" data-item="{{item}}" wx:if="{{item.STATUS == '待发货'}}" catchtap="remindShip">提醒发货</button>
-                                <button class="outline-rectangle button-orange" data-item="{{item}}"  wx:if="{{item.STATUS == '待收货'}}" catchtap="confirmReceipt">确认收货</button>
+                                <button class="outline-rectangle button-orange" data-item="{{item}}"  wx:if="{{item.STATUS == '待收货'}}" catchtap="receipt">确认收货</button>
                             </view>
                             
                         </view>
@@ -60,5 +60,12 @@
        
     </view>
 </lm-framework>
+<sj-confirm visible="{{showConfirmReceipt}}" addLineHeight="0" title="确认收货" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmReceipt">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认收货后交易将完成，请确认是否已收到货物？</text>
+    </view>
+</sj-confirm>
+
 
 

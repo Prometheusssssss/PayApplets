@@ -176,3 +176,24 @@ button{
   height: 36rpx;
   line-height: 36rpx;
 }
+.no-authorize{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin: 50rpx; */
+  margin: 0 50rpx;
+  text-align: center;
+  position: relative;
+  top: 70rpx;
+}
+.no-authorize image{
+  width: 440rpx;
+  height: 480rpx;  
+
+}
+.no-authorize .tip{
+  color: var(--text-gray);
+  font-size: 40rpx;
+  letter-spacing: 2rpx;
+  line-height: 54rpx;
+}

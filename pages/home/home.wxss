@@ -1,1 +1,31 @@
 /* pages/home/home.wxss */
+.banner-list {
+  min-height: 370rpx;
+  max-height: 370rpx;
+}
+
+.banner-list image {
+  width: 100%;
+  display: block;
+  height: 100%;
+  margin: 0;
+  pointer-events: none;
+}
+.area-list{
+  display: flex;
+  flex-direction: row;
+  padding: 30rpx;
+  justify-content: space-around;
+  background: white;
+  margin-top: 30rpx;
+}
+.area-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.area-info image{
+  width: 140rpx;
+  height: 140rpx;
+  
+}

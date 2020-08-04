@@ -34,7 +34,7 @@ Page({
       wx.getSetting({
         success: res=> {
         if (res.authSetting['scope.userInfo']) {
-          // debugger
+          
         // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: res=> {
@@ -85,7 +85,7 @@ Page({
           //   url: '../order/order',
           // })
           wx.switchTab({
-            url: '../user/user',
+            url: '../home/home',
           })
           that.setData({
             isLogin : true
@@ -138,7 +138,6 @@ Page({
         
         wx.checkSession({success:res=>{
           console.log('有效期内')
-          // debugger
         },fail:erro=>{
           console.log('已经过期')
           
@@ -190,7 +189,7 @@ Page({
               };
               app.setUser(info)
               wx.switchTab({
-                url: '../publish/publish',
+                url: '../home/home',
               })
               that.setData({
                 isLogin : true,
@@ -234,7 +233,7 @@ Page({
             name: nickName.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "") ,
             url: data.avatarUrl
         }
-        // debugger
+        
         that.setData({
           userInfo:userInfo,
           hasUserInfo: true,

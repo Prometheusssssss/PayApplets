@@ -31,6 +31,11 @@
 </view>
 
 <view class="menu-items">
+    <view class="invitation-custom" bindtap="goMyBoughtPage">
+        <view class="icon icon-qianbao"></view>
+        <view class="text">我买到的</view>
+    </view>
+
     <view class="cashout" bindtap="goMyPublishPage">
         <i class="icon icon-fabu"></i>
         <view class="text">我发布的</view>
@@ -41,10 +46,7 @@
         <view class="text">我卖出的</view>
     </view>
 
-    <view class="invitation-custom" bindtap="goMyBoughtPage">
-        <view class="icon icon-qianbao"></view>
-        <view class="text">我买到的</view>
-    </view>
+    
 
     <view class="second-hod-manager" bindtap="goMyCollectPage">
         <view class="icon icon-collect"></view>
@@ -105,6 +107,10 @@
       </view>
       <i class="icon icon-arrow-right"></i>
     </view>
+    <!-- <view>
+      <button open-type="openSetting" bindopensetting="handleSetting" wx:if="{{isPic}}">授权保存</button> 
+      <button bindtap="saveImg" wx:else>保存图片</button>
+    </view> -->
 
     <!-- <view wx:if="{{isInTestAliyun}}" class="menu-item group" bindtap="getDebugParam">
       <view>
@@ -122,6 +128,8 @@
       <i class="icon icon-arrow-right"></i>
     </view> -->
   </view>
+  <!-- <canvas canvas-id='share_canvas'
+    style='width:500px;height:400px;position:fixed;bottom:-400px;left:0;'></canvas> -->
 
 
 

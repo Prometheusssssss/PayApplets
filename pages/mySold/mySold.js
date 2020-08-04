@@ -77,7 +77,7 @@ Page({
       ];
     } else {
       filter = [{
-          "fieldName": "NAME",
+          "fieldName": "PRODUCT_NAME",
           "type": "string",
           "compared": "like",
           "filterValue": data.searchText
@@ -174,7 +174,7 @@ Page({
   shipMsg:function(order){
     var that = this;
     var item = order;
-    // debugger
+    
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
@@ -198,7 +198,7 @@ Page({
   remindReceipt: function(e){
     var that = this;
     var item = e.target.dataset.item;
-    // debugger
+    
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {

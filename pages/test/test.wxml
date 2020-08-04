@@ -37,8 +37,13 @@
                 </view>
             </view>
         </form>
+        <view>
+            <button open-type="openSetting" bindopensetting="handleSetting" wx:if="{{isPic}}">授权保存</button> 
+            <button bindtap="saveImg" wx:else>保存图片</button>
+        </view>
     </view>
-   
+   <canvas canvas-id='share_canvas'
+    style='width:500px;height:400px;position:fixed;bottom:-400px;left:0;'></canvas>
 
 </lm-framework>
 

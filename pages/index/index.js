@@ -57,7 +57,7 @@ Page({
     console.log(e)
     
     app.globalData.userInfo = e.detail.userInfo;
-    // debugger;
+   
     // if()
     this.setData({
       userInfo: e.detail.userInfo,

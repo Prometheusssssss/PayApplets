@@ -19,6 +19,10 @@ Page({
     uploaderList: [],              //保存上传图片url的数组
     uploaderNum: 0,             //已经上传的图片数目
     showUpload: true,           //控制上传框的显隐
+
+    imageUrl:'',
+    tmpPath:'',
+    isPic : false,
   },
 
   /**
@@ -53,7 +57,6 @@ Page({
    }, 
    tap(){ 
     var that = this; 
-    // debugger;
     that.setData({ 
      isFocus:true, 
     }) 
@@ -65,12 +68,43 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: async function () {
     var that = this;
     that.sjFramework = that.selectComponent("#lm-framework");
     that.sjFramework.dealPageNoSize('enter')
+    await that.getImageUrl()
+    // that.createCanvas()
   },
-
+  getImageUrl:function(){
+    var that = this;
+    debugger
+    //网上路径转成本地路径
+    wx.getImageInfo({
+      src: 'https://img3.doubanio.com/view/photo/l/public/p2327709524.jpg',
+      success: function (res) {
+        console.log(res.width)
+        console.log(res.path)
+        that.setData({imageUrl:res.path})
+      }
+    })
+  },
+  createCanvas:function(){
+    var that = this;
+    let ctx = wx.createCanvasContext('share_canvas', this);
+    
+    ctx.drawImage(that.data.imageUrl, 0, 0, 300, 400);
+    ctx.draw(true,setTimeout(function(){
+        wx.canvasToTempFilePath({
+            canvasId: 'shareCanvas',
+            success: function(res){
+                // that.data.tmpPath = res.tempFilePath
+                console.log('res.tempFilePath')
+                console.log(res.tempFilePath)
+                that.setData({tmpPath : res.tempFilePath})
+            },
+        })
+    },1000));
+  },
 
   callBackPageSetData: function (e) {
     var that = this;
@@ -135,7 +169,6 @@ Page({
         that.setData({
           uploaderNum: that.data.uploaderList.length
         })
-        // debugger
         if (uploaderList.length == 6) {
           that.setData({
             showUpload:false

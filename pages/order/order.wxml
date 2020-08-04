@@ -30,7 +30,7 @@
                 <image class='item-product-image {{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"no-image":""}}'
                 mode='aspectFit' src='{{(item.PHOTO_URL==""||item.PHOTO_URL==null)?"":item.PHOTO_URL+"/200x200"}}'>
                 </image>
-                <view class='item-product-info'>
+                <view class='item-product-info' data-item="{{item}}" bindtap="openOrderDetailPage">
                     <view class="item-product-name-area">
                         <text class='item-product-name'>{{item.NAME}}</text>
                     </view>
@@ -39,7 +39,7 @@
                             <text class='item-product-price'>{{convert.toMoney(item.PRICE)}}</text>
                         </view>
                         <view>
-                        <sj-button shape="outline-rectangle" title="立即购买" buttonColor="main-color outline long" data-item="{{item}}" bindButtonClick="openOrderDetailPage" />
+                        <sj-button shape="outline-rectangle" title="立即购买" buttonColor="main-color outline long"   data-item="{{item}}" bindButtonClick="openOrderDetailPage" />
                         </view>
                     </view>
                 </view>

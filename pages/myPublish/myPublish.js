@@ -20,7 +20,7 @@ Page({
         NAME: '上架中'
       },
       {
-        NAME: '已售卖'
+        NAME: '已卖出'
       }, {
         NAME: '已下架'
       },
@@ -223,7 +223,7 @@ Page({
     var that = this;
     var newPrice = that.data.newPrice;
     var oldPrice = that.data.currentProductInfo.PRICE;
-    // debugger
+    
     if (common.validators.isInValidNum(newPrice, '价格') ) {
       return;
     }

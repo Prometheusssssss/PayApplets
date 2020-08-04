@@ -62,8 +62,16 @@ Page({
       });
       //获取对应的index
       var item = areaInfo.publishInfo;
-      var uploaderList = item.PHOTO_URL.split(',');
-      var uploaderDetailList = item.DESC_PHOTO.split(',');
+      var uploaderList = [];
+      var uploaderDetailList = [];
+      if(item.PHOTO_URL != ''){
+        uploaderList = item.PHOTO_URL.split(',');
+      }
+      if(item.DESC_PHOTO != ''){
+          uploaderDetailList = item.DESC_PHOTO.split(',');
+      }
+      
+      
       if(uploaderList.length>=1){
         that.setData({showUpload:false})
       }
@@ -185,7 +193,7 @@ Page({
     var that = this;
     var publishInfo = that.data.publishInfo;
     var value = publishInfo.DESCRIPTION == undefined ? '' : publishInfo.DESCRIPTION;
-    // debugger
+    
       var updatelocalText = "publishInfo.DESCRIPTION";
       var title = "商品详情"
       wx.navigateTo({

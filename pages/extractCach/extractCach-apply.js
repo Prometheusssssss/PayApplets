@@ -33,6 +33,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     that.loadUserAccountAmount()
   },
   loadUserAccountAmount:function(){
@@ -118,8 +119,11 @@ Page({
       wx.hideLoading()
       if (result != 'error') {
         setTimeout(()=>{
-          wx.navigateTo({
-            url: '../extractCach/extractCach-record',
+          // wx.navigateTo({
+          //   url: '../extractCach/extractCach-record',
+          // })
+          wx.navigateBack({
+            delta:1
           })
         },200)
         wx.showToast({

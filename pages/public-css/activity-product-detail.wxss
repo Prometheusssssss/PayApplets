@@ -112,8 +112,8 @@ swiper-item image {
 }
 
 .detail-group-title-bar {
-  height: 60rpx;
-  line-height: 60rpx;
+  /* height: 60rpx;
+  line-height: 60rpx; */
   border-bottom: 2rpx solid var(--line-gray);
   margin: 0 8rpx;
   padding: 20rpx 24rpx 20rpx 24rpx;
@@ -127,8 +127,8 @@ swiper-item image {
 
 .detail-group-title-bar.description{
   font-size: 32rpx;
-  height: 50rpx;
-  line-height: 50rpx;
+  /* height: 50rpx;
+  line-height: 50rpx; */
 }
 
 .detail-group-image {

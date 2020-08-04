@@ -112,6 +112,12 @@ Page({
               "filterValue": data.searchText
             },
             {
+              "fieldName":"STATUS",
+              "type":"date",
+              "compared":"=",
+              "filterValue": '上架中'
+            },
+            {
               "fieldName":"GAME_ZONE_KID",
               "type":"date",
               "compared":"=",

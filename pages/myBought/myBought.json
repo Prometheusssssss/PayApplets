@@ -6,6 +6,7 @@
     "i-tabs": "../../assets/iview-weapp/tabs/index",
     "i-tab": "../../assets/iview-weapp/tab/index",
     "sj-search": "../../../assets/my-components/search/index",
+    "sj-confirm": "../../../assets/my-components/mask-confirm/index",
     "sj-button": "../../../assets/my-components/button/index"
   }
 }

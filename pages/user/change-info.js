@@ -26,7 +26,6 @@ Page({
     var that = this;
         //获取对应的index
     if(options){
-      // debugger
       var userInfo = JSON.parse(options.userInfo)
       console.log(userInfo)
       that.setData({

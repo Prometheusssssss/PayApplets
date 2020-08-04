@@ -8,14 +8,14 @@ page{
   bottom: 50rpx;
   left: 21vw
 }
-image{
+/* image{
   width: 48rpx;
   height: 48rpx;
   position: relative;
   left: 128rpx;
   z-index: 1;
   top: 88rpx;
-}
+} */
 .user-info-image{
   /* position: relative;
   left: 128rpx;
@@ -38,7 +38,7 @@ image{
   align-items: center;
   justify-content: space-around;
   height: 20vh;
-  margin-top: 220rpx;
+  margin-top: 180rpx;
 }
 .header{
   justify-content: space-start;
@@ -90,19 +90,19 @@ image{
   }
   
   .authBtn {
-    margin: 70rpx 50rpx 0 50rpx;
+    margin: 100rpx 50rpx 0 50rpx;
     /* height: 90rpx; */
     font-size: 28rpx;
     color: white;
     font-weight: 500;
-    background-color: var(--button-green);
+    background-color: var(--main-style);
     min-width: 520rpx;
     border-radius: 40rpx;
 
 }
-.authBtn:last-child{
+/* .authBtn:last-child{
   margin-top: 20rpx;
-}
+} */
 .mask-layer-content>.main-content>.content{
   display: flex;
   justify-content: space-around;
@@ -117,11 +117,27 @@ image{
 }
 .confirm-btn{
   height: 100rpx;
-  padding: 26rpx 24rpx;
+  padding: 16rpx 24rpx;
   border-radius: 0;
   font-size: 30rpx;
   font-weight: normal;
+  margin: 0;
+  width: 50%;
 }
 .confirm-btn:last-child{
   color: var(--main-style);
+}
+
+.logo-content{
+  width: 100%;
+  height: 350rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.logo-image{
+  width: 350rpx;
+  height: 350rpx;
+  
 }

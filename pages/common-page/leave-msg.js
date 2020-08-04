@@ -26,7 +26,6 @@ Page({
   onLoad: function (options) {
     var that = this;
     if(options){
-      // debugger
       var receiveInfo = JSON.parse(options.receiveInfo);
       that.setData({
         receiveInfo: receiveInfo
@@ -45,6 +44,18 @@ Page({
   },
   bindChangeTextArea: function (e) {
     var that = this;
+    console.log(e.detail.value)
+    var value = e.detail.value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "`");
+    
+    if(value.indexOf("`")){
+      value = e.detail.value.replace(/`/g, "")
+      wx.showToast({
+        title: '暂不支持表情包使用哦~',
+        icon:'none',
+        duration: 2000
+      })
+    }
+    
     that.setData({
       value: e.detail.value,
     })

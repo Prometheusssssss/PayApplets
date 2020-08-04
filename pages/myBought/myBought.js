@@ -19,11 +19,11 @@ Page({
       },
       {
         NAME: '商品'
-      },
-      {
-        NAME: '代练'
       }
-    ]
+    ],
+
+    showConfirmReceipt: false,
+    orderInfo:{},
   },
 
   /**
@@ -56,7 +56,7 @@ Page({
     //我买的 是作为买家存在
     if (selectType == '全部') {
       filter = [{
-          "fieldName": "NAME",
+          "fieldName": "PRODUCT_NAME",
           "type": "string",
           "compared": "like",
           "filterValue": data.searchText
@@ -76,7 +76,7 @@ Page({
       ];
     } else {
       filter = [{
-          "fieldName": "NAME",
+          "fieldName": "PRODUCT_NAME",
           "type": "string",
           "compared": "like",
           "filterValue": data.searchText
@@ -147,13 +147,21 @@ Page({
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
-  //确认收货 更改订单状态为已完成
-  confirmReceipt: function(e){
+  receipt:function(e){
     var that = this;
-    var order = e.target.dataset.item;
+    var orderInfo = e.target.dataset.item;
+    that.setData({
+      orderInfo: orderInfo,
+      showConfirmReceipt : true
+    })
+  },
+  //确认收货 更改订单状态为已完成
+  confirmReceipt: function(){
+    var that = this;
+    var orderInfo = that.data.orderInfo;
     // /api/_cud/confirmedOrder
     var p = {
-      KID: order.KID
+      KID: orderInfo.KID
     }
      //确认收货 发消息给卖家，主题交易完成提醒，买家已收货；；更新订单状态为已完成; 更新用户表，卖家累计受益和可用资金都会增加，即将收入减少
     app.ManageExecuteApi('/api/_cud/confirmedOrder', '', p, 'POST').then((result) => {
@@ -164,6 +172,7 @@ Page({
           icon: 'none',
           duration: 1500
         })
+        that.setData({showConfirmReceipt:false})
         that.lmFramework.dealPageNoSize('enter')
       }
     })

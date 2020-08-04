@@ -23,7 +23,7 @@ Page({
     
     const detailData =  JSON.parse(options.detailData);
     var imageList = detailData.DESC_PHOTO.split(',');
-    // debugger
+    
     that.setData({
       mainImg:detailData.PHOTO_URL,
       detailImageList: imageList,
@@ -84,9 +84,10 @@ Page({
             wx.navigateTo({
               url: '../myBought/myBought'//main-in
             })
+            
             setTimeout(() => {
               wx.navigateTo({
-                url: `../customerOrder/customerOrder-detail?orderItem=${JSON.stringify(orderItem)}`//main-in
+                url: `../myBought/myBought-detail?orderItem=${JSON.stringify(orderItem)}`//main-in
               })
             }, 800)
           }, 600)

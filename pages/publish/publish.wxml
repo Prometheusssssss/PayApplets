@@ -1,5 +1,5 @@
-<form bindsubmit="saveGuestValue">
-  <sj-framework sliderBar="false" contentBg="white">
+<form bindsubmit="saveGuestValue" >
+  <sj-framework sliderBar="false" contentBg="white" wx:if="{{authorizeSeller}}">
     <view slot="content">
         <view class="area line">
           <view class="picker-content">
@@ -84,5 +84,13 @@
     <view slot="bottom">
       <button formType="submit" class="bottom-rect main-bgcolor">保存</button>
     </view>
+  </sj-framework>
+  <sj-framework sliderBar="false" contentBg="var(--page)" wx:if="{{!authorizeSeller}}">
+       <view slot="content">
+          <view class="no-authorize">
+            <image mode='aspectFit' src='/assets/img/logo.png'></image>
+            <text class="tip">当前仅限授权卖家发布商品，如需开通卖家功能请联系客服</text>
+          </view>
+       </view>
   </sj-framework>
 </form>

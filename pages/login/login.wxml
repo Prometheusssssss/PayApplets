@@ -25,12 +25,15 @@
         <view class="line"></view>
     </view>
     <view class="content">
+        <view class="logo-content">
+          <image  mode='aspectFit' src="/assets/img/logo.png" class="logo-image"></image>
+        </view>
         <view  wx:if="{{hasUserInfo && !hasPhoneNumber}}">
-            <image  mode='aspectFit' src="/assets/img/wechat.png" class="phone-image"></image>
+            <!-- <image  mode='aspectFit' src="/assets/img/wechat.png" class="phone-image"></image> -->
             <button class='authBtn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
         </view>
         <view wx:if="{{!hasUserInfo}}">
-            <image  mode='aspectFit' src="/assets/img/wechat.png" class="user-info-image"></image>
+            <!-- <image  mode='aspectFit' src="/assets/img/wechat.png" class="user-info-image"></image> -->
             <button class='authBtn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo"> 微信登录 </button>
         </view>
         

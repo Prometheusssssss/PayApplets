@@ -78,7 +78,7 @@ Page({
   sendMsgToBuyer:function(order){
     var that = this;
     var item = order;
-    // debugger
+    
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {
@@ -100,7 +100,7 @@ Page({
   sendMsgToSell:function(order){
     var that = this;
     var item = order;
-    // debugger
+   
     //先插入消息表吧  给买家发消息 
     var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
     var p = {

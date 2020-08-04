@@ -19,6 +19,7 @@
                     <view class='item-product-info'>
                         <view class="item-product-name-area">
                             <text class='item-product-name'>{{item.NAME}}</text>
+                            <text class='item-product-status'>{{item.STATUS}}</text>
                             <text class='item-product-name'>{{item.TYPE}}</text>
                         </view>
                         <view class="price-button-content">

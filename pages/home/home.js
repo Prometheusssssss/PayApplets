@@ -5,7 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    bannerList:[{
+      PICTURE_URL:'../../assets/img/banner/banner1.jpg'
+    }],
+    areaList:[{
+      URL:'../../assets/img/area/xiaoaojianghu.png',
+      NAME:'笑傲江湖'
+    },{
+      URL:'../../assets/img/area/tiandao.png',
+      NAME:'天刀'
+    },{
+      URL:'../../assets/img/area/tianyu.png',
+      NAME:'天谕'
+    }]
   },
 
   /**
@@ -15,12 +27,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -28,39 +34,10 @@ Page({
   onShow: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  goPublishPage:function(){
+      wx.switchTab({
+        url: '../order/order',
+      })
   }
+  
 })
