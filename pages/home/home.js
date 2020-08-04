@@ -6,7 +6,7 @@ Page({
    */
   data: {
     bannerList:[{
-      PICTURE_URL:'../../assets/img/banner/banner1.jpg'
+      PICTURE_URL:'../../assets/img/banner/banner.png'
     }],
     areaList:[{
       URL:'../../assets/img/area/xiaoaojianghu.png',
@@ -17,6 +17,9 @@ Page({
     },{
       URL:'../../assets/img/area/tianyu.png',
       NAME:'天谕'
+    },{
+      URL:'../../assets/img/area/more.png',
+      NAME:'更多游戏'
     }]
   },
 

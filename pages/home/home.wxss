@@ -15,9 +15,9 @@
   display: flex;
   flex-direction: row;
   padding: 30rpx;
-  justify-content: space-around;
-  background: white;
-  margin-top: 30rpx;
+  justify-content: space-between;
+  /* background: white;
+  margin-top: 30rpx; */
 }
 .area-info{
   display: flex;
@@ -28,4 +28,8 @@
   width: 140rpx;
   height: 140rpx;
   
+}
+.white-bg{
+  background-color: white;
+  height: 40rpx;
 }

@@ -13,3 +13,6 @@
   z-index: 10;
   color: var(--main-style);
 }
+.item-tel{
+  margin-left: 20rpx;
+}

@@ -55,14 +55,14 @@
 </view>
 
  <view class="menu-list">
-    <view class="menu-item" bindtap="viewOrder" bindtap="goCustomerPage">
+    <view class="menu-item" bindtap="viewOrder" bindtap="goCustomerPage" wx:if="{{isManager}}">
       <view>
         <i class="icon  icon-order  icon-green menu-image"></i>
         <text>订单处理</text>
       </view>
       <i class="icon icon-arrow-right"></i>
     </view>
-    <view class="menu-item" bindtap="extractCachCheck">
+    <view class="menu-item" bindtap="extractCachCheck" wx:if="{{isManager}}">
       <view>
         <i class="icon  icon-tixian  icon-green menu-image"></i>
         <text>提现核对</text>

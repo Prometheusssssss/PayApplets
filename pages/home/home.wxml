@@ -10,6 +10,7 @@
               </swiper-item>
           </swiper>
       </block>
+      <view class="white-bg"></view>
       <view class="area-list">
         <view wx:if="{{areaList.length>0}}" class="area-info" wx:for="{{areaList}}" bindtap="goPublishPage">
             <view >

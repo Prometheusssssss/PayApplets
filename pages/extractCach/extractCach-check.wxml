@@ -36,9 +36,9 @@
                     <view class="extract-info">
                         <text>申请时间：</text><text>{{item.APPLICATION_TIME}}</text>
                     </view>
-                    <view class="extract-info">
+                    <!-- <view class="extract-info">
                         <text>账户余额：</text><text>{{item.APPLICATION_TIME}}</text>
-                    </view>
+                    </view> -->
                     <view class="extract-info">
                         <text>提现金额：</text><text class="red">{{convert.toMoney(item.APPLICATION_AMOUNT)}}</text>
                     </view>

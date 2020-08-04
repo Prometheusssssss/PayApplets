@@ -9,7 +9,8 @@ Page({
     userInfo:{},
     imageUrl:'',
     tmpPath:'',
-    isPic : false,
+    // isPic : false,
+    isManager:false
   },
 
   /**
@@ -22,6 +23,7 @@ Page({
   onShow: function(){
     var that = this;
     that.loadUserInfo();
+   
     // await that.getImageUrl()
     // that.createCanvas()
   },
@@ -152,6 +154,8 @@ Page({
             tel: dataList[0].PHONE,
             authorizeSeller: dataList[0].AUTHORIZED_SELLER
           };
+        var isManager = dataList[0].IS_SA;
+        that.setData({isManager:isManager})
         app.setUser(info)
         that.setData({userInfo: dataList[0]})
       }
@@ -194,6 +198,16 @@ Page({
     })
   },
   goCustomerPage: function(){
+    var isManager = app.getUser().isManager;
+    //没有卖家授权
+    if(!isManager){
+      wx.showToast({
+        title:'当前仅限授权客服查看',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     wx.navigateTo({
       url: '../customerOrder/customerOrder',
     })
@@ -250,6 +264,16 @@ Page({
     })
   },
   extractCachCheck:function(){
+    var isManager = app.getUser().isManager;
+    //没有卖家授权
+    if(!isManager){
+      wx.showToast({
+        title:'当前仅限授权客服查看',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     wx.navigateTo({
       url: '../extractCach/extractCach-check',
     })
