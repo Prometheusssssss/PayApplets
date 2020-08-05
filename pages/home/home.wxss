@@ -27,7 +27,7 @@
 .area-info image{
   width: 140rpx;
   height: 140rpx;
-  
+  border-radius: 30rpx;
 }
 .white-bg{
   background-color: white;

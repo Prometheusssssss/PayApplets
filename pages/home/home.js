@@ -10,10 +10,10 @@ Page({
     }],
     areaList:[{
       URL:'../../assets/img/area/xiaoaojianghu.png',
-      NAME:'笑傲江湖'
+      NAME:'新笑傲江湖'
     },{
       URL:'../../assets/img/area/tiandao.png',
-      NAME:'天刀'
+      NAME:'天涯明月刀'
     },{
       URL:'../../assets/img/area/tianyu.png',
       NAME:'天谕'
