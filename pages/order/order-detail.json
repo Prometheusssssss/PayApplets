@@ -2,6 +2,7 @@
   "navigationBarTitleText":"商品交易",
   "usingComponents": {
     "lm-framework":"../../assets/my-components/framework/index",
+    "sj-confirm": "../../../assets/my-components/mask-confirm/index",
     "lm-button": "../../../assets/my-components/button/index"
   }
 }

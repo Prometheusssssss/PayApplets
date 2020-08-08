@@ -40,7 +40,7 @@ Page({
     uploaderDetailNum: 0,             //已经上传的详情图片数目
     showDetailUpload: true,           //控制上传框的显隐
     authorizeSeller:false,
-    
+    isLoginUser: false,
   },
 
   /**
@@ -89,9 +89,21 @@ Page({
 
   onShow: function(){
     var that = this;
-    var authorizeSeller = app.getUser().authorizeSeller;
-    that.setData({authorizeSeller:authorizeSeller})
-    that.loadArea();
+    console.log(app.getUser())
+    if(app.getUser() !=undefined && app.getUser() != null){
+      that.setData({isLoginUser:true})
+    }
+    if(that.data.isLoginUser){
+      var authorizeSeller = app.getUser().authorizeSeller;
+      that.setData({authorizeSeller:authorizeSeller})
+      that.loadArea();
+    } 
+    
+  },
+  goLogin:function(){
+    wx.navigateTo({
+      url: '../login/login?isFromPage=1'
+    })
   },
   loadArea:function(){
     var that = this;

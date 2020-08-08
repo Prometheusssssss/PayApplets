@@ -37,8 +37,8 @@ page{
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 20vh;
-  margin-top: 180rpx;
+  /* height: 20vh; */
+  margin-top: 80rpx;
 }
 .header{
   justify-content: space-start;

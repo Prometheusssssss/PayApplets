@@ -9,6 +9,7 @@ Page({
     msgList: [], //消息列表
     totalList: [],
     defaultPageSize: 30,
+    isLoginUser: false,
   },
 
   /**
@@ -17,13 +18,25 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.lmFramework = that.selectComponent("#lm-framework");
-    that.lmFramework.dealPageNoSize('enter');
+    
     // this.getMsgData();
   },
   onShow:function(){
     var that = this;
+    if(app.getUser() !=undefined && app.getUser() != null){
+      that.setData({isLoginUser:true})
+    }
+    if(that.data.isLoginUser){
+      that.lmFramework.dealPageNoSize('enter');
+    }
     // that.lmFramework.dealPageNoSize('enter');
     
+  },
+  goLogin:function(){
+    // wx.reLaunch({
+    wx.navigateTo({
+      url: '../login/login?isFromPage=1'
+    })
   },
   callBackPageSetData: function (e) {
     var that = this;
@@ -74,10 +87,5 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
 
-  },
 })

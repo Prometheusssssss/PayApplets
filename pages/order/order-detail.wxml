@@ -59,3 +59,10 @@
 
     </view>
 </lm-framework>
+<sj-confirm visible="{{showNeedLoginn}}" addLineHeight="0" title="确认登录" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmLogin">
+    <view slot='content' class="delete-confirm-content">
+        <text>请先去登录哦</text>
+    </view>
+</sj-confirm>
+

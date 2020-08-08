@@ -14,7 +14,8 @@ Page({
     isLogin: true,
     userInfo:{},
     showConfirmAuthorization:false,
-    jscode:''
+    jscode:'',
+    isFromPage: false,
   },
 
   /**
@@ -25,8 +26,17 @@ Page({
   onLoad: async function(options) {
       var that = this;
       //查看是否授权 是否授权过昵称 授权过手机号
+      if(options){
+        that.setData({isFromPage : options.isFromPage})
+      }
       that.isAuthoraization();
-      that.isCodeHasUser();
+      if(that.data.isFromPage){
+        that.isUnloginCodeHasUser();
+      }else{
+        that.isCodeHasUser();
+      }
+    
+      
   },
  
   isAuthoraization:async function(){
@@ -56,6 +66,20 @@ Page({
           })
         }
       }
+    })
+  },
+  isUnloginCodeHasUser:function(){
+    var that = this;
+    wx.login({
+      success(res) {
+        if (res.code) {
+          var code = res.code;
+          that.setData({jscode:code})
+        }
+      }
+    })
+    that.setData({
+      isLogin : false
     })
   },
   isCodeHasUser: async function () {
@@ -97,24 +121,21 @@ Page({
               if (res.code) {
                 var code = res.code;
                 that.setData({jscode:code})
-              }else{
-                setTimeout(() => {
-                  wx.login({
-                    success(res) {
-                      if (res.code) {
-                        var code = res.code;
-                        that.setData({jscode:code})
-                      }
-                    }
-                  })
-                }, 400)
               }
             }
           })
-          
           that.setData({
             isLogin : false
           })
+          console.log('app.getUser()')
+          console.log(app.getUser())
+          if(app.getUser() == null){
+             wx.switchTab({
+              url: '../home/home',
+            })
+          }
+         
+         
         }
       })
     } else {
@@ -205,20 +226,23 @@ Page({
             }
           })
       } else {
-  
+          wx.switchTab({
+            url: '../home/home',
+          })
+          // that.isCodeHasUser()
         //用户按了拒绝按钮
-        wx.showModal({
-          title: '警告',
-          content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
-          showCancel: false,
-          confirmText: '返回授权',
-          success: function(res) {
-            // 用户没有授权成功，不需要改变 isLogin 的值
-            if (res.confirm) {
-              console.log('用户点击了“返回授权”');
-            }
-          }
-        });
+  //       wx.showModal({
+  //         title: '警告',
+  //         content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+  //         showCancel: false,
+  //         confirmText: '返回授权',
+  //         success: function(res) {
+  //           // 用户没有授权成功，不需要改变 isLogin 的值
+  //           if (res.confirm) {
+  //             console.log('用户点击了“返回授权”');
+  //           }
+  //         }
+  //       });
       }
    },
   //授权同意之后 弹出确认弹框 提示用手机来注册或者登录小程序
@@ -242,18 +266,22 @@ Page({
       } else {
   
         //用户按了拒绝按钮
-        wx.showModal({
-          title: '警告',
-          content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
-          showCancel: false,
-          confirmText: '返回授权',
-          success: function(res) {
-            // 用户没有授权成功，不需要改变 isLogin 的值
-            if (res.confirm) {
-              console.log('用户点击了“返回授权”');
-            }
-          }
-        });
+        // that.isCodeHasUser()
+        wx.switchTab({
+          url: '../home/home',
+        })
+  //       wx.showModal({
+  //         title: '警告',
+  //         content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+  //         showCancel: false,
+  //         confirmText: '返回授权',
+  //         success: function(res) {
+  //           // 用户没有授权成功，不需要改变 isLogin 的值
+  //           if (res.confirm) {
+  //             console.log('用户点击了“返回授权”');
+  //           }
+  //         }
+  //       });
       }
   },
   cancel:function(){

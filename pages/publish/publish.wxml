@@ -1,5 +1,5 @@
-<form bindsubmit="saveGuestValue" >
-  <sj-framework sliderBar="false" contentBg="white" wx:if="{{authorizeSeller}}">
+<form bindsubmit="saveGuestValue" wx:if="{{isLoginUser}}">
+  <sj-framework sliderBar="false" contentBg="white" wx:if="{{authorizeSeller && isLoginUser}}">
     <view slot="content">
         <view class="area line">
           <view class="picker-content">
@@ -85,11 +85,24 @@
       <button formType="submit" class="bottom-rect main-bgcolor">保存</button>
     </view>
   </sj-framework>
-  <sj-framework sliderBar="false" contentBg="var(--page)" wx:if="{{!authorizeSeller}}">
+  <sj-framework sliderBar="false" contentBg="var(--page-bg)" wx:if="{{!authorizeSeller && isLoginUser}}">
        <view slot="content">
           <view class="no-authorize">
             <image mode='aspectFit' src='/assets/img/logo.png'></image>
             <text class="tip">当前仅限授权卖家发布商品，如需开通卖家功能请联系客服</text>
+          </view>
+       </view>
+  </sj-framework>
+
+
+</form>
+<form bindsubmit="saveGuestValue" wx:else>
+  <sj-framework sliderBar="false" contentBg="white">
+       <view slot="content">
+          <view class="no-authorize">
+            <image mode='aspectFit' src='/assets/img/logo.png'></image>
+            <button class="login-button" bindtap="goLogin">先去登录哦</button>
+           
           </view>
        </view>
   </sj-framework>

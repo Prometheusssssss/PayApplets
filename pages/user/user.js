@@ -10,7 +10,8 @@ Page({
     imageUrl:'',
     tmpPath:'',
     // isPic : false,
-    isManager:false
+    isManager:false,
+    isLoginUser: false,
   },
 
   /**
@@ -22,12 +23,25 @@ Page({
 
   onShow: function(){
     var that = this;
-    that.loadUserInfo();
+    // debugger
+    if(app.getUser() !=undefined && app.getUser() != null){
+      that.setData({isLoginUser:true})
+    }else{
+      that.setData({isLoginUser:false})
+    }
+    if(that.data.isLoginUser){
+      that.loadUserInfo();
+    }
+   
    
     // await that.getImageUrl()
     // that.createCanvas()
   },
-  
+  goLogin:function(){
+    wx.navigateTo({
+      url: '../login/login?isFromPage=1'
+    })
+  },
   //画完图片调起保存图片功能
   createCanvas : async function(){
     var that = this;
@@ -311,9 +325,13 @@ Page({
     app.ManageExecuteApi('/api/_cud/createAndUpdate/a_user', '', p, 'POST').then((result) => {
       if (result != 'error') {
         //更新订单
-        wx.reLaunch({
-          url: '../login/login?hasUserInfo=1'
+        app.setUser(null)
+        wx.navigateTo({
+          url: '../login/login?isFromPage=1'
         })
+        // wx.reLaunch({
+        //   url: '../login/login?hasUserInfo=1'
+        // })
       }
     })
   }

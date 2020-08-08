@@ -11,7 +11,9 @@ Page({
   data: {
     detailImageList:[],
     mainImg:'',
-    detailInfo:''
+    detailInfo:'',
+    
+    showNeedLoginn:false,
   },
 
   /**
@@ -33,37 +35,47 @@ Page({
   },
   buyProduct:function(){
     var that = this;
-    var detailInfo = that.data.detailInfo;
-    console.log(detailInfo)
-    var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
-    console.log(time)
-    
-    var p = {
-      STATUS: '待发货',
-      TYPE:'商品',
-      GAME_PARTITION_KID: detailInfo.GAME_PARTITION_KID,
-      GAME_PARTITION_NAME: detailInfo.GAME_PARTITION_NAME,
-      GAME_SECONDARY_KID: detailInfo.GAME_SECONDARY_KID,
-      GAME_SECONDARY_NAME: detailInfo.GAME_SECONDARY_NAME,
-      GAME_ZONE_KID: detailInfo.GAME_ZONE_KID,
-      GAME_ZONE_NAME: detailInfo.GAME_ZONE_NAME,
-      BUY_USER_ID: app.getUser().id,
-      BUY_USER_NAME: app.getUser().name,
-      BUY_USER_PHONE: app.getUser().tel,
-      SELL_USER_ID: detailInfo.SELL_USER_ID,
-      SELL_USER_NAME: detailInfo.SELL_USER_NAME,
-      SELL_USER_PHONE: detailInfo.SELL_USER_PHONE,
-      PRODUCT_NAME: detailInfo.NAME,
-      PRODUCT_ID: detailInfo.KID,
-      PRICE: detailInfo.PRICE,
-      PHOTO_URL: detailInfo.PHOTO_URL,
-      DESC_PHOTO: detailInfo.DESC_PHOTO,
-      NEED_LEVEL: detailInfo.NEED_LEVEL,
-      DESCRIPTION: detailInfo.DESCRIPTION,
-      ORDER_TIME: time,
+    if(app.getUser() !=undefined && app.getUser() != null){
+      var detailInfo = that.data.detailInfo;
+      console.log(detailInfo)
+      var time = common.time.formatDay(new Date())+' '+common.time.formatTime(new Date());
+      console.log(time)
+      
+      var p = {
+        STATUS: '待发货',
+        TYPE:'商品',
+        GAME_PARTITION_KID: detailInfo.GAME_PARTITION_KID,
+        GAME_PARTITION_NAME: detailInfo.GAME_PARTITION_NAME,
+        GAME_SECONDARY_KID: detailInfo.GAME_SECONDARY_KID,
+        GAME_SECONDARY_NAME: detailInfo.GAME_SECONDARY_NAME,
+        GAME_ZONE_KID: detailInfo.GAME_ZONE_KID,
+        GAME_ZONE_NAME: detailInfo.GAME_ZONE_NAME,
+        BUY_USER_ID: app.getUser().id,
+        BUY_USER_NAME: app.getUser().name,
+        BUY_USER_PHONE: app.getUser().tel,
+        SELL_USER_ID: detailInfo.SELL_USER_ID,
+        SELL_USER_NAME: detailInfo.SELL_USER_NAME,
+        SELL_USER_PHONE: detailInfo.SELL_USER_PHONE,
+        PRODUCT_NAME: detailInfo.NAME,
+        PRODUCT_ID: detailInfo.KID,
+        PRICE: detailInfo.PRICE,
+        PHOTO_URL: detailInfo.PHOTO_URL,
+        DESC_PHOTO: detailInfo.DESC_PHOTO,
+        NEED_LEVEL: detailInfo.NEED_LEVEL,
+        DESCRIPTION: detailInfo.DESCRIPTION,
+        ORDER_TIME: time,
+      }
+      console.log(p)
+      that.createOrder(p)
+    }else{
+        //弹出登录框
+      that.setData({showNeedLoginn:true})
     }
-    console.log(p)
-    that.createOrder(p)
+  },
+  confirmLogin: function(){
+    wx.navigateTo({
+      url: '../login/login?isFromPage=1'
+    })
   },
   createOrder: function (p) {
     console.log('立即购买')

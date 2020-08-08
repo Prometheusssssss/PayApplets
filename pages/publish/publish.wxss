@@ -11,6 +11,7 @@ sj-framework {
   /* border-bottom: 2rpx solid var(--line-gray-light); */
   /* margin-left: 40rpx; */
 }
+
 .warning{
   margin-left: 40rpx;
   margin-top: 20rpx;
@@ -76,23 +77,7 @@ image{
 }
 
 
-/* .bottom-rect{
-  color: white;
-  border-radius: 0;
-  padding: 0;
-  margin-left: 0;
-  margin-right: 0;
-  height: 104rpx;
-  min-width: 190rpx;
-  width: 150rpx;
-  line-height: 112rpx;
-  font-size: 30rpx;
-  letter-spacing: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-} */
+
 button{
   margin: 0!important;
   width: 220rpx !important;
@@ -196,4 +181,15 @@ button{
   font-size: 40rpx;
   letter-spacing: 2rpx;
   line-height: 54rpx;
+}
+.no-authorize button.login-button {
+  margin: 100rpx 50rpx 0 50rpx !important;
+  font-size: 28rpx !important;
+  color: white;
+  font-weight: 500;
+  background-color: var(--main-style) !important;
+  min-width: 520rpx !important;
+  width: 520rpx !important;
+  border-radius: 40rpx;
+
 }

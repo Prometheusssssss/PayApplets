@@ -1,4 +1,5 @@
 <wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<view wx:if="{{isLoginUser}}">
 <view class="user-info">
     <!-- <view class="user-image"> -->
     <!-- <open-data type="userAvatarUrl" class="user-image"></open-data> -->
@@ -69,13 +70,6 @@
       </view>
       <i class="icon icon-arrow-right"></i>
     </view>
-    <!-- <view class="menu-item" bindtap="extractCashRecord">
-      <view>
-        <i class="icon  icon-tixian  icon-green menu-image"></i>
-        <text>提现记录</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view> -->
     <view class="menu-item" bindtap="viewAddress">
       <view>
         <i class="icon  icon-contact  icon-green menu-image"></i>
@@ -93,13 +87,6 @@
       </view>
       <i class="icon icon-arrow-right"></i>
     </view>
-     <!-- <view class="menu-item" bindtap="loginOut">
-      <view>
-        <i class="icon  icon-login-out  icon-green menu-image"></i>
-        <text>{{userInfo.NAME}}</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view> -->
     <view class="menu-item" bindtap="loginOut">
       <view>
         <i class="icon  icon-login-out  icon-green menu-image"></i>
@@ -130,6 +117,15 @@
   </view>
   <!-- <canvas canvas-id='share_canvas'
     style='width:500px;height:400px;position:fixed;bottom:-400px;left:0;'></canvas> -->
+</view>
 
+<sj-framework sliderBar="false" contentBg="var(--page)"  wx:if="{{!isLoginUser}}">
+       <view slot="content">
+          <view class="no-authorize">
+            <image mode='aspectFit' src='/assets/img/logo.png'></image>
+            <button class="login-button" bindtap="goLogin">先去登录哦</button>
+          </view>
+       </view>
+</sj-framework>
 
 
