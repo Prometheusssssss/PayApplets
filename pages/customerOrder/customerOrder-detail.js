@@ -53,27 +53,44 @@ Page({
   //交易关闭 发送信息给卖家买家 
   confirmOff:function(){
     var that = this;
-    var p = {
-      KID: that.data.orderItem.KID,
-      STATUS: '交易关闭',
-    }
-    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_order', '', p, 'POST').then((result) => {
-      if (result != 'error') {
-        //更新订单
+    var code = that.data.orderItem.CODE;
+    console.log('code')
+    console.log(code)
+    app.getRefund(code).then(result => {
+      if(result != 'error'){
         wx.showToast({
-          title: '交易关闭成功',
           icon: 'none',
-          duration: 1500
+          title: '交易关闭成功',
+          duration: 3000,
         })
-        that.sendMsgToBuyer(that.data.orderItem)
-        that.sendMsgToSell(that.data.orderItem)
         that.setData({
           ['orderItem.STATUS']:'交易关闭',
           showConfirmOff:false
         })
-        // that.lmFramework.dealPageNoSize('enter');
       }
     })
+      
+    // var p = {
+    //   KID: that.data.orderItem.KID,
+    //   STATUS: '交易关闭',
+    // }
+    // app.ManageExecuteApi('/api/_cud/createAndUpdate/b_order', '', p, 'POST').then((result) => {
+    //   if (result != 'error') {
+    //     //更新订单
+    //     wx.showToast({
+    //       title: '交易关闭成功',
+    //       icon: 'none',
+    //       duration: 1500
+    //     })
+    //     that.sendMsgToBuyer(that.data.orderItem)
+    //     that.sendMsgToSell(that.data.orderItem)
+    //     that.setData({
+    //       ['orderItem.STATUS']:'交易关闭',
+    //       showConfirmOff:false
+    //     })
+    //     // that.lmFramework.dealPageNoSize('enter');
+    //   }
+    // })
   },
   sendMsgToBuyer:function(order){
     var that = this;

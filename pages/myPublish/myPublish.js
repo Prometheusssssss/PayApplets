@@ -59,7 +59,7 @@ Page({
 
     showButton:false,
     offList:['下架','删除'],
-    onList:['上架','删除'],
+    onList:['删除'],
     newStatus:'',
     publishStatus:'上架',
   },
@@ -365,7 +365,51 @@ Page({
       },
     })
   },
-  
+  putOnPubilshProduct:function(e){
+    var that = this;
+    var productInfo = e.target.dataset.item;
+    var p = {
+      KID: productInfo.KID,
+      STATUS: '上架中',
+    }
+    app.ManageExecuteApi('/api/_cud/createAndUpdate/b_product_list', '', p, 'POST').then((result) => {
+      if (result != 'error') {
+        //更新商品发布状态
+        wx.showToast({
+          title: '上架成功',
+          icon: 'none',
+          duration: 1500
+        })
+        that.lmFramework.dealPageNoSize('enter');
+      }
+    })
+  },
+  copyPublishProduct:function(e){
+    var that = this;
+    //复制 跳到新建页面
+    var data = that.data;
+    var publishInfo = e.target.dataset.item;
+    var areaId = publishInfo.GAME_PARTITION_KID;//大区
+    var areaIndex = data.areaList.findIndex((area)=>area.KID == areaId);
+    var regionId =  publishInfo.GAME_SECONDARY_KID;//二级区
+    var serverId =  publishInfo.GAME_ZONE_KID;//服务器
+    var areaInfo = {
+      type:'edit',
+      operateType:'copy',
+      regionId:regionId,
+      areaId:areaId,
+      serverId:serverId,
+      areaIndex:areaIndex,
+      publishInfo:publishInfo
+    }
+    app.setArea(areaInfo);
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]; //上一个页面
+    wx.switchTab({
+      url: `../publish/publish`
+    })
+
+  },
   //删除 
   deleteProductItem:function(product){
     var that = this;

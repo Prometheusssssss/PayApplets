@@ -46,31 +46,54 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
-    var publishInfo = app.getArea();
+    var areaInfo = app.getArea();
     var pagetype = that.data.pagetype;
-    if(publishInfo != undefined && publishInfo != null){
-      pagetype = publishInfo.type;
-      that.setData({
-        pagetype:pagetype
-      })
+    if(areaInfo != null){
+      if(areaInfo != undefined && areaInfo != null){
+        pagetype = areaInfo.type;
+        that.setData({
+          pagetype:pagetype
+        })
+      }
     }
+    
     if(pagetype == 'edit'){
       wx.setNavigationBarTitle({
         title: "编辑发布",
       });
+      var item = areaInfo.publishInfo;
+      if(areaInfo.operateType != undefined && areaInfo.operateType == 'copy'){
+        item.KID = -1;
+        wx.setNavigationBarTitle({
+          title: "发布商品",
+        });
+      }
       //获取对应的index
-      var item = publishInfo.publishInfo;
-      var uploaderList = item.PHOTO_URL.split(',');
-      var uploaderDetailList = item.DESC_PHOTO.split(',');
       
+      var uploaderList = [];
+      var uploaderDetailList = [];
+      if(item.PHOTO_URL != ''){
+        uploaderList = item.PHOTO_URL.split(',');
+      }
+      if(item.DESC_PHOTO != ''){
+          uploaderDetailList = item.DESC_PHOTO.split(',');
+      }
+      
+      
+      if(uploaderList.length>=1){
+        that.setData({showUpload:false})
+      }
+      if(uploaderDetailList.length>=10){
+        that.setData({showUpload:false})
+      }
       that.setData({
         publishInfo: item,
-        areaIndex: publishInfo.areaIndex,
-        areaId: publishInfo.areaId,
-        regionId: publishInfo.regionId,
-        serverId: publishInfo.serverId,
+        areaIndex: areaInfo.areaIndex,
+        areaId: areaInfo.areaId,
+        regionId: areaInfo.regionId,
+        serverId: areaInfo.serverId,
         uploaderList: uploaderList,
         uploaderDetailList: uploaderDetailList,
       })
@@ -98,6 +121,72 @@ Page({
       that.setData({authorizeSeller:authorizeSeller})
       that.loadArea();
     } 
+
+    var areaInfo = app.getArea();
+    // debugger
+    if(areaInfo != null){
+      var pagetype = that.data.pagetype;
+      if(areaInfo != null){
+        if(areaInfo != undefined && areaInfo != null){
+          pagetype = areaInfo.type;
+          app.setArea(null)
+          that.setData({
+            pagetype:pagetype
+          })
+        }
+      }
+      
+      if(pagetype == 'edit'){
+        wx.setNavigationBarTitle({
+          title: "编辑发布",
+        });
+        var item = areaInfo.publishInfo;
+        if(areaInfo.operateType != undefined && areaInfo.operateType == 'copy'){
+          item.KID = -1;
+          wx.setNavigationBarTitle({
+            title: "发布商品",
+          });
+        }
+        //获取对应的index
+        
+        var uploaderList = [];
+        var uploaderDetailList = [];
+        if(item.PHOTO_URL != ''){
+          uploaderList = item.PHOTO_URL.split(',');
+        }
+        if(item.DESC_PHOTO != ''){
+            uploaderDetailList = item.DESC_PHOTO.split(',');
+        }
+        
+        
+        if(uploaderList.length>=1){
+          that.setData({showUpload:false})
+        }
+        if(uploaderDetailList.length>=10){
+          that.setData({showUpload:false})
+        }
+        that.setData({
+          publishInfo: item,
+          areaIndex: areaInfo.areaIndex,
+          areaId: areaInfo.areaId,
+          regionId: areaInfo.regionId,
+          serverId: areaInfo.serverId,
+          uploaderList: uploaderList,
+          uploaderDetailList: uploaderDetailList,
+        })
+      }else{
+        wx.setNavigationBarTitle({
+          title: "发布商品",
+        });
+        var publishInfo = {
+          DESCRIPTION: '',
+        };
+        that.setData({
+          publishInfo: publishInfo
+        })
+      }
+    }
+   
     
   },
   goLogin:function(){
@@ -373,6 +462,15 @@ Page({
       })
       return
     }
+    var isEmoji = await that.isEmojiCharacter(form.NAME);
+    if(isEmoji && isEmoji !=undefined){
+      wx.showToast({
+        title: '暂不支持表情包使用哦~',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     if (common.validators.isEmptyText(areaName, '游戏专区')||common.validators.isEmptyText(serverName, '游戏大区') || common.validators.isEmptyText(form.NAME, '商品名称') ) {
       return;
     }
@@ -474,6 +572,7 @@ Page({
           uploaderDetailNum: 0,
           uploaderDetailList: [],
           showDetailUpload: true,
+          pagetype:'add',
         })
         setTimeout(()=>{
           wx.switchTab({
@@ -489,7 +588,39 @@ Page({
     })
     
   },
- 
+  isEmojiCharacter: async function(substring) {
+    for (var i = 0; i < substring.length; i++) {
+      var hs = substring.charCodeAt(i);
+      if (0xd800 <= hs && hs <= 0xdbff) {
+        if (substring.length > 1) {
+          var ls = substring.charCodeAt(i + 1);
+          var uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+          if (0x1d000 <= uc && uc <= 0x1f77f) {
+            return true;
+          }
+        }
+      } else if (substring.length > 1) {
+        var ls = substring.charCodeAt(i + 1);
+        if (ls == 0x20e3) {
+          return true;
+        }
+      } else {
+        if (0x2100 <= hs && hs <= 0x27ff) {
+          return true;
+        } else if (0x2B05 <= hs && hs <= 0x2b07) {
+          return true;
+        } else if (0x2934 <= hs && hs <= 0x2935) {
+          return true;
+        } else if (0x3297 <= hs && hs <= 0x3299) {
+          return true;
+        } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 ||
+          hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b ||
+          hs == 0x2b50) {
+          return true;
+        }
+      }
+    }
+  }
 
 
 

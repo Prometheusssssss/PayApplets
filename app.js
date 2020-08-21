@@ -24,7 +24,9 @@ App({
     areaInfo:null,
     sliderBar: [],
 
+
     manageUrl: 'https://www.dazuiba.cloud', //体验
+    // manageUrl:'https://test.dazuiba.cloud',
     // manageUrl: 'https://app.keyun.link', //体验
   },
   setHostUrl: function (hostUrl) {
@@ -142,10 +144,79 @@ App({
       return data.Table
     }
   },
+  reTryPayRequest: async function (url, method, data, header, retryTimes = 0) {
+    var result = await new Promise(resolve => {
+      wx.request({
+        url: url,
+        method: method, data: data, header: header,
+        complete: function (res) {
+          resolve(res);
+        }
+      })
+    })
+    // IS_SUCCESS  MSG  TABLE
+    var data = result.data.Table;
+    if(!data.IsSuccess){
+      wx.showToast({
+        title: data.ErroMessage,
+        icon: 'none',
+        duration: 2000
+      });
+      return 'error'
+    }else{
+      return JSON.parse(data.MSG)
+    }
+  },
   UploadImage: async function (p) {
     var that = this;
     var result = await that.reTryRequest(that.globalData.manageUrl+'/api/_oss/ossimg', 'POST', p, {});
     return result;
   },
-  
+  getPayMent: async function(price,productId,buyUserId,orderNo) {
+    var that = this;
+    var jsCode = await new Promise(resolve => {
+      wx.login({
+        success(newRes) {
+          if (newRes.code) {
+            resolve(newRes.code);
+          }
+        }
+      })
+    })
+    // price productId buyUserId jsCode
+    var result = await that.reTryPayRequest(that.globalData.manageUrl + '/api/_pay/WeChatServicesPayApi', 'POST', {
+      price: price,
+      productId: productId,
+      buyUserId: buyUserId,
+      jsCode: jsCode,
+      orderNo: orderNo,
+    }, {});
+    if (result == 'error') {
+      return 'error'
+    } else {
+      return result
+    }
+  },
+  getRefund: async function (orderNo) {
+    var that = this;
+    var result = await that.reTryPayRequest(that.globalData.manageUrl + '/api/_pay/WeChatServicesRefundApi', 'POST', {
+      orderNo: orderNo
+    }, {});
+
+    if (result == 'error') {
+      return 'error'
+    } else {
+      return result
+    }
+  },
+  randomString: function (len) {
+    len = len || 32;
+    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+    var maxPos = $chars.length;
+    var pwd = '';
+    for (var i = 0; i < len; i++) {
+      pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
+  },
 })

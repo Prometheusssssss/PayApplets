@@ -12,6 +12,7 @@ Page({
     orderItem : '',
     userInfo:{},
     msgList:[],
+    payCode:'',
   },
 
   /**
@@ -19,11 +20,34 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var orderItem = JSON.parse(options.orderItem);
-    console.log('orderUtem')
-    console.log(orderItem)
-    that.setData({orderItem:orderItem,userInfo:app.getUser()})
+    if(options.orderItem){
+      var orderItem = JSON.parse(options.orderItem);
+      console.log('orderUtem')
+      console.log(orderItem)
+      that.setData({orderItem:orderItem,userInfo:app.getUser()})
+      that.sellerMsg()
+    }else if(options.payCode){
+      that.setData({payCode: options.payCode})
+      that.loadOrder()
+    }
+   
 
+  },
+  //加载订单
+  loadOrder:function(){
+    var that = this;
+    var p = {
+      CODE: that.data.payCode
+    }
+    var url = `/api/_search/defaultSearch/b_order?filter=${JSON.stringify(p)}`;
+    app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
+      if (dataList != 'error') {
+        that.setData({
+          orderItem: dataList[0]
+        })
+        that.sellerMsg()
+      }
+    })
   },
   onShow: function () {
     var that = this;

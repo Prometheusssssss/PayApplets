@@ -29,10 +29,12 @@
                         </view>
                         <!-- 侧滑加个删除 降价弹框打开可以编辑价格金额 -->
                         <view class="item-poduct-btn">
-                            <button class="outline-rectangle" wx:if="{{item.STATUS != '已卖出'}}" data-item="{{item}}" bindtap="editPubilshProduct">编辑</button>
-                            <button class="outline-rectangle" wx:if="{{item.STATUS != '已卖出'}}" data-item="{{item}}" bindtap="reducePubilshProductPrice">降价</button>
+                            <button class="outline-rectangle" wx:if="{{item.STATUS != '已卖出' && item.STATUS != '已锁定'}}" data-item="{{item}}" bindtap="editPubilshProduct">编辑</button>
+                             <button class="outline-rectangle" wx:if="{{item.STATUS == '已下架'}}" data-item="{{item}}" bindtap="putOnPubilshProduct">上架</button>
+                            <button class="outline-rectangle" wx:if="{{item.STATUS != '已卖出' && item.STATUS != '已锁定' && item.STATUS != '已下架'}}" data-item="{{item}}" bindtap="reducePubilshProductPrice">降价</button>
+                             <button class="outline-rectangle" wx:if="{{item.STATUS == '已卖出'}}" data-item="{{item}}" bindtap="copyPublishProduct">复制</button>
                             <!-- <button class="outline-rectangle more" data-kid="{{item.KID}}" bindtap="moreButton">...</button> -->
-                            <view class="outline-rectangle more" wx:if="{{item.STATUS != '已卖出'}}" data-item="{{item}}" bindtap="actionsheet">
+                            <view class="outline-rectangle more" wx:if="{{item.STATUS != '已卖出'  && item.STATUS != '已锁定'}}" data-item="{{item}}" bindtap="actionsheet">
                                 <view  data-item="{{item}}"  catchtap="actionsheet">...</view>
                             </view>
                         </view>

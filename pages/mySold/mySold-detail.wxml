@@ -45,7 +45,7 @@
           <view class="bought-detail">
               <text>买家信息：</text>
               <text class="buyUserName">{{orderItem.BUY_USER_NAME}}</text>
-              <text>{{orderItem.BUY_USER_PHONE}}</text>
+              <!-- <text>{{orderItem.BUY_USER_PHONE}}</text> -->
           </view>
           <!-- <view class="bought-detail">
               <text>卖家信息：</text><text>{{orderItem.SELL_USER_NAME}}</text><text>{{orderItem.SELL_USER_PHONE}}</text>
@@ -67,7 +67,8 @@
               <text class="copy" bindtap="copyBtn">复制</text>
           </view>
           <view class="bought-detail">
-              <text>卖家信息：</text><text class="buyUserName">{{orderItem.SELL_USER_NAME}}</text><text>{{orderItem.SELL_USER_PHONE}}</text>
+              <text>卖家信息：</text><text class="buyUserName">{{orderItem.SELL_USER_NAME}}</text>
+              <!-- <text>{{orderItem.SELL_USER_PHONE}}</text> -->
           </view>
           <view class="bought-detail" wx:if="{{orderItem.ORDER_TIME != null}}">
               <text>下单时间：</text><text>{{orderItem.ORDER_TIME}}</text>

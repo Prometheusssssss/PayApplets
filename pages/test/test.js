@@ -77,7 +77,6 @@ Page({
   },
   getImageUrl:function(){
     var that = this;
-    debugger
     //网上路径转成本地路径
     wx.getImageInfo({
       src: 'https://img3.doubanio.com/view/photo/l/public/p2327709524.jpg',

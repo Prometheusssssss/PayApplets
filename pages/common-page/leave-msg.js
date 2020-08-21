@@ -32,6 +32,14 @@ Page({
       })
     }
   },
+  // onUnload:function(){
+  //   var that = this;
+  //   var pages = getCurrentPages();
+  //   var prevPage = pages[pages.length - 2]; //上一个页面
+  //   setTimeout(() => {
+  //     prevPage.onLoad()
+  //   }, 600);
+  // },
 
   onShow:function(){
 

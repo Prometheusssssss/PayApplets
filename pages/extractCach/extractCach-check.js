@@ -102,11 +102,15 @@ Page({
   }) {
     var that = this;
     var endTime = common.time.addOneDay(detail.date2);
-    var newDay = common.time.formatDay(new Date(endTime))
-    
+    console.log('endTime')
+    console.log(endTime)
+    // debugger
+    // var newDay = common.time.formatDay(new Date(endTime))
+    // console.log('newDay')
+    // console.log(newDay)
     that.setData({
       startTime: detail.date1,
-      endTime: newDay
+      endTime: endTime
     })
     if (that.lmFramework != undefined) {
       that.lmFramework.dealPageNoSize('enter');
