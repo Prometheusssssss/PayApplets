@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText":"发布商品",
-  "usingComponents": {
-    "i-input": "../../../assets/iview-weapp/input/index",
-    "sj-framework":"../../assets/my-components/framework/index",
-    "sj-button": "../../../assets/my-components/button/index"
-  }
-}

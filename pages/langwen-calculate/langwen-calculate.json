@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText":"琅玟计算",
+  "usingComponents": {
+    "lm-framework":"../../assets/my-components/framework/index",
+    "sj-search": "../../../assets/my-components/search/index",
+    "i-tabs": "../../assets/iview-weapp/tabs/index",
+    "i-tab": "../../assets/iview-weapp/tab/index",
+    "sj-button": "../../../assets/my-components/button/index"
+  }
+}

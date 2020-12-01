@@ -1,0 +1,298 @@
+/* pages/star-luck/star-luck.wxss */
+@import '/assets/my-components/button/index.wxss';
+@import "../public-css/product-mask.wxss";
+@import "../public-css/mask-layer-tel.wxss";
+@import "/assets/my-components/mask-confirm/index.wxss";
+page{
+ background: white !important;
+  /* position: relative; */
+}
+
+.lw-info .text-red{
+  color: var(--text-red);
+}
+.lw-info .main-sytle{color: var(--main-style);}
+.search-top{
+  box-shadow: 2rpx 4rpx 8rpx 0 var(--box-shadow-gray);
+}
+.bottom{
+  position: relative;
+  top: 200rpx;
+}
+.bottom.min-height{
+  top: 100rpx;
+}
+.bottom-change{
+  position: relative;
+  top: 100rpx;
+}
+.bottom-change.min-height{
+  top: 10rpx;
+}
+.slot-content{
+  /* padding: 0 26rpx; */
+}
+.main-style{
+  color: var(--main-style);font-size: 34rpx;
+}
+.warning-text{
+  margin-left: 4rpx;
+  margin-bottom: 30rpx;
+ 
+}
+.warning-text text{
+  font-size: 30rpx;
+}
+
+.recommend-calculate{
+  padding-bottom: 20rpx;
+  background-color: white;
+  border-bottom: 6rpx solid var(--page-bg);
+}
+.recommend-calculate>view{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* padding: 0 12rpx; */
+}
+.recommend-calculate>.bottom-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-input{
+  border: 2rpx solid var(--line-gray);
+  height: 54rpx;
+  line-height: 54rpx;
+  width: calc(100% - 500rpx);
+  font-size: 28rpx;
+  padding-left: 14rpx;
+  border-radius: 10rpx;
+  position: relative;
+  /* z-index: 100; */
+}
+.adventure-edit{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20rpx;
+}
+.adventure-clue{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.adventure-clue:last-child{
+ justify-content: flex-end;
+}
+.adventure-clue>view:first-child text{
+  font-size: 30rpx;
+  margin-right: 10rpx;
+}
+.luck-info{
+  margin-top: 120rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.luck-promote{
+  margin-top: 60rpx;
+  margin-left: 30rpx;
+  line-height: 60rpx;
+  
+}
+.luck-promote>view:last-child{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.adventure-picker{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  align-items: center;
+  position: relative;
+  margin-top: 20rpx;
+  padding: 0 30rpx;
+}
+
+.adventure-picker>view:first-child text{
+  font-size: 30rpx;
+}
+.adventure-picker picker,adventure-picker .price-input{
+  border: 2rpx solid var(--line-gray);
+  height: 54rpx;
+  line-height: 54rpx;
+  width: 200rpx;
+  font-size: 28rpx;
+  padding-left: 14rpx;
+  border-radius: 10rpx;
+  z-index: 100;
+}
+.adventure-picker:last-child picker,adventure-picker:last-child .price-input{
+  width: 230rpx;
+}
+.adventure-picker .icon-arrowdownb{
+  color: var(--line-gray);
+  position: absolute;
+  right: 14rpx;
+  font-size: 40rpx;
+}
+.adventure-picker .login{
+  font-size: 28rpx !important;
+  color: var(--main-style);
+  margin-left: 10rpx;
+  text-decoration: underline;
+}
+.adventure-picker .count-number{
+  font-size: 24rpx;
+  color: var(--main-style);
+  margin-left: 10rpx;
+}
+.adventure-picker>view:first-child .text-gray{
+  color: var(--text-gray);
+  font-size: 24rpx;
+}
+.recommend-info{
+  padding: 10rpx 6rpx;
+  border-bottom:  2rpx solid var(--page-bg);
+}
+.recommend-info:last-child{border-bottom: none;}
+.detail-info .title text{
+  font-size: 28rpx !important;
+}
+.recommend-bottom text{
+  font-size: 26rpx;
+}
+.recommend-info .detail-info{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: space-around; */
+}
+.detail-info .lw-info{
+  display: flex;
+  line-height: 60rpx;
+  align-items: center;
+  /* justify-content: space-around; */
+}
+.lw-info text{
+  color: var(--text-gray);
+  font-size: 26rpx;
+
+}
+.detail-info .title  .lw-title{
+  font-size: 26rpx !important;
+  color: var(--text-gray);
+}
+.detail-info .detai-item{
+  display: flex;
+  /* justify-content: space-around; */
+  /* justify-content: center; */
+  width: 100%;
+  align-items: center;
+}
+.detail-info .property{
+justify-content: flex-start;
+}
+.detail-info .title{
+  width: 120rpx;
+  padding-left: 10rpx;
+}
+.lw-info .title{
+  width: 90rpx;
+}
+.recommend-info .image-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 8rpx;
+  /* flex: 1; */
+}
+.recommend-info .lw-level{
+  /* flex: 1;
+  margin-right: 0; */
+  width: 110rpx;
+}
+.image-info .lw-name{
+  font-size: 22rpx;
+  color: var(--text-black);
+}
+.image-info .image-item{
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+.recommend-info .image-info image{
+  width: 110rpx;
+  height: 110rpx;
+}
+.recommend-bottom{
+  margin: 20rpx 0;
+  margin-bottom: 50rpx;
+  padding: 0 26rpx;
+  border-bottom: 2rpx solid var(--page-bg);
+}
+
+.recommend-bottom:last-child{
+  border-bottom: none;
+}
+.recommend-bottom .tip{
+  display: flex;
+  justify-content: center;
+  line-height: 40rpx;
+  padding-bottom: 10rpx;
+}
+.recommend-bottom.border-none .tip{
+  margin-bottom: 60rpx;
+  justify-content: flex-start;
+  padding-bottom: 50rpx;
+}
+.recommend-bottom .tip .text-red{
+  color: var(--text-red);
+  font-size: 32rpx;
+}
+.recommend-bottom .tip text{
+  font-size: 26rpx;
+}
+.recommend-bottom .tip .text-gray{color: var(--text-gray); font-size: 24rpx;}
+.bottom-content{
+  margin-top: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 30rpx;
+  border-bottom: 2rpx solid var(--page-bg);
+}
+.mask-rect.long{
+  min-width: 280rpx !important;
+}
+
+/* 确认登录弹框 */
+.mask-layer-content>.main-content>.content{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+.mask-layer-content>.main-content>.content text{
+  font-size: 26rpx;
+}
+.confirm-btn:first-child{
+  border-right: 2rpx solid var(--line-gray);
+}
+.confirm-btn{
+  height: 100rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 0;
+  font-size: 30rpx;
+  font-weight: normal;
+  margin: 0;
+  width: 50%;
+}
+.confirm-btn:last-child{
+  color: var(--main-style);
+}

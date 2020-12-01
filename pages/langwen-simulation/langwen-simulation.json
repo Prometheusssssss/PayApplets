@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText":"琅玟模拟",
+  "usingComponents": {
+    "lm-framework":"../../assets/my-components/framework/index",
+    "sj-search": "../../../assets/my-components/search/index",
+    "i-tabs": "../../assets/iview-weapp/tabs/index",
+    "i-tab": "../../assets/iview-weapp/tab/index",
+    "sj-mask-layer": "../../assets/my-components/mask_layer/index",
+    "sj-button": "../../../assets/my-components/button/index",
+    "sj-confirm": "/assets/my-components/mask-confirm/index"
+  }
+}

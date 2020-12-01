@@ -48,7 +48,6 @@ Page({
         // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: res=> {
-              console.log(res)
               var nickName = res.userInfo.nickName;
               var userInfo = {
                 name: nickName.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, ""),
@@ -66,7 +65,7 @@ Page({
           })
         }
       }
-    })
+      })
   },
   isUnloginCodeHasUser:function(){
     var that = this;
@@ -85,7 +84,6 @@ Page({
   isCodeHasUser: async function () {
     var that = this;
     var code = await app.getJsCode();
-    // console.log(code)
     if (code != '') {
       //是否可以自动登录 可以返回给我用户的手机id昵称头像url,不可以跳到用户授权页面，授权注册或者更新
      
@@ -101,14 +99,11 @@ Page({
             name: data.NAME,
             url: data.IMG_URL,
             isManager: data.IS_SA,
-            tel: data.PHONE,
-            authorizeSeller: data.AUTHORIZED_SELLER
+            // tel: data.PHONE,
+            // authorizeSeller: data.AUTHORIZED_SELLER
           };
           app.setUser(info)
-          // wx.switchTab({
-          //   url: '../order/order',
-          // })
-          wx.switchTab({
+          wx.redirectTo({
             url: '../home/home',
           })
           that.setData({
@@ -127,15 +122,11 @@ Page({
           that.setData({
             isLogin : false
           })
-          console.log('app.getUser()')
-          console.log(app.getUser())
           if(app.getUser() == null){
-             wx.switchTab({
+             wx.navigateTo({
               url: '../home/home',
             })
           }
-         
-         
         }
       })
     } else {
@@ -151,17 +142,14 @@ Page({
       if (res.detail.errMsg == 'getPhoneNumber:ok') {
         //用户按了允许授权按钮
         // 获取到用户的信息了，打印到控制台上看下
-        console.log("用户的手机号如下：");
-        console.log(res);
         var data = res.detail;
         var encryptedData = data.encryptedData;
         var iv = data.iv;
         
         wx.checkSession({success:res=>{
-          console.log('有效期内')
+          // 有效期内
         },fail:erro=>{
-          console.log('已经过期')
-          
+          // 已经过期
           wx.login({
             success(res) {
               if (res.code) {
@@ -185,17 +173,13 @@ Page({
         //授权成功后加加密信息和jscode传给后台，后台换回手机号 并且可以注册用户信息（存手机号，用户openid），调用成功后返回用户手机号、userId，userName
         //进入tab页面 
         // var name = base64.base64Encode("腻腻")
-        console.log('名称')
-          console.log(that.data.userInfo.name)
           var p = {
             "jsCode": code,
-            "encryptedData": encryptedData,
-            "iv": iv,
+            // "encryptedData": encryptedData,
+            // "iv": iv,
             "name": base64.encode(that.data.userInfo.name),
             "url": that.data.userInfo.url
           }
-          console.log('baser')
-          console.log(p)
           await app.ManageExecuteApi(`/api/_login/doLogin`, '', p, "POST").then((userInfo) => {
             if(userInfo != 'error'){//存入user  跳转页面
               var data = userInfo[0];
@@ -205,11 +189,11 @@ Page({
                 name: data.NAME,
                 url: data.IMG_URL,
                 isManager: data.IS_SA,
-                tel: data.PHONE,
-                authorizeSeller: data.AUTHORIZED_SELLER
+                // tel: data.PHONE,
+                // authorizeSeller: data.AUTHORIZED_SELLER
               };
               app.setUser(info)
-              wx.switchTab({
+              wx.navigateTo({
                 url: '../home/home',
               })
               that.setData({
@@ -226,7 +210,7 @@ Page({
             }
           })
       } else {
-          wx.switchTab({
+          wx.navigateTo({
             url: '../home/home',
           })
           // that.isCodeHasUser()
@@ -257,7 +241,6 @@ Page({
             name: nickName.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "") ,
             url: data.avatarUrl
         }
-        
         that.setData({
           userInfo:userInfo,
           hasUserInfo: true,
@@ -267,7 +250,7 @@ Page({
   
         //用户按了拒绝按钮
         // that.isCodeHasUser()
-        wx.switchTab({
+        wx.navigateTo({
           url: '../home/home',
         })
   //       wx.showModal({

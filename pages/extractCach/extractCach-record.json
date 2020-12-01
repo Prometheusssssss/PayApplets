@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText":"提现记录",
-  "usingComponents": {
-    "lm-framework": "../../assets/my-components/framework/index",
-    "sj-date-view-picker": "../../assets/my-components/picker_date_periods/index"
-  }
-}

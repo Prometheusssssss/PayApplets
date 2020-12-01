@@ -143,7 +143,17 @@ var convert = {
     if(value.length>20)
       subStrs = subStrs+'...'
     return subStrs
+  },
+  highLight:function(arr, arg){
+    var result = {
+      indexOf: false,
+      toString: ''
+    }
+     result.indexOf = arr.indexOf(arg) > -1;
+    //  result.toString = arr.join(","); 
+     return result.indexOf;
   }
+
 }
 module.exports = {
   sum: convert.sum,
@@ -153,4 +163,5 @@ module.exports = {
   tofixed2: convert.tofixed2,
   toProductQuotationMoney: convert.toProductQuotationMoney,
   substr: convert.substr,
+  highLight : convert.highLight
 }

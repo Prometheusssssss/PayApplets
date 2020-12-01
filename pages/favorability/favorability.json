@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText":"伙伴好感度",
+  "usingComponents": {
+    "lm-slider-bar": "../../assets/my-components/slider_bar/index",
+    "lm-framework": "../../assets/my-components/framework/index",
+    "lm-button": "../../assets/my-components/button/index",
+    "sj-search": "../../assets/my-components/search/index"
+  }
+}

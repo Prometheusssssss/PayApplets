@@ -1,0 +1,182 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<!-- <lm-framework sliderBar="false" contentBg="white" id="lm-framework"> -->
+    <!-- <view slot="top" class="search-top"> -->
+<view class="view-content">
+    <view class="search-top">
+        <i-tabs current="{{ selectStatus }}" bindchange="changeCurrentSegment">
+            <i-tab key="金色琅玟" title="金色琅玟"></i-tab>
+            <i-tab key="商店琅玟" title="商店琅玟"></i-tab>
+        </i-tabs>
+    </view>
+    <!-- <view slot="content" class="slot-content"> -->
+    <view class="slot-content">
+        <form bindsubmit="saveGoldenValue" wx:if="{{selectStatus == '金色琅玟'}}">
+            <view class="adventure-content">
+              <view class="adventure-picker">
+                  <view>
+                          <text>请选择琅玟:</text>
+                  </view>
+                  <picker bindchange="bindGoldenLwChange" value="{{goldenLwIndex}}" range="{{goldenLwArr}}" >
+                      <view class="picker">
+                        <text  space="emsp">{{goldenLwArr[goldenLwIndex]}}</text>
+                      </view>
+                  </picker>
+                  <i class="icon icon-arrowdownb" ></i>
+              </view>
+              <view class="adventure-picker">
+                  <view>
+                          <text>请选择琅玟等级:</text>
+                  </view>
+                  <picker bindchange="bindGoldenLevelChange" value="{{goldenLevelIndex}}" range="{{goldenLevelArr}}" >
+                      <view class="picker">
+                          {{goldenLevelArr[goldenLevelIndex]}}
+                      </view>
+                  </picker>
+                  <i class="icon icon-arrowdownb" ></i>
+              </view>
+              <view class="adventure-picker">
+                  <view>
+                          <text>请选择琅玟数量:</text>
+                  </view>
+                  <picker bindchange="bindGoldenNumChange" value="{{goldenNumIndex}}" range="{{goldenNumArr}}" >
+                      <view class="picker">
+                          {{goldenNumArr[goldenNumIndex]}}
+                      </view>
+                  </picker>
+                  <i class="icon icon-arrowdownb" ></i>
+              </view>
+              <view class="adventure-picker">
+                  <view>
+                          <text>钥匙平均价格(点券):</text>
+                  </view>
+                  <input class="price-input" bindinput="bindPointInput" type="number" value="{{pointPrice}}" name='pointPrice' placeholder="请输入价格" id="" />
+              </view>
+              <view class="bottom-content">
+                  <button  class="mask-rect  main-color long " formType="submit">确认计算</button>
+              </view>
+              <view class="golden-info" wx:if="{{goldenCurrentInfo.attrStr!=undefined}}">
+                  <view class="warning-text">
+                      <text>琅玟属性：</text>
+                  </view>
+                  <view class="attrStr-center">
+                    {{goldenCurrentInfo.attrStr}}
+                  </view>
+                  <view class="warning-text">
+                      <text>功力：</text>
+                  </view>
+                  <view class="attrStr-center skill">
+                    {{goldenCurrentInfo.skill}}
+                  </view>
+                  <view class="tip">
+                    <text>*说明：属性和功力与输入的琅玟数量无关</text>
+                  </view>
+              </view>
+              <view class="golden-promote" wx:if="{{goldenCurrentInfo.keyNumber !=undefined}}">
+                <view class="warning-text">
+                    <view>
+                      <text>少侠需要：</text>
+                    </view>
+                    <view class="attrStr-center">
+                      1）钥匙数量：{{goldenCurrentInfo.keyNumber}}把
+                    </view> 
+                    <view class="attrStr-center">
+                      2）1级琅玟数量：{{goldenCurrentInfo.totalNum}}个
+                    </view> 
+                    <view class="attrStr-center">
+                      3）箱子钥匙总消费：{{goldenCurrentInfo.totalKeyPrice}}点
+                    </view>
+                    
+                </view>
+                <view>
+                  <text class="tip">*说明：计算结果为最大所需绑定点数</text>
+                </view>
+              </view>
+              
+            </view>
+        </form>
+        <!-- <form bindsubmit="saveStarConvertValue" wx:else> -->
+        <form bindsubmit="saveShopValue" wx:else>
+            <view class="adventure-content">
+                <view class="adventure-picker">
+                  <view>
+                          <text>请选择琅玟:</text>
+                  </view>
+                  <picker bindchange="bindShopLwChange" value="{{shopLwIndex}}" range="{{shopLwArr}}" >
+                      <view class="picker">
+                        <text  space="emsp" class="picker">{{shopLwArr[shopLwIndex]}}</text>
+                      </view>
+                  </picker>
+                  <i class="icon icon-arrowdownb" ></i>
+                </view>
+                <view class="adventure-picker">
+                    <view>
+                            <text>请选择琅玟等级:</text>
+                    </view>
+                    <picker bindchange="bindShopLevelChange" value="{{shopLevelIndex}}" range="{{shopLevelArr}}" >
+                        <view class="picker">
+                            {{shopLevelArr[shopLevelIndex]}}
+                        </view>
+                    </picker>
+                    <i class="icon icon-arrowdownb" ></i>
+                </view>
+                <view class="adventure-picker">
+                    <view>
+                            <text>请选择琅玟数量:</text>
+                    </view>
+                    <picker bindchange="bindShopNumChange" value="{{shopNumIndex}}" range="{{shopNumArr}}" >
+                        <view class="picker">
+                            {{shopNumArr[shopNumIndex]}}
+                        </view>
+                    </picker>
+                    <i class="icon icon-arrowdownb" ></i>
+                </view>
+                <view class="bottom-content">
+                  <button  class="mask-rect  main-color long " formType="submit">确认计算</button>
+                </view>
+                <view class="golden-info" wx:if="{{shopCurrentInfo.attrStr!=undefined}}">
+                    <view class="warning-text">
+                        <text>琅玟属性：</text>
+                    </view>
+                    <view class="attrStr-center">
+                      {{shopCurrentInfo.attrStr}}
+                    </view>
+                    <view class="warning-text">
+                        <text>功力：</text>
+                    </view>
+                    <view class="attrStr-center skill">
+                      {{shopCurrentInfo.skill}}
+                    </view>
+                    <view class="tip">
+                      <text>*说明：属性和功力与输入的琅玟数量无关</text>
+                    </view>
+                </view>
+                <view class="golden-promote" wx:if="{{shopCurrentInfo.langwenNum !=undefined}}">
+                  <view class="warning-text">
+                      <view>
+                        <text>少侠需要：</text>
+                      </view>
+                      <view class="attrStr-center">
+                        1）1级琅玟数量：{{shopCurrentInfo.langwenNum}}个
+                      </view> 
+                      <view class="attrStr-center">
+                        2）琅玟碎片数量：{{shopCurrentInfo.totalFragementsNum}}个                      
+                      </view> 
+                  </view>
+                  <!-- <view>
+                    <text class="tip">*说明：计算结果为最大所需绑定数</text>
+                  </view> -->
+                </view>
+            </view>
+        </form>
+    </view>
+  
+</view>
+<view class="bottom {{goldenCurrentInfo.attrStr != undefined ?'min-height':''}}" wx:if="{{selectStatus == '金色琅玟'}}">
+  <ad unit-id="adunit-21aaa636fa784055" ad-type="video" ad-theme="white"></ad>
+</view>
+<view class="bottom-change  {{shopCurrentInfo.RESULT != undefined ?'min-height':''}}" wx:else>
+  <ad unit-id="adunit-e9b00ac2950dda8e" ad-type="video" ad-theme="white"></ad>
+</view>
+<!-- </lm-framework> -->
+
+

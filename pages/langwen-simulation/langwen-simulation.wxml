@@ -1,0 +1,227 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<lm-framework sliderBar="false" contentBg="white"  >
+  <!-- <view class="view-content"> -->
+      <view class="slot-content"  slot="content">
+          <!-- <form bindsubmit="saveValue"> -->
+          <view class="recommend-calculate">
+            <view>
+              <view class="adventure-picker">
+                <view>
+                  <text>当前可计算次数:</text>
+                  <text class="login" wx:if="{{!isLogin}}" bindtap="goLogin">请先登录</text>
+                  <text wx:else class="count-number">{{userInfo.isPermanent==true? '永久可用':userInfo.countNumber}}</text>
+                </view>
+                <view><button  class="mask-rect  main-color" bindtap="addTimes">增加次数</button></view>
+              </view>
+              <view class="adventure-picker">
+                <view>
+                    <text>钥匙平均价格(点券)</text><text class="text-gray">（*可编辑修改）:</text>
+                </view>
+                <input class="price-input" bindinput="bindPointInput" type="number" value="{{pointPrice}}" name='pointPrice' placeholder="请输入价格" id="" />
+              </view>
+                  
+            </view>
+          </view>
+          <!-- </form> -->
+          <view class="recommend-info" wx:for="{{armsList}}">
+              <view class="detail-info">
+                <view class="title">
+                  <text>{{item.ARMS_NAME}}:</text>
+                </view>
+                <view class="lw-info">
+                  <view class="title">
+                    <text class="lw-title">琅纹:</text>
+                  </view>
+                  <view class="detai-item">
+                    <view wx:for="{{item.DETAIL}}" wx:for-item="detaiItem" class="image-info" data-item="{{item}}" data-detail="{{detaiItem}}" bindtap="selectLw">
+                      <!-- <view wx:if="{{detaiItem.LW_IAMGE != ''}}" data-item="{{item}}" data-detail="{{detaiItem}}" bindtap="selectLw" class="image-item"> -->
+                        <image wx:if="{{detaiItem.LW_IAMGE != ''}}"src="{{detaiItem.LW_IAMGE}}" mode="aspectFit" />
+                        <text wx:if="{{detaiItem.LW_IAMGE != ''}}" class="lw-name">{{detaiItem.LW_NAME}}</text>
+                      <!-- </view> -->
+                      <!-- <view wx:else data-item="{{item}}" data-detail="{{detaiItem}}" bindtap="selectLw"> -->
+                        <text  wx:else class="main-sytle">选择琅玟</text>
+                      <!-- </view> -->
+                    </view>
+                  </view>
+                  
+                </view>
+                <view class="lw-info">
+                  <view class="title">
+                    <text class="lw-title">等级:</text>
+                  </view>
+                  <view class="detai-item">
+                    <view wx:for="{{item.DETAIL}}" wx:for-item="detaiItem" class="image-info lw-level">
+                      <view bindtap="selectLw" data-item="{{item}}" data-detail="{{detaiItem}}">
+                        <text space="emsp">{{detaiItem.LW_LEVEL}}{{detaiItem.LW_LEVEL !=' ' ? '级':' '}}</text>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                <view class="lw-info" wx:if="{{item.PROPERTY !=undefined && item.PROPERTY !=''}}">
+                  <view class="title">
+                    <text class="lw-title">属性:</text>
+                  </view>
+                  <view class="detai-item property">
+                    <text>{{item.PROPERTY}}</text>
+                  </view>
+                </view>
+                <view class="lw-info"  wx:if="{{item.SKILL!=undefined && item.SKILL !=''}}">
+                  <view class="title">
+                    <text class="lw-title">功力:</text>
+                  </view>
+                  <view class="detai-item property">
+                    <text class="text-red">{{item.SKILL}}</text>
+                  </view>
+                </view>
+              </view>
+          </view>
+          <view class="bottom-content">
+            <button  class="mask-rect  main-color outline long" bindtap="clearAllLw">清空琅玟</button>
+            <button  class="mask-rect  main-color long" bindtap="saveValue">确认计算</button>
+          </view>
+          <view class="recommend-bottom" wx:if="{{showPropertyInfo}}">
+            <view>
+              <view>
+                <text>琅玟属性：</text>
+              </view>
+              <view class="tip">
+                <text>{{totalAttr.firstStr}}</text>
+              </view>
+              <view  class="tip">
+                <text>{{totalAttr.sencondStr}}</text>
+              </view>
+              <view  class="tip">
+                <text>{{totalAttr.threeStr}}</text>
+              </view>
+              <view  class="tip">
+                <text>{{totalAttr.foreStr}}</text>
+              </view>
+              <view  class="tip">
+                <text>{{totalAttr.fiveStr}}</text>
+              </view>
+            </view>
+            <view>
+              <view>
+                <text>功力值：</text>
+              </view>
+              <view class="tip">
+                <text class="text-red">{{totalSkill}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="recommend-bottom" wx:if="{{showPropertyInfo}}">
+            <view>
+              <view>
+                <text>少侠需要：</text>
+              </view>
+              <view class="tip">
+                <text>{{totalKeysXiaofei}}</text>
+              </view>
+            </view>
+            <view>
+              <view>
+                <text>其中：</text>
+              </view>
+              <block wx:for='{{detailStrList}}' wx:for-item="detailItem">
+              <view class="tip" >
+                  <text>{{detailItem.name}}：钥匙{{detailItem.keyNumber}}把，消费点{{detailItem.price}}点</text>
+              </view>
+              </block>
+            </view>
+          </view>
+          <view class="recommend-bottom border-none" >
+            <view class="tip">
+                <text class="text-gray">*说明：计算结果为最多所需绑点数,功力值可能存在细微误差,请以实际游戏结果为准。</text>
+            </view>
+          </view>
+      <!-- </view> -->
+  </view>
+</lm-framework>
+<sj-mask-layer visible="{{showLwDetail}}" addLineHeight="-260" hasImageArea="{{false}}" hasTitleArea="{{false}}">
+  <view slot="content" class="mask-content">
+    <view class="select-content">
+      <view>
+        <view class="label">
+              <text>琅纹:</text>
+        </view>
+        <view class="picker-content">
+          <picker bindchange="bindLwChange" value="{{currentLwIndex}}" range="{{currentLwList}}" range-key="NAME">
+              <view class="picker">
+                  {{currentLwList[currentLwIndex].NAME}}
+              </view>
+          </picker>
+          <i class="icon icon-arrowdownb" ></i>
+        </view>
+      </view>
+    </view>
+    <view class="select-content">
+      <view>
+        <view class="label">
+              <text>等级:</text>
+        </view>
+        <view class="picker-content">
+          <picker bindchange="bindLevelChange" value="{{levelIndex}}" range="{{levelList}}" >
+            <view class="picker">
+                {{levelList[levelIndex]}}
+            </view>
+          </picker>
+          <i class="icon icon-arrowdownb" ></i>
+        </view>
+      </view>
+    </view>
+  </view> 
+  <view slot="button-area" >
+    <sj-button shape="mask-rect" title="清空" buttonColor="main-color outline" bindButtonClick="clearSelectLw"
+      slot="button" />
+    <sj-button shape="mask-rect" title="确认" buttonColor="main-color" bindButtonClick="confirmSelectLw"
+    slot="button" />
+  </view>
+</sj-mask-layer>
+
+<view class="mask-layer {{showConfirmLogin == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>提示</text>
+      </view>
+      <view class="content">
+        <text>亲，您还未登录哦~</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancelDoLogin" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo" >登录</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="mask-layer {{showConfirmAuthorization == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>确认</text>
+      </view>
+      <view class="content">
+        <text>使用手机号登录/注册大嘴巴百宝箱</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancel" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="closeMask">确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+<sj-confirm visible="{{showClearLwConfirm}}" addLineHeight="{{0}}" title="提示" confirmText="确认" cancelText="取消"
+  catchConfirmEvent="confirmClearLw">
+  <view slot='content' class="delete-confirm-content">
+    <text>是否确认清空？</text>
+  </view>
+</sj-confirm>
+<sj-confirm visible="{{showCaculateConfirm}}" addLineHeight="{{0}}" title="提示" confirmText="确认" cancelText="取消"
+  catchConfirmEvent="confirmCaculateLw">
+  <view slot='content' class="delete-confirm-content">
+    <text>计算后会扣减可计算次数，是否确认操作？</text>
+  </view>
+</sj-confirm>
+
+
+

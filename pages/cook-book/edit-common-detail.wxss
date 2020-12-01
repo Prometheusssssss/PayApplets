@@ -1,0 +1,37 @@
+/* pages/adventure/edit-common-detail.wxss */
+@import '/assets/my-components/button/index.wxss';
+.adventure-content{
+  background-color: white;
+  
+}
+.adventure-content>view{
+  border-bottom: 2rpx solid var(--page-bg);
+  padding: 20rpx;
+}
+.adventure-title,.adventure-clue{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.adventure-input{
+  width: calc(100% - 130rpx);
+}
+.adventure-input textarea{
+  height: 150rpx;
+  border: 2rpx solid var(--page-bg);
+  font-size: 24rpx;
+  padding: 6rpx 0 0 6rpx;
+  width: 98%;
+}
+
+.bottom-content{
+    margin-top: 40rpx;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.adventure-name text{
+  font-size: 26rpx;
+}

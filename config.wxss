@@ -9,6 +9,7 @@ page {
   --text-orange-light: #fe6d1d;
   
   --text-green: #8ac449;
+  --text-acitve:#1EB89C;
 
   --line-gray: #d8d8d8;
   --content-gray: #f8f8f8;
@@ -16,7 +17,7 @@ page {
 
   --button-orange-dark: #fe784a;
   --button-blue: #2489fb;
-  --button-main-style: #2583F5;
+  --button-main-style: #90A2D1;
   --button-outline-border: #979797;
   
   --bg-gray-a: #a6a6a6;
@@ -30,12 +31,13 @@ page {
 
   --main-box-shadow: rgb(145, 209, 252);
   --main-lga:  #26A0F1;
-  --main-lgb: #2583F5;
+  --main-lgb: #90A2D1;
   --main-lgba: #26A0F1;
-  --main-lgbb: #2583F5;
-  --main-style: #2583F5;
+  --main-lgbb: #90A2D1;
+  --main-style: #90A2D1;
   --button-green:#2EA247;
 
+  
   /* focus-color FEA126
      focus-color 1ab1a1
   */

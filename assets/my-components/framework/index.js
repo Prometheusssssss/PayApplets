@@ -219,7 +219,6 @@ Component({
         }
         case "load": {
           this.mystopLoad();
-          console.log('load', index, dataList)
           var index = that.data.pageNo - 1;
           returnSetObj["totalList[" + index + "]"] = dataList;
           break;

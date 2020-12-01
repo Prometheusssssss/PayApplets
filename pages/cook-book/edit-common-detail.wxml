@@ -1,0 +1,33 @@
+<form bindsubmit="saveGuestValue">
+<view class="adventure-content">
+        <view class="adventure-title">
+                <view class="adventure-name">
+                        <text>菜系名称:</text>
+                </view>
+                <view class="adventure-name">
+                        <text>{{cookInfo.NAME}}</text>
+                </view>
+        </view>
+        <!-- 普通人只有新建  -->
+        <view class="adventure-clue">
+                <view>
+                         <text>配方:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindClueChangeTextArea" value="{{cookInfo.DETAIL_NAME}}"
+                                placeholder="多行输入"  name="DETAIL_NAME" />
+                </view>
+              
+        </view>
+</view>
+<view class="bottom-content">
+        <button  class="mask-rect  main-color long " formType="submit">保存</button>
+</view>
+</form>
+<sj-confirm visible="{{showSaveConfirm}}" addLineHeight="0" title="确认操作" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmSave">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认保存吗？</text>
+    </view>
+</sj-confirm>
+

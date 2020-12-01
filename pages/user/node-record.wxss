@@ -1,0 +1,32 @@
+/* pages/user/node-record.wxss */
+page {
+ 
+  /* width: calc(100% - 64rpx); */
+  /* background: white; */
+}
+.record{
+  padding: 10rpx 40rpx;
+  width: calc(100% - 80rpx);
+  background: white;
+  margin-top: 6rpx;
+  padding-bottom: 40rpx;
+}
+.record:first-child{
+  margin-top: 20rpx;
+}
+.record text{
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #868585;
+}
+.record:last-child text{
+  line-height: 50rpx;
+}
+
+view.title{
+  text-align: center;
+  font-size: 40rpx;
+  margin-top: 20rpx;
+  /* margin-bottom: 20rpx; */
+  color: var(--main-style);
+}

@@ -1,0 +1,91 @@
+/* pages/langwen-simulation/langwen-add-times.wxss */
+@import '/assets/my-components/button/index.wxss';
+page{
+  background-color: white;
+}
+.content{
+  /* background-color: white; */
+  margin-top: 30rpx;
+  /* padding: 0 30rpx; */
+}
+.padding-30{
+  padding: 0 30rpx;
+}
+.count-number{color: var(--main-style);font-size: 30rpx;}
+.content>view{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 50rpx;
+}
+.content .row{
+  flex-direction: row;
+  justify-content: flex-start;
+  line-height: 30rpx;
+}
+.content .margin-60{
+  margin-top: 60rpx;
+}
+.select-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 50rpx;
+  height: 350rpx;
+  width: calc(100% - 40rpx);
+  padding: 0 10rpx;
+}
+.select-content.center{
+  justify-content: center;
+}
+.select-content .select-info{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 280rpx;
+  width: 190rpx;
+  border: 2rpx solid #F4D2A7;
+  margin-right: 10rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  color: #7D4805;
+}
+.select-content .select-info.selected{
+  background-color: #F4D2A7;
+}
+.select-content .select-info.max-width{
+  width: 260rpx;
+  margin-right: 14rpx;
+}
+.select-content .select-info>view{
+  font-weight: bold;
+  font-size: 30rpx;
+}
+.select-content .select-info .text-times{
+  color: #7D4805;
+  font-size: 28rpx;
+}
+.select-content .select-info>view{
+  width: 200rpx;
+}
+.bottom-content{
+  margin-top: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30rpx;
+  /* border-bottom: 2rpx solid var(--page-bg); */
+}
+
+.content .tip{
+  margin-top: 40rpx;
+  line-height: 40rpx;
+}
+.tip text{
+  color: var(--text-gray);
+  font-size: 24rpx;
+}

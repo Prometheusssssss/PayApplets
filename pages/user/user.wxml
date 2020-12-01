@@ -1,131 +1,90 @@
 <wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
-<view wx:if="{{isLoginUser}}">
-<view class="user-info">
-    <!-- <view class="user-image"> -->
-    <!-- <open-data type="userAvatarUrl" class="user-image"></open-data> -->
-    <image src="{{userInfo.IMG_URL}}" class="user-image"></image>
-    <!-- </view> -->
-    <view class="title-info">
-        <!-- <open-data type="userNickName" class="user-name"></open-data> -->
-        <text class="user-name">{{userInfo.NAME}}</text>
-        <text class="user-tel">{{userInfo.PHONE}}</text>
-    </view>
-    <view bindtap="changeUser" class="invalidate-user">
-        <i class="icon icon-right" bindtap='editUser' ></i>
-    </view>
-</view>
-<view class="menu">
-    <view class="cashout">
-        <view class="price">{{convert.toMoney(userInfo.CUMULATIVE_INCOME)}}</view>
-        <view class="title">累计收入</view>
-        <!-- <view class="detail-msg">审核中：{{convert.toMoney(hodInfo.PENDING_AMOUNT)}}</view> -->
-    </view>
-    <view class="settlement">
-        <view class="price">{{convert.toMoney(userInfo.UPCOMING_INCOME)}}</view>
-        <view class="title">即将收入</view>
-        <!-- <view class="detail-msg">{{convert.toMoney(hodInfo.CASHOUT_AMOUNT)}}</view> -->
-    </view>
-</view>
-<view class="user-last-wallet">
-    <view class="last-price" bindtap="extractCashRecord">可用资金：{{convert.toMoney(userInfo.BALANCE)}}</view>
-    <view bindtap="goImmediateWithdrawalPage" class="immediate-withdrawal">立即提现</view>
-</view>
-
-<view class="menu-items">
-    <view class="invitation-custom" bindtap="goMyBoughtPage">
-        <view class="icon icon-qianbao"></view>
-        <view class="text">我买到的</view>
-    </view>
-
-    <view class="cashout" bindtap="goMyPublishPage">
-        <i class="icon icon-fabu"></i>
-        <view class="text">我发布的</view>
-    </view>
-
-    <view class="settlement" bindtap="goMySoldPage">
-        <view class="icon icon-check1"></view>
-        <view class="text">我卖出的</view>
-    </view>
-
-    
-
-    <view class="second-hod-manager" bindtap="goMyCollectPage">
-        <view class="icon icon-collect"></view>
-        <view class="text">我收藏的</view>
-    </view>
-</view>
-
- <view class="menu-list">
-    <view class="menu-item" bindtap="viewOrder" bindtap="goCustomerPage" wx:if="{{isManager}}">
-      <view>
-        <i class="icon  icon-order  icon-green menu-image"></i>
-        <text>订单处理</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view>
-    <view class="menu-item" bindtap="extractCachCheck" wx:if="{{isManager}}">
-      <view>
-        <i class="icon  icon-tixian  icon-green menu-image"></i>
-        <text>提现核对</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view>
-    <view class="menu-item" bindtap="viewAddress">
-      <view>
-        <i class="icon  icon-contact  icon-green menu-image"></i>
-        <text>联系客服</text>
-      </view>
-      <contact-button type="default-light"   size="20" session-from="weapp">
-      </contact-button>
-      <button class="contact-server" open-type="contact" bindcontact="handleContact"></button>
-      <i class="icon icon-arrow-right" ></i>
-    </view>
-    <view class="menu-item" bindtap="editRemark">
-      <view>
-        <i class="icon  icon-feedback  icon-green menu-image"></i>
-        <text>意见反馈</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view>
-    <view class="menu-item" bindtap="loginOut">
-      <view>
-        <i class="icon  icon-login-out  icon-green menu-image"></i>
-        <text>注销</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view>
-    <!-- <view>
-      <button open-type="openSetting" bindopensetting="handleSetting" wx:if="{{isPic}}">授权保存</button> 
-      <button bindtap="saveImg" wx:else>保存图片</button>
-    </view> -->
-
-    <!-- <view wx:if="{{isInTestAliyun}}" class="menu-item group" bindtap="getDebugParam">
-      <view>
-        <image class='menu-image' mode='aspectFit' src='/assets/img/user/edit-pwd.png'></image>
-        <text>协助postman调试/获取参数</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view>
-
-    <view wx:if="{{isInTestAliyun}}" class="menu-item" bindtap="openRequestLogs">
-      <view>
-        <image class='menu-image' mode='aspectFit' src='/assets/img/user/edit-pwd.png'></image>
-        <text>请求日志</text>
-      </view>
-      <i class="icon icon-arrow-right"></i>
-    </view> -->
+<view>
+  <view class="title-tip">
+    <text>点击右上方的三个点 可以[添加到我的小程序]</text>
   </view>
-  <!-- <canvas canvas-id='share_canvas'
-    style='width:500px;height:400px;position:fixed;bottom:-400px;left:0;'></canvas> -->
-</view>
+  <view class="user-info">
+    <image wx:if="{{isLoginUser}}" src="{{userInfo.url}}" class="user-image"></image>
+    <image wx:else src="/assets/img/logo.png" class="user-image" mode="aspectFit"></image>
+    <view class="title-info" wx:if="{{isLoginUser}}" bindtap="editUser">
+        <text class="user-name" >{{userInfo.name}}</text>
+        <text class="user-name" wx:if="{{userInfo.tel != null}}">{{userInfo.tel}}</text>
+    </view>
+    <view class="title-info" wx:else>
+        <button class='authBtn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo"> 请点击登录 </button>
+    </view>
+    <view bindtap="editUser" class="invalidate-user" wx:if="{{isLoginUser}}">
+        <i class="icon icon-right"></i>
+    </view>
+  </view>
 
-<sj-framework sliderBar="false" contentBg="var(--page)"  wx:if="{{!isLoginUser}}">
-       <view slot="content">
-          <view class="no-authorize">
-            <image mode='aspectFit' src='/assets/img/logo.png'></image>
-            <button class="login-button" bindtap="goLogin">先去登录哦</button>
-          </view>
-       </view>
-</sj-framework>
+  <view class="menu-list">
+      <view class="menu-item" bindtap="viewAddress">
+        <view>
+          <i class="icon  icon-contact  icon-green menu-image"></i>
+          <text>联系客服</text>
+        </view>
+        <!-- <contact-button type="default-light"   size="20" session-from="weapp">
+        </contact-button> -->
+        <button class="contact-server" open-type="contact" bindcontact="handleContact"></button>
+        <i class="icon icon-arrow-right" ></i>
+      </view>
+      <view class="menu-item" bindtap="goNodeRecordPage">
+        <view>
+          <i class="icon  icon-feedback  icon-green menu-image"></i>
+          <text>版本记录</text>
+        </view>
+        <i class="icon icon-arrow-right"></i>
+      </view>
+  </view>
+</view>
+<view class="tip-info">
+  <view class="tip-public">
+    <view>
+      <view>  
+        <text>欢迎关注“天刀大嘴巴”微信公众号</text>
+      </view>
+      <view>
+        <text>提前了解天涯明月刀手游最新攻略~</text>
+      </view>
+    </view>
+    <view class="previewImage">
+            <image src="{{imageUrl}}" mode="aspectFit" bindtap="previewImage"/>
+    </view>
+  </view>
+  <view class="tip-public">
+    <view >
+      <view>  
+        <text>小程序制作不易</text>
+      </view>
+      <view>
+        <text>各位老板喜欢的话，请多多支持！</text>
+      </view>
+    </view>
+    
+    <view class="previewImage zanImageUrl">
+      <image src="{{zanImageUrl}}" mode="aspectFit" bindtap="previewZanImage"/>
+    </view>
+  </view>
+</view>
+<view>
+  <ad unit-id="adunit-36bb24391a6e85f6" ad-type="video" ad-theme="white"></ad>
+</view>
+<view class="mask-layer {{showConfirmAuthorization == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>确认</text>
+      </view>
+      <view class="content">
+        <text>使用手机号登录/注册大嘴巴百宝箱</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancel" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="closeMask">确认</button>
+      </view>
+    </view>
+  </view>
+</view>
 
 

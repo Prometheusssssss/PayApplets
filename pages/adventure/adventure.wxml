@@ -1,0 +1,173 @@
+<!-- <lm-framework sliderBar="true" contentBg="var(--page-bg)" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"> -->
+<lm-framework sliderBar="true" contentBg="var(--page-bg)"  >
+  <view slot="top" class="search-top">
+    <view class="second-category-list-land" >
+      <scroll-view class="second-category" scroll-x="{{true}}" scroll-y="{{false}}" enable-flex="{{true}}"
+        scroll-into-view="{{scrollSecondCategoryKid}}" scroll-with-animation="{{true}}">
+        <block wx:for="{{adventureGroupList}}">
+          <view id="second_{{item.KID}}"
+            class="second-category-title-land-item {{groupName == item.NAME?'current':''}}  {{index==0?'first':''}}"
+            bindtap="changeSecondCategory" data-item="{{item.NAME}}">
+            <view class="second-category-title-text {{index+1 == secondSliderList.length?'last':''}}">{{item.NAME}}
+            </view>
+          </view>
+
+        </block>
+      </scroll-view>
+      <!-- <i bindtap="changeSecondCategoryType" data-second-type="big" class="icon icon-arrow-down icon-main-style"></i> -->
+    </view>
+  </view>
+  <lm-slider-bar slot="slider" items="{{sliderList}}" current="{{currentSliderbar}}" itemsKey="NAME"
+    bindChangeSliderBar="changeSliderBar">
+  </lm-slider-bar>
+  <view slot="content">
+    <view class='main-container'>
+        <block wx:for="{{adventureList}}"  wx:for-item="item">
+            <view class='my-product-item' data-index="{{index}}" data-item="{{item}}" id="product_{{index+1}}" wx:key="{{item.KID}}">
+              <view class="my-product-item-server">
+                  <view class="item-product-title">
+                    <view>
+                      <text>{{item.NAME}}</text>
+                    </view>
+                    <view class="item-product-supllier">
+                      <text wx:if="{{item.CONTRIBUTOR != '' && item.CONTRIBUTOR != null}}">感谢:{{item.CONTRIBUTOR}}提供信息</text>
+                      <i class="icon icon-flower iconc-main-style" wx:if="{{item.CONTRIBUTOR != '' && item.CONTRIBUTOR != null}}"></i>
+                      <i class="icon icon-edit iconc-main-style" bindtap="edtiManagerAdventure"  data-item="{{item}}" wx:if="{{userInfo.isManager == true}}"></i>
+                    </view>
+                  </view>
+                  <view class='item-product-info' wx:if="{{item.CLUE != null && item.FILLER != null  && item.FILLER != ''}}">
+                    <view>
+                      <view class="item-product-row">
+                          <view class="row-flex">
+                            <text>名称</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <view class="row-flex-content">
+                              <text>内容</text>
+                            </view>
+                          </view>
+                        
+                      </view>
+                      <view class="item-product-row">
+                          <view class="row-flex">
+                            <text>线索</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <view class="row-flex-content">
+                              <text>{{item.CLUE}}</text>
+                            </view>
+                          </view>
+                      </view>
+                      <view class="item-product-row">
+                          <view class="row-flex">
+                            <text>开启条件</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <view class="row-flex-content">
+                              <text>{{item.OPENING_CONDITIONS}}</text>
+                            </view>
+                          </view>
+                      </view>
+                      <view class="item-product-row">
+                          <view class="row-flex">
+                            <text>坐标位置</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <view class="row-flex-content">
+                              <text>{{item.COORDINATE}}</text>
+                            </view>
+                          </view>
+                      </view>
+                      <view class="item-product-row" wx:if="{{item.ENDING != ''}}">
+                          <view class="row-flex">
+                            <text>结局</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <view class="row-flex-content">
+                              <text>{{item.ENDING}}</text>
+                            </view>
+                          </view>
+                      </view>
+                    </view>
+                    <!-- <view> -->
+                      <view class="item-product-image" wx:if="{{item.IMG_LIST.length > 0}}">
+                          <view class="row-flex">
+                            <text>详情：</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <image  bindtap='previewImage' data-item="{{item}}" data-index="0" mode='aspectFit' src="{{item.IMG_LIST[0]+'/200x200'}}" lazy-load="{{true}}"></image>
+                            <image  bindtap='previewImage' wx:if="{{item.IMG_LIST.length > 1}}" data-item="{{item}}" data-index="1" mode='aspectFit' src="{{item.IMG_LIST[1]+'/200x200'}}" lazy-load="{{true}}"></image>
+                            <view bindtap='previewImage' data-item="{{item}}" data-index="0" wx:if="{{item.IMG_LIST.length > 2}}">...</view>
+                          </view>
+                      </view>
+                    <!-- </view> -->
+                    
+                    <view class="item-product-bottom">
+                      <view wx:if="{{userInfo.isManager != true}}">
+                        <lm-button shape="outline-rectangle" title="我来补充" buttonColor="main-color long white"   data-item="{{item}}" bindButtonClick="edtiCommonAdventure" />
+                      </view>
+                      <view wx:else>
+                        <!-- 所有没有启用的投稿 -->
+                          <view>
+                            <lm-button shape="outline-rectangle" title="查看投稿" buttonColor="main-color long white"   data-item="{{item}}" bindButtonClick="selAllAdventure" />
+                          </view>
+                      </view> 
+                    </view>
+                    
+                  </view>
+                  <!-- 尚未录入 -->
+                  <!-- Not yet included -->
+                  <view wx:else class="'item-not-include">
+                      <view>
+                        <text>尚未收录</text>
+                      </view>
+                      <view wx:if="{{userInfo.isManager != true}}">
+                         <lm-button shape="outline-rectangle" title="我来补充" buttonColor="main-color long white"   data-item="{{item}}" bindButtonClick="edtiCommonAdventure" />
+                      </view>
+                      <view wx:else>
+                        <!-- 所有没有启用的投稿 -->
+                        <view>
+                         <lm-button shape="outline-rectangle" title="查看投稿" buttonColor="main-color long white"   data-item="{{item}}" bindButtonClick="selAllAdventure" />
+                        </view>
+                      </view>
+                  </view>
+              </view>
+            </view>
+        </block>
+    </view>
+  </view>
+  
+</lm-framework>
+<view class="mask-layer {{showConfirmLogin == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>提示</text>
+      </view>
+      <view class="content">
+        <text>亲，您还未登录哦~</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancelDoLogin" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo" >登录</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="mask-layer {{showConfirmAuthorization == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>确认</text>
+      </view>
+      <view class="content">
+        <text>使用手机号登录/注册大嘴巴百宝箱</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancel" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="closeMask">确认</button>
+      </view>
+    </view>
+  </view>
+</view>

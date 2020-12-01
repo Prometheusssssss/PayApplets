@@ -16,22 +16,26 @@
   padding: 20rpx 0;
   text-align: center;
   color: var(--text-gray);
-  border-radius: 8rpx;
-  margin-left: 10rpx;
+  /* border-radius: 8rpx; */
+  /* margin-left: 10rpx; */
   margin-right: 10rpx;
-  margin-bottom: 20rpx;
+  /* margin-bottom: 20rpx; */
 }
 
 .slider-bar .slider-text {
-  border: 2rpx solid var(--page-bg);
-  font-size: 30rpx;
+  /* border: 2rpx solid var(--page-bg); */
+  font-size: 24rpx;
   letter-spacing: 0.8rpx;
 }
 
 .slider-bar .slider-text-choosed {
-  color: white;
-  background: linear-gradient(90deg, var(--main-lga) 4%, var(--main-lgb) 100%);
+  /* color: white; */
+  /* background: linear-gradient(90deg, var(--main-lga) 4%, var(--main-lgb) 100%); */
+  color: var(--main-style);
   border: none;
+  border-left: 6rpx solid var(--main-style);
+  border-radius: 0;
+
 }
 
 .setting-area {
@@ -44,4 +48,11 @@
 
 .icon-setting {
   font-size: 60rpx;
+}
+.waiting-for{
+  /* color: var(--text-red); */
+  font-size: 26rpx;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 200rpx;
 }

@@ -1,6 +1,6 @@
-<view class='slider-bar'>
+<view class='slider-bar' wx:if="{{showSlider}}">
   <block wx:for="{{items}}" wx:key="{{KID}}">
-    <view wx:if="{{item.IS_ENABLE!=false}}" class="slider-item slider-text {{current == item.KID ? 'slider-text-choosed' : ''}}"
+    <view  class="slider-item slider-text {{current == item.KID ? 'slider-text-choosed' : ''}}"
       bindtap="handleChange" data-name="{{item.NAME}}" data-id="{{item.KID}}">
       {{item.NAME}}
     </view>
@@ -8,4 +8,7 @@
   <view wx:if="{{bottomIconName!=''}}" class="slider-item setting-area" bindtap="iconEvent">
     <i class="icon icon-{{bottomIconName}} setting-i"></i>
   </view>
+</view>
+<view wx:else class="waiting-for">
+  等待开启
 </view>

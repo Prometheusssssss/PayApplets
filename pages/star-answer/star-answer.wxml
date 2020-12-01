@@ -1,0 +1,115 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<lm-framework sliderBar="false" contentBg="var(--page-bg)" id="lm-framework"  bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}">
+    <view slot="top" class="search-top">
+        <view class="search">
+            <sj-search placeholder="请输入内容查询" catchInputEvent="searchList"  initValue="{{searchText}}" type="text" iconName="" rightIconName=""
+              catchPickerEvent="bindAreaChange" />
+        </view>
+    </view>
+    <view slot="content" class="slot-content">
+      <!-- 普通人和管理员进入，还没有查询 -->
+      <!-- <view class="first-in" wx:if="{{isFirstIn}}"> -->
+      <view class="first-in" wx:if="{{userInfo.isManager && isFirstIn}}">
+        <view>
+          <button  class="mask-rect  main-color long " bindtap="managerEditBank">补充题库</button>
+          <button  class="mask-rect  main-color long " bindtap="selBank">查看投稿</button>
+        </view>
+        
+      </view>
+      
+      <view class="search-in"  wx:if="{{isSearchIn}}">  
+        <!-- 普通人和管理员进入，进行查询，没有查到结果 -->
+        <view wx:if="{{!hasSearchContent}}" class="no-content">
+          <view>
+            <view>恕小二无能找不到少侠想要的结果.°(ಗдಗ。)°.</view>
+            <view>请点击下方补充题库进行补充哦！</view>
+          </view>
+          <view>
+            <button  class="mask-rect  main-color long" bindtap="commonEditBank">补充题库</button>
+            <button  class="mask-rect  main-color long"  wx:if="{{userInfo.isManager}}" bindtap="selBank">查看投稿</button>
+          </view>
+        </view>
+        <!-- 普通人和管理员进入，进行查询查到结果，展示查询结果标绿色，展示广告位。循环展示内容 -->
+        <!-- 答案是空的显示暂无此属性 -->
+        <view wx:else>
+          <block wx:for="{{totalList}}" wx:for-item="listItem">
+          <!-- <block wx:for="{{listItem}}"  wx:for-item="item"> -->
+          <view class="search-content" wx:for="{{listItem}}">
+            <view class="answer-title">
+              题目：
+            </view>
+            <view class="answer-text">
+              <block wx:for="{{item.SUBJECT}}" wx:for-item="subject">
+                <text class="{{convert.highLight(searchTextList, subject) ? 'active':''}}">{{subject}}</text>
+              </block>
+            </view>
+            <view class="answer-title">
+              回答：
+            </view>
+            <view class="answer-content">
+                <view class="true-answer">
+                  肯定：
+                  <block wx:for="{{item.TRUE_ANSWER}}" wx:for-item="trueAnswer" wx:if="{{item.TRUE_ANSWER.length != 0}}">
+                    <text class="{{convert.highLight(searchTextList, trueAnswer) ?'active':''}}">{{trueAnswer}}</text>
+                  </block>
+                  <block wx:if="{{item.TRUE_ANSWER.length == 0 || item.TRUE_ANSWER[0] == ''}}">
+                    <text>无属性变化</text>
+                  </block>
+                </view>
+                <view class="false-answer">
+                  否定：
+                  <block wx:for="{{item.FALSE_ANSWER}}" wx:for-item="falseAnswer" wx:if="{{item.FALSE_ANSWER.length != 0}}">
+                    <text class="{{convert.highLight(searchTextList, falseAnswer) ?'active':''}}">{{falseAnswer}}</text>
+                  </block>
+                  <block wx:if="{{item.FALSE_ANSWER.length == 0 || item.FALSE_ANSWER[0] == ''}}">
+                    <text>无属性变化</text>
+                  </block>
+                  <!-- <text class="{{convert.highLight(searchTextList, item.FALSE_ANSWER) ?'active':''}}" >{{item.FALSE_ANSWER != 0 ? item.FALSE_ANSWER:'无属性变化'}}</text> -->
+                </view>
+            </view>
+          </view>
+          </block>
+          <!-- <view>
+            <ad unit-id="adunit-7b1486a45049fc55"></ad>
+          </view> -->
+        </view>
+      </view>
+     
+    </view>
+   
+
+</lm-framework>
+
+<view class="mask-layer {{showConfirmLogin == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>提示</text>
+      </view>
+      <view class="content">
+        <text>亲，您还未登录哦~</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancelDoLogin" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo" >登录</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="mask-layer {{showConfirmAuthorization == true?'show':''}}">
+  <view class='mask-layer-content'>
+    <view class="main-content">
+      <view  class="title">
+        <text>确认</text>
+      </view>
+      <view class="content">
+        <text>使用手机号登录/注册大嘴巴百宝箱</text>
+      </view>
+      <view class="button-area">
+        <button  bindtap="cancel" class="confirm-btn"> 取消 </button>
+        <button class='confirm-btn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="closeMask">确认</button>
+      </view>
+    </view>
+  </view>
+</view>

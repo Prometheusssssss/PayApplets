@@ -105,8 +105,6 @@ Page({
       "orderByField": "ORDER_TIME",
       "isDesc":1
     }
-    console.log('查询数据')
-    console.log(JSON.stringify(p))
     app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
       if (dataList != 'error') {
         that.lmFramework.dealWithList(type, dataList, pageSize);

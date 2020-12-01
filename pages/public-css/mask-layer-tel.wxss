@@ -1,0 +1,26 @@
+@import "/assets/my-components/mask-confirm/index.wxss";
+/* //遮罩层 */
+.mask-layer-content>.main-content>.content{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+.mask-layer-content>.main-content>.content text{
+  font-size: 26rpx;
+}
+.confirm-btn:first-child{
+  border-right: 2rpx solid var(--line-gray);
+}
+.confirm-btn{
+  height: 100rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 0;
+  font-size: 30rpx;
+  font-weight: normal;
+  margin: 0;
+  width: 50%;
+}
+.confirm-btn:last-child{
+  color: var(--main-style);
+}

@@ -1,0 +1,43 @@
+<form bindsubmit="saveGuestValue">
+<view class="adventure-content">
+        <view class="adventure-title">
+                <view class="adventure-name">
+                        <text>名称:</text>
+                </view>
+                <view class="adventure-name">
+                        <text>{{lawsuitInfo.NAME}}</text>
+                </view>
+        </view>
+        <view class="adventure-clue" wx:for="{{lawsuitList}}">
+                <view class="favorability-input">
+                        <input bindinput="handleInput" placeholder="输入断案名称"
+                        value="{{item.NAME}}" name="lawsuitList[{{index}}].NAME" data-index="{{index}}"/>
+                        <view class="icon-list">
+                                <i class="icon icon-add icon-main-style"  wx:if="{{index == lawsuitList.length-1}}" bindtap="copyManagerFavorabilty"  data-index="{{index}}" ></i>
+                                <i class="icon icon-remove icon-red" bindtap="removeManagerFavorabilty" wx:if="{{index != lawsuitList.length-1}}" data-index="{{index}}" data-item="{{item}}"></i>
+                                
+                        </view>
+                </view>
+                <view class="adventure-input">
+                        <view>
+                                <textarea bindinput="bindNameChangeTextArea" value="{{item.CONTENT}}"
+                                placeholder="输入断案内容"  name="lawsuitList[{{index}}].CONTENT" data-index="{{index}}" />
+                                
+                        </view>
+                </view>
+                
+        </view>
+        <!-- </view> -->
+       
+        <view class="bottom-content">
+                <button  class="mask-rect  main-color long " formType="submit">保存</button>
+        </view>
+</view>
+</form>
+<sj-confirm visible="{{showClearConfirm}}" addLineHeight="0" title="确认清空" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmClear">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认清空吗？</text>
+    </view>
+</sj-confirm>
+

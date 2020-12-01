@@ -1,0 +1,82 @@
+<!-- <lm-framework sliderBar="true" contentBg="var(--page-bg)" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"> -->
+  <lm-framework sliderBar="false" contentBg="var(--page-bg)"  >
+  <view slot="content">
+    <view class='main-container'>
+        <block wx:for="{{answerList}}"  wx:for-item="item">
+          <form bindsubmit="saveGuestValue" data-item="{{item}}">
+            <view class='my-product-item' data-index="{{index}}" data-item="{{item}}" id="product_{{index+1}}" wx:key="{{item.KID}}">
+              <view class="my-product-item-server"  wx:if="{{item.FILLER != null}}">
+                  <view class="item-product-title">
+                    <view>
+                    <text>来自{{item.FILLER}}投稿</text>
+                    </view>
+                  </view>
+                  <view class='item-product-info' wx:if="{{item.SUBJECT != null && item.SUBJECT != ''}}">
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>名称</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                            <text>内容</text>
+                          </view>
+                        </view>
+                       
+                    </view>
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>题目</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                             <textarea bindinput="bindSubjectInput" value="{{item.SUBJECT}}"
+                                placeholder="多行输入" data-index="{{index}}"  name="SUBJECT" />
+                          </view>
+                        </view>
+                    </view>
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>肯定答案</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                             <textarea bindinput="bindtrueInput" value="{{item.TRUE_ANSWER}}"
+                                placeholder="多行输入" data-index="{{index}}" name="TRUE_ANSWER"/>
+                          </view>
+                        </view>
+                    </view>
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>否定答案</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                             <textarea bindinput="bindfalseInput" value="{{item.FALSE_ANSWER}}"
+                                placeholder="多行输入" data-index="{{index}}" name="FALSE_ANSWER"/>
+                          </view>
+                        </view>
+                    </view>
+                    <!-- <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>贡献人</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                            <textarea bindinput="bindOpenContionsChangeTextArea" value="{{item.CONTRIBUTOR}}"
+                                placeholder="多行输入"  name="CONTRIBUTOR"/>
+                          </view>
+                        </view>
+                    </view> -->
+                  </view>
+                 <view class="bottom-content">
+                        <button  class="mask-rect  main-color" formType="submit" >保存并使用</button>
+                        <button  class="mask-rect outline main-color refuse" bindtap="refuse" data-item="{{item}}">拒绝</button>
+                </view>
+              </view>
+            </view>
+          </form>
+        </block>
+    </view>
+  </view>
+</lm-framework>

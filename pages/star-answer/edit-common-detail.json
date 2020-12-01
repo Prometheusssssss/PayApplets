@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText":"星运补充",
+  "usingComponents": {
+    "lm-slider-bar": "../../assets/my-components/slider_bar/index",
+    "lm-framework": "../../assets/my-components/framework/index",
+    "lm-button": "../../assets/my-components/button/index",
+    "sj-confirm": "../../../assets/my-components/mask-confirm/index",
+    "lm-search": "../../assets/my-components/search/index"
+  }
+}

@@ -1,0 +1,44 @@
+<form bindsubmit="saveGuestValue">
+<view class="adventure-content">
+        <view class="adventure-clue">
+                <view>
+                         <text>题目:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindClueChangeTextArea" value="{{answerInfo.SUBJECT}}"
+                                placeholder="多行输入"  name="SUBJECT" />
+                </view>
+              
+        </view>
+         <view class="adventure-clue">
+                <view>
+                         <text>肯定答案:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindOpenContionsChangeTextArea" value="{{answerInfo.TRUE_ANSWER}}"
+                                placeholder="多行输入"  name="TRUE_ANSWER"/>
+                </view>
+              
+        </view>
+         <view class="adventure-clue">
+                <view>
+                         <text>否定答案:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindCoordinateTextArea" value="{{answerInfo.FALSE_ANSWER}}"
+                                placeholder="多行输入"  name="FALSE_ANSWER"/>
+                </view>
+              
+        </view> 
+</view>
+<view class="bottom-content">
+        <button  class="mask-rect  main-color long " formType="submit">保存</button>
+</view>
+</form>
+<sj-confirm visible="{{showSaveConfirm}}" addLineHeight="0" title="确认操作" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmSave">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认保存吗？</text>
+    </view>
+</sj-confirm>
+

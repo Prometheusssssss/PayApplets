@@ -4,7 +4,9 @@ global.common = require('/pages/public-js/common.js')
 //2、提现详情里要实时查一下用户的账户余额
 //3、登录页面
 App({
-  onLaunch: function () {
+  onLaunch: function (e) {
+    var platform = wx.getSystemInfoSync().platform;
+    this.platform = platform;
     
   },
   globalData: {
@@ -16,21 +18,26 @@ App({
 
     hostUrl: '',
     systemInfo: {},
-    platform: {},
+    platform: '',
     toastDuration: 1500,
     pageSize: 10,
     pageLargeSize: 30,
     userInfo: null,
     areaInfo:null,
     sliderBar: [],
+    maxShowRewardedAdCount:3,
 
-
-    manageUrl: 'https://www.dazuiba.cloud', //体验
-    // manageUrl:'https://test.dazuiba.cloud',
-    // manageUrl: 'https://app.keyun.link', //体验
+    // manageUrl: 'https://www.dazuiba.top:8005', //正式
+    manageUrl:'https://test.dazuiba.top:8006',//测试
   },
+  
   setHostUrl: function (hostUrl) {
     this.globalData.hostUrl = this.globalData.manageUrl + '/' + hostUrl;
+  },
+   //是否是安卓平台 只要不是ios
+  isAndriod: function() {
+    // return false
+    return 'ios' != this.platform
   },
   getJsCode: async function () {
     return await new Promise(re => {
@@ -98,29 +105,6 @@ App({
       return result
     }
   },
-  // reTryRequest: function (url, method, data, header, retryTimes = 0) {
-  //   var result =  new Promise(resolve => {
-  //     wx.request({
-  //       url: url,
-  //       method: method, data: data, header: header,
-  //       complete: function (res) {
-  //         resolve(res);
-  //       }
-  //     })
-  //   })
-  //   // IS_SUCCESS  MSG  TABLE
-  //   var data = result.data;
-  //   if(!data.IS_SUCCESS){
-  //     wx.showToast({
-  //       title: data.MSG,
-  //       icon: 'none',
-  //       duration: 2000
-  //     });
-  //     return 'error'
-  //   }else{
-  //     return data.Table
-  //   }
-  // },
   reTryRequest: async function (url, method, data, header, retryTimes = 0) {
     var result = await new Promise(resolve => {
       wx.request({
@@ -172,7 +156,7 @@ App({
     var result = await that.reTryRequest(that.globalData.manageUrl+'/api/_oss/ossimg', 'POST', p, {});
     return result;
   },
-  getPayMent: async function(price,productId,buyUserId,orderNo) {
+  getPayMent: async function(price,buyNum,buyUserId,orderNo) {
     var that = this;
     var jsCode = await new Promise(resolve => {
       wx.login({
@@ -183,10 +167,10 @@ App({
         }
       })
     })
-    // price productId buyUserId jsCode
+    // price buyNum, buyUserId jsCode
     var result = await that.reTryPayRequest(that.globalData.manageUrl + '/api/_pay/WeChatServicesPayApi', 'POST', {
       price: price,
-      productId: productId,
+      buyNum: buyNum,
       buyUserId: buyUserId,
       jsCode: jsCode,
       orderNo: orderNo,

@@ -1,10 +1,14 @@
 /* pages/user/change-info.wxss */
-@import "/pages/publish/publish-edit.wxss";
+@import "../public-css/publish-edit.wxss";
 @import "/assets/iview-weapp/input/index.wxss";
+.upload{
+  flex:1
+}
+
 .upload-view{
   margin-left: 0 !important;
   padding-left: 40rpx;
-  justify-content: flex-start !important;
+  justify-content: space-between;
   height: 120rpx;
   max-height: 120rpx;
 
@@ -33,4 +37,55 @@
   border-radius: 8rpx;
   background-color: var(--main-style);
   color: white;
+  
 }
+.authBtn{
+  background: transparent;
+  font-size: 30rpx;
+  color: var(--button-green);
+  text-align: right;
+}
+.authBtn.long{
+  text-align: left;
+  width: 300rpx !important;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0;
+}
+@import "/assets/my-components/mask-confirm/index.wxss";
+/* //遮罩层 */
+.mask-layer-content>.main-content>.content{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+.mask-layer-content>.main-content>.content text{
+  font-size: 26rpx;
+}
+.confirm-btn:first-child{
+  border-right: 2rpx solid var(--line-gray);
+}
+.confirm-btn{
+  height: 100rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 0;
+  font-size: 30rpx;
+  font-weight: normal;
+  margin: 0;
+  width: 50%;
+}
+.confirm-btn:last-child{
+  color: var(--main-style);
+}
+.upload-view{
+  padding-top: 30rpx;
+  padding-bottom: 20rpx;
+}
+.ui_uploader_item{
+  width: 150rpx !important;
+}
+.ui_uploader_item .special-image{
+  border-radius:150rpx ;
+}
+.upload .tel{font-size: 28rpx;}

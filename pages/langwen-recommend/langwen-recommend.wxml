@@ -1,0 +1,81 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<lm-framework sliderBar="false" contentBg="white"  >
+  <!-- <view class="view-content"> -->
+      <view class="slot-content"  slot="content">
+          <form bindsubmit="saveValue">
+              <view class="recommend-calculate">
+                <view>
+                  <view class="adventure-picker">
+                    <view>
+                            <text>职业:</text>
+                    </view>
+                    <picker bindchange="bindProfessionChange" value="{{professionIndex}}" range="{{professionList}}" >
+                        <view class="picker">
+                          <!-- <text  space="emsp"> -->
+                          {{professionList[professionIndex]}}
+                          <!-- </text> -->
+                        </view>
+                    </picker>
+                    <i class="icon icon-arrowdownb" ></i>
+                  </view>
+                  <view class="adventure-picker">
+                    <view>
+                            <text>氪金度:</text>
+                    </view>
+                    <picker bindchange="bindGoldenDegreeChange" value="{{goldDegreeIndex}}" range="{{goldDegreeList}}" >
+                        <view class="picker">
+                            {{goldDegreeList[goldDegreeIndex]}}
+                        </view>
+                    </picker>
+                    <i class="icon icon-arrowdownb" ></i>
+                  </view>
+                  <!-- <view class="adventure-picker">
+                      <view>
+                              <text>阶段:</text>
+                      </view>
+                      <picker bindchange="bindStageChange" value="{{stageIndex}}" range="{{stageList}}" >
+                          <view class="picker">
+                              {{stageList[stageIndex]}}
+                          </view>
+                      </picker>
+                      <i class="icon icon-arrowdownb" ></i>
+                  </view> -->
+                </view>
+                <view class="bottom-content">
+                  <!-- <view > -->
+                      <button  class="mask-rect  main-color long" formType="submit">确认计算</button>
+                  <!-- </view> -->
+                </view>
+              </view>
+              
+          
+          </form>
+          <view class="recommend-info" wx:for="{{recommondCurrentList}}">
+              <view class="detail-info">
+                <view class="title">
+                  <text>{{item.name}}:</text>
+                </view>
+                <view>
+                  <view wx:for="{{item.details}}" wx:for-item="imageItem" class="image-info">
+                    <image src="{{imageItem.url}}" mode="aspectFit" />
+                    <text>{{imageItem.name}}</text>
+                  </view>
+                </view>
+              </view>
+          </view>
+          <view class="recommend-bottom" wx:if="{{recommondCurrentList.length>0}}">
+            <view>
+              <text>大嘴巴说明：</text>
+            </view>
+            <view class="tip">
+              <text>{{remark}}</text>
+            </view>
+          </view>
+      </view>
+     
+     
+  <!-- </view> -->
+</lm-framework>
+
+
+

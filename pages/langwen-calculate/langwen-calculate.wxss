@@ -1,0 +1,155 @@
+/* pages/star-luck/star-luck.wxss */
+@import '/assets/my-components/button/index.wxss';
+page{
+ background: white !important;
+  /* position: relative; */
+}
+.search-top{
+  box-shadow: 2rpx 4rpx 8rpx 0 var(--box-shadow-gray);
+}
+.bottom{
+  position: relative;
+  top: 200rpx;
+}
+.bottom.min-height{
+  top: 100rpx;
+}
+.bottom-change{
+  position: relative;
+  top: 100rpx;
+}
+.bottom-change.min-height{
+  top: 10rpx;
+}
+.slot-content{
+  /* padding: 0 26rpx; */
+}
+.main-style{
+  color: var(--main-style);font-size: 34rpx;
+}
+.warning-text{
+  margin-left: 4rpx;
+  margin-bottom: 30rpx;
+ 
+}
+.warning-text text{
+  font-size: 30rpx;
+}
+.bottom-content{
+  margin-top: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.adventure-content{
+  /* margin-top: 30rpx; */
+  /* padding: 0 26rpx; */
+  background-color: white;
+}
+.adventure-edit{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20rpx;
+}
+.adventure-clue{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.adventure-clue:last-child{
+ justify-content: flex-end;
+}
+.adventure-clue>view:first-child text{
+  /* flex: 0.5;
+  text-align: center; */
+  font-size: 30rpx;
+  margin-right: 10rpx;
+}
+.luck-info{
+  margin-top: 120rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.luck-promote{
+  margin-top: 60rpx;
+  margin-left: 30rpx;
+  line-height: 60rpx;
+  
+}
+.luck-promote>view:last-child{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.adventure-picker,.golden-info,.golden-promote,.bottom-content{
+  padding: 0 26rpx;
+}
+.adventure-picker{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 36rpx;
+  align-items: center;
+ 
+}
+.adventure-picker:first-child {
+  margin-top: 40rpx;
+}
+.adventure-picker>view{
+  width: 300rpx;
+}
+
+.adventure-picker>view:first-child text{
+  font-size: 30rpx;
+}
+picker,.price-input{
+  border: 2rpx solid var(--line-gray);
+  height: 54rpx;
+  line-height: 54rpx;
+  width: calc(100% - 360rpx);
+  font-size: 28rpx;
+  padding-left: 14rpx;
+  border-radius: 10rpx;
+  position: relative;
+  z-index: 100;
+}
+.adventure-picker .icon-arrowdownb{
+  color: var(--line-gray);
+  position: absolute;
+  right: 50rpx;
+  font-size: 40rpx;
+}
+.golden-info{
+  border-top: 10rpx solid var(--page-bg);
+  margin-top: 36rpx;
+  padding-top: 30rpx;
+}
+.golden-promote{
+  border-top: 2rpx solid var(--page-bg);
+  border-bottom: 2rpx solid var(--page-bg);
+  margin-top: 30rpx;
+  /* padding-top: 30rpx; */
+  padding: 30rpx 26rpx;
+}
+.golden-info .attrStr-center{
+  display: flex;
+  justify-content: center;
+}
+.golden-promote .attrStr-center{
+  margin-left: 130rpx;
+  /* display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end; */
+  line-height: 60rpx;
+}
+.skill{
+  font-size: 40rpx;
+  color: var(--text-red);
+}
+.tip{margin-top: 20rpx;color: var(--text-gray);}
+.tip text{
+  color: var(--text-gray);
+}

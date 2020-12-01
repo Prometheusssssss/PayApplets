@@ -1,0 +1,76 @@
+<form bindsubmit="saveGuestValue">
+<view class="adventure-content">
+        <view class="adventure-title">
+                <view class="adventure-name">
+                        <text>{{adventureInfo.NAME}}</text>
+                </view>
+                <view wx:if="{{adventureInfo.CONTRIBUTOR != '' && adventureInfo.CONTRIBUTOR != null}}" class="adventure-contributor">
+                        <text>感谢: {{adventureInfo.CONTRIBUTOR}}提供信息</text>
+                        <button  class="mini-operate text-white  main-color" bindtap="clearContributor">清空</button>
+                </view>
+        </view>
+        <!-- 普通人只有新建  -->
+        <view class="adventure-clue">
+                <view>
+                         <text>线索:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindClueChangeTextArea" value="{{adventureInfo.CLUE}}"
+                                placeholder="多行输入"  name="CLUE" />
+                </view>
+              
+        </view>
+         <view class="adventure-clue">
+                <view>
+                         <text>开启条件:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindOpenContionsChangeTextArea" value="{{adventureInfo.OPENING_CONDITIONS}}"
+                                placeholder="多行输入"  name="OPENING_CONDITIONS"/>
+                </view>
+              
+        </view>
+         <view class="adventure-clue">
+                <view>
+                         <text>坐标位置:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindCoordinateTextArea" value="{{adventureInfo.COORDINATE}}"
+                                placeholder="多行输入"  name="COORDINATE"/>
+                </view>
+              
+        </view>
+         <view class="adventure-clue">
+                <view>
+                         <text>结局:</text>
+                </view>
+                <view class="adventure-input">
+                        <textarea bindinput="bindEndingChangeTextArea" value="{{adventureInfo.ENDING}}"
+                                placeholder="多行输入"  name="ENDING"/>
+                </view>      
+        </view>
+        <view class="upload-view adventure-clue start">
+                <view class="picker-title">具体位置：</view>
+                        <view class='upload'>
+                                <!-- 根据已选择的图片临时路径数组展示图片-->
+                                <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+                                        <i class="icon icon-shanchu ui_uploader_item_icon icon-red" data-index="{{index}}" bindtap='clearImg' ></i>
+                                        <image class="special-image" mode='aspectFit' bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+                                </view>
+                                <view class="image" wx:if="{{showUpload}}" > 
+                                        <image  bindtap='upload' mode='aspectFit' src="/assets/img/photo.png" ></image>
+                                </view>
+                        </view>
+                </view>
+        </view>   
+        <view class="bottom-content">
+                <button  class="mask-rect  main-color long " formType="submit">保存</button>
+        </view>
+</form>
+<sj-confirm visible="{{showClearConfirm}}" addLineHeight="0" title="确认清空" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmClear">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认清空吗？</text>
+    </view>
+</sj-confirm>
+

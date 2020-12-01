@@ -49,7 +49,6 @@ Page({
 
   focus(e){ 
     var that = this; 
-    console.log(e.detail.value); 
     var inputValue = e.detail.value; 
     that.setData({ 
      Value:inputValue, 
@@ -62,7 +61,6 @@ Page({
     }) 
    }, 
    formSubmit(e){ 
-    console.log(e.detail.value.password); 
    }, 
 
   /**
@@ -81,8 +79,6 @@ Page({
     wx.getImageInfo({
       src: 'https://img3.doubanio.com/view/photo/l/public/p2327709524.jpg',
       success: function (res) {
-        console.log(res.width)
-        console.log(res.path)
         that.setData({imageUrl:res.path})
       }
     })
@@ -96,9 +92,6 @@ Page({
         wx.canvasToTempFilePath({
             canvasId: 'shareCanvas',
             success: function(res){
-                // that.data.tmpPath = res.tempFilePath
-                console.log('res.tempFilePath')
-                console.log(res.tempFilePath)
                 that.setData({tmpPath : res.tempFilePath})
             },
         })
@@ -131,11 +124,9 @@ Page({
 
   startDatePickerBindchange:function(e){
     var that = this;
-    
     that.setData({
       startDate:e.detail.value
     })
-    console.log(that.data.startDate)
   },
   endDatePickerBindchange:function(e){
     var that = this;
@@ -144,12 +135,7 @@ Page({
     })
   },
   searchDate: function(){
-    
     var that = this;
-    console.log(that.data.startDate)
-    // var startDate = that.data.startDate;
-    // var endDate = that.data.endDate;
-   
   },
   upload: function(){
     var that = this;
@@ -172,7 +158,6 @@ Page({
           that.setData({
             showUpload:false
           })
-          console.log(that.showUpload)
         }
         //图片选择完就可以显示在本地，可以提交的时候再去存入oss，换入可直接访问的图片链接，存入数据库
         //将压缩或者不压缩图片本地连接上传给oss，oss返回带域名可以直接访问的图片链接，本地将图片链接逗号拼接，保存的时候存入数据库

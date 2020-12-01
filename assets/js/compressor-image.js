@@ -24,7 +24,6 @@ var IsNeedCompressImage = async function (path, page, quality) {
       })
   })
   if (size > 1000000) {
-      console.log('size', size, 'quality', quality);
       return compressorImage(path, page, quality)
   } else {
       return path;
@@ -32,7 +31,6 @@ var IsNeedCompressImage = async function (path, page, quality) {
 }
 
 var compressorImage = async function (path, page, quality) {
-  console.log('do compressorImage', path, page, quality);
   var originPicInfo = await new Promise((r) => {
       wx.getImageInfo({
           src: path,
@@ -54,7 +52,6 @@ var compressorImage = async function (path, page, quality) {
       r = pHeight / cHeight
   }
   var totalR = r < 1 ? 1 : r;
-  console.log(pWidth, pHeight, totalR, cWidth, cHeight);
   var drawW = pWidth / totalR;
   var drawH = pHeight / totalR;
   //绘制新图
@@ -68,10 +65,8 @@ var compressorImage = async function (path, page, quality) {
           r()
       });
   })
-  console.log("wait result")
   var result = await new Promise((r) => {
       var v = Number.parseFloat(Math.sqrt(quality).toFixed(2));
-      console.log(v, 'v', drawW * drawH, quality)
       wx.canvasToTempFilePath({
           x: 0,
           y: 0,
@@ -85,7 +80,6 @@ var compressorImage = async function (path, page, quality) {
               r(filePath);
           },
           fail: function (error) {
-              console.log(error, 'error')
           }
       }, page)
   })

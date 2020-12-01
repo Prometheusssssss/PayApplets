@@ -1,0 +1,61 @@
+<form bindsubmit="saveGuestValue">
+<view class="adventure-content">
+        <view class="adventure-title">
+            <view>
+              <image  mode='aspectFit' src="{{favorabilityInfo.IMAGE_URL+'/200x200'}}" lazy-load="{{true}}"></image>
+            </view>
+            <view class="adventure-title-info">
+              <view class="adventure-name">
+                        <text>{{favorabilityInfo.NAME}}</text>
+              </view>
+              <!-- <view wx:if="{{inimacyMax != null && pageType =='edit'}}">
+                <text>推荐使用：</text> <text>{{favorabilityList[0].PROPS_NAME}}</text>
+               </view> -->
+              <!-- <view class="adventure-supllier">
+                      <text>感谢: {{favorabilityInfo.CONTRIBUTOR}}提供信息</text>
+                      <button  class="mini-operate text-white  main-color" bindtap="clearContributor">清空</button>
+              </view> -->
+            </view>
+                
+        </view>
+        <!-- 普通人只有新建  -->
+        <!-- <view> -->
+        <view class="adventure-clue recommd">
+                <view class="favorability-input">
+                        <input bindinput="handleRecommdInput" placeholder="输入推荐使用"
+        value="{{favorabilityInfo.RECOMMEND}}" name="favorabilityInfo..RECOMMEND" data-index="{{index}}"/>
+                </view>  
+        </view>
+        <view class="adventure-clue" wx:for="{{favorabilityList}}">
+                <view class="adventure-input">
+                        <textarea bindinput="bindNameChangeTextArea" value="{{item.PROPS_NAME}}"
+                        placeholder="输入道具名称"  name="favorabilityList[{{index}}].PROPS_NAME" data-index="{{index}}" />
+                </view>
+                <view class="favorability-input">
+                        <view>
+                                <input bindinput="handleInput" placeholder="输入好感度"
+                value="{{item.INTIMACY}}" name="favorabilityList[{{index}}].INTIMACY" data-index="{{index}}"/>
+                        </view>
+                    
+                        <view class="icon-list">
+                        <i class="icon icon-add icon-main-style"  wx:if="{{index == favorabilityList.length-1}}" bindtap="copyManagerFavorabilty"  data-index="{{index}}" ></i>
+                                <i class="icon icon-remove icon-red" bindtap="removeManagerFavorabilty" wx:if="{{index != favorabilityList.length-1}}" data-index="{{index}}" data-item="{{item}}"></i>
+                                
+                        </view>
+                </view>
+                
+        </view>
+        <!-- </view> -->
+       
+        <view class="bottom-content">
+                <button  class="mask-rect  main-color long " formType="submit">保存</button>
+        </view>
+</view>
+</form>
+<sj-confirm visible="{{showClearConfirm}}" addLineHeight="0" title="确认清空" confirmText="确认" cancelText="取消"
+    catchConfirmEvent="confirmClear">
+    <view slot='content' class="delete-confirm-content">
+        <text>确认清空吗？</text>
+    </view>
+</sj-confirm>
+

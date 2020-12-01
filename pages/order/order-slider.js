@@ -11,7 +11,7 @@ Page({
     defaultPageSize: app.getPageSize(),
 
     sliderList: [],
-    currentSliderbar: 0,
+    currentSliderbar: 1,
     searchText: '',
 
     hasPicker:false,
@@ -22,153 +22,193 @@ Page({
     areaIndex:'',
     regionIndex:'',
     serverIndex:'',
-    isPicker:false
+    isPicker:false,
+    // '天命风流','江湖轶事','闲情偶遇','侠影迷踪','大宋锦鲤'
+    adventureGroupList:[{
+      KID:1,
+      NAME:'天命风流',
+      PARENT_ID:0,
+    },{
+      KID:2,
+      NAME:'江湖轶事',
+      PARENT_ID:0,
+    },{
+      KID:3,
+      NAME:'闲情偶遇',
+      PARENT_ID:0,
+    },{
+      KID:4,
+      NAME:'侠影迷踪',
+      PARENT_ID:0,
+    },{
+      KID:5,
+      NAME:'大宋锦鲤',
+      PARENT_ID:0,
+    }],
+    groupName: '天命风流',
+
+    userInfo :{},
+    scrollTop:0,
   },
 
   onLoad: function(options) {
     var that = this;
-    console.log(options)
-    if (options != undefined) {
-      that.setData({
-        currentSliderbar:options.regionId,
-        currentSliderbarChangeId: options.regionId,
-        areaId :options.areaId,
-        serverId:options.serverId,
-        areaIndex: options.areaIndex,
-        regionIndex: options.regionIndex,
-        serverIndex: options.serverIndex,
-      })
-    }
+    that.lmFramework = that.selectComponent("#lm-framework");
+    that.setData({
+      userInfo: app.getUser()
+    })
   },
   onShow:function(){
     var that = this;
-    that.loadSliderList();
+    that.lmFramework.dealPageNoSize('enter');
+    // that.loadSliderList();
   },
-  // callBackPageSetData: function(e) {
-  //   var that = this;
-  //   wx.hideLoading();
-  //   that.setData(e.detail.returnSetObj)
-  // },
+
+  callBackPageSetData: function(e) {
+    var that = this;
+    wx.hideLoading();
+    that.setData(e.detail.returnSetObj)
+  },
 
   //获取产品列表
-  // loadMainList: async function(e) {
-  //   var {
-  //     pageNo,
-  //     pageSize,
-  //     type
-  //   } = e.detail;
-  //   var that = this;
-  //   var p = {"PARENT_ID": that.data.regionId}
-  //   var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
-  //   console.log(url)
-  //   app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
-  //     if (dataList != 'error') {
-  //       that.sjFramework.dealWithList(type, dataList, pageSize);
-  //     }
-  //   })
-    
-  // },
-  loadServer: async function() {
+  loadMainList: async function(e) {
+    var {
+      pageNo,
+      pageSize,
+      type
+    } = e.detail;
     var that = this;
-    var p = {"PARENT_ID": that.data.currentSliderbar}
-    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
-    console.log(url)
-    app.ManageExecuteApi(url, '', {}, 'GET').then((dataList) => {
-      wx.hideLoading()
-      if (dataList != 'error') {
-        that.setData({totalList:dataList})
+    // filter = [
+    // {
+    //     "fieldName": "GROUP",
+    //     "type": "date",
+    //     "compared": "=",
+    //     "filterValue": that.data.groupName
+    //   }
+    // ]
+    // var p = {
+    //   "tableName": "B_ADVENTURE_STRATEGY",
+    //   "page": pageNo,
+    //   "limit": pageSize,
+    //   "filters": filter,
+    //   "orderByField": "NAME",
+    //   "isDesc":1
+    // }
+   
+    // app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
+    //   if (dataList != 'error') {
+    //     that.lmFramework.dealWithList(type, dataList, pageSize);
+    //   }
+    // })
+    var dataList = [{
+      KID:1,
+      GROUP:'天命风流',
+      NAME:'八荒之焰.之一',
+      IS_ENABLE:true,
+      CLUE:'八荒之焰.之一第一天自动签到，自动激活',//线索
+      OPENING_CONDITIONS:'开启第一天签到',//开启条件
+      COORDINATE:'洛阳555,555',//坐标
+      ENDING:'结局成功激活',//结局,
+      CONTRIBUTOR:'李梦',
+    },{
+      KID:2,
+      GROUP:'天命风流',
+      NAME:'八荒之焰.之二',
+      IS_ENABLE:true,
+      CLUE:'八荒之焰.之二打野获取金币',//线索
+      OPENING_CONDITIONS:'打野',//开启条件
+      COORDINATE:'洛阳535,551',//坐标
+      ENDING:'',//结局
+      CONTRIBUTOR:'李k',
+    },
+    {
+      KID:3,
+      GROUP:'天命风流',
+      NAME:'八荒之焰.之三',
+      IS_ENABLE:false,
+      CLUE:'八荒之焰.之三开启第一天打怪',//线索
+      OPENING_CONDITIONS:'开启第一天打怪',//开启条件
+      COORDINATE:'天津555,555',//坐标
+      ENDING:'',//结局,
+      CONTRIBUTOR:'lm',
+    },{
+      KID:4,
+      GROUP:'天命风流',
+      NAME:'八荒之焰.之四',
+      IS_ENABLE:false,
+      CLUE:'',//线索
+      OPENING_CONDITIONS:'',//开启条件
+      COORDINATE:'',//坐标
+      ENDING:'',//结局
+      CONTRIBUTOR:'',
+    },
+    {
+      KID:1,
+      GROUP:'江湖轶事',
+      NAME:'江湖轶事.之一',
+      IS_ENABLE:false,
+      CLUE:'江湖轶事树林打石头怪升级',//线索
+      OPENING_CONDITIONS:'打怪',//开启条件
+      COORDINATE:'北京999,999',//坐标
+      ENDING:'',//结局,
+      CONTRIBUTOR:'wangbj',
+    }]
+   
+    var adventureList = [];
+    dataList.forEach(item=>{
+      if(item.GROUP == that.data.groupName){
+        adventureList.push(item)
       }
     })
-    
-  },
-  loadSliderList: async function() {
-    var that = this;
-    //获取slider列表
-
-    var p = {"PARENT_ID": that.data.areaId}
-    var url = `/api/_search/defaultSearch/a_game_setting?filter=${JSON.stringify(p)}`;
-    console.log(url)
-    app.ManageExecuteApi(url, '', {}, 'GET').then((slider) => {
-      if (slider != 'error') {
-        that.setSliderList(slider);
-      }
-    })
-  },
-   //获取初始化侧边栏
-   setSliderList: function(slider) {
-    var that = this;
-    var sliderList = slider;
+   
     that.setData({
-      sliderList: sliderList,
+      sliderList: adventureList,
     })
-
-    if (that.data.currentSliderbarChangeId != "") {
-      var slider = null;
-      sliderList.forEach(sliderItem => {
-        if (sliderItem.KID.toString() == that.data.currentSliderbarChangeId.toString()) {
-          slider = sliderItem;
-        }
-      })
-      if (slider == null) {
-        if (that.data.currentSliderbarChangeId != 0) {
-          setTimeout(() => {
-            wx.showToast({
-              title: '暂无此类别',
-              duration: 1500,
-              icon: 'none'
-            });
-            that.setData({
-              currentSliderbarChangeId: '',
-            })
-          }, 1000)
-        }
-
-      } else {
-        that.setData({
-          currentSliderbarChangeId: '',
-          currentSliderbar: slider.KID,
-        })
-      }
-
-    }
-    //加载产品列表
-    that.loadServer();
-    // that.sjFramework.dealPageNoSize('enter');
+    that.lmFramework.dealWithList(type, adventureList, pageSize);
   },
 
+  changeSecondCategory: function (e) {
+    var that = this;
+    var groupName = e.currentTarget.dataset.item;
+    that.setData({
+      groupName: groupName
+    })
+    // that.lmFramework.dealPageNoSize('enter');
+  },
+
+  // 切换slider滚动到指定位置
   changeSliderBar: function({
     detail
   }) {
     var that = this;
-    var regionIndex = that.data.sliderList.findIndex(region=>region.KID == detail.KID);
+    var id = detail.KID;
+    
+  //  that.setData({
+  //   scrollTop: -50
+  //  })
+    var toViewid = "#product_"+id;//获取id
+    const query=wx.createSelectorQuery();  //创建节点查询器
+    query.select(toViewid).boundingClientRect()  //选择toViewid获取位置信息
+   
+    query.selectViewport().scrollOffset()  //获取页面查询位置的
+    query.exec(function(res) {
+        let scrollTop = 0;
+        if(res[3]){
+          scrollTop = res[0].top + res[3].scrollTop
+        }else{
+          scrollTop = res[0].top;
+        }
+        wx.pageScrollTo({
+            // scrollTop: scrollTop - 160,
+            duration: 300
+        });
+        
+    })
     that.setData({
       currentSliderbar: detail.KID,
-      regionIndex: regionIndex,
     })
-    that.loadServer()
   },
 
-  selecServer: function(e){
-    var that = this;
-    var serverData =e.currentTarget.dataset.item;
-    that.setData({
-      serverId:serverData.KID
-    })
-    var pages = getCurrentPages();
-    var prevPage = pages[pages.length - 2]; //上一个页面
-    var serverIndex = that.data.totalList.findIndex(server=>server.KID == serverData.KID);
-    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-    prevPage.setData({
-      areaIndex: that.data.areaIndex,//大区
-      regionIndex: that.data.regionIndex,//小区
-      serverIndex: serverIndex,//小区
-      areaId : that.data.areaId,
-      regionId: that.data.currentSliderbar,
-      serverId: serverData.KID,
-    })
-    wx.navigateBack({
-      delta: 1
-    })
-  }
+ 
   
 })

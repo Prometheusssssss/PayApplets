@@ -148,6 +148,7 @@ button::after {
 
 
 
+
 .gray.no-border.delete {
   color: var(--text-gray);
   background: transparent;
@@ -170,7 +171,8 @@ button::after {
 
 .main-bgcolor,
 .main-color {
-  background: linear-gradient(90deg, var(--main-lgba) 5%, var(--main-lgbb) 100%);
+  /* background: linear-gradient(90deg, var(--main-lgba) 5%, var(--main-lgbb) 100%); */
+  background-color: var(--main-style);
 }
 
 .gray {
@@ -215,6 +217,10 @@ button::after {
   letter-spacing: 0.88rpx;
 }
 
+.mini-operate.text-white{
+  color: white;
+}
+
 .mask-operate {
   margin: 0;
   min-width: 204rpx;
@@ -243,4 +249,7 @@ button::after {
 
 .outline-rectangle.long{
   min-width: 150rpx;
+}
+.outline-rectangle.white{
+  color: white;
 }

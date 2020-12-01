@@ -20,8 +20,6 @@ Page({
   onLoad: function (options) {
     var that = this;
     var orderItem = JSON.parse(options.orderItem);
-    console.log('orderUtem')
-    console.log(orderItem)
     that.setData({orderItem:orderItem,userInfo:app.getUser()})
 
   },
@@ -54,8 +52,6 @@ Page({
   confirmOff:function(){
     var that = this;
     var code = that.data.orderItem.CODE;
-    console.log('code')
-    console.log(code)
     app.getRefund(code).then(result => {
       if(result != 'error'){
         wx.showToast({

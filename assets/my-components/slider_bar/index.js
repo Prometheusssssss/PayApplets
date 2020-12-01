@@ -24,6 +24,10 @@ Component({
       type: String,
       value: ""
     },
+    showSlider: {
+      type: Boolean,
+      value: true
+    },
   },
 
   /**
@@ -44,10 +48,10 @@ Component({
       var {
         id
       } = e.currentTarget.dataset;
-      wx.showLoading({
-        title: '加载中',
-        mask: true,
-      });
+      // wx.showLoading({
+      //   title: '加载中',
+      //   mask: true,
+      // });
       this.triggerEvent(
         'ChangeSliderBar', {
           'NAME': name,

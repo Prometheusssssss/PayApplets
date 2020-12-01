@@ -1,48 +1,116 @@
-<!-- <lm-framework sliderBar="true" contentBg="white" id="lm-framework" bindCallBackFunction="loadMainList"
-  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"> -->
-<lm-framework sliderBar="true" contentBg="white"  >
-    <!-- <view slot="top" class="search-top"> -->
-        <!-- <lm-search placeholder="服务器名称" catchInputEvent="searchProductListByText" initValue="{{searchText}}"
-        type="text" bindSearchList="getProductList" rightIconName=""  iconName='' catchRightEvent="" picker="{{isPicker}}" /> -->
-        <!-- <lm-search placeholder="服务器名称" picker='{{hasPicker}}' catchInputEvent="searchProductListByText" initValue="{{searchText}}"
-      type="recorder" bindSearchList="getProductList" allowedClear='true' rightIconName="" catchRightEvent="" /> -->
-  <!-- </view> -->
+<lm-framework sliderBar="true" contentBg="var(--page-bg)" id="lm-framework" bindCallBackFunction="loadMainList"
+  bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}">
+<!-- <lm-framework sliderBar="true" contentBg="white"  > -->
+  <view slot="top" class="search-top">
+    <view class="second-category-list-land" >
+      <scroll-view class="second-category" scroll-x="{{true}}" scroll-y="{{false}}" enable-flex="{{true}}"
+        scroll-into-view="{{scrollSecondCategoryKid}}" scroll-with-animation="{{true}}">
+        <block wx:for="{{adventureGroupList}}">
+          <view id="second_{{item.KID}}"
+            class="second-category-title-land-item {{groupName == item.NAME?'current':''}}  {{index==0?'first':''}}"
+            bindtap="changeSecondCategory" data-item="{{item.NAME}}">
+            <view class="second-category-title-text {{index+1 == secondSliderList.length?'last':''}}">{{item.NAME}}
+            </view>
+          </view>
+
+        </block>
+      </scroll-view>
+      <!-- <i bindtap="changeSecondCategoryType" data-second-type="big" class="icon icon-arrow-down icon-main-style"></i> -->
+    </view>
+  </view>
   <lm-slider-bar slot="slider" items="{{sliderList}}" current="{{currentSliderbar}}" itemsKey="NAME"
     bindChangeSliderBar="changeSliderBar">
   </lm-slider-bar>
   <view slot="content">
     <view class='main-container'>
-    <!-- <view class="my-product-title">
-        <view >
-            <i class="icon icon-gray icon-uncheck"></i>
-            <text >维护</text>
-        </view>
-         <view >
-            <i class="icon icon-red icon-uncheck"></i>
-            <text >爆满</text>
-        </view>
-        <view >
-            <i class="icon icon-green icon-uncheck"></i>
-            <text >流畅</text>
-        </view>
-    </view> -->
-      <block wx:for="{{totalList}}" >
-        <!-- <block wx:for="{{listItem}}" wx:key="listItem.productName" wx:for-item="item"> -->
-          <!-- <view class="my-product-item-content"> -->
-            <view class='my-product-item' data-item="{{item}}" bindtap="selecServer">
+     <scroll-view  scroll-x="{{false}}" scroll-y="{{true}}" enable-flex="{{true}}"
+        scroll-with-animation="{{true}}" scroll-top="{{scrollTop}}" scroll-into-view="product_{{currentSliderbar}}">
+      <block wx:for="{{totalList}}" wx:for-item="listItem">
+        <block wx:for="{{listItem}}"  wx:for-item="item">
+            <view class='my-product-item' data-index="{{index}}" data-item="{{item}}" id="product_{{index+1}}">
               <view class="my-product-item-server">
-                  <i wx:if="{{item.KID == serverId}}" class="icon icon-main-style icon-check"></i>
-                  <i wx:else class="icon icon-main-style icon-uncheck"></i>
-                  <view class='item-product-info'>
-                    <view class="item-product-name-area"><text
-                        class='item-product-name'>{{item.NAME}}</text>
+                  <view class="item-product-title">
+                    <view>
+                      <text>{{item.NAME}}</text>
                     </view>
+                    <view class="item-product-supllier">
+                      <text wx:if="{{item.CONTRIBUTOR != ''}}">感谢:{{item.CONTRIBUTOR}}提供信息</text>
+                      <i class="icon icon-flower iconc-main-style" wx:if="{{item.CONTRIBUTOR != ''}}"></i>
+                      <i class="icon icon-edit iconc-main-style" wx:if="{{userInfo.isManager == true}}"></i>
+                    </view>
+                  </view>
+                  <view class='item-product-info' wx:if="{{item.CLUE != '' && item.OPENING_CONDITIONS != ''}}">
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>名称</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                            <text>内容</text>
+                          </view>
+                        </view>
+                       
+                    </view>
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>线索</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                            <text>{{item.CLUE}}</text>
+                          </view>
+                        </view>
+                    </view>
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>开启条件</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                            <text>{{item.OPENING_CONDITIONS}}</text>
+                          </view>
+                        </view>
+                    </view>
+                    <view class="item-product-row">
+                        <view class="row-flex">
+                          <text>坐标位置</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                            <text>{{item.COORDINATE}}</text>
+                          </view>
+                        </view>
+                    </view>
+                    <view class="item-product-row" wx:if="{{item.ENDING != ''}}">
+                        <view class="row-flex">
+                          <text>结局</text>
+                        </view>
+                        <view class="row-flex-right">
+                          <view class="row-flex-content">
+                            <text>{{item.ENDING}}</text>
+                          </view>
+                        </view>
+                    </view>
+                  </view>
+                  <!-- 尚未录入 -->
+                  <!-- Not yet included -->
+                  <view wx:else class="'item-not-include">
+                      <view>
+                        <text>尚未收录</text>
+                      </view>
+                      <view wx:if="{{userInfo.isManager != true}}">
+                         <lm-button shape="outline-rectangle" title="我来补充" buttonColor="main-color long white"   data-item="{{item}}" bindButtonClick="openOrderDetailPage" />
+                      </view>
+                      <view wx:else>
+                        <!-- 所有没有启用的投稿 -->
+                         <lm-button shape="outline-rectangle" title="查看投稿" buttonColor="main-color long white"   data-item="{{item}}" bindButtonClick="openOrderDetailPage" />
+                      </view>
                   </view>
               </view>
             </view>
-          <!-- </view> -->
-        <!-- </block> -->
+        </block>
       </block>
+    </scroll-view>
     </view>
   </view>
 </lm-framework>

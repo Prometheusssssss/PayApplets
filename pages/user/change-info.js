@@ -4,7 +4,7 @@ const {
   common
 } = global;
 var compressor = require("../../assets/js/compressor-image.js");
-// var covertPingYin = require("../../../pages/public-js/covertPingYin.js");
+const { base64 } = global;
 Page({
 
   /**
@@ -17,6 +17,8 @@ Page({
     uploaderList: [],              //保存上传图片url的数组
     uploaderNum: 0,             //已经上传的图片数目
     showUpload: true,           //控制上传框的显隐
+
+    // showConfirmAuthorization:false
   },
 
   /**
@@ -25,22 +27,21 @@ Page({
   onLoad: function (options) {
     var that = this;
         //获取对应的index
-    if(options){
-      var userInfo = JSON.parse(options.userInfo)
-      console.log(userInfo)
+    // if(options){
+      var userInfo = app.getUser()
       that.setData({
         userInfo: userInfo
       })
-      var uploaderList = userInfo.IMG_URL.split(',');
+      var uploaderList = userInfo.url.split(',');
       if(uploaderList.length>=1){
         that.setData({
           showUpload:false,
           uploaderList:uploaderList,
-          userName : userInfo.NAME
+          userName : userInfo.name
         })
       }
      
-    }
+    // }
       
   },
 
@@ -68,8 +69,6 @@ Page({
         that.setData({
           uploaderNum: that.data.uploaderList.length
         })
-        console.log('that.data.uploaderList')
-        console.log(that.data.uploaderList)
         if (that.data.uploaderList.length == 1) {
           that.setData({
             showUpload:false
@@ -114,8 +113,92 @@ Page({
     var value = e.detail.value;
     that.setData({userName:value})
   },
+  getImgUrl:async function(imgList){
+    var that = this;
+    var url = '';
+    var UploadImageP = []
+    if(imgList.length == 0){
+      return url
+    }else{
+      
+      for (var i = 0; i < imgList.length; i++) {
+        var minFile = await compressor.Main(imgList[i], that)
+        var base64 = wx.getFileSystemManager().readFileSync(minFile, "base64");
+        UploadImageP.push({
+          name: 'productPicture',
+          content: base64
+        })
+      }
+      await app.UploadImage(UploadImageP).then((uploadImageResult) => {
+        if(uploadImageResult.length>0){
+          uploadImageResult.forEach(result=>{
+             url += result.url +',';
+          })
+          url = url.substring(url.length-1,0);
+        }
+      })
+      return url
 
-   saveUserInfo: async function (e) {
+    }
+  },
+  //第一次授权
+  getPhoneNumber:async function(res) {
+    var that = this;
+    if (res.detail.errMsg == 'getPhoneNumber:ok') {
+      var data = res.detail;
+      var encryptedData = data.encryptedData;
+      var iv = data.iv;
+      var code = await app.getJsCode();
+      var p = {
+        'kid':that.data.userInfo.id,
+        "jsCode": code,
+        // "name": base64.encode(that.data.userInfo.name),
+        // "url": that.data.userInfo.url,
+        "encryptedData": encryptedData,
+        "iv": iv,
+      }
+      await app.ManageExecuteApi(`/api/_login/doUpdate`, '', p, "POST").then((userInfo) => {
+        if(userInfo != 'error'){
+          var data = userInfo[0];
+          var info = {
+            id: data.KID,
+            code: data.CODE,
+            name: data.NAME,
+            url: data.IMG_URL,
+            isManager: data.IS_SA,
+            tel: data.PHONE,
+            isPermanent: data.IS_PERMANENT,
+            countNumber: data.COUNT_NUMBER,
+          };
+          app.setUser(info)
+          that.setData({
+            userInfo: info
+          })
+          wx.showToast({
+            title: '补充手机号成功',
+            icon:'none',
+            duration:1500
+          })
+        }else{
+          //重新授权登录
+          wx.showToast({
+            title: '补充手机号失败',
+            icon:'none',
+            duration:1500
+          })
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '注册解锁更多功能哦~',
+        icon:'none',
+        duration:1500
+      })
+    }
+  },
+
+
+  saveUserInfo: async function (e) {
     var that = this;
     var data = that.data;
     var form = e.detail.value;
@@ -154,60 +237,39 @@ Page({
         NAME: data.userName,
       }
     }
-    
-    console.log('发布')
-    console.log(JSON.stringify(p))
-    that.createProduct(p)
+    that.updateUserInfo(p)
   },
-  getImgUrl:async function(imgList){
-    var that = this;
-    var url = '';
-    var UploadImageP = []
-    if(imgList.length == 0){
-      return url
-    }else{
-      
-      for (var i = 0; i < imgList.length; i++) {
-        var minFile = await compressor.Main(imgList[i], that)
-        var base64 = wx.getFileSystemManager().readFileSync(minFile, "base64");
-        UploadImageP.push({
-          name: 'productPicture',
-          content: base64
-        })
-      }
-      await app.UploadImage(UploadImageP).then((uploadImageResult) => {
-        if(uploadImageResult.length>0){
-          uploadImageResult.forEach(result=>{
-             url += result.url +',';
-          })
-          url = url.substring(url.length-1,0);
-        }
-      })
-      return url
-
-    }
-  },
-  //发布商品
-  createProduct: function (p) {
-    app.ManageExecuteApi('/api/_cud/createAndUpdate/a_user', '', p, 'POST').then((result) => {
-      wx.hideLoading()
-      if(result!='error'){
-        setTimeout(()=>{
-            wx.navigateBack({
-              delta: 1
-          })
-        },200)
+  //更新用户信息  没有手机号的更新 授权之后就去update接口，返回手机号后直接显示手机号；；保存的直接调用表存
+  updateUserInfo: async function (p) {
+    // _login/doUpdate  /api/_login/doUpdate
+    // jsCode kid name url encryptedData  iv  
+    await app.ManageExecuteApi('/api/_cud/createAndUpdate/a_user', '', p, "POST").then((userInfo) => {
+      if(userInfo != 'error'){//存入user  跳转页面
+        
         wx.showToast({
           title: '保存成功',
-          icon: 'none',
-          duration: 1500
+          icon:'none',
+          duration:1500
         })
+        setTimeout(()=>{
+          var pages=getCurrentPages();//页面指针数组
+          var prepage=pages[pages.length-2];//上一页面指针
+          prepage.loadUserInfo()
+          wx.navigateBack({
+            delta: 1,
+          })
+        },400)
+        
+       
+      }else{
+        wx.showToast({
+          title: '保存失败',
+          icon:'none',
+          duration:1500
+        })
+        
       }
     })
     
   },
- 
-
-
-
 })

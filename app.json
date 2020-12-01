@@ -1,76 +1,69 @@
 {
   "pages":[
+    "pages/home/home",
+    "pages/langwen-simulation/langwen-simulation",
+    "pages/langwen-simulation/langwen-add-times",
+    "pages/langwen-recommend/langwen-recommend",
+    "pages/adventure/adventure",
+    "pages/adventure/edit-common-detail",
+    "pages/adventure/edit-manager-detail",
+    "pages/adventure/examine-common-submittion",
+    "pages/cook-book/cook-book",
+    "pages/cook-book/edit-common-detail",
+    "pages/cook-book/edit-manager-detail",
+    "pages/cook-book/examine-common-submittion",
+    "pages/fish/fish",
+    "pages/fish/edit-common-detail",
+    "pages/fish/edit-manager-detail",
+    "pages/fish/examine-common-submittion",
+    "pages/favorability/favorability",
+    "pages/favorability/edit-common-detail",
+    "pages/favorability/edit-manager-detail",
+    "pages/favorability/edit-manager-submission",
+    "pages/lawsuit/lawsuit",
+    "pages/star-luck/star-luck",
+    "pages/star-answer/star-answer",
+    "pages/star-answer/edit-manager-detail",
+    "pages/star-answer/edit-common-detail",
+    "pages/star-answer/examine-common-submittion",
+    "pages/langwen-calculate/langwen-calculate",
+    "pages/lawsuit/edit-manager-detail",
+    "pages/order/order-slider",
+    "pages/customerOrder/customerOrder",
+    "pages/customerOrder/customerOrder-detail",
     "pages/login/login",
     "pages/login/terms-of-service",
-    "pages/order/order",
-    "pages/home/home",
-    "pages/publish/publish",
-    "pages/publish/publish-edit",
+    "pages/user/node-record",
     "pages/user/change-info",
     "pages/user/user",
     "pages/common-page/leave-msg",
-    "pages/remark/remark",
-    "pages/extractCach/extractCach-record",
-    "pages/extractCach/extractCach-apply",
-    "pages/extractCach/extractCach-check",
-    "pages/extractCach/extractCach-detail",
-    "pages/mySold/mySold",
-    "pages/mySold/mySold-detail",
-    "pages/myBought/myBought",
-    "pages/myBought/myBought-detail",
-    "pages/customerOrder/customerOrder",
-    "pages/customerOrder/customerOrder-detail",
-    "pages/myPublish/myPublish",
-    "pages/msgs/msgs",
-    "pages/order/order-slider",
-    "pages/order/order-detail",
-    "pages/test/test",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/remark/remark"
   ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#90A2D1",
+    "navigationBarTitleText": "天刀大嘴巴百宝箱",
+    "navigationBarTextStyle":"white"
+  },
   "tabBar": {
     "backgroundColor": "#FFFFFF",
-    "color": "#999999",
-    "selectedColor": "#57afe6",
+    "color": "#000000",
+    "selectedColor": "#90A2D1",
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "assets/img/tabs-focus/home-focus.png",
+        "selectedIconPath": "assets/img/tabs-focus/home.png",
         "iconPath": "assets/img/tabs-unfocus/home.png",
         "pagePath": "pages/home/home",
         "text": "首页"
       },
       {
-        "selectedIconPath": "assets/img/tabs-focus/trade-focus.png",
-        "iconPath": "assets/img/tabs-unfocus/trade.png",
-        "pagePath": "pages/order/order",
-        "text": "交易"
-      },
-      {
-        "selectedIconPath": "assets/img/tabs-focus/add-focus.png",
-        "iconPath": "assets/img/tabs-unfocus/add.png",
-        "pagePath": "pages/publish/publish",
-        "text": "发布"
-      },
-      {
-        "selectedIconPath": "assets/img/tabs-focus/msg-focus.png",
-        "iconPath": "assets/img/tabs-unfocus/msg.png",
-        "pagePath": "pages/msgs/msgs",
-        "text": "消息"
-      },
-      {
-        "selectedIconPath": "assets/img/tabs-focus/user-focus.png",
+        "selectedIconPath": "assets/img/tabs-focus/user.png",
         "iconPath": "assets/img/tabs-unfocus/user.png",
         "pagePath": "pages/user/user",
         "text": "我的"
       }
     ]
-  },
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "线上交易",
-    "navigationBarTextStyle":"black"
   },
   "networkTimeout": {
     "request": 20000,

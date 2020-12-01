@@ -1,0 +1,94 @@
+
+<lm-framework sliderBar="true" contentBg="var(--page-bg)">
+   <view slot="top" class="search-top">
+    <view class="second-category-list-land" >
+      <scroll-view class="second-category" scroll-x="{{true}}" scroll-y="{{false}}" enable-flex="{{true}}"
+        scroll-into-view="{{scrollSecondCategoryKid}}" scroll-with-animation="{{true}}">
+        <block wx:for="{{lawsuitGroupList}}">
+          <view id="second_{{item.KID}}"
+            class="second-category-title-land-item {{groupName == item.NAME?'current':''}}  {{index==0?'first':''}}"
+            bindtap="changeSecondCategory" data-item="{{item.NAME}}">
+            <view class="second-category-title-text {{index+1 == secondSliderList.length?'last':''}}">{{item.NAME}}
+            </view>
+          </view>
+
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <lm-slider-bar slot="slider" items="{{sliderList}}" current="{{currentSliderbar}}" itemsKey="NAME"
+    bindChangeSliderBar="changeSliderBar" showSlider="{{sliderList.length > 0 ? 'true' : false}}">
+  </lm-slider-bar>
+  <view slot="content">
+    <view class='main-container'>
+        <view wx:if="{{lawsuitList.length>0 && sliderList.length>0}}">
+            <view class='my-product-item'>
+              <view class="my-product-item-server">
+                  <view class="item-product-title">
+                     <view>
+                      <view>
+                        <text>{{lawsuitList[0].CATEGORY_NAME}}</text>
+                      </view>
+                      <view>
+                       <i class="icon icon-edit iconc-main-style" bindtap="edtiManagerAdventure"  data-item="{{lawsuitList[0]}}" wx:if="{{userInfo.isManager == true}}"></i>
+                      </view>
+                    </view>
+                  </view>
+                  <view class='item-product-info'>
+                    <view>
+                      <view class="item-product-row">
+                          <view class="row-flex">
+                            <text>名称</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <view class="row-flex-content">
+                              <text>内容</text>
+                            </view>
+                          </view>
+                        
+                      </view>
+                      <view class="item-product-row"  wx:for="{{lawsuitList}}"  wx:for-item="item" wx:if="{{item.CONTENT != '' && item.CONTENT != null}}">
+                          <view class="row-flex" >
+                            <text>{{item.NAME}}</text>
+                          </view>
+                          <view class="row-flex-right">
+                            <view class="row-flex-content">
+                              <text>{{item.CONTENT}}</text>
+                            </view>
+                          </view>
+                      </view>
+                    </view>
+                  </view>
+              </view>
+            </view>
+        </view>
+        <view wx:if="{{lawsuitList.length==0 && sliderList.length>0}}">
+            <view class='my-product-item'>
+              <view class="my-product-item-server">
+                  <view class="item-product-title">
+                     <view>
+                        <view>
+                          <text>{{currentSliderbarInfo.NAME}}</text>
+                        </view>
+                        <view>
+                          <i class="icon icon-edit iconc-main-style" bindtap="edtiManagerAdventure"  data-item="{{currentSliderbarInfo}}" wx:if="{{userInfo.isManager == true}}"></i>
+                        </view>
+                    </view>
+                  </view>
+                  <!-- 尚未录入 -->
+                  <view class="'item-not-include">
+                      <view>
+                        <text>尚未收录</text>
+                      </view>
+                  </view>
+              </view>
+            </view>
+        </view>
+        <view wx:if="{{sliderList.length==0}}" class="waiting-for">
+          等待开启
+        </view>
+    </view>
+
+  </view>
+</lm-framework>
+

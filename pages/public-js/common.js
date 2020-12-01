@@ -1115,6 +1115,7 @@ const converter = {
   nullToEmpty: function(str) {
     return str == null ? '' : str;
   },
+  
 }
 
 const validators = {
@@ -1150,6 +1151,7 @@ const validators = {
     }
   },
 
+  
   // isNumOrEmpty 是非有效数字且不为空
   isNotNumAndEmpty: function(value, name, showToast = true) {
     if (validators.isEmptyText(value, '', false) || !validators.isNotDecimals(value, '', false)) {
@@ -1219,7 +1221,7 @@ const validators = {
         // true
         wx.showToast({
           // 必须为数字
-          title: name + '输入内容有误',
+          title: name + '输入内容有误,请输入非0数值',
           icon: 'none',
           duration: 3000
         })

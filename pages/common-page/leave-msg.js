@@ -84,8 +84,6 @@ Page({
         that.setData({
           uploaderNum: that.data.uploaderList.length
         })
-        console.log('that.data.uploaderList')
-        console.log(that.data.uploaderList)
         if (that.data.uploaderList.length == 6) {
           that.setData({
             showUpload:false
@@ -142,8 +140,6 @@ Page({
     }else{
       var content = that.data.value.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
     }
-   console.log('输入文字')
-   console.log(content)
     var receiveInfo = that.data.receiveInfo;
     var imgUrls = '';
     if(that.data.uploaderList.length >0 ){
@@ -190,7 +186,6 @@ Page({
       }
       app.ManageExecuteApi('/api/_cud/createAndUpdate/b_message', '', p, 'POST').then((result) => {   
         if (result != 'error') {
-          console.log('发送成功')
           wx.showToast({
             title: '留言成功',
             icon:'none',

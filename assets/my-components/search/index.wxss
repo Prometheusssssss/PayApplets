@@ -124,7 +124,7 @@
 
 .delete-i {
   position: absolute;
-  left: 500rpx;
+  /* left: 500rpx; */
   top: 36rpx;
   font-size: 44rpx !important;
   z-index: 10;

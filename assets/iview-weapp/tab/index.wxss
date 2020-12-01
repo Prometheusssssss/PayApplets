@@ -28,9 +28,12 @@
 
 .i-tabs-tab-current {}
 
+i-badge.current {
+    border-bottom: 4rpx solid var(--main-style);
+}
 .i-tabs-tab-title-current {
     color: var(--main-style);
-    border-bottom: 3rpx solid var(--main-style);
+    /* border-bottom: 3rpx solid var(--main-style); */
 
 
 }

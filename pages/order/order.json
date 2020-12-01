@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText":"商品交易",
-  "usingComponents": {
-    "lm-picker-time":"../../assets/my-components/picker-time/index",
-    "lm-framework":"../../assets/my-components/framework/index",
-    "sj-search": "../../../assets/my-components/search/index",
-    "sj-button": "../../../assets/my-components/button/index"
-  }
-}

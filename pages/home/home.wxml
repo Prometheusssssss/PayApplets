@@ -1,26 +1,97 @@
   <lm-framework sliderBar="false" contentBg="var(--page-bg)" id="lm-framework">
     <view slot='content' class="content">
-      <block wx:if="{{bannerList.length>0}}">
-          <swiper class="banner-list" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500"
-              indicator-color="#8799a3" indicator-active-color="var(--main-style)">
-              <swiper-item wx:for="{{bannerList}}">
-                  <div data-item="{{item}}">
-                      <image src="{{item.PICTURE_URL}}" data-item="{{item}}" mode="aspectFit"></image>
-                  </div>
-              </swiper-item>
-          </swiper>
-      </block>
-      <view class="white-bg"></view>
+      <!-- <view class="user-info">
+          <image wx:if="{{isLoginUser}}" src="{{userInfo.url}}" class="user-image"></image>
+          <image wx:else src="/assets/img/logo.png" class="user-image" mode="aspectFit"></image>
+          <view class="title-info" wx:if="{{isLoginUser}}">
+              <text class="user-name" >{{userInfo.name}}</text>
+              <text class="user-name" wx:if="{{userInfo.tel != null}}">{{userInfo.tel}}</text>
+          </view>
+          <view class="title-info" wx:else>
+              <button class='authBtn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo"> 请点击登录 </button>
+          </view>
+          <view bindtap="editUser" class="invalidate-user">
+              <i class="icon icon-right"></i>
+          </view>
+      </view> -->
       <view class="area-list">
-        <view wx:if="{{areaList.length>0}}" class="area-info" wx:for="{{areaList}}" bindtap="goPublishPage">
-            <view >
-              <image src="{{item.URL}}" data-item="{{item}}" mode="aspectFit"></image>
-            </view>
+        <view wx:if="{{strategyList1.length>0}}" class="area-info {{strategyList1.length == 1?'area-info-min':''}}" wx:for="{{strategyList1}}" data-item="{{item}}" bindtap="goStrategyPage">
             <view>
+              <image src="{{item.URL}}" mode="aspectFit" />
+            </view>
+            <view class="strategyList-info">
+              <view wx:if="{{item.IDENTITY != ''}}" class="strategyList-name">
+                  <text>{{item.IDENTITY}}</text>
+              </view>
+              <view class="strategyList-name">
                 <text>{{item.NAME}}</text>
+              </view>
             </view>
         </view>
       </view>
+      <view class="area-list">
+          <view wx:if="{{strategyList2.length>0}}" class="area-info {{strategyList2.length == 1?'area-info-min':''}}" wx:for="{{strategyList2}}" data-item="{{item}}" bindtap="goStrategyPage">
+            <view >
+              <image src="{{item.URL}}" mode="aspectFit" />
+            </view>
+           <view class="strategyList-info">
+              <view wx:if="{{item.IDENTITY != ''}}" class="strategyList-name">
+                  <text>{{item.IDENTITY}}</text>
+              </view>
+              <view class="strategyList-name">
+                <text>{{item.NAME}}</text>
+              </view>
+            </view>
+        </view>
+      </view>
+      <view class="area-list">
+          <view wx:if="{{strategyList3.length>0}}" class="area-info {{strategyList3.length == 1?'area-info-min':''}}" wx:for="{{strategyList3}}" data-item="{{item}}" bindtap="goStrategyPage">
+            <view >
+              <image src="{{item.URL}}" mode="aspectFit" />
+            </view>
+           <view class="strategyList-info">
+              <view wx:if="{{item.IDENTITY != ''}}" class="strategyList-name">
+                  <text>{{item.IDENTITY}}</text>
+              </view>
+              <view class="strategyList-name">
+                <text>{{item.NAME}}</text>
+              </view>
+            </view>
+        </view>
+      </view>
+      <view class="area-list">
+          <view class="area-info {{strategyList4.length == 1?'area-info-min':''}}" wx:for="{{strategyList4}}" data-item="{{item}}" bindtap="goStrategyPage">
+            <view >
+              <image src="{{item.URL}}" mode="aspectFit" />
+            </view>
+           <view class="strategyList-info">
+              <view wx:if="{{item.IDENTITY != ''}}" class="strategyList-name">
+                  <text>{{item.IDENTITY}}</text>
+              </view>
+              <view class="strategyList-name">
+                <text>{{item.NAME}}</text>
+              </view>
+            </view>
+        </view>
+      </view>
+      <view class="area-list mgb">
+          <view class="area-info {{strategyList5.length == 1?'area-info-min':''}}" wx:for="{{strategyList5}}" data-item="{{item}}" bindtap="goStrategyPage">
+            <view >
+              <image src="{{item.URL}}" mode="aspectFit" />
+            </view>
+           <view class="strategyList-info">
+              <view wx:if="{{item.IDENTITY != ''}}" class="strategyList-name">
+                  <text>{{item.IDENTITY}}</text>
+              </view>
+              <view class="strategyList-name">
+                <text>{{item.NAME}}</text>
+              </view>
+            </view>
+        </view>
+      </view>
+      <view>
+        <ad unit-id="adunit-789ee162f008d92d" ad-type="video" ad-theme="white"></ad>
+      </view>
     </view>
-    
+   
   </lm-framework>

@@ -1,5 +1,0 @@
-@import "../public-css/order.wxss";
-.item-product-name-area{
-  margin-bottom: 0 !important;
-  padding-bottom: 10rpx;
-}

@@ -1,0 +1,146 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<!-- <lm-framework sliderBar="false" contentBg="white" id="lm-framework"> -->
+    <!-- <view slot="top" class="search-top"> -->
+<view class="view-content">
+    <view class="search-top">
+        <i-tabs current="{{ selectStatus }}" bindchange="changeCurrentSegment">
+            <i-tab key="星运计算" title="星运计算"></i-tab>
+            <i-tab key="星运转换" title="星运转换"></i-tab>
+        </i-tabs>
+    </view>
+    <!-- <view slot="content" class="slot-content"> -->
+    <view class="slot-content">
+        <form bindsubmit="saveStarCalValue" wx:if="{{selectStatus == '星运计算'}}">
+            <view class="adventure-content">
+                <view class="warning-text">
+                    <view >
+                        <text>请输入：</text>
+                    </view>
+                    <view bindtap="previewTuopuImage" class="tuo-pu">
+                        <i class="icon icon-info iconc-main-style"></i>
+                        <text class="main-style">查看星运拓扑图</text>
+                    </view>
+                </view>
+                <view class="adventure-edit">
+                    <view class="adventure-clue">
+                        <view>
+                                <text>厉:</text>
+                        </view>
+                        <view class="adventure-input">
+                            <input bindinput="liInput" type="number" placeholder="请输入数值"
+                            value="{{li}}" name="li" />
+                        </view>
+                    </view>
+                    <view class="adventure-clue">
+                        <view>
+                                <text>律:</text>
+                        </view>
+                        <view class="adventure-input">
+                            <input bindinput="lvInput" type="number" placeholder="请输入数值"
+                            value="{{lv}}" name="lv" />
+                        </view>
+                    
+                    </view>
+               
+                </view>
+                <view class="adventure-edit">
+                    <view class="adventure-clue">
+                        <view>
+                                <text>仁:</text>
+                        </view>
+                        <view class="adventure-input">
+                            <input bindinput="renInput" type="number" placeholder="请输入数值"
+                            value="{{ren}}" name="ren" />
+                        </view>
+                    </view>
+                    <view class="adventure-clue">
+                        <view>
+                                <text>狂:</text>
+                        </view>
+                        <view class="adventure-input">
+                            <input bindinput="kuangInput" type="number" placeholder="请输入数值"
+                            value="{{kuang}}" name="kuang" />
+                        </view>
+                    </view>
+                </view>
+                <view class="bottom-content">
+                    <button  class="mask-rect  main-color long " formType="submit">开始计算</button>
+                </view>
+                <view class="luck-info" wx:if="{{curentStarCal.C_NAME!=undefined}}">
+                    <view>
+                        当前属于<text class="main-style">{{curentStarCal.C_NAME}}</text>的<text class="main-style">{{curentStarCal.NAME}}</text>阶段
+                    </view>
+                </view>
+                <view class="luck-promote">
+                    <view>
+                        <!-- 如需提升至旺相阶段需： -->
+                        {{curentStarCal.TEXT1}}
+                    </view>
+                    <view>
+                        <text class="main-style">{{curentStarCal.TEXT2}}</text>
+                    </view>
+                </view>
+                <view class="advertisement">
+                </view>
+            </view>
+        </form>
+        <!-- <form bindsubmit="saveStarConvertValue" wx:else> -->
+        <form bindsubmit="saveStarConvertValue" wx:else>
+            <view class="adventure-content">
+                <view class="warning-text flex-end">
+                    <view bindtap="previewTuopuImage" class="tuo-pu">
+                        <i class="icon icon-info iconc-main-style"></i>
+                        <text class="main-style">查看星运拓扑图</text>
+                    </view>
+                </view>
+                <view >
+                    <view class="adventure-picker">
+                        <view>
+                                <text>当前星运:</text>
+                        </view>
+                        <picker bindchange="bindSartCalChange" value="{{curentStarCalIndex}}" range="{{starCalArr}}" >
+                            <view class="picker">
+                                {{starCalArr[curentStarCalIndex]}}
+                            </view>
+                        </picker>
+                        <i class="icon icon-arrowdownb" ></i>
+                    </view>
+                    <view class="adventure-picker">
+                        <view>
+                                <text>转换星运至:</text>
+                        </view>
+                       <picker bindchange="bindStarConvertChange" value="{{curentStarConvertIndex}}" range="{{starConvertArr}}" >
+                            <view class="picker">
+                                {{starConvertArr[curentStarConvertIndex]}}
+                            </view>
+                        </picker>
+                        <i class="icon icon-arrowdownb" ></i>
+                    </view>
+                    <view class="bottom-content">
+                        <button  class="mask-rect  main-color long " formType="submit">确认计算</button>
+                    </view>
+                    <view class="luck-promote" wx:if="{{curentStarConvert.RESULT != undefined}}">
+                        <view>
+                            少侠需要：
+                        </view>
+                        <view>
+                            <text class="main-style">{{curentStarConvert.RESULT}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="advertisement">
+                </view>
+            </view>
+        </form>
+    </view>
+  
+</view>
+<view class="bottom {{curentStarCal.C_NAME != undefined ?'min-height':''}}" wx:if="{{selectStatus == '星运计算'}}">
+    <ad unit-id="adunit-660cdf50f5bd8175" ad-type="video" ad-theme="white"></ad>
+</view>
+<view class="bottom-change  {{curentStarConvert.RESULT != undefined ?'min-height':''}}" wx:else>
+    <ad unit-id="adunit-aaddb13d93edf115" ad-type="video" ad-theme="white"></ad>
+</view>
+<!-- </lm-framework> -->
+
+

@@ -75,8 +75,6 @@ Component({
       return function () {
         const args = arguments;
         let time = + new Date();
-        console.log('time')
-        console.log(time)
         if (time - lastTime > gapTime || !lastTime) {
           func.apply(that, args)
           that.data.lastTime = time;
