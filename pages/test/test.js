@@ -23,6 +23,7 @@ Page({
     imageUrl:'',
     tmpPath:'',
     isPic : false,
+    url: ''
   },
 
   /**

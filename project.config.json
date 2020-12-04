@@ -11,7 +11,7 @@
     "preloadBackgroundData": false,
     "minified": true,
     "newFeature": true,
-    "coverView": true,   
+    "coverView": true,
     "nodeModules": false,
     "autoAudits": true,
     "showShadowRootInWxmlPanel": true,

@@ -1,19 +1,5 @@
   <lm-framework sliderBar="false" contentBg="var(--page-bg)" id="lm-framework">
     <view slot='content' class="content">
-      <!-- <view class="user-info">
-          <image wx:if="{{isLoginUser}}" src="{{userInfo.url}}" class="user-image"></image>
-          <image wx:else src="/assets/img/logo.png" class="user-image" mode="aspectFit"></image>
-          <view class="title-info" wx:if="{{isLoginUser}}">
-              <text class="user-name" >{{userInfo.name}}</text>
-              <text class="user-name" wx:if="{{userInfo.tel != null}}">{{userInfo.tel}}</text>
-          </view>
-          <view class="title-info" wx:else>
-              <button class='authBtn'  open-type="getUserInfo"  bindgetuserinfo="getUserInfo"> 请点击登录 </button>
-          </view>
-          <view bindtap="editUser" class="invalidate-user">
-              <i class="icon icon-right"></i>
-          </view>
-      </view> -->
       <view class="area-list">
         <view wx:if="{{strategyList1.length>0}}" class="area-info {{strategyList1.length == 1?'area-info-min':''}}" wx:for="{{strategyList1}}" data-item="{{item}}" bindtap="goStrategyPage">
             <view>
@@ -60,8 +46,8 @@
         </view>
       </view>
       <view class="area-list">
-          <view class="area-info {{strategyList4.length == 1?'area-info-min':''}}" wx:for="{{strategyList4}}" data-item="{{item}}" bindtap="goStrategyPage">
-            <view >
+          <view class="area-info  {{strategyList4.length == 1?'area-info-min':''}}" wx:for="{{strategyList4}}" data-item="{{item}}" bindtap="goStrategyPage">
+            <view class="strategyList4">
               <image src="{{item.URL}}" mode="aspectFit" />
             </view>
            <view class="strategyList-info">

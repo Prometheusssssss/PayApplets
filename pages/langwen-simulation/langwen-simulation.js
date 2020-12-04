@@ -1183,10 +1183,12 @@ Page({
     var that = this;
     var data = that.data;
     var item = e.currentTarget.dataset.item;
-    var detailKid =  e.currentTarget.dataset.detail.DETAIL_KID;
-    var detailName =  e.currentTarget.dataset.detail.LW_NAME;
+    var detailItem = e.currentTarget.dataset.detail;
+    var detailKid = detailItem.DETAIL_KID;
+    var detailName = detailItem.LW_NAME;
     var currentLwList = [];
     var name = item.ARMS_NAME;
+    var level = item.LW_LEVEL;
     if(name.indexOf('武器') != -1 || name.indexOf('项链') != -1  || 
     name.indexOf('戒指') != -1  || name.indexOf('护腕') != -1 || name.indexOf('腰带') != -1 ){
         currentLwList =  data.attackList;
@@ -1201,10 +1203,14 @@ Page({
         levelIndex:0,
       })
     }
+    var currentLwIndex = currentLwList.findIndex(lw=>lw.NAME == detailItem.LW_NAME) 
+    var levelIndex = that.data.levelList.findIndex(levelItem=>levelItem == detailItem.LW_LEVEL)
     that.setData({
       showLwDetail:true,
       currentSelectLwDetailKid: detailKid,
       currentSelectLwName: name,
+      currentLwIndex: currentLwIndex == -1 ? 0: currentLwIndex,
+      levelIndex: levelIndex == -1 ? 0: levelIndex,
       currentLwList: currentLwList
     })
   },
@@ -1301,6 +1307,15 @@ Page({
         duration:2000
       })
     }else{
+    //如果次数变成0了，不能弹出弹框 提示请去增加次数
+    if(that.data.userInfo.countNumber <= 0 && !that.data.userInfo.isPermanent){
+      wx.showToast({
+        title: '当前可计算次数已用完，请去增加次数',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
       that.setData({showCaculateConfirm:true})
     }
    
@@ -1309,14 +1324,6 @@ Page({
     var that = this;
     var data = that.data;
     var armsList = data.armsList;
-    if(data.userInfo.countNumber == 0){
-      wx.showToast({
-        title: '当前可计算次数已用完，请去增加',
-        icon:'none',
-        duration:2000
-      })
-      return
-    }
     //确认计算之前要校验下这个用户是不是没有登陆过 没有登陆不允许计算
     var armsInfo = await that.getArmsInfo(armsList)
     var p = {
@@ -1519,6 +1526,8 @@ Page({
   addTimes:function(){
     var that = this;
     var userInfo = that.data.userInfo;
+    console.log('增加次数')
+    console.log(userInfo)
     if(userInfo == undefined || userInfo == null  || userInfo == ''){
       that.setData({showConfirmLogin:true})
     }else{
@@ -1615,6 +1624,10 @@ Page({
   cancelDoLogin:function(){
     var that = this;
     that.setData({showConfirmLogin:false})
+  },
+  cancel:function(){
+    var that = this;
+    that.setData({showConfirmAuthorization:false})
   },
   clearAllLw:function(){
     var that = this;

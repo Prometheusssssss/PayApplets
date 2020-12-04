@@ -298,6 +298,14 @@ Page({
         })
       }
   },
+  cancelDoLogin:function(){
+    var that = this;
+    that.setData({showConfirmLogin:false})
+  },
+  cancel:function(){
+    var that = this;
+    that.setData({showConfirmAuthorization:false})
+  },
   //查看投稿
   selBank:function(){
     var that = this;

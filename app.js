@@ -4,10 +4,11 @@ global.common = require('/pages/public-js/common.js')
 //2、提现详情里要实时查一下用户的账户余额
 //3、登录页面
 App({
-  onLaunch: function (e) {
+  onLaunch: async function (e) {
+    var that = this;
     var platform = wx.getSystemInfoSync().platform;
     this.platform = platform;
-    
+    that.isCodeHasUser();
   },
   globalData: {
     logsStorageList: [],
@@ -25,10 +26,10 @@ App({
     userInfo: null,
     areaInfo:null,
     sliderBar: [],
-    maxShowRewardedAdCount:3,
+    maxShowRewardedAdCount:2,
 
-    // manageUrl: 'https://www.dazuiba.top:8005', //正式
-    manageUrl:'https://test.dazuiba.top:8006',//测试
+    manageUrl: 'https://www.dazuiba.top:8005', //正式
+    // manageUrl:'https://test.dazuiba.top:8006',//测试
   },
   
   setHostUrl: function (hostUrl) {
@@ -38,6 +39,43 @@ App({
   isAndriod: function() {
     // return false
     return 'ios' != this.platform
+  },
+  isCodeHasUser: async function () {
+    var that = this;
+    var code = await that.getJsCode();
+    wx.showLoading({
+      title: '登录中',
+    })
+    if (code != '') {
+      //是否可以自动登录 可以返回给我用户的手机id昵称头像url,不可以跳到用户授权页面，授权注册或者更新
+      var p = {
+        "jsCode": code
+      }
+      await that.ManageExecuteApi(`/api/_login/doAutoLogin`, '', p, "POST").then((userInfo) => {
+        if(userInfo != 'error'){//存入user  跳转页面
+          wx.hideLoading()
+          var data = userInfo[0];
+          var info = {
+            id: data.KID,
+            code: data.CODE,
+            name: data.NAME,
+            url: data.IMG_URL,
+            tel: data.PHONE,
+            isManager: data.IS_SA,
+            isPermanent: data.IS_PERMANENT,
+            countNumber: data.COUNT_NUMBER,
+          };
+          that.setUser(info)
+        }
+      })
+    } else {
+      wx.hideLoading()
+      wx.showToast({
+        title: '请先登录/注册',
+        icon:'none',
+        duration:2000
+      })
+    }
   },
   getJsCode: async function () {
     return await new Promise(re => {
@@ -59,7 +97,6 @@ App({
   getUser: function () {
     var that = this;
     var user = that.globalData.userInfo;
-    // var user = {id:1,name:'测试',tel:'15635678989'};
     return user;
   },
 

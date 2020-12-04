@@ -293,7 +293,10 @@ Page({
     var that = this;
     that.setData({showConfirmLogin:false})
   },
-
+  cancel:function(){
+    var that = this;
+    that.setData({showConfirmAuthorization:false})
+  },
 
   //和管理员编辑 管理员可以清空推荐人和推荐人id 
   edtiManagerAdventure:function(e){

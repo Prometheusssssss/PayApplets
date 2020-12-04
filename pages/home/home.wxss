@@ -50,6 +50,10 @@
   height: 84rpx;
   margin-right: 30rpx;
 }
+.area-info .strategyList4 image:last-child{
+  width: 94rpx;
+  height: 94rpx;
+}
 .strategyList-name text{
   font-size: 30rpx;
 }

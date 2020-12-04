@@ -179,6 +179,11 @@ Page({
       url: 'node-record',
     })
   },
+  goUrlPage:function(){
+    wx.navigateTo({
+      url: '../test/test',
+    })
+  },
   onShareAppMessage: function () {
 
   }
