@@ -8,72 +8,98 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    enhancementsList1:[{
+      URL:'../../assets/img/area/commond.png',
+      IDENTITY:'',
+      NAME:'琅玟推荐',
+      TYPE:'lwtuijian',
+      TIP_URL:''
+    },{
+      URL:'../../assets/img/area/calculate.png',
+      IDENTITY:'',
+      NAME:'琅玟计算',
+      TYPE:'lwjisuan',
+      TIP_URL:''
+    }],
+    enhancementsList2:[{
+      URL:'../../assets/img/area/simulation.png',
+      IDENTITY:'',
+      NAME:'琅玟模拟',
+      TYPE:'lwmoni',
+      TIP_URL:''
+    },{
+      URL:'../../assets/img/area/think-caculate.png',
+      IDENTITY:'',
+      NAME:'琢磨计算',
+      TYPE:'think-caculate',
+      TIP_URL:'../../assets/img/area/look-forward.png'
+    }],
     strategyList1:[{
       URL:'../../assets/img/area/zhihe.png',
       IDENTITY:'',
       NAME:'奇遇',
-      TYPE:'qiyu'
+      TYPE:'qiyu',
+      TIP_URL:''
     },{
-        URL:'../../assets/img/area/love.png',
-        IDENTITY:'',
-        NAME:'伙伴好友度',
-        TYPE:'haoyou'
-      }],
-    strategyList2:[{
       URL:'../../assets/img/area/search.png',
       IDENTITY:'身份:',
       NAME:'捕快断案',
-      TYPE:'bukuai'
+      TYPE:'bukuai',
+      TIP_URL:''
+    }
+  ],
+    strategyList2:[{
+      URL:'../../assets/img/area/cook.png',
+      IDENTITY:'',
+      NAME:'厨师菜谱',
+      TYPE:'cook',
+      TIP_URL:''
+    }, {
+      URL:'../../assets/img/area/caipu-cost.png',
+      IDENTITY:'',
+      NAME:'菜谱成本',
+      TYPE:'caipu-cost',
+      TIP_URL:'../../assets/img/area/new.png'
+    }
+  ],
+    strategyList3:[
+      {
+        URL:'../../assets/img/area/fish.png',
+        IDENTITY:'',
+        NAME:'食材鱼王',
+        TYPE:'fish',
+        TIP_URL:''
+      }, 
+      {
+        URL:'../../assets/img/area/love.png',
+        IDENTITY:'',
+        NAME:'伙伴好友度',
+        TYPE:'haoyou',
+        TIP_URL:''
+    }],
+    strategyList4:[
+    {
+      URL:'../../assets/img/area/xingqiu.png',
+      IDENTITY:'',
+      NAME:'星运答题',
+      TYPE:'xingqiu',
+      TIP_URL:''
     },
     {
       URL:'../../assets/img/area/collect.png',
       IDENTITY:'',
       NAME:'星运计算',
-      TYPE:'jisuan'
-    }],
-    strategyList3:[{
-      URL:'../../assets/img/area/xingqiu.png',
-      IDENTITY:'',
-      NAME:'星运答题',
-      TYPE:'xingqiu'
-    },
-    {
-      URL:'../../assets/img/area/calculate.png',
-      IDENTITY:'',
-      NAME:'琅玟计算',
-      TYPE:'lwjisuan'
-    }
-  ],
-    strategyList4:[{
-      URL:'../../assets/img/area/commond.png',
-      IDENTITY:'',
-      NAME:'琅玟推荐',
-      TYPE:'lwtuijian'
-    },
-    {
-      URL:'../../assets/img/area/simulation.png',
-      IDENTITY:'',
-      NAME:'琅玟模拟',
-      TYPE:'lwmoni'
+      TYPE:'jisuan',
+      TIP_URL:''
     }],
     strategyList5:[{
-      URL:'../../assets/img/area/cook.png',
+      URL:'../../assets/img/area/lightning.png',
       IDENTITY:'',
-      NAME:'厨师菜谱',
-      TYPE:'cook'
-    },
-    {
-      URL:'../../assets/img/area/fish.png',
-      IDENTITY:'',
-      NAME:'食材鱼王',
-      TYPE:'fish'
+      NAME:'逆天改命',
+      TYPE:'nitiangaiming',
+      TIP_URL:'../../assets/img/area/look-forward.png'
     }],
-    // imageUrl:'https://oss.dazuiba.cloud:8003//api/oss/20200830-4d9d4613-fc94-4a8a-9531-3c0f81cdd7db/image',
-    imageUrl:'https://oss.dazuiba.cloud:8003//api/oss/20201016-a8035ddb-f0f9-4417-a772-27f7b30559d2/image',
-    // zanImageUrl: 'https://oss.dazuiba.cloud:8003//api/oss/20201014-57dd94e0-3c87-4b14-96bd-c6340c4dfe9d/image',
-    zanImageUrl:'https://oss.dazuiba.cloud:8003//api/oss/20201016-bc73298c-340c-4dfe-90b1-74f360a63266/image',
-
+    caipuImageUrl:'https://oss.dazuiba.cloud:8003//api/oss/20201207-08405d4a-1376-486c-8c6e-d0b0aefc93e3/image',
   },
   //星运计算广告上移 ；； 拓扑图右边，点击放大图；；赞赏图；；；点击激励广告；；；
   /**
@@ -87,6 +113,10 @@ Page({
    */
   onShow: function () {
     var that = this;
+    if (isonShow) {//添加弹框在预览图片
+      isonShow= false;
+      return;
+    };
   },
  
   goStrategyPage:function(e){
@@ -137,6 +167,9 @@ Page({
       wx.navigateTo({
         url: '../langwen-simulation/langwen-simulation',
       })
+    }else if(type == 'caipu-cost'){
+        //弹出弹框
+        that.previewImage()
     }
     else{
       wx.showToast({
@@ -146,7 +179,14 @@ Page({
       })
     }
   },
-  
+  previewImage: function () {
+    var that = this;
+    isonShow = true;
+    wx.previewImage({
+      current: that.data.caipuImageUrl, // 当前显示图片的http链接
+      urls: [that.data.caipuImageUrl]// 需要预览的图片http链接列表
+    })
+  },
   /**
    * 用户点击右上角分享
    */

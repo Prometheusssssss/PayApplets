@@ -1,6 +1,25 @@
 /* pages/home/home.wxss */
 .content{
-  margin-top: 24rpx;
+  /* margin-top: 24rpx; */
+}
+.various-enhancements{
+  padding-top: 20rpx;
+  background-color: white;
+  margin-bottom: 14rpx;
+}
+.tools-title{
+  padding-left: 30rpx;
+  margin: 10rpx 0;
+}
+.tools-title text{
+  font-size: 28rpx;
+}
+.common-tools{
+  padding-top: 20rpx;
+  background-color: white;
+}
+.common-tools .tools-title{
+
 }
 .banner-list {
   min-height: 370rpx;
@@ -37,7 +56,19 @@
   width: 100%;
   padding: 40rpx 0;
   border: 4rpx solid var(--main-style);
+  position: relative;
 }
+.area-info .look-forward{
+  position: absolute;
+  top: 0;
+  left: -2rpx;
+}
+.area-info .look-forward image{
+  width: 64rpx;
+  height: 64rpx;
+   margin-right: 0;
+}
+
 .area-list .area-info-min{
   /* width: 50%; */
   width: calc(50% - 10rpx);
@@ -48,7 +79,7 @@
 .area-info image{
   width: 84rpx;
   height: 84rpx;
-  margin-right: 30rpx;
+  margin-right: 20rpx;
 }
 .area-info .strategyList4 image:last-child{
   width: 94rpx;
