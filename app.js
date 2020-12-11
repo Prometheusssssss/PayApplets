@@ -28,8 +28,8 @@ App({
     sliderBar: [],
     maxShowRewardedAdCount:2,
 
-    manageUrl: 'https://www.dazuiba.top:8005', //正式
-    // manageUrl:'https://test.dazuiba.top:8006',//测试
+    // manageUrl: 'https://www.dazuiba.top:8005', //正式
+    manageUrl:'https://test.dazuiba.top:8006',//测试
   },
   
   setHostUrl: function (hostUrl) {
