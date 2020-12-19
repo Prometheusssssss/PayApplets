@@ -1,18 +1,7 @@
  <lm-framework sliderBar="true" contentBg="var(--page-bg)"  >
   <view slot="top" class="search-top">
-    <!-- <view class="second-category-list-land" >
-      <scroll-view class="second-category" scroll-x="{{true}}" scroll-y="{{false}}" enable-flex="{{true}}"
-        scroll-into-view="{{scrollSecondCategoryKid}}" scroll-with-animation="{{true}}">
-        <block wx:for="{{adventureGroupList}}">
-          <view id="second_{{item.KID}}"
-            class="second-category-title-land-item {{groupName == item.NAME?'current':''}}  {{index==0?'first':''}}"
-            bindtap="changeSecondCategory" data-item="{{item.NAME}}">
-            <view class="second-category-title-text {{index+1 == adventureGroupList.length?'last':''}}">{{item.NAME}}
-            </view>
-          </view>
-        </block>
-      </scroll-view>
-    </view> -->
+    <sj-search placeholder="菜名" catchInputEvent="searchProductListByText" initValue="{{searchText}}"
+      type="text" bindSearchList="getProductList" rightIconName="" catchRightEvent="" />
     <block wx:if="{{adventureGroupList.length>1&&currentSliderbar!=0}}" >
       <view class="second-category-list-land" wx:if="{{secondCategoryType=='land'}}">
         <scroll-view  class="second-category" scroll-x="{{true}}" scroll-y="{{false}}" enable-flex="{{true}}"scroll-into-view="{{scrollSecondCategoryKid}}" scroll-with-animation="{{true}}">

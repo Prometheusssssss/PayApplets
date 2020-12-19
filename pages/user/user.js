@@ -148,6 +148,10 @@ Page({
         })
       }
   },
+  cancel:function(){
+    var that = this;
+    that.setData({showConfirmAuthorization:false})
+  },
   previewImage: function () {
     var that = this;
     isonShow = true;

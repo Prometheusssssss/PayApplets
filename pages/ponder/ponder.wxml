@@ -1,0 +1,79 @@
+<wxs module="convert" src="../../pages/public-js/convert.wxs"></wxs>
+<view class="view-content">
+    <view class="slot-content">
+        <form bindsubmit="savePonderValue" >
+            <view class="adventure-content">
+                <view >
+                    <view class="adventure-picker">
+                        <view>
+                                <text>请选择当前琢磨等级:</text>
+                        </view>
+                        <picker bindchange="bindCurrenPonderChange" value="{{curentPonderIndex}}" range="{{curentPonderArr}}" >
+                            <view class="picker">
+                                {{curentPonderArr[curentPonderIndex]}}
+                            </view>
+                        </picker>
+                        <i class="icon icon-arrowdownb" ></i>
+                    </view>
+                    <view class="adventure-picker">
+                        <view>
+                                <text>请选择预期琢磨等级:</text>
+                        </view>
+                       <picker bindchange="bindExpectPonderChange" value="{{expectPonderIndex}}" range="{{expectPonderArr}}" >
+                            <view class="picker">
+                                {{expectPonderArr[expectPonderIndex]}}
+                            </view>
+                        </picker>
+                        <i class="icon icon-arrowdownb" ></i>
+                    </view>
+                    <view class="adventure-picker">
+                        <view>
+                                <text>请选择精工等级:</text>
+                        </view>
+                       <picker bindchange="bindPonderLevelChange" value="{{ponderLevelIndex}}" range="{{ponderLevelArr}}" >
+                            <view class="picker">
+                                {{ponderLevelArr[ponderLevelIndex]}}
+                            </view>
+                        </picker>
+                        <i class="icon icon-arrowdownb" ></i>
+                    </view>
+                    <view class="adventure-picker">
+                        <view>
+                                <text>请输入精工价格:</text>
+                        </view>
+                        <view class="adventure-input">
+                            <input bindinput="liInput" type="number" placeholder="请输入数值"
+                            value="{{price}}" name="price" />
+                        </view>
+                    </view>
+                    <view class="bottom-content">
+                        <button  class="mask-rect  main-color long " formType="submit">确认计算</button>
+                    </view>
+                   
+                </view>
+            
+            </view>
+        </form>
+        <view class="luck-promote" wx:if="{{ponderInfo.JGNum != undefined}}">
+              <view class="ponder-num">
+                  <view>精工数量：<text>{{ponderInfo.JGNum}}</text></view>
+                  <view>精工总消耗：<text>{{ponderInfo.TotalJGNum}}</text></view>
+              </view>
+              <view class="ponder-num">
+                  <view>银两消耗：<text>{{ponderInfo.YLNum}}</text></view>
+                  <view>银两总消耗：<text>{{ponderInfo.TotalYLNum}}</text></view>
+              </view>
+              <view class="ponder-num">
+                  <view>碎银消耗：<text>{{ponderInfo.SYNum}}</text></view>
+                  <view>碎银总消耗：<text>{{ponderInfo.TotalSYNum}}</text></view>
+              </view>
+              <view class="tip"><text>*说明：总消耗指从当前等级到预期等级的12件装备的所有消耗</text></view>
+          </view>
+    </view>
+  
+</view>
+<view class="bottom">
+    <ad unit-id="adunit-660cdf50f5bd8175" ad-type="video" ad-theme="white"></ad>
+</view>
+
+

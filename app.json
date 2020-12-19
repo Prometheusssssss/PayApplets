@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/ponder/ponder",
     "pages/langwen-simulation/langwen-simulation",
     "pages/langwen-simulation/langwen-add-times",
     "pages/langwen-recommend/langwen-recommend",

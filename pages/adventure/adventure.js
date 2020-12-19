@@ -29,6 +29,10 @@ Page({
     // '天命风流','江湖轶事','闲情偶遇','侠影迷踪','大宋锦鲤'
     //考虑一下是不是横着类别存到数据库里好做维护
     adventureGroupList:[{
+      KID:0,
+      NAME:'全部',
+      PARENT_ID:0,
+    },{
       KID:1,
       NAME:'天命风流',
       PARENT_ID:0,
@@ -86,12 +90,17 @@ Page({
   },
   loadSliderList:function(){
     var that = this;
-    var  filter = [
+    var  filter = [{
+      "fieldName": "NAME",
+      "type": "string",
+      "compared": "like",
+      "filterValue": that.data.searchText 
+    },
       {
         "fieldName": "GROUPS",
         "type": "date",
         "compared": "=",
-        "filterValue": that.data.groupName
+        "filterValue": that.data.groupName == '全部' ? '' : that.data.groupName
       }]
     var p = {
       "tableName": "B_ADVENTURE_STRATEGY_CATEGORY",
@@ -101,15 +110,24 @@ Page({
     }
     app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
       if (dataList != 'error') {
-        var allSliderList = [{
-          KID:0,
-          GROUPS: that.data.groupName,
-          NAME: '全部',
-        }]
-        
+        var allSliderList = []
+        if(that.data.groupName != '全部' ){
+          allSliderList = [{
+            KID:0,
+            GROUPS: that.data.groupName,
+            NAME: '全部',
+          }]
+        }else{
+          that.setData({
+            currentSliderbar : dataList[0].KID,
+            currentSliderbarName:dataList[0].NAME,
+          })
+        }
         that.setData({
           sliderList: allSliderList.concat(dataList),
         })
+        
+      
         that.loadAdventureList()
       }
     })
@@ -117,7 +135,7 @@ Page({
   loadAdventureList:function(){
     var that = this;
     var p = {
-      "groups": that.data.groupName,
+      "groups": that.data.groupName == '全部' ? '' : that.data.groupName,
       "name": that.data.currentSliderbarName,
       "orderByField":"KID",
       "isDesc":0
@@ -133,7 +151,25 @@ Page({
       }
     })
   },
-  
+  //文本
+  searchProductListByText: function (e) {
+    var that = this;
+    if( e.detail != ''){
+      that.setData({
+        searchText: e.detail,
+        groupName:'全部',
+        groupKid: 0,
+      })
+    }else{
+      that.setData({
+        searchText: e.detail,
+        groupName:'天命风流',
+        groupKid: 1,
+      })
+    }
+    
+    that.loadSliderList()
+  },
 
   changeSecondCategory: function (e) {
     var that = this;
@@ -185,11 +221,12 @@ Page({
     }else{
       wx.setStorageSync('clickTimes',clickTimes)
     }
+    // debugger
     that.setData({
       currentSliderbar: detail.KID,
       currentSliderbarName:detail.NAME
     })
-    that.loadSliderList()
+    that.loadAdventureList()
   },
   //普通用户编辑
   edtiCommonAdventure:function(e){

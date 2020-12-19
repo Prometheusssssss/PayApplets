@@ -170,7 +170,12 @@ Page({
     }else if(type == 'caipu-cost'){
         //弹出弹框
         that.previewImage()
-    }
+    }else if(type == 'think-caculate'){
+      //弹出弹框
+      wx.navigateTo({
+        url: '../ponder/ponder',
+      })
+  }
     else{
       wx.showToast({
         title: '开发中敬请期待',

@@ -2,6 +2,8 @@
   bindCallBackSetData="callBackPageSetData" defaultPageSize="{{defaultPageSize}}"> -->
 <lm-framework sliderBar="true" contentBg="var(--page-bg)"  >
   <view slot="top" class="search-top">
+    <sj-search placeholder="奇遇名称" catchInputEvent="searchProductListByText" initValue="{{searchText}}"
+      type="text" bindSearchList="getProductList" rightIconName="" catchRightEvent="" />
     <view class="second-category-list-land" >
       <scroll-view class="second-category" scroll-x="{{true}}" scroll-y="{{false}}" enable-flex="{{true}}"
         scroll-into-view="{{scrollSecondCategoryKid}}" scroll-with-animation="{{true}}">

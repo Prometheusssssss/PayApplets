@@ -28,6 +28,10 @@ Page({
     isPicker:false,
     showConfirmAuthorization:false,
     adventureGroupList:[{
+      KID:0,
+      NAME:'全部',
+      PARENT_ID:0,
+    },{
       KID:1,
       NAME:'秦川菜系',
       PARENT_ID:0,
@@ -86,6 +90,7 @@ Page({
     cookInfo:{},
     secondCategoryType: 'land',
     scrollSecondCategoryKid: `second_1`,
+    searchText:'',
   },
   
   onLoad: function(options) {
@@ -114,23 +119,29 @@ Page({
   },
   loadSliderList:function(){
     var that = this;
-    var  filter = [
+    //增加全部的大类
+    var  filter = [{
+      "fieldName": "NAME",
+      "type": "string",
+      "compared": "like",
+      "filterValue": that.data.searchText //类别给死是全部吗
+    },
       {
         "fieldName": "GROUPS",
         "type": "date",
         "compared": "=",
-        "filterValue": that.data.groupName
+        "filterValue": that.data.groupName == '全部' ? '' : that.data.groupName
       }]
     var p = {
       "tableName": "B_CAIPU_CATEGORY",
       "page": 1,
       "limit": 10000,
-      "filters": filter
+      "filters": filter,
     }
     app.ManageExecuteApi('/api/_search/postSearch', '', p, 'POST').then((dataList) => {
       if (dataList != 'error') {
         that.setData({
-          sliderList: dataList
+          sliderList: dataList,
         })
         if(dataList.length>0){
           that.setData({
@@ -144,11 +155,22 @@ Page({
       }
     })
   },
+   //文本
+   searchProductListByText: function (e) {
+    var that = this;
+    that.setData({
+      searchText: e.detail,
+      groupName:'全部',
+      groupKid: 0,
+    })
+    that.loadSliderList()
+  },
+  //搜搜菜名过滤  在大类的过滤下，再加个搜索条件根据小雷的名字去匹配具体的菜
   loadcookList:function(){
     var that = this;
     // var currentSliderbar = that.data.currentSliderbar;
     var p = {
-      "groups": that.data.groupName,
+      "groups": that.data.groupName == '全部' ? '' : that.data.groupName,
       "name": that.data.currentSliderbarName,
       "orderByField":"KID",
       "isDesc":0
@@ -170,7 +192,8 @@ Page({
     var group = e.currentTarget.dataset.item;
     that.setData({
       groupName: group.NAME,
-      groupKid: group.KID
+      groupKid: group.KID,
+      searchText:''
     })
     that.loadSliderList()
   },
@@ -181,7 +204,8 @@ Page({
       secondCategoryType: 'land',
       scrollSecondCategoryKid: `second_${group.KID}`,
       groupName: group.NAME,
-      groupKid: group.KID
+      groupKid: group.KID,
+      searchText:''
     })
     that.loadSliderList()
   },

@@ -43,6 +43,8 @@ App({
   isCodeHasUser: async function () {
     var that = this;
     var code = await that.getJsCode();
+    // console.log('用户的jscode')
+    // console.log(code)
     wx.showLoading({
       title: '登录中',
     })
